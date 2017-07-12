@@ -1,7 +1,6 @@
 # ooblox
 
 ooblox is a 3D sandbox framework in its infancy.
-It implements an easily extendable system of object types, available for 3D scene-composition, instantiatable via URL query string.
 
 ## Why ?
 
