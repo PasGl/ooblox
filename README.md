@@ -38,6 +38,12 @@ A scene with one instance of each Module.
 
 * http://51.15.67.244/demo
 
+## contact
+
+https://discord.gg/Ux52EYw
+
+https://www.patreon.com/PasGl
+
 ## ooblox makes use of
 
 * three.js | https://github.com/mrdoob/three.js
@@ -49,12 +55,6 @@ A scene with one instance of each Module.
 * SkyboxSet | https://93i.de/p/free-skybox-texture-set/
 * FileSaver.js | https://github.com/eligrey/FileSaver.js
 * jszip | https://github.com/Stuk/jszip
-
-## contact
-
-https://discord.gg/Ux52EYw
-
-https://www.patreon.com/PasGl
 
 ## license
 
