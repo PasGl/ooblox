@@ -97,10 +97,8 @@
 				var newURLstring = "?"+allmodulArgsList.join("&");
 				window.history.replaceState({}, '', newURLstring);
 			}
-		</script>
-	</head>
-	<body onload="bootVR()">
-		<script>
+
+
 		    	// loading all Modules in the folder /js/vrobjects ... needs webserver to autolist that folder (or 403 fail)
 		    	// otherwise this section needs to be replaced by regular imports ala <script src="js/vrobjects/ooblox...
 			$.get("./js/vrobjects", function(data) 
@@ -113,13 +111,15 @@
 						if (thisfilename.substring(thisfilename.length-3,thisfilename.length+1)===".js")
 						{													
 							var newscript = document.createElement('script');
+							newscript.type  = "text/javascript";
 							newscript.src = 'js/vrobjects/'+thisfilename;
-							console.log(newscript);
-							document.getElementsByTagName("head")[0].appendChild(newscript);
+							document.body.appendChild(newscript);
 						}
 					}
 		        });
 		</script>
+	</head>
+	<body onload="bootVR()">
 		<div id="container" class="unselectable"></div>
 		<script src="js/ooblox.js"></script>
 	</body>
