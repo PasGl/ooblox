@@ -31,9 +31,10 @@ oobloxMasterMenu = function ()
 	
 	this.mesh.fillDatGUI = function (targetScene)
 	{
+		mesh.geometry.computeBoundingBox();
 		var datFolder = dat.GUIVR.create('ooblox Menu');
 		datFolder.position.copy(mesh.position);
-		datFolder.position.x += mesh.scale.x/2;
+		datFolder.position.z += mesh.geometry.boundingBox.max.z;
 		datFolder.scale.set(20.0,20.0,0.1);
 
 		var remFolder = dat.GUIVR.create('Remove');
