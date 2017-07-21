@@ -18,9 +18,9 @@ oobloxMasterMenu = function ()
 	{
 		updateURLargs([	mesh.uname,
 				mesh.vrObjectTypeID,
-				mesh.position.x,
-				mesh.position.y,
-				mesh.position.z,
+				mesh.parent.position.x,
+				mesh.parent.position.y,
+				mesh.parent.position.z,
 				mesh.scale.x,
 				mesh.scale.y,
 				mesh.scale.z,
@@ -35,7 +35,10 @@ oobloxMasterMenu = function ()
 		mesh.geometry.computeBoundingBox();
 		var datFolder = dat.GUIVR.create('ooblox Menu');
 		datFolder.position.copy(mesh.position);
-		datFolder.position.z += mesh.geometry.boundingBox.max.z;
+		mesh.position.x=0;
+		mesh.position.y=0;
+		mesh.position.z=0;
+
 		datFolder.scale.set(20.0,20.0,0.1);
 
 		var remFolder = dat.GUIVR.create('Remove');
@@ -64,7 +67,7 @@ oobloxMasterMenu = function ()
 		datFolder.addFolder(remFolder);
 		
 		var rezFolder = dat.GUIVR.create('Add');
-//		var posFolder = dat.GUIVR.create('Rez Position');
+/*		var posFolder = dat.GUIVR.create('Rez Position');
 //		var posXSlider = posFolder.add(mesh.position,'x',-200.0,200.0);
 //		posXSlider.onChange(refresh);
 //		var posYSlider = posFolder.add(mesh.position,'y',-200.0,200.0);
@@ -88,6 +91,7 @@ oobloxMasterMenu = function ()
 		var rotZSlider = rotFolder.add(mesh.rotation,'z').min(0).max(Math.PI * 2).step(0.001);
 		rotZSlider.onChange(refresh);
 		rezFolder.addFolder(rotFolder);
+*/
 
 		var posScaleRotString = "" + 	mesh.position.x + "+" + mesh.position.y + "+" + mesh.position.z + "+" +
 						mesh.scale.x + "+" + mesh.scale.y + "+" + mesh.scale.z + "+" +
