@@ -135,8 +135,11 @@ function processURLParams()
 	var urlCallParametersList= [];
 	if (window.location.href.indexOf("?")!=-1)
 	{
-		allmodulArgs=window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
-		urlCallParametersList = allmodulArgs.split("&");
+		if ((window.location.href.indexOf("?")+1)<window.location.href.length)
+		{
+			allmodulArgs=window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
+			urlCallParametersList = allmodulArgs.split("&");
+		}
 	}
 
 	// gather the vrObjectTypeID from each available Module
