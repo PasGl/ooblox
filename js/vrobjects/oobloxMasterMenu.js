@@ -86,7 +86,8 @@ oobloxMasterMenu = function ()
 		datFolder.children[0].add(mesh);
 		datFolder.children[0].add(indicator);
 		targetScene.add( datFolder );
-		console.log(datFolder);
+		datFolder.close();
+		//console.log(datFolder);
 	}
 
 	this.load = function (targetScene, camera)
