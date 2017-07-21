@@ -36,18 +36,8 @@ oobloxMasterMenu = function ()
 				var uname = urlCallParametersList[i].substring(0, urlCallParametersList[i].indexOf("="));
 				var obj = {	choice: uname,
 						remove: function()
-						{
-							var indexInList = -1;
-							for (var i=0;i<urlCallParametersList.length;i++)
-							{
-								if (uname === urlCallParametersList[i].substring(0, uname.length))
-								{
-									indexInList = i;
-									break;
-								}
-							}
-			
-							if (indexInList > -1) urlCallParametersList.splice(indexInList, 1);
+						{	
+							urlCallParametersList.splice(i, 1);
 							var newURLstring = "?"+urlCallParametersList.join("&");
 							window.history.pushState({}, '', newURLstring);
 							location.reload();
