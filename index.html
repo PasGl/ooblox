@@ -113,7 +113,7 @@
 							var newscript = document.createElement('script');
 							newscript.type  = "text/javascript";
 							newscript.src = 'js/vrobjects/'+thisfilename;
-							document.body.appendChild(newscript);
+							$.getScript(newscript);
 						}
 					}
 		        });
