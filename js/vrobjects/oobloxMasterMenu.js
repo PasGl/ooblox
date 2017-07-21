@@ -5,7 +5,7 @@
 
 oobloxMasterMenu = function ()
 {
-	this.mesh = new THREE.Mesh( new THREE.SphereGeometry(0, 0, 0), new THREE.MeshPhongMaterial({}));
+	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(0, 0, 0), new THREE.MeshPhongMaterial({}));
 	///this.group = new THREE.Group();
 	///this.group.add(this.mesh);
 	///var group = this.group;
