@@ -103,7 +103,11 @@
 		        $.get("./js/vrobjects", function(data) 
 		        {
 				var modules = data.split("href=\"");
-		            	console.log(modules);
+				modules.splice(0,1);
+				for (var i=0;i<modules.length;i++)
+				{
+					console.log(modules[i].substring(0,modules[i].indexOf("\"")));
+				}
 		        });
 		    })
 		</script>
