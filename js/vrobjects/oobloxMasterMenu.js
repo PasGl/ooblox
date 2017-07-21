@@ -100,7 +100,9 @@ oobloxMasterMenu = function ()
 		rezFolder.add(addobj,'add').name("Torus Knot");
 			
 		datFolder.addFolder(rezFolder);
+	
 		datFolder.children.push(mesh);
+		console.log(datFolder);
 		targetScene.add( datFolder );
 	}
 
