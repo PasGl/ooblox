@@ -69,11 +69,12 @@ oobloxMasterMenu = function ()
 		
 		var rezFolder = dat.GUIVR.create('Add');
 
-		var position = new THREE.Vector3();
-		targetScene.updateMatrixWorld();
-		position.setFromMatrixPosition( mesh.matrixWorld );
-		var posScaleRotString = "" + position.x + "+" + position.y + "+" + position.z + "+1+1+1+0+0+0+1";
+		
 		var addobj = {add: function() {
+			var position = new THREE.Vector3();
+			targetScene.updateMatrixWorld();
+			position.setFromMatrixPosition( mesh.matrixWorld );
+			var posScaleRotString = "" + position.x + "+" + position.y + "+" + position.z + "+1+1+1+0+0+0+1";
 			var d = new Date();
 			var uname = "TK" + d.getTime();
 			var newhref = window.location.href + "&" + uname + "=TTK+" + posScaleRotString + "+9+0.7+240+7+6+10";
