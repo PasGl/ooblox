@@ -101,8 +101,8 @@ oobloxMasterMenu = function ()
 			
 		datFolder.addFolder(rezFolder);
 	
-		datFolder.children.push(mesh);
-		console.log(datFolder);
+		datFolder.children[0].add(mesh);
+		///console.log(datFolder);
 		targetScene.add( datFolder );
 	}
 
