@@ -46,6 +46,16 @@
 		<script src="js/controls/VRControls.js"></script>
 		<script src="js/Detector.js"></script>
 
+		<script src="js/datguivr.min.js"></script>
+
+		<script src="js/BBTubeGeometry.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+		<script src="js/exporters/OBJExporter.js"></script>
+		<script src="js/exporters/STLExporter.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 		<script>
 			// list for contructors and vrObjectTypeIDs, to which each module contributes one of each
 			var vrObjectConstructorList = [];
@@ -87,18 +97,9 @@
 				var newURLstring = "?"+allmodulArgsList.join("&");
 				window.history.replaceState({}, '', newURLstring);
 			}
-		</script>
-		<script src="js/datguivr.min.js"></script>
 
-		<script src="js/BBTubeGeometry.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
-		<script src="js/exporters/OBJExporter.js"></script>
-		<script src="js/exporters/STLExporter.js"></script>
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-		<script type="text/javascript">
 		    // loading all Modules in the folder /js/vrobjects ... needs webserver to autolist that folder (or 403 fail)
 		    // otherwise this section needs to be replaced by regular imports ala <script src="js/vrobjects/ooblox...
 
@@ -115,6 +116,7 @@
 					{													
 						var newscript = document.createElement('script');
 						newscript.src = 'js/vrobjects/'+thisfilename;
+						console.log(newscript);
 						document.getElementsByTagName("head")[0].appendChild(newscript);
 					}
 				}
