@@ -15,10 +15,12 @@ var effect;
 var manager;
 var clock = new THREE.Clock();
 
+var loadcounter = 0;
+var totalModules = 0;
+
 var bootVR = function ()
 {
-	var loadcounter = 0;
-	var totalModules = 0;
+
 
    	// loading all Modules in the folder /js/vrobjects ... needs webserver to autolist that folder (or 403 fail)
     	// otherwise this section needs to be replaced by regular imports ala <script src="js/vrobjects/ooblox...
@@ -38,6 +40,7 @@ var bootVR = function ()
 				$.getScript('js/vrobjects/'+thisfilename, function()
 				{
 					loadcounter+=1;
+					console.log(loadcounter);
 					if (loadcounter==totalModules)
 					{
 						init();
