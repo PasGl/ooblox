@@ -88,7 +88,7 @@ oobloxMasterMenu = function ()
 
 		var posScaleRotString = "" + 	mesh.position.x + "+" + mesh.position.y + "+" + mesh.position.z + "+" +
 						mesh.scale.x + "+" + mesh.scale.y + "+" + mesh.scale.z + "+" +
-						mesh.rotation.x + "+" + mesh.rotation.y + "+" + mesh.rotation.z + "+" + mesh.rotation.w;
+						mesh.quaternion.x + "+" + mesh.quaternion.y + "+" + mesh.quaternion.z + "+" + mesh.quaternion.w;
 		console.log(posScaleRotString);
 		var addobj = {add: function() {
 			var d = new Date();
@@ -97,10 +97,6 @@ oobloxMasterMenu = function ()
 			location.reload();}};
 		rezFolder.add(addobj,'add').name("Torus Knot");
 			
-
-
-
-
 		datFolder.addFolder(rezFolder);
 
 		targetScene.add( datFolder );
