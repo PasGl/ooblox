@@ -47,6 +47,14 @@ var bootVR = function ()
 					init();
 					animate();
 				}
+			}).fail(function()
+			{
+				loadcounter+=1;
+				if (loadcounter==totalModules)
+				{
+					init();
+					animate();
+				}
 			});
 		}
         });
