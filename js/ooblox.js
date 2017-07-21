@@ -29,10 +29,10 @@ var bootVR = function ()
 		var modules = data.split("href=\"");
 
 		var n = 0;
-		while (n<modules.length;n++)
+		while (n<modules.length)
 		{
 			var thisfilename= modules[n].substring(0,modules[n].indexOf("\""));
-			if (thisfilename.substring(thisfilename.length-3,thisfilename.length+1)===".js") {modules[n] = thisfilename;n++}
+			if (thisfilename.substring(thisfilename.length-3,thisfilename.length+1)===".js") {modules[n] = thisfilename;n++;}
 			else modules.splice(n,1);
 		}
 
