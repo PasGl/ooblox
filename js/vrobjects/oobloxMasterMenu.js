@@ -58,7 +58,7 @@ oobloxMasterMenu = function ()
 		mesh.position.x=0;
 		mesh.position.y=0;
 		mesh.position.z=0;
-		indicator.position.x = -0.5;
+		indicator.position.y = -0.5;
 
 		datFolder.scale.set(20.0,20.0,0.1);
 
