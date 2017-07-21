@@ -65,7 +65,7 @@ oobloxMasterMenu = function ()
 
 		var position = new THREE.Vector3();
 		position.setFromMatrixPosition( mesh.matrixWorld );
-		var posScaleRotString = "" + 	position.x + "+" + position.y + "+" + position.z + "+1+1+1+0+0+0+1;
+		var posScaleRotString = "" + position.x + "+" + position.y + "+" + position.z + "+1+1+1+0+0+0+1";
 		var addobj = {add: function() {
 			var d = new Date();
 			var uname = "TK" + d.getTime();
