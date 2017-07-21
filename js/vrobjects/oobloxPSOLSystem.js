@@ -639,6 +639,7 @@ function PSOLSystem ()
 		datFolder.addFolder(rotFolder);
 
 		targetScene.add( datFolder );
+		datFolder.close();
 	}
 
 
