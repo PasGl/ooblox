@@ -6,9 +6,9 @@
 oobloxMasterMenu = function ()
 {
 	this.mesh = new THREE.Mesh( new THREE.SphereGeometry(5, 20, 20), new THREE.MeshPhongMaterial({color: "#FF0000", transparent: true,opacity: 0.5}));
-	this.group = new THREE.Group();
-	this.group.add(this.mesh);
-	var group = this.group;
+	///this.group = new THREE.Group();
+	///this.group.add(this.mesh);
+	///var group = this.group;
 	
 	this.mesh.vrObjectTypeID = "OMM";
 
@@ -34,8 +34,8 @@ oobloxMasterMenu = function ()
 	{
 		mesh.geometry.computeBoundingBox();
 		var datFolder = dat.GUIVR.create('ooblox Menu');
-		//datFolder.position.copy(mesh.position);
-		//datFolder.position.z += mesh.geometry.boundingBox.max.z;
+		datFolder.position.copy(mesh.position);
+		datFolder.position.z += mesh.geometry.boundingBox.max.z;
 		datFolder.scale.set(20.0,20.0,0.1);
 
 		var remFolder = dat.GUIVR.create('Remove');
@@ -64,14 +64,14 @@ oobloxMasterMenu = function ()
 		datFolder.addFolder(remFolder);
 		
 		var rezFolder = dat.GUIVR.create('Add');
-		var posFolder = dat.GUIVR.create('Rez Position');
-		var posXSlider = posFolder.add(mesh.position,'x',-200.0,200.0);
-		posXSlider.onChange(refresh);
-		var posYSlider = posFolder.add(mesh.position,'y',-200.0,200.0);
-		posYSlider.onChange(refresh);
-		var posZSlider = posFolder.add(mesh.position,'z',-200.0,200.0);
-		posZSlider.onChange(refresh);
-		rezFolder.addFolder(posFolder);
+//		var posFolder = dat.GUIVR.create('Rez Position');
+//		var posXSlider = posFolder.add(mesh.position,'x',-200.0,200.0);
+//		posXSlider.onChange(refresh);
+//		var posYSlider = posFolder.add(mesh.position,'y',-200.0,200.0);
+//		posYSlider.onChange(refresh);
+//		var posZSlider = posFolder.add(mesh.position,'z',-200.0,200.0);
+//		posZSlider.onChange(refresh);
+//		rezFolder.addFolder(posFolder);
 		var scaleFolder = dat.GUIVR.create('Rez Scale');
 		var scaleXSlider = scaleFolder.add(mesh.scale,'x',0.01,20.0);
 		scaleXSlider.onChange(refresh);
@@ -100,8 +100,8 @@ oobloxMasterMenu = function ()
 		rezFolder.add(addobj,'add').name("Torus Knot");
 			
 		datFolder.addFolder(rezFolder);
-
-		group.add( datFolder );
+		datFolder.children.push(mesh);
+		targetScene.add( datFolder );
 	}
 
 	this.load = function (targetScene, camera)
@@ -127,7 +127,7 @@ oobloxMasterMenu = function ()
 
 		refresh(targetScene);
 		this.mesh.fillDatGUI(targetScene);
-		targetScene.add(this.group);			
+		///targetScene.add(this.group);			
 	}
 }
 
