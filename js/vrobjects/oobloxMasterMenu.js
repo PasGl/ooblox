@@ -57,7 +57,7 @@ oobloxMasterMenu = function ()
 		mesh.geometry.computeBoundingBox();
 		var datFolder = dat.GUIVR.create('ooblox Menu');
 		datFolder.position.copy(mesh.position);
-		mesh.position.x=-20;
+		mesh.position.x=-200;
 		mesh.position.y=0;
 		mesh.position.z=0;
 
