@@ -14,6 +14,9 @@ oobloxMasterMenu = function ()
 
 	var mesh=this.mesh;
 
+	var remFolder;
+	var remsAdded=0;
+
 	var refresh = function (targetScene)
 	{
 		var position = new THREE.Vector3();
@@ -23,6 +26,29 @@ oobloxMasterMenu = function ()
 				position.x,
 				position.y,
 				position.z]);
+		
+		var allmodulArgs="";
+		var urlCallParametersList= [];
+		if (window.location.href.indexOf("?")!=-1)
+		{
+			allmodulArgs=window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
+			urlCallParametersList = allmodulArgs.split("&");
+			while (remsAdded<urlCallParametersList.length)
+			{		
+				var uname = urlCallParametersList[remsAdded].substring(0, urlCallParametersList[remsAdded].indexOf("="));
+				var obj = {	myIndex: remsAdded,
+						remove: function()
+						{	
+							urlCallParametersList.splice(this.myIndex, 1);
+							var newURLstring = "?"+urlCallParametersList.join("&");
+							window.history.pushState({}, '', newURLstring);
+							location.reload();
+						}};
+				remFolder.add(obj,'remove').name(uname);
+				remsAdded++;
+			}
+	
+		}
 	};
 	
 	this.mesh.fillDatGUI = function (targetScene, camera)
@@ -36,29 +62,8 @@ oobloxMasterMenu = function ()
 
 		datFolder.scale.set(20.0,20.0,0.1);
 
-		var remFolder = dat.GUIVR.create('Remove');
-		var allmodulArgs="";
-		var urlCallParametersList= [];
-		if (window.location.href.indexOf("?")!=-1)
-		{
-			allmodulArgs=window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
-			urlCallParametersList = allmodulArgs.split("&");
-	
-			for (var i=0;i<urlCallParametersList.length;i++)
-			{		
-				var uname = urlCallParametersList[i].substring(0, urlCallParametersList[i].indexOf("="));
-				var obj = {	myIndex: i,
-						remove: function()
-						{	
-							urlCallParametersList.splice(this.myIndex, 1);
-							var newURLstring = "?"+urlCallParametersList.join("&");
-							window.history.pushState({}, '', newURLstring);
-							location.reload();
-						}};
-				remFolder.add(obj,'remove').name(uname);
-			}
-	
-		}
+		remFolder = dat.GUIVR.create('Remove');
+
 		datFolder.addFolder(remFolder);
 		
 		var rezFolder = dat.GUIVR.create('Add');
@@ -74,15 +79,12 @@ oobloxMasterMenu = function ()
 			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("TTK")]();
 			importedThing.mesh.uname = uname;
 			importedThing.load(targetScene, camera);
-
+			refresh(targetScene);
 		}};
 		
 		rezFolder.add(addobj,'add').name("Torus Knot");
-			
 		datFolder.addFolder(rezFolder);
-	
 		datFolder.children[0].add(mesh);
-
 		targetScene.add( datFolder );
 	}
 
@@ -93,12 +95,9 @@ oobloxMasterMenu = function ()
 		position.x = parseFloat(argList[1]);
 		position.y = parseFloat(argList[2]);
 		position.z = parseFloat(argList[3]);
-
 		this.mesh.position.copy(position);
-
-		refresh(targetScene);
 		this.mesh.fillDatGUI(targetScene, camera);
-			
+		refresh(targetScene);
 	}
 }
 
