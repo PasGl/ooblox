@@ -6,7 +6,7 @@
 oobloxMasterMenu = function ()
 {
 	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(0, 0, 0), new THREE.MeshPhongMaterial({}));
-	this.indicator = new THREE.Mesh( new THREE.SphereGeometry(0.1, 24, 24), new THREE.MeshPhongMaterial({color:"#FF0000",transparent:true,opacity:0.5}));
+	this.indicator = new THREE.Mesh( new THREE.SphereGeometry(1.0, 24, 24), new THREE.MeshPhongMaterial({color:"#FF0000",transparent:true,opacity:0.5}));
 	var indicator = this.indicator;
 	this.mesh.vrObjectTypeID = "OMM";
 
@@ -70,7 +70,7 @@ oobloxMasterMenu = function ()
 		
 		var rezFolder = dat.GUIVR.create('Add');
 
-		var addobj = {add: function() {
+		var tkobj = {add: function() {
 			var position = new THREE.Vector3();
 			targetScene.updateMatrixWorld();
 			position.setFromMatrixPosition( mesh.matrixWorld );
@@ -83,7 +83,52 @@ oobloxMasterMenu = function ()
 			importedThing.mesh.uname = uname;
 			importedThing.load(targetScene, camera);
 			refresh(targetScene);}};
-		rezFolder.add(addobj,'add').name("Torus Knot");
+		rezFolder.add(tkobj,'add').name("Torus Knot");
+
+		var psolobj = {add: function() {
+			var position = new THREE.Vector3();
+			targetScene.updateMatrixWorld();
+			position.setFromMatrixPosition( mesh.matrixWorld );
+			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z + "+1+1+1+0+0+0+1";
+			var d = new Date();
+			var uname = "PSOL" + d.getTime();
+			var newhref = window.location.href + "&" + uname + "=PLS+" + posScaleRotString + "+3+FN(1)+645101582+5+0.6+4.5+0.7+0.36+0.3+0.45+0.4+0.0001+0.0001";
+			window.history.pushState({}, '', newhref);
+			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("PLS")]();
+			importedThing.mesh.uname = uname;
+			importedThing.load(targetScene, camera);
+			refresh(targetScene);}};
+		rezFolder.add(psolobj,'add').name("PSOL-System");
+
+		var cpgobj = {add: function() {
+			var position = new THREE.Vector3();
+			targetScene.updateMatrixWorld();
+			position.setFromMatrixPosition( mesh.matrixWorld );
+			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z + "+1+1+1+0+0+0+1";
+			var d = new Date();
+			var uname = "CPG" + d.getTime();
+			var newhref = window.location.href + "&" + uname + "=CPG+" + posScaleRotString + "+4+8356747";
+			window.history.pushState({}, '', newhref);
+			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("CPG")]();
+			importedThing.mesh.uname = uname;
+			importedThing.load(targetScene, camera);
+			refresh(targetScene);}};
+		rezFolder.add(cpgobj,'add').name("Chord Progression Generator");
+
+		var metobj = {add: function() {
+			var position = new THREE.Vector3();
+			targetScene.updateMatrixWorld();
+			position.setFromMatrixPosition( mesh.matrixWorld );
+			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z + "+1+1+1+0+0+0+1";
+			var d = new Date();
+			var uname = "MET" + d.getTime();
+			var newhref = window.location.href + "&" + uname + "=MET+" + posScaleRotString + "+128+true";
+			window.history.pushState({}, '', newhref);
+			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("MET")]();
+			importedThing.mesh.uname = uname;
+			importedThing.load(targetScene, camera);
+			refresh(targetScene);}};
+		rezFolder.add(metobj,'add').name("Metronome");
 
 		datFolder.addFolder(rezFolder);
 		datFolder.children[0].add(mesh);
