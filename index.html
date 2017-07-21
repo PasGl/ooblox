@@ -102,7 +102,8 @@
 		    {
 		        $.get("./js/vrobjects", function(data) 
 		        {
-		            console.log(data);
+				var modules = data.split("href=\"");
+		            	console.log(modules);
 		        });
 		    })
 		</script>
