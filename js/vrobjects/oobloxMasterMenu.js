@@ -6,6 +6,8 @@
 oobloxMasterMenu = function ()
 {
 	this.mesh = new THREE.Mesh( new THREE.SphereGeometry(5, 20, 20), new THREE.MeshPhongMaterial({color: "#FF0000", transparent: true,opacity: 0.5}));
+	this.group = new THREE.Group();
+	this.group.add(this.mesh);
 	
 	this.mesh.vrObjectTypeID = "OMM";
 
@@ -98,8 +100,7 @@ oobloxMasterMenu = function ()
 			
 		datFolder.addFolder(rezFolder);
 
-		mesh.add( datFolder );
-		//targetScene.add( datFolder );
+		this.group.add( datFolder );
 	}
 
 	this.load = function (targetScene, camera)
@@ -125,7 +126,7 @@ oobloxMasterMenu = function ()
 
 		refresh(targetScene);
 		this.mesh.fillDatGUI(targetScene);
-		targetScene.add(mesh);			
+		targetScene.add(this.group);			
 	}
 }
 
