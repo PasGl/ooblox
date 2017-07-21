@@ -58,7 +58,9 @@ oobloxMasterMenu = function ()
 		mesh.position.x=0;
 		mesh.position.y=0;
 		mesh.position.z=0;
-		indicator.position.y = -0.5;
+		indicator.position.x=0;
+		indicator.position.y=0;
+		indicator.position.z=0;
 
 		datFolder.scale.set(20.0,20.0,0.1);
 
@@ -73,7 +75,7 @@ oobloxMasterMenu = function ()
 			var position = new THREE.Vector3();
 			targetScene.updateMatrixWorld();
 			position.setFromMatrixPosition( mesh.matrixWorld );
-			var posScaleRotString = "" + (position.x - 10) + "+" + position.y + "+" + position.z + "+1+1+1+0+0+0+1";
+			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z + "+1+1+1+0+0+0+1";
 			var d = new Date();
 			var uname = "TK" + d.getTime();
 			var newhref = window.location.href + "&" + uname + "=TTK+" + posScaleRotString + "+9+0.7+240+7+6+10";
@@ -100,7 +102,8 @@ oobloxMasterMenu = function ()
 		position.z = parseFloat(argList[3]);
 		this.mesh.position.copy(position);
 		this.mesh.fillDatGUI(targetScene, camera);
-		refresh(targetScene);
+
+		setInterval(function(){ refresh(targetScene); }, 1000);
 	}
 }
 
