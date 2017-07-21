@@ -89,7 +89,7 @@ oobloxMasterMenu = function ()
 		var posScaleRotString = "" + 	mesh.position.x + "+" + mesh.position.y + "+" + mesh.position.z + "+" +
 						mesh.scale.x + "+" + mesh.scale.y + "+" + mesh.scale.z + "+" +
 						mesh.rotation.x + "+" + mesh.rotation.y + "+" + mesh.rotation.z + "+" + mesh.rotation.w;
-		
+		console.log(posScaleRotString);
 		var addobj = {add: function() {
 			var d = new Date();
 			var newhref = window.location.href + "&TK" + d.getTime() + "=TTK+" + posScaleRotString + "+9+0.7+240+7+6+10";
