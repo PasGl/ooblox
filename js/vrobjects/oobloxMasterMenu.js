@@ -40,7 +40,7 @@ oobloxMasterMenu = function ()
 				var obj = {	myIndex: remsAdded,
 						remove: function()
 						{
-							refresh();	
+							refresh(targetScene);	
 							urlCallParametersList.splice(this.myIndex, 1);
 							var newURLstring = "?"+urlCallParametersList.join("&");
 							window.history.pushState({}, '', newURLstring);
