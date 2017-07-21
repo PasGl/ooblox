@@ -107,7 +107,7 @@
 				for (var i=0;i<modules.length;i++)
 				{
 					thisfilename= modules[i].substring(0,modules[i].indexOf("\""));
-					if (thisfilename.substring(-3,thisfilename.length+1===".js"))
+					if (thisfilename.substring(thisfilename.length-2,thisfilename.length+1)===".js")
 					{
 						console.log(thisfilename);
 					}
