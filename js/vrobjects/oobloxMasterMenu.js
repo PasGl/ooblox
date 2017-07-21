@@ -61,16 +61,12 @@ oobloxMasterMenu = function ()
 		indicator.position.x=0;
 		indicator.position.y=0;
 		indicator.position.z=0;
-
 		datFolder.scale.set(20.0,20.0,0.1);
-
 		remFolder = dat.GUIVR.create('Remove');
-
 		datFolder.addFolder(remFolder);
 		
 		var rezFolder = dat.GUIVR.create('Add');
 
-		
 		var addobj = {add: function() {
 			var position = new THREE.Vector3();
 			targetScene.updateMatrixWorld();
@@ -83,13 +79,12 @@ oobloxMasterMenu = function ()
 			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("TTK")]();
 			importedThing.mesh.uname = uname;
 			importedThing.load(targetScene, camera);
-			refresh(targetScene);
-		}};
-		
+			refresh(targetScene);}};
 		rezFolder.add(addobj,'add').name("Torus Knot");
+
 		datFolder.addFolder(rezFolder);
-		datFolder.children[0].add(mesh);
-		datFolder.children[0].add(indicator);
+		datFolder.children[0].parent.add(mesh);
+		datFolder.children[0].parent.add(indicator);
 		targetScene.add( datFolder );
 	}
 
