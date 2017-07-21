@@ -31,8 +31,8 @@ oobloxMasterMenu = function ()
 	{
 		mesh.geometry.computeBoundingBox();
 		var datFolder = dat.GUIVR.create('ooblox Menu');
-		datFolder.position.copy(mesh.position);
-		datFolder.position.z += mesh.geometry.boundingBox.max.z;
+		//datFolder.position.copy(mesh.position);
+		//datFolder.position.z += mesh.geometry.boundingBox.max.z;
 		datFolder.scale.set(20.0,20.0,0.1);
 
 		var remFolder = dat.GUIVR.create('Remove');
@@ -98,7 +98,8 @@ oobloxMasterMenu = function ()
 			
 		datFolder.addFolder(rezFolder);
 
-		targetScene.add( datFolder );
+		mesh.add( datFolder );
+		//targetScene.add( datFolder );
 	}
 
 	this.load = function (targetScene, camera)
