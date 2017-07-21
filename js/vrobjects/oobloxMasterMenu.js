@@ -20,6 +20,7 @@ oobloxMasterMenu = function ()
 	var refresh = function (targetScene)
 	{
 		var position = new THREE.Vector3();
+		targetScene.updateMatrixWorld();
 		position.setFromMatrixPosition( mesh.matrixWorld );
 		updateURLargs([	mesh.uname,
 				mesh.vrObjectTypeID,
@@ -69,6 +70,7 @@ oobloxMasterMenu = function ()
 		var rezFolder = dat.GUIVR.create('Add');
 
 		var position = new THREE.Vector3();
+		targetScene.updateMatrixWorld();
 		position.setFromMatrixPosition( mesh.matrixWorld );
 		var posScaleRotString = "" + position.x + "+" + position.y + "+" + position.z + "+1+1+1+0+0+0+1";
 		var addobj = {add: function() {
