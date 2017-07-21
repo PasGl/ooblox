@@ -90,19 +90,29 @@
 		</script>
 		<script src="js/datguivr.min.js"></script>
 
-		<script src="js/vrobjects/oobloxTorusKnot.js"></script>
-		<script src="js/vrobjects/oobloxSkybox.js"></script>
-		<script src="js/vrobjects/oobloxOrbitCamMod.js"></script>
-		<script src="js/vrobjects/oobloxMetronome.js"></script>
-		<script src="js/vrobjects/oobloxChordProgressionGenerator.js"></script>
-		<script src="js/vrobjects/oobloxMasterMenu.js"></script>
-
 		<script src="js/BBTubeGeometry.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
 		<script src="js/exporters/OBJExporter.js"></script>
 		<script src="js/exporters/STLExporter.js"></script>
 
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script type="text/javascript">
+		    $(document).ready(function () 
+		    {
+		        $.get("./js/vrobjects", function(data) 
+		        {
+		            console.log(data);
+		        });
+		    })
+		</script>
+
+		<script src="js/vrobjects/oobloxTorusKnot.js"></script>
+		<script src="js/vrobjects/oobloxSkybox.js"></script>
+		<script src="js/vrobjects/oobloxOrbitCamMod.js"></script>
+		<script src="js/vrobjects/oobloxMetronome.js"></script>
+		<script src="js/vrobjects/oobloxChordProgressionGenerator.js"></script>
+		<script src="js/vrobjects/oobloxMasterMenu.js"></script>
 		<script src="js/vrobjects/oobloxPSOLSystem.js"></script>
 	</head>
 	<body onload="bootVR()">
