@@ -33,6 +33,7 @@ oobloxMasterMenu = function ()
 	{
 		var datFolder = dat.GUIVR.create('ooblox Menu');
 		datFolder.position.copy(mesh.position);
+		datFolder.position.x += mesh.scale.x/2;
 		datFolder.scale.set(20.0,20.0,0.1);
 
 		var remFolder = dat.GUIVR.create('Remove');
