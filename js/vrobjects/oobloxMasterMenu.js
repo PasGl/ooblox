@@ -39,8 +39,7 @@ oobloxMasterMenu = function ()
 				var uname = urlCallParametersList[remsAdded].substring(0, urlCallParametersList[remsAdded].indexOf("="));
 				var obj = {	myIndex: remsAdded,
 						remove: function()
-						{
-							refresh(targetScene);	
+						{	
 							urlCallParametersList.splice(this.myIndex, 1);
 							var newURLstring = "?"+urlCallParametersList.join("&");
 							window.history.pushState({}, '', newURLstring);
@@ -58,7 +57,7 @@ oobloxMasterMenu = function ()
 		mesh.geometry.computeBoundingBox();
 		var datFolder = dat.GUIVR.create('ooblox Menu');
 		datFolder.position.copy(mesh.position);
-		mesh.position.x=0;
+		mesh.position.x=-20;
 		mesh.position.y=0;
 		mesh.position.z=0;
 
