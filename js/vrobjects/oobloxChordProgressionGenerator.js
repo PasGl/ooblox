@@ -208,6 +208,7 @@ oobloxChordProgressionGenerator = function ()
 		datFolder.addFolder(rotFolder);
 
 		targetScene.add( datFolder );
+		datFolder.close();
 	}
 
 	this.load = function (targetScene, camera)
