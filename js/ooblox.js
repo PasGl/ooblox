@@ -27,9 +27,9 @@ var bootVR = function ()
 	$.get("./js/vrobjects", function(data) 
        	{
 		var modules = data.split("href=\"");
-		console.log(modules):
+		console.log(modules);
 		modules.splice(0,1);
-		console.log(modules):
+		console.log(modules);
 		totalModules = modules.length;
 		for (var i=0;i<modules.length;i++)
 		{
