@@ -18,9 +18,9 @@ oobloxMasterMenu = function ()
 	{
 		updateURLargs([	mesh.uname,
 				mesh.vrObjectTypeID,
-				mesh.parent.position.x,
-				mesh.parent.position.y,
-				mesh.parent.position.z,
+				mesh.position.x,
+				mesh.position.y,
+				mesh.position.z,
 				mesh.scale.x,
 				mesh.scale.y,
 				mesh.scale.z,
