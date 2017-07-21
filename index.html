@@ -98,30 +98,24 @@
 				window.history.replaceState({}, '', newURLstring);
 			}
 
-
-
-		    // loading all Modules in the folder /js/vrobjects ... needs webserver to autolist that folder (or 403 fail)
-		    // otherwise this section needs to be replaced by regular imports ala <script src="js/vrobjects/ooblox...
-
-		    $(document).ready(function () 
-		    {
-		        $.get("./js/vrobjects", function(data) 
-		        {
-				var modules = data.split("href=\"");
-				modules.splice(0,1);
-				for (var i=0;i<modules.length;i++)
-				{
-					var thisfilename= modules[i].substring(0,modules[i].indexOf("\""));
-					if (thisfilename.substring(thisfilename.length-3,thisfilename.length+1)===".js")
-					{													
-						var newscript = document.createElement('script');
-						newscript.src = 'js/vrobjects/'+thisfilename;
-						console.log(newscript);
-						document.getElementsByTagName("head")[0].appendChild(newscript);
+		    	// loading all Modules in the folder /js/vrobjects ... needs webserver to autolist that folder (or 403 fail)
+		    	// otherwise this section needs to be replaced by regular imports ala <script src="js/vrobjects/ooblox...
+			$.get("./js/vrobjects", function(data) 
+		        	{
+					var modules = data.split("href=\"");
+					modules.splice(0,1);
+					for (var i=0;i<modules.length;i++)
+					{
+						var thisfilename= modules[i].substring(0,modules[i].indexOf("\""));
+						if (thisfilename.substring(thisfilename.length-3,thisfilename.length+1)===".js")
+						{													
+							var newscript = document.createElement('script');
+							newscript.src = 'js/vrobjects/'+thisfilename;
+							console.log(newscript);
+							document.getElementsByTagName("head")[0].appendChild(newscript);
+						}
 					}
-				}
 		        });
-		    })
 		</script>
 	</head>
 	<body onload="bootVR()">
