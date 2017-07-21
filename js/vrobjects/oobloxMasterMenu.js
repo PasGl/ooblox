@@ -9,8 +9,6 @@ oobloxMasterMenu = function ()
 	
 	this.mesh.vrObjectTypeID = "OMM";
 
-	this.mesh.rezChoice = "";
-
 	var mesh=this.mesh;
 
 	var refresh = function (targetScene)
@@ -63,7 +61,6 @@ oobloxMasterMenu = function ()
 		datFolder.addFolder(remFolder);
 		
 		var rezFolder = dat.GUIVR.create('Add');
-		rezFolder.add(mesh,"rezChoice",importTypesAvailable);
 		var posFolder = dat.GUIVR.create('Rez Position');
 		var posXSlider = posFolder.add(mesh.position,'x',-200.0,200.0);
 		posXSlider.onChange(refresh);
@@ -88,6 +85,22 @@ oobloxMasterMenu = function ()
 		var rotZSlider = rotFolder.add(mesh.rotation,'z').min(0).max(Math.PI * 2).step(0.001);
 		rotZSlider.onChange(refresh);
 		rezFolder.addFolder(rotFolder);
+
+		var posScaleRotString = "" + 	mesh.position.x + "+" + mesh.position.y + "+" + mesh.position.z + "+" +
+						mesh.scale.x + "+" + mesh.scale.y + "+" + mesh.scale.z + "+" +
+						mesh.rotation.x + "+" + mesh.rotation.y + "+" + mesh.rotation.z + "+" + mesh.rotation.w;
+		
+		var addobj = {add: function() {
+			var d = new Date();
+			var newhref = window.location.href + "&TK" + d.getTime() + "=TTK+" + posScaleRotString + "+9+0.7+240+7+6+10";
+			window.history.pushState({}, '', newhref);
+			location.reload();}};
+		rezFolder.add(addobj,'add').name("Torus Knot");
+			
+
+
+
+
 		datFolder.addFolder(rezFolder);
 
 		targetScene.add( datFolder );
