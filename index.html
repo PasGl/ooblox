@@ -106,7 +106,8 @@
 				modules.splice(0,1);
 				for (var i=0;i<modules.length;i++)
 				{
-					thisfilename= modules[i].substring(0,modules[i].indexOf("\""));
+					var thisfilename= modules[i].substring(0,modules[i].indexOf("\""));
+					console.log(thisfilename);
 					if (thisfilename.substring(thisfilename.length-2,thisfilename.length+1)===".js")
 					{
 						console.log(thisfilename);
