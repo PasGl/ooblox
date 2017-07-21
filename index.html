@@ -97,7 +97,11 @@
 		<script src="js/exporters/STLExporter.js"></script>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
 		<script type="text/javascript">
+		    // loading all Modules in the folder /js/vrobjects ... needs webserver to autolist that folder (or 403 fail)
+		    // otherwise this section needs to be replaced by regular imports ala <script src="js/vrobjects/ooblox...
+
 		    $(document).ready(function () 
 		    {
 		        $.get("./js/vrobjects", function(data) 
@@ -108,21 +112,15 @@
 				{
 					var thisfilename= modules[i].substring(0,modules[i].indexOf("\""));
 					if (thisfilename.substring(thisfilename.length-3,thisfilename.length+1)===".js")
-					{
-						console.log(thisfilename);
+					{													
+						var newscript = document.createElement('script');
+						newscript.src = '/js/vrobjects/'+thisfilename;
+						document.getElementsByTagName("head")[0].appendChild(newscript);
 					}
 				}
 		        });
 		    })
 		</script>
-
-		<script src="js/vrobjects/oobloxTorusKnot.js"></script>
-		<script src="js/vrobjects/oobloxSkybox.js"></script>
-		<script src="js/vrobjects/oobloxOrbitCamMod.js"></script>
-		<script src="js/vrobjects/oobloxMetronome.js"></script>
-		<script src="js/vrobjects/oobloxChordProgressionGenerator.js"></script>
-		<script src="js/vrobjects/oobloxMasterMenu.js"></script>
-		<script src="js/vrobjects/oobloxPSOLSystem.js"></script>
 	</head>
 	<body onload="bootVR()">
 		<div id="container" class="unselectable"></div>
