@@ -102,8 +102,7 @@ oobloxMasterMenu = function ()
 		position.z = parseFloat(argList[3]);
 		this.mesh.position.copy(position);
 		this.mesh.fillDatGUI(targetScene, camera);
-
-		setInterval(function(){ refresh(targetScene); }, 1000);
+		refresh(targetScene);
 	}
 }
 
