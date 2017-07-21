@@ -118,7 +118,7 @@ oobloxMetronome = function ()
 		datFolder.addFolder(rotFolder);
 
 		targetScene.add( datFolder );
-
+		datFolder.close();
 	}
 
 	this.mesh.kill = function ()
