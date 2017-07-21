@@ -61,6 +61,9 @@ oobloxMasterMenu = function ()
 		indicator.position.x=0;
 		indicator.position.y=0;
 		indicator.position.z=0;
+		indicator.scale.x=0.05;
+		indicator.scale.y=0.05;
+		indicator.scale.z=10;
 		datFolder.scale.set(20.0,20.0,0.1);
 		remFolder = dat.GUIVR.create('Remove');
 		datFolder.addFolder(remFolder);
@@ -75,7 +78,7 @@ oobloxMasterMenu = function ()
 			var d = new Date();
 			var uname = "TK" + d.getTime();
 			var newhref = window.location.href + "&" + uname + "=TTK+" + posScaleRotString + "+9+0.7+240+7+6+10";
-			window.history.replaceState({}, '', newhref);
+			window.history.pushState({}, '', newhref);
 			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("TTK")]();
 			importedThing.mesh.uname = uname;
 			importedThing.load(targetScene, camera);
