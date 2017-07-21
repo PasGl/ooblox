@@ -34,7 +34,7 @@ var bootVR = function ()
 			var thisfilename= modules[i].substring(0,modules[i].indexOf("\""));
 			if (thisfilename.substring(thisfilename.length-3,thisfilename.length+1)===".js")
 			{	
-				console.log(loadcounter,totalModules);												
+				console.log(loadcounter,totalModules, thisfilename);												
 				$.getScript('js/vrobjects/'+thisfilename, function()
 				{
 					loadcounter+=1;
