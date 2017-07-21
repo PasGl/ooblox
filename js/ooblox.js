@@ -17,8 +17,36 @@ var clock = new THREE.Clock();
 
 var bootVR = function ()
 {
-	init();
-	animate();
+	var loadcounter = 0;
+	var totalModules = 0;
+
+   	// loading all Modules in the folder /js/vrobjects ... needs webserver to autolist that folder (or 403 fail)
+    	// otherwise this section needs to be replaced by regular imports ala <script src="js/vrobjects/ooblox...
+	$.get("./js/vrobjects", function(data) 
+       	{
+		var modules = data.split("href=\"");
+		modules.splice(0,1);
+		totalModules = modules.length;
+		for (var i=0;i<modules.length;i++)
+		{
+			var thisfilename= modules[i].substring(0,modules[i].indexOf("\""));
+			if (thisfilename.substring(thisfilename.length-3,thisfilename.length+1)===".js")
+			{													
+				var newscript = document.createElement('script');
+				newscript.type  = "text/javascript";
+				newscript.src = 'js/vrobjects/'+thisfilename;
+				$.getScript('js/vrobjects/'+thisfilename, function()
+				{
+					loadcounter+=1;
+					if (loadcounter==totalModules)
+					{
+						init();
+						animate();
+					}
+				});
+			}
+		}
+        });
 }
 
 function init()
