@@ -6,7 +6,7 @@
 oobloxMasterMenu = function ()
 {
 	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(0, 0, 0), new THREE.MeshPhongMaterial({}));
-	this.indicator = new THREE.Mesh( new THREE.SphereGeometry(5, 24, 24), new THREE.MeshPhongMaterial({color:"#FF0000",transparent:true,opacity:0.5}));
+	this.indicator = new THREE.Mesh( new THREE.SphereGeometry(500, 24, 24), new THREE.MeshPhongMaterial({color:"#FF0000",transparent:true,opacity:0.5}));
 	var indicator = this.indicator;
 	this.mesh.vrObjectTypeID = "OMM";
 
