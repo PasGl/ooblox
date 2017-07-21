@@ -6,10 +6,8 @@
 oobloxMasterMenu = function ()
 {
 	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(0, 0, 0), new THREE.MeshPhongMaterial({}));
-	///this.group = new THREE.Group();
-	///this.group.add(this.mesh);
-	///var group = this.group;
-	
+	this.indicator = new THREE.Mesh( new THREE.SphereGeometry(0.1, 24, 24), new THREE.MeshPhongMaterial({color:"#FF0000",transparent:true,opacity:0.5}));
+	var indicator = this.indicator;
 	this.mesh.vrObjectTypeID = "OMM";
 
 	var mesh=this.mesh;
@@ -57,9 +55,10 @@ oobloxMasterMenu = function ()
 		mesh.geometry.computeBoundingBox();
 		var datFolder = dat.GUIVR.create('ooblox Menu');
 		datFolder.position.copy(mesh.position);
-		mesh.position.x=-200;
+		mesh.position.x=0;
 		mesh.position.y=0;
 		mesh.position.z=0;
+		indicator.position.x = -0.5;
 
 		datFolder.scale.set(20.0,20.0,0.1);
 
@@ -74,7 +73,7 @@ oobloxMasterMenu = function ()
 			var position = new THREE.Vector3();
 			targetScene.updateMatrixWorld();
 			position.setFromMatrixPosition( mesh.matrixWorld );
-			var posScaleRotString = "" + position.x + "+" + position.y + "+" + position.z + "+1+1+1+0+0+0+1";
+			var posScaleRotString = "" + (position.x - 10) + "+" + position.y + "+" + position.z + "+1+1+1+0+0+0+1";
 			var d = new Date();
 			var uname = "TK" + d.getTime();
 			var newhref = window.location.href + "&" + uname + "=TTK+" + posScaleRotString + "+9+0.7+240+7+6+10";
@@ -88,6 +87,7 @@ oobloxMasterMenu = function ()
 		rezFolder.add(addobj,'add').name("Torus Knot");
 		datFolder.addFolder(rezFolder);
 		datFolder.children[0].add(mesh);
+		datFolder.children[0].add(indicator);
 		targetScene.add( datFolder );
 	}
 
