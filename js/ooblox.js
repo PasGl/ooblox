@@ -20,8 +20,6 @@ var totalModules = 0;
 
 var bootVR = function ()
 {
-
-
    	// loading all Modules in the folder /js/vrobjects ... needs webserver to autolist that folder (or 403 fail)
     	// otherwise this section needs to be replaced by regular imports in <head> ala <script src="js/vrobjects/ooblox...
 	$.get("./js/vrobjects", function(data) 
@@ -31,7 +29,7 @@ var bootVR = function ()
 		var n = 0;
 		while (n<modules.length)
 		{
-			var thisfilename= modules[n].substring(0,modules[n].indexOf("\""));
+			var thisfilename = modules[n].substring(0,modules[n].indexOf("\""));
 			if (thisfilename.substring(thisfilename.length-3,thisfilename.length+1)===".js") {modules[n] = thisfilename;n++;}
 			else modules.splice(n,1);
 		}
@@ -39,19 +37,17 @@ var bootVR = function ()
 		totalModules = modules.length;
 		for (var i=0;i<modules.length;i++)
 		{
-			var thisfilename= modules[i].substring(0,modules[i].indexOf("\""));
-			if (thisfilename.substring(thisfilename.length-3,thisfilename.length+1)===".js")
-			{	
-				$.getScript('js/vrobjects/'+thisfilename, function()
+			var thisfilename= modules[i];
+			
+			$.getScript('js/vrobjects/'+thisfilename, function()
+			{
+				loadcounter+=1;
+				if (loadcounter==totalModules)
 				{
-					loadcounter+=1;
-					if (loadcounter==totalModules)
-					{
-						init();
-						animate();
-					}
-				});
-			}
+					init();
+					animate();
+				}
+			});
 		}
         });
 }
