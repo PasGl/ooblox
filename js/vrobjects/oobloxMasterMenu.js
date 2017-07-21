@@ -8,6 +8,7 @@ oobloxMasterMenu = function ()
 	this.mesh = new THREE.Mesh( new THREE.SphereGeometry(5, 20, 20), new THREE.MeshPhongMaterial({color: "#FF0000", transparent: true,opacity: 0.5}));
 	this.group = new THREE.Group();
 	this.group.add(this.mesh);
+	var group = this.group;
 	
 	this.mesh.vrObjectTypeID = "OMM";
 
@@ -100,7 +101,7 @@ oobloxMasterMenu = function ()
 			
 		datFolder.addFolder(rezFolder);
 
-		this.group.add( datFolder );
+		group.add( datFolder );
 	}
 
 	this.load = function (targetScene, camera)
