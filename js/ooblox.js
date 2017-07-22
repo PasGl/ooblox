@@ -105,8 +105,6 @@ function init()
 	var t0 = document.createTextNode("ooblox by PasGl - ");
 	p.appendChild(t0);
 
-
-
 	var l1 = document.createElement("A");
 	l1.href = "sandbox";
 	l1.target= "_blank";
@@ -114,10 +112,38 @@ function init()
 	var lt1 = document.createTextNode("sandbox");
 	l1.appendChild(lt1);  
 	p.appendChild(l1);
+	var ls1 = document.createTextNode(" - ");
+	p.appendChild(ls1);
 
+	var l2 = document.createElement("A");
+	l2.href = "guitar";
+	l2.target= "_blank";
+	l2.style.color = "#002";
+	var lt2 = document.createTextNode("guitar");
+	l2.appendChild(lt2);  
+	p.appendChild(l2);
+	var ls2 = document.createTextNode(" - ");
+	p.appendChild(ls2);
 
+	var l3 = document.createElement("A");
+	l3.href = "geometry";
+	l3.target= "_blank";
+	l3.style.color = "#002";
+	var lt3 = document.createTextNode("geometry");
+	l3.appendChild(lt3);  
+	p.appendChild(l3);
+	var ls3 = document.createTextNode(" - ");
+	p.appendChild(ls3);
 
-
+	var l4 = document.createElement("A");
+	l4.href = "demo";
+	l4.target= "_blank";
+	l4.style.color = "#002";
+	var lt4 = document.createTextNode("dev-test");
+	l4.appendChild(lt4);  
+	p.appendChild(l4);
+	var ls4 = document.createTextNode(" - ");
+	p.appendChild(ls4);
 
 	var a1 = document.createElement("A");
 	a1.href = "https://github.com/PasGl/ooblox";
