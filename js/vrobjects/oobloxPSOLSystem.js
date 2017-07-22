@@ -608,7 +608,7 @@ function PSOLSystem ()
 		datFolder.children[1].add(this.mesh);
 		targetScene.add( datFolder );
 		datFolder.close();
-		window.addEventListener("mouseup", function(){updateMyURLArgs(targetScene,this.mesh);})
+		window.addEventListener("mouseup", function(){updateMyURLArgs(targetScene,mesh);})
 	}
 
 
