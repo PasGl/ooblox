@@ -545,26 +545,26 @@ function PSOLSystem ()
 	}
 	var finalize = this.finalize;
 
-	this.fillGUI = function (targetScene,mesh)
+	this.fillGUI = function (targetScene,thismesh)
 	{
 
-		var datFolder = dat.GUIVR.create(this.mesh.uname+' (PSOL-System)');
-		datFolder.position.copy(this.mesh.position);
+		var datFolder = dat.GUIVR.create(thismesh.uname+' (PSOL-System)');
+		datFolder.position.copy(thismesh.position);
 		datFolder.scale.set(10.0,10.0,0.1);
-		this.mesh.position.set(0,0,0);
-		this.mesh.scale.set(0.1,0.1,10.0);
+		thismesh.position.set(0,0,0);
+		thismesh.scale.set(0.1,0.1,10.0);
 		
 		var iterationsSlider = datFolder.add(conf,'iterations',0,6).step(1);
-		iterationsSlider.onChange(function(){refresh(targetScene,mesh);});
+		iterationsSlider.onChange(function(){refresh(targetScene,thismesh);});
 
 		var axiomText = datFolder.add(conf,'axiom',["F","FN(1)"]);
-		axiomText.onChange(function(){refresh(targetScene,mesh);});
+		axiomText.onChange(function(){refresh(targetScene,thismesh);});
 		
 		var randomSeedSlider = datFolder.add(conf,'randomSeed',0,1000000000).step(1);
-		randomSeedSlider.onChange(function(){refresh(targetScene,mesh);});
+		randomSeedSlider.onChange(function(){refresh(targetScene,thismesh);});
 
 		var circleSegmentsSlider = datFolder.add(conf,'circleSegments',3,50).step(1);
-		circleSegmentsSlider.onChange(function(){refresh(targetScene,mesh);});
+		circleSegmentsSlider.onChange(function(){refresh(targetScene,thismesh);});
 
 		var diameterSlider = datFolder.add(conf,'diameter',0.1,3.0);
 		diameterSlider.onChange(function(value) 
@@ -572,53 +572,53 @@ function PSOLSystem ()
 			conf.initTurtle.scale.x=value;
 			conf.initTurtle.scale.y=value;
 			conf.initTurtle.scale.z=value;
-			refresh(targetScene,mesh);
+			refresh(targetScene,thismesh);
 		});
 
 		var stepSlider = datFolder.add(conf.initTurtle,'step',0.1,10.0);
-		stepSlider.onChange(function(){refresh(targetScene,mesh);});
+		stepSlider.onChange(function(){refresh(targetScene,thismesh);});
 		var angleSlider = datFolder.add(conf.initTurtle,'angle',0.001,1.5);
-		angleSlider.onChange(function(){refresh(targetScene,mesh);});
+		angleSlider.onChange(function(){refresh(targetScene,thismesh);});
 		var diameterDeltaSlider = datFolder.add(conf.initTurtle,'diameterDelta',0.0001,0.5);
-		diameterDeltaSlider.onChange(function(){refresh(targetScene,mesh);});
+		diameterDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
 		var stepDeltaSlider = datFolder.add(conf.initTurtle,'stepDelta',0.0001,0.5);
-		stepDeltaSlider.onChange(function(){refresh(targetScene,mesh);});
+		stepDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
 		var tropismAngleSlider = datFolder.add(conf.initTurtle,'tropismAngle',0.001,1.5);
-		tropismAngleSlider.onChange(function(){refresh(targetScene,mesh);});
+		tropismAngleSlider.onChange(function(){refresh(targetScene,thismesh);});
 		var gravityAngleSlider = datFolder.add(conf.initTurtle,'gravityAngle',0.001,1.5);
-		gravityAngleSlider.onChange(function(){refresh(targetScene,mesh);});
+		gravityAngleSlider.onChange(function(){refresh(targetScene,thismesh);});
 		var tropismDeltaSlider = datFolder.add(conf.initTurtle,'tropismDelta',0.0001,0.5);
-		tropismDeltaSlider.onChange(function(){refresh(targetScene,mesh);});
+		tropismDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
 		var gravityDeltaSlider = datFolder.add(conf.initTurtle,'gravityDelta',0.0001,0.5);
-		gravityDeltaSlider.onChange(function(){refresh(targetScene,mesh);});
+		gravityDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
 
 		var obj = {obj_and_stl:function()
 		{
 			var zip = new JSZip();
 			var exporter = new THREE.OBJExporter();
-			var txt = exporter.parse(this.mesh);
+			var txt = exporter.parse(thismesh);
 			zip.file("PSOLSystem.obj", txt);
 			exporter = new THREE.STLExporter();
-			txt = exporter.parse(this.mesh);
+			txt = exporter.parse(thismesh);
 			zip.file("PSOLSystem.stl", txt);
 			var content = zip.generate({type:"blob"});
 			saveAs(content, "PSOLSystem.zip");
 		}};
 		datFolder.add(obj,'obj_and_stl').name('export');
-		datFolder.children[1].add(this.mesh);
+		datFolder.children[1].add(thismesh);
 		targetScene.add( datFolder );
 		datFolder.close();
-		window.addEventListener("mouseup", function(){updateMyURLArgs(targetScene,mesh);})
+		window.addEventListener("mouseup", function(){updateMyURLArgs(targetScene,thismesh);})
 	}
 
 
-	this.updateMyURLArgs = function (targetScene,mesh)
+	this.updateMyURLArgs = function (targetScene,thismesh)
 	{
 		var position = new THREE.Vector3();
 		targetScene.updateMatrixWorld();
-		position.setFromMatrixPosition( mesh.matrixWorld );
-		updateURLargs([	mesh.uname,
-				mesh.vrObjectTypeID,
+		position.setFromMatrixPosition( thismesh.matrixWorld );
+		updateURLargs([	thismesh.uname,
+				thismesh.vrObjectTypeID,
 				position.x,
 				position.y,
 				position.z,
@@ -638,11 +638,11 @@ function PSOLSystem ()
 	}
 	var updateMyURLArgs = this.updateMyURLArgs;
 
-	this.refresh = function (targetScene,mesh)
+	this.refresh = function (targetScene,thismesh)
 	{
 		interpret(iterate());
-		finalize(mesh);
-		updateMyURLArgs(targetScene,mesh);
+		finalize(thismesh);
+		updateMyURLArgs(targetScene,thismesh);
 	}
 	var refresh = this.refresh;
 
