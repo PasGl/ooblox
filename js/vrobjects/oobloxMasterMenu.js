@@ -73,12 +73,6 @@ oobloxMasterMenu = function ()
 		indicator.position.x=-0.25;
 		datFolder.scale.set(20.0,20.0,0.1);
 
-		var posFolder = dat.GUIVR.create('Menu Position');
-		var posXSlider = posFolder.add(datFolder.position,'x',-200.0,200.0).listen(function () {urlRefresh(targetScene);}).onChange(function () {urlRefresh(targetScene);});
-		var posYSlider = posFolder.add(datFolder.position,'y',-200.0,200.0).listen(function () {urlRefresh(targetScene);}).onChange(function () {urlRefresh(targetScene);});
-		var posZSlider = posFolder.add(datFolder.position,'z',-200.0,200.0).listen(function () {urlRefresh(targetScene);}).onChange(function () {urlRefresh(targetScene);});
-		datFolder.addFolder(posFolder);
-
 		remFolder = dat.GUIVR.create('Remove');
 		datFolder.addFolder(remFolder);
 		
@@ -149,8 +143,6 @@ oobloxMasterMenu = function ()
 		datFolder.children[1].add(indicator);
 		targetScene.add( datFolder );
 		datFolder.close();
-		console.log(dat.GUIVR);
-		//datFolder.addEventListener( 'change', function() {urlRefresh(targetScene);} );
 	}
 
 	this.load = function (targetScene, camera)
