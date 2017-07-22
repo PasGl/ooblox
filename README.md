@@ -46,9 +46,8 @@ A scene with one instance of each Module.
 
 ## contact
 
-https://discord.gg/Ux52EYw
-
-https://www.patreon.com/PasGl
+* Discord | https://discord.gg/Ux52EYw
+* Patreon | https://www.patreon.com/PasGl
 
 ## ooblox makes use of
 
