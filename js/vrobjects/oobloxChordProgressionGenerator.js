@@ -166,10 +166,10 @@ oobloxChordProgressionGenerator = function ()
 	{
 		var datFolder = dat.GUIVR.create('Chord Progression');
 
-		datFolder.position.set(conf.position.x,conf.position.y-4,conf.position.z);
+		datFolder.position.set(conf.position.x-6,conf.position.y-6,conf.position.z);
 		datFolder.scale.set(20.0,20.0,0.1);
 		mesh.scale.set(0.05,0.05,10.0);
-		mesh.position.set(0,0.2,0);
+		mesh.position.set(0.3,0.3,0);
 		var barsSlider = datFolder.add(conf,'bars',1,8).step(1);
 		barsSlider.onChange(function(){refresh(targetScene);});
 
