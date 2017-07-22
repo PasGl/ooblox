@@ -7,7 +7,8 @@ oobloxOrbitCamMod = function ()
 	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(0, 0, 0), new THREE.MeshPhongMaterial({}));
 	this.mesh.vrObjectTypeID = "OCM";
 	var mesh = this.mesh;
-	var cam;
+	this.cam = new THREE.Mesh( new THREE.BoxGeometry(0, 0, 0), new THREE.MeshPhongMaterial({}));
+	var cam = this.cam;
 
 	var refresh = function ()
 	{
@@ -24,13 +25,14 @@ oobloxOrbitCamMod = function ()
 	this.load = function (targetScene, camera)
 	{
 		var argList = getURLargs(this.mesh.uname);
-		camera.position.x = parseFloat(argList[1]);
-		camera.position.y = parseFloat(argList[2]);
-		camera.position.z = parseFloat(argList[3]);
-		camera.target.x = parseFloat(argList[4]);
-		camera.target.y = parseFloat(argList[5]);
-		camera.target.z = parseFloat(argList[6]);
-		cam = camera;
+		this.cam = camera;
+
+		this.cam.position.x = parseFloat(argList[1]);
+		this.cam.position.y = parseFloat(argList[2]);
+		this.cam.position.z = parseFloat(argList[3]);
+		this.cam.target.x = parseFloat(argList[4]);
+		this.cam.target.y = parseFloat(argList[5]);
+		this.cam.target.z = parseFloat(argList[6]);
 		controls.addEventListener( 'change', refresh );
 	}
 }
