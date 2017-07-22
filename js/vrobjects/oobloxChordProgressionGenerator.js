@@ -190,8 +190,8 @@ oobloxChordProgressionGenerator = function ()
 		conf.position.x = parseFloat(argList[1]);
 		conf.position.y = parseFloat(argList[2]);
 		conf.position.z = parseFloat(argList[3]);
-		conf.bars = parseInt(argList[11]);
-		conf.randomSeed = parseInt(argList[12]);
+		conf.bars = parseInt(argList[4]);
+		conf.randomSeed = parseInt(argList[5]);
 		this.mesh.position.copy(conf.position);
 		this.mesh.fillDatGUI(targetScene,this.mesh);
 		refresh(targetScene);
