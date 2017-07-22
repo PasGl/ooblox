@@ -670,7 +670,7 @@ function PSOLSystem ()
 		this.mesh.position.copy(position);
 		this.initPresetRandom();
 		refresh(targetScene,this.mesh);
-		this.fillGUI(targetScene);
+		this.fillGUI(targetScene,this.mesh);
 	}
 }
 
