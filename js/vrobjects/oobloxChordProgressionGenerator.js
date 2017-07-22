@@ -177,6 +177,7 @@ oobloxChordProgressionGenerator = function ()
 		randomSeedSlider.onChange(function(){refresh(targetScene);});
 
 		datFolder.children[1].add(mesh);
+
 		targetScene.add( datFolder );
 		datFolder.close();
 		window.addEventListener("mouseup", function(){refreshURL(targetScene);})
