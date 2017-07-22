@@ -54,6 +54,7 @@ https://www.patreon.com/PasGl
 
 * three.js | https://github.com/mrdoob/three.js
 * stats.js | https://github.com/mrdoob/stats.js
+* jquery |https://github.com/jquery/jquery
 
 ## ooblox modules make use of
 
