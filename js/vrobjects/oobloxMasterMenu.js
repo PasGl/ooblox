@@ -15,7 +15,7 @@ oobloxMasterMenu = function ()
 	var remFolder;
 	var remsAdded=0;
 
-	var refresh = function (targetScene)
+	var urlRefresh = function (targetScene)
 	{
 		var position = new THREE.Vector3();
 		targetScene.updateMatrixWorld();
@@ -25,7 +25,11 @@ oobloxMasterMenu = function ()
 				position.x,
 				position.y,
 				position.z]);
-		
+	}
+
+	var refresh = function (targetScene)
+	{
+		urlRefresh(targetScene);
 		var allmodulArgs="";
 		var urlCallParametersList= [];
 		if (window.location.href.indexOf("?")!=-1)
@@ -38,14 +42,7 @@ oobloxMasterMenu = function ()
 				var obj = {	myIndex: remsAdded,
 						remove: function()
 						{
-							var position = new THREE.Vector3();
-							targetScene.updateMatrixWorld();
-							position.setFromMatrixPosition( mesh.matrixWorld );
-							updateURLargs([	mesh.uname,
-								mesh.vrObjectTypeID,
-								position.x,
-								position.y,
-								position.z]);
+							urlRefresh(targetScene);
 							allmodulArgs=window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
 							urlCallParametersList = allmodulArgs.split("&");	
 							urlCallParametersList.splice(this.myIndex, 1);
@@ -145,8 +142,7 @@ oobloxMasterMenu = function ()
 		datFolder.children[1].add(indicator);
 		targetScene.add( datFolder );
 		datFolder.close();
-		console.log(controls);
-		controls.addEventListener( 'pinReleased', function() {refresh(targetScene);} );
+		controls.addEventListener( 'change', function() {urlRefresh(targetScene);} );
 	}
 
 	this.load = function (targetScene, camera)
