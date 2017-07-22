@@ -24,7 +24,7 @@ oobloxOrbitCamMod = function ()
 		camera.position.y = parseFloat(argList[2]);
 		camera.position.z = parseFloat(argList[3]);
 		cam = camera;
-		controls.addEventListener( 'change', refesh );
+		controls.addEventListener( 'change', refresh );
 	}
 }
 
