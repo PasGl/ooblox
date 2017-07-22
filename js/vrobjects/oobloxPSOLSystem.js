@@ -83,7 +83,7 @@ function PSOLSystem ()
 	this.finalGeometry;
 	var finalGeometry = this.finalGeometry;
 	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 1), new THREE.MeshPhongMaterial({}));
-	
+	var mesh = this.mesh;
 	this.mesh.receiveShadow = true;
 	this.mesh.castShadow = true;
 
@@ -523,8 +523,8 @@ function PSOLSystem ()
 		var c1 = new THREE.Color(conf.initTurtle.primaryColor);
 		var c2 = new THREE.Color(conf.initTurtle.secondaryColor);
 		var c3 = new THREE.Color(conf.initTurtle.tertiaryColor);
-		this.mesh.geometry = finalGeometry;
-		this.mesh.material  = [new THREE.MeshPhongMaterial(
+		mesh.geometry = finalGeometry;
+		mesh.material  = [new THREE.MeshPhongMaterial(
 				{
 					color: c1.getHex(),
 					specular: 0x333333,
