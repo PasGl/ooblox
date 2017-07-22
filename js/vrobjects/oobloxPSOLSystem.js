@@ -89,8 +89,6 @@ function PSOLSystem ()
 
 	this.mesh.vrObjectTypeID = "PLS";
 
-	var mesh=this.mesh;
-
 	var PSOLGUIProperties = function ()
 	{
 		this.iterations = 4;
@@ -525,8 +523,8 @@ function PSOLSystem ()
 		var c1 = new THREE.Color(conf.initTurtle.primaryColor);
 		var c2 = new THREE.Color(conf.initTurtle.secondaryColor);
 		var c3 = new THREE.Color(conf.initTurtle.tertiaryColor);
-		mesh.geometry = finalGeometry;
-		mesh.material  = [new THREE.MeshPhongMaterial(
+		this.mesh.geometry = finalGeometry;
+		this.mesh.material  = [new THREE.MeshPhongMaterial(
 				{
 					color: c1.getHex(),
 					specular: 0x333333,
@@ -551,11 +549,11 @@ function PSOLSystem ()
 	this.fillGUI = function (targetScene)
 	{
 
-		var datFolder = dat.GUIVR.create(mesh.uname+' (PSOL-System)');
-		datFolder.position.copy(mesh.position);
+		var datFolder = dat.GUIVR.create(this.mesh.uname+' (PSOL-System)');
+		datFolder.position.copy(this.mesh.position);
 		datFolder.scale.set(10.0,10.0,0.1);
-		mesh.position.set(0,0,0);
-		mesh.scale.set(0.1,0.1,10.0);
+		this.mesh.position.set(0,0,0);
+		this.mesh.scale.set(0.1,0.1,10.0);
 		
 		var iterationsSlider = datFolder.add(conf,'iterations',0,6).step(1);
 		iterationsSlider.onChange(function(){refresh(targetScene);});
@@ -599,16 +597,16 @@ function PSOLSystem ()
 		{
 			var zip = new JSZip();
 			var exporter = new THREE.OBJExporter();
-			var txt = exporter.parse(mesh);
+			var txt = exporter.parse(this.mesh);
 			zip.file("PSOLSystem.obj", txt);
 			exporter = new THREE.STLExporter();
-			txt = exporter.parse(mesh);
+			txt = exporter.parse(this.mesh);
 			zip.file("PSOLSystem.stl", txt);
 			var content = zip.generate({type:"blob"});
 			saveAs(content, "PSOLSystem.zip");
 		}};
 		datFolder.add(obj,'obj_and_stl').name('export');
-		datFolder.children[1].add(mesh);
+		datFolder.children[1].add(this.mesh);
 		targetScene.add( datFolder );
 		datFolder.close();
 		window.addEventListener("mouseup", function(){updateMyURLArgs(targetScene);})
@@ -619,9 +617,9 @@ function PSOLSystem ()
 	{
 		var position = new THREE.Vector3();
 		targetScene.updateMatrixWorld();
-		position.setFromMatrixPosition( mesh.matrixWorld );
-		updateURLargs([	mesh.uname,
-				mesh.vrObjectTypeID,
+		position.setFromMatrixPosition( this.mesh.matrixWorld );
+		updateURLargs([	this.mesh.uname,
+				this.mesh.vrObjectTypeID,
 				position.x,
 				position.y,
 				position.z,
@@ -670,7 +668,7 @@ function PSOLSystem ()
 		conf.initTurtle.tropismDelta = parseFloat(argList[15]);
 		conf.initTurtle.gravityDelta = parseFloat(argList[16]);
 		conf.initTurtle.scale = new THREE.Vector3(conf.diameter,conf.diameter,conf.diameter);
-		mesh.position.copy(position);
+		this.mesh.position.copy(position);
 		this.initPresetRandom();
 		refresh(targetScene);
 		this.fillGUI(targetScene);
