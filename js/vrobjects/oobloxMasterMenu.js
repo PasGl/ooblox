@@ -72,6 +72,16 @@ oobloxMasterMenu = function ()
 		indicator.scale.z=10;
 		indicator.position.x=-0.25;
 		datFolder.scale.set(20.0,20.0,0.1);
+
+		var posFolder = dat.GUIVR.create('Menu Position');
+		var posXSlider = posFolder.add(datFolder.position,'x',-200.0,200.0).listen();
+		posXSlider.onChange(function () {urlRefresh(targetScene);});
+		var posYSlider = posFolder.add(datFolder.position,'y',-200.0,200.0).listen();;
+		posYSlider.onChange(function () {urlRefresh(targetScene);});
+		var posZSlider = posFolder.add(datFolder.position,'z',-200.0,200.0).listen();;
+		posZSlider.onChange(function () {urlRefresh(targetScene);});
+		datFolder.addFolder(posFolder);
+
 		remFolder = dat.GUIVR.create('Remove');
 		datFolder.addFolder(remFolder);
 		
