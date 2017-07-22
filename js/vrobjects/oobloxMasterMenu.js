@@ -37,7 +37,8 @@ oobloxMasterMenu = function ()
 				var uname = urlCallParametersList[remsAdded].substring(0, urlCallParametersList[remsAdded].indexOf("="));
 				var obj = {	myIndex: remsAdded,
 						remove: function()
-						{	
+						{
+							refresh(targetScene);	
 							urlCallParametersList.splice(this.myIndex, 1);
 							var newURLstring = "?"+urlCallParametersList.join("&");
 							window.history.pushState({}, '', newURLstring);
@@ -63,7 +64,7 @@ oobloxMasterMenu = function ()
 		indicator.scale.x=0.05;
 		indicator.scale.y=0.05;
 		indicator.scale.z=10;
-		indicator.position.x=-1;
+		indicator.position.x=-0.25;
 		datFolder.scale.set(20.0,20.0,0.1);
 		remFolder = dat.GUIVR.create('Remove');
 		datFolder.addFolder(remFolder);
@@ -73,7 +74,7 @@ oobloxMasterMenu = function ()
 		var tkobj = {add: function() {
 			var position = new THREE.Vector3();
 			targetScene.updateMatrixWorld();
-			position.setFromMatrixPosition( mesh.matrixWorld );
+			position.setFromMatrixPosition( indicator.matrixWorld );
 			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z + "+1+1+1+0+0+0+1";
 			var d = new Date();
 			var uname = "TK" + d.getTime();
@@ -88,7 +89,7 @@ oobloxMasterMenu = function ()
 		var psolobj = {add: function() {
 			var position = new THREE.Vector3();
 			targetScene.updateMatrixWorld();
-			position.setFromMatrixPosition( mesh.matrixWorld );
+			position.setFromMatrixPosition( indicator.matrixWorld );
 			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z + "+1+1+1+0+0+0+1";
 			var d = new Date();
 			var uname = "PSOL" + d.getTime();
@@ -103,7 +104,7 @@ oobloxMasterMenu = function ()
 		var cpgobj = {add: function() {
 			var position = new THREE.Vector3();
 			targetScene.updateMatrixWorld();
-			position.setFromMatrixPosition( mesh.matrixWorld );
+			position.setFromMatrixPosition( indicator.matrixWorld );
 			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z + "+1+1+1+0+0+0+1";
 			var d = new Date();
 			var uname = "CPG" + d.getTime();
@@ -118,7 +119,7 @@ oobloxMasterMenu = function ()
 		var metobj = {add: function() {
 			var position = new THREE.Vector3();
 			targetScene.updateMatrixWorld();
-			position.setFromMatrixPosition( mesh.matrixWorld );
+			position.setFromMatrixPosition( indicator.matrixWorld );
 			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z + "+1+1+1+0+0+0+1";
 			var d = new Date();
 			var uname = "MET" + d.getTime();
