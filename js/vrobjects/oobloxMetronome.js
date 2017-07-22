@@ -63,11 +63,15 @@ oobloxMetronome = function ()
 			}
 		}
 
+		var position = new THREE.Vector3();
+		targetScene.updateMatrixWorld();
+		position.setFromMatrixPosition( mesh.matrixWorld );
+
 		updateURLargs([	mesh.uname,
 				mesh.vrObjectTypeID,
-				mesh.position.x,
-				mesh.position.y,
-				mesh.position.z,
+				position.x,
+				position.y,
+				position.z,
 				mesh.scale.x,
 				mesh.scale.y,
 				mesh.scale.z,
@@ -85,40 +89,16 @@ oobloxMetronome = function ()
 		datFolder.position.copy(mesh.position);
 		datFolder.position.z -= 1.0;
 		datFolder.scale.set(20.0,20.0,0.1);
+		mesh.scale.set(0.05,0.05,10.0);
+		
 		var bpmSlider = datFolder.add(conf,'BPM',1,300).step(1);
 		bpmSlider.onChange(refresh);
 		var pauseSwitch = datFolder.add(conf,'pause');
 		pauseSwitch.onChange(refresh);
 
-		var posFolder = dat.GUIVR.create('Position');
-		var posXSlider = posFolder.add(mesh.position,'x',-200.0,200.0);
-		posXSlider.onChange(refresh);
-		var posYSlider = posFolder.add(mesh.position,'y',-200.0,200.0);
-		posYSlider.onChange(refresh);
-		var posZSlider = posFolder.add(mesh.position,'z',-200.0,200.0);
-		posZSlider.onChange(refresh);
-		datFolder.addFolder(posFolder);
-
-		var scaleFolder = dat.GUIVR.create('Scale');
-		var scaleXSlider = scaleFolder.add(mesh.scale,'x',0.01,20.0);
-		scaleXSlider.onChange(refresh);
-		var scaleYSlider = scaleFolder.add(mesh.scale,'y',0.01,20.0);
-		scaleYSlider.onChange(refresh);
-		var scaleZSlider = scaleFolder.add(mesh.scale,'z',0.01,20.0);
-		scaleZSlider.onChange(refresh);
-		datFolder.addFolder(scaleFolder);
-
-		var rotFolder = dat.GUIVR.create('Rotation');
-		var rotXSlider = rotFolder.add(mesh.rotation,'x').min(0).max(Math.PI * 2).step(0.001);
-		rotXSlider.onChange(refresh);
-		var rotYSlider = rotFolder.add(mesh.rotation,'y').min(0).max(Math.PI * 2).step(0.001);
-		rotYSlider.onChange(refresh);
-		var rotZSlider = rotFolder.add(mesh.rotation,'z').min(0).max(Math.PI * 2).step(0.001);
-		rotZSlider.onChange(refresh);
-		datFolder.addFolder(rotFolder);
-
 		targetScene.add( datFolder );
 		datFolder.close();
+		datFolder.children[1].add(mesh);
 	}
 
 	this.mesh.kill = function ()
@@ -152,7 +132,7 @@ oobloxMetronome = function ()
 		mesh.position.copy(position);
 		mesh.scale.copy(scale);
 
-		targetScene.add(mesh);
+		//targetScene.add(mesh);
 
 		camera.add( listener );
 
