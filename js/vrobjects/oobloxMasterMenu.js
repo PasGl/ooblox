@@ -45,7 +45,9 @@ oobloxMasterMenu = function ()
 								mesh.vrObjectTypeID,
 								position.x,
 								position.y,
-								position.z]);	
+								position.z]);
+							allmodulArgs=window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
+							urlCallParametersList = allmodulArgs.split("&");	
 							urlCallParametersList.splice(this.myIndex, 1);
 							var newURLstring = "?"+urlCallParametersList.join("&");
 							window.history.pushState({}, '', newURLstring);
