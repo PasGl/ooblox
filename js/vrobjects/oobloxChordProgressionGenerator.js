@@ -46,8 +46,6 @@ oobloxChordProgressionGenerator = function ()
 					[0.01,0.01,0.01,0.01,0.01,0.51,0.005,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.0005,0.001,0.0005,0.001,0.001,0.0005,0.001,0.0005,0.001,0.0005,0.001], // from Asus2
 					[0.01,0.01,0.01,0.01,0.01,0.51,0.005,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.0005,0.001,0.0005,0.001,0.001,0.0005,0.001,0.0005,0.001,0.0005,0.001]];// from Asus4
 		this.position = new THREE.Vector3(0,0,0);
-		this.scale = new THREE.Vector3(1,1,1);
-		this.rotation = new THREE.Quaternion(0,0,0,1);
 	}
 
 	var conf = new CPGProperties();
@@ -136,77 +134,49 @@ oobloxChordProgressionGenerator = function ()
 					mesh.material =  material;
 				}
 
-	var refresh = function ()
+	var refreshURL = function (targetScene)
+	{
+		var position = new THREE.Vector3();
+		targetScene.updateMatrixWorld();
+		position.setFromMatrixPosition( mesh.matrixWorld );
+		updateURLargs([	mesh.uname,
+				mesh.vrObjectTypeID,
+				position.x,
+				position.y,
+				position.z,
+				conf.bars,
+				conf.randomSeed]);
+	}
+
+	var refresh = function (targetScene)
 	{
 		var progression = generateProgression();
-
 		var progressionString = "|";
-
 		for (var i=0;i<progression.length;i++) 
 		{
 			var thisBar = "  ";
 			for (var j=0;j<progression[i].length;j++) thisBar+=progression[i][j]+"  ";
 			progressionString += thisBar + "|";
 		}
-		
 		createTexture(progressionString);
-
-		updateURLargs([	mesh.uname,
-				mesh.vrObjectTypeID,
-				mesh.position.x,
-				mesh.position.y,
-				mesh.position.z,
-				mesh.scale.x,
-				mesh.scale.y,
-				mesh.scale.z,
-				mesh.quaternion.x,
-				mesh.quaternion.y,
-				mesh.quaternion.z,
-				mesh.quaternion.w,
-				conf.bars,
-				conf.randomSeed]);
+		refreshURL(targetScene);
 	}
 
 	this.mesh.fillDatGUI = function (targetScene,mesh)
 	{
 		var datFolder = dat.GUIVR.create('Chord Progression');
 
-		datFolder.position.set(conf.position.x-42,conf.position.y+1.5,conf.position.z);
-		datFolder.scale.set(conf.scale.x*20.0,conf.scale.x*20.0,0.1);
-
+		datFolder.position.set(conf.position.x,conf.position.y,conf.position.z);
+		datFolder.scale.set(20.0,20.0,0.1);
+		mesh.scale.set(0.05,0.05,10.0);
+		mesh.position.set(0,-1,0);
 		var barsSlider = datFolder.add(conf,'bars',1,8).step(1);
-		barsSlider.onChange(refresh);
+		barsSlider.onChange(function(){refresh(targetScene);});
 
 		var randomSeedSlider = datFolder.add(conf,'randomSeed',0,999999).step(1); // Number.MAX_SAFE_INTEGER
-		randomSeedSlider.onChange(refresh);
+		randomSeedSlider.onChange(function(){refresh(targetScene);});
 
-		var posFolder = dat.GUIVR.create('Position');
-		var posXSlider = posFolder.add(mesh.position,'x',-200.0,200.0);
-		posXSlider.onChange(refresh);
-		var posYSlider = posFolder.add(mesh.position,'y',-200.0,200.0);
-		posYSlider.onChange(refresh);
-		var posZSlider = posFolder.add(mesh.position,'z',-200.0,200.0);
-		posZSlider.onChange(refresh);
-		datFolder.addFolder(posFolder);
-
-		var scaleFolder = dat.GUIVR.create('Scale');
-		var scaleXSlider = scaleFolder.add(mesh.scale,'x',0.01,20.0);
-		scaleXSlider.onChange(refresh);
-		var scaleYSlider = scaleFolder.add(mesh.scale,'y',0.01,20.0);
-		scaleYSlider.onChange(refresh);
-		var scaleZSlider = scaleFolder.add(mesh.scale,'z',0.01,20.0);
-		scaleZSlider.onChange(refresh);
-		datFolder.addFolder(scaleFolder);
-
-		var rotFolder = dat.GUIVR.create('Rotation');
-		var rotXSlider = rotFolder.add(mesh.rotation,'x').min(0).max(Math.PI * 2).step(0.001);
-		rotXSlider.onChange(refresh);
-		var rotYSlider = rotFolder.add(mesh.rotation,'y').min(0).max(Math.PI * 2).step(0.001);
-		rotYSlider.onChange(refresh);
-		var rotZSlider = rotFolder.add(mesh.rotation,'z').min(0).max(Math.PI * 2).step(0.001);
-		rotZSlider.onChange(refresh);
-		datFolder.addFolder(rotFolder);
-
+		datFolder.children[1].add(mesh);
 		targetScene.add( datFolder );
 		datFolder.close();
 	}
@@ -218,24 +188,11 @@ oobloxChordProgressionGenerator = function ()
 		conf.position.x = parseFloat(argList[1]);
 		conf.position.y = parseFloat(argList[2]);
 		conf.position.z = parseFloat(argList[3]);
-		conf.scale = new THREE.Vector3();
-		conf.scale.x = parseFloat(argList[4]);
-		conf.scale.y = parseFloat(argList[5]);
-		conf.scale.z = parseFloat(argList[6]);
-		conf.rotation = new THREE.Quaternion();
-		conf.rotation.x = parseFloat(argList[7]);
-		conf.rotation.y = parseFloat(argList[8]);
-		conf.rotation.z = parseFloat(argList[9]);
-		conf.rotation.w = parseFloat(argList[10]);
 		conf.bars = parseInt(argList[11]);
 		conf.randomSeed = parseInt(argList[12]);
-		targetScene.add( this.mesh );
-		this.mesh.quaternion.copy(conf.rotation);
 		this.mesh.position.copy(conf.position);
-		this.mesh.scale.copy(conf.scale)
-		refresh();
 		this.mesh.fillDatGUI(targetScene,this.mesh);
-
+		refresh(targetScene);
 	}
 }
 
