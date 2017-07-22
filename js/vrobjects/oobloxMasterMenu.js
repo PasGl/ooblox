@@ -49,7 +49,7 @@ oobloxMasterMenu = function ()
 							urlCallParametersList.splice(this.myIndex, 1);
 							var newURLstring = "?"+urlCallParametersList.join("&");
 							window.history.pushState({}, '', newURLstring);
-							//location.reload();
+							location.reload();
 						}};
 				remFolder.add(obj,'remove').name(uname);
 				remsAdded++;
