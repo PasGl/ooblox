@@ -145,7 +145,7 @@ oobloxMasterMenu = function ()
 		datFolder.children[1].add(indicator);
 		targetScene.add( datFolder );
 		datFolder.close();
-
+		console.log(controls);
 		controls.addEventListener( 'pinReleased', function() {refresh(targetScene);} );
 	}
 
