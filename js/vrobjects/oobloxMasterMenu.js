@@ -58,12 +58,12 @@ oobloxMasterMenu = function ()
 		mesh.position.x=0;
 		mesh.position.y=0;
 		mesh.position.z=0;
-		indicator.position.x=0;
 		indicator.position.y=0;
 		indicator.position.z=0;
 		indicator.scale.x=0.05;
 		indicator.scale.y=0.05;
 		indicator.scale.z=10;
+		indicator.position.x=-20;
 		datFolder.scale.set(20.0,20.0,0.1);
 		remFolder = dat.GUIVR.create('Remove');
 		datFolder.addFolder(remFolder);
