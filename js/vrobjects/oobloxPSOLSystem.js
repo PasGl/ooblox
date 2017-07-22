@@ -543,8 +543,9 @@ function PSOLSystem ()
 				})];
 
 	}
+	var finalize = this.finalize;
 
-	this.fillGUI = function (targetScene)
+	this.fillGUI = function (targetScene,mesh)
 	{
 
 		var datFolder = dat.GUIVR.create(this.mesh.uname+' (PSOL-System)');
@@ -554,16 +555,16 @@ function PSOLSystem ()
 		this.mesh.scale.set(0.1,0.1,10.0);
 		
 		var iterationsSlider = datFolder.add(conf,'iterations',0,6).step(1);
-		iterationsSlider.onChange(function(){refresh(targetScene);});
+		iterationsSlider.onChange(function(){refresh(targetScene,mesh);});
 
 		var axiomText = datFolder.add(conf,'axiom',["F","FN(1)"]);
-		axiomText.onChange(function(){refresh(targetScene);});
+		axiomText.onChange(function(){refresh(targetScene,mesh);});
 		
 		var randomSeedSlider = datFolder.add(conf,'randomSeed',0,1000000000).step(1);
-		randomSeedSlider.onChange(function(){refresh(targetScene);});
+		randomSeedSlider.onChange(function(){refresh(targetScene,mesh);});
 
 		var circleSegmentsSlider = datFolder.add(conf,'circleSegments',3,50).step(1);
-		circleSegmentsSlider.onChange(function(){refresh(targetScene);});
+		circleSegmentsSlider.onChange(function(){refresh(targetScene,mesh);});
 
 		var diameterSlider = datFolder.add(conf,'diameter',0.1,3.0);
 		diameterSlider.onChange(function(value) 
@@ -571,25 +572,25 @@ function PSOLSystem ()
 			conf.initTurtle.scale.x=value;
 			conf.initTurtle.scale.y=value;
 			conf.initTurtle.scale.z=value;
-			refresh(targetScene);
+			refresh(targetScene,mesh);
 		});
 
 		var stepSlider = datFolder.add(conf.initTurtle,'step',0.1,10.0);
-		stepSlider.onChange(function(){refresh(targetScene);});
+		stepSlider.onChange(function(){refresh(targetScene,mesh);});
 		var angleSlider = datFolder.add(conf.initTurtle,'angle',0.001,1.5);
-		angleSlider.onChange(function(){refresh(targetScene);});
+		angleSlider.onChange(function(){refresh(targetScene,mesh);});
 		var diameterDeltaSlider = datFolder.add(conf.initTurtle,'diameterDelta',0.0001,0.5);
-		diameterDeltaSlider.onChange(function(){refresh(targetScene);});
+		diameterDeltaSlider.onChange(function(){refresh(targetScene,mesh);});
 		var stepDeltaSlider = datFolder.add(conf.initTurtle,'stepDelta',0.0001,0.5);
-		stepDeltaSlider.onChange(function(){refresh(targetScene);});
+		stepDeltaSlider.onChange(function(){refresh(targetScene,mesh);});
 		var tropismAngleSlider = datFolder.add(conf.initTurtle,'tropismAngle',0.001,1.5);
-		tropismAngleSlider.onChange(function(){refresh(targetScene);});
+		tropismAngleSlider.onChange(function(){refresh(targetScene,mesh);});
 		var gravityAngleSlider = datFolder.add(conf.initTurtle,'gravityAngle',0.001,1.5);
-		gravityAngleSlider.onChange(function(){refresh(targetScene);});
+		gravityAngleSlider.onChange(function(){refresh(targetScene,mesh);});
 		var tropismDeltaSlider = datFolder.add(conf.initTurtle,'tropismDelta',0.0001,0.5);
-		tropismDeltaSlider.onChange(function(){refresh(targetScene);});
+		tropismDeltaSlider.onChange(function(){refresh(targetScene,mesh);});
 		var gravityDeltaSlider = datFolder.add(conf.initTurtle,'gravityDelta',0.0001,0.5);
-		gravityDeltaSlider.onChange(function(){refresh(targetScene);});
+		gravityDeltaSlider.onChange(function(){refresh(targetScene,mesh);});
 
 		var obj = {obj_and_stl:function()
 		{
@@ -637,11 +638,11 @@ function PSOLSystem ()
 	}
 	var updateMyURLArgs = this.updateMyURLArgs;
 
-	this.refresh = function (targetScene)
+	this.refresh = function (targetScene,mesh)
 	{
 		interpret(iterate());
-		this.finalize(this.mesh);
-		updateMyURLArgs(targetScene,this.mesh);
+		finalize(mesh);
+		updateMyURLArgs(targetScene,mesh);
 	}
 	var refresh = this.refresh;
 
@@ -668,7 +669,7 @@ function PSOLSystem ()
 		conf.initTurtle.scale = new THREE.Vector3(conf.diameter,conf.diameter,conf.diameter);
 		this.mesh.position.copy(position);
 		this.initPresetRandom();
-		refresh(targetScene);
+		refresh(targetScene,this.mesh);
 		this.fillGUI(targetScene);
 	}
 }
