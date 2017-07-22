@@ -15,6 +15,7 @@ oobloxOrbitCamMod = function ()
 				cam.position.x,
 				cam.position.y,
 				cam.position.z]);
+	}
 
 	this.load = function (targetScene, camera)
 	{
@@ -23,7 +24,7 @@ oobloxOrbitCamMod = function ()
 		camera.position.y = parseFloat(argList[2]);
 		camera.position.z = parseFloat(argList[3]);
 		cam = camera;
-		cam.addEventListener( 'changed', function (event) {refresh();});
+		controls.addEventListener( 'change', refesh );
 	}
 }
 
