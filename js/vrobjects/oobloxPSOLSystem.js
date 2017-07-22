@@ -669,8 +669,8 @@ function PSOLSystem ()
 		conf.initTurtle.scale = new THREE.Vector3(conf.diameter,conf.diameter,conf.diameter);
 		this.mesh.position.copy(position);
 		this.initPresetRandom();
-		refresh(targetScene,this.mesh);
 		this.fillGUI(targetScene,this.mesh);
+		refresh(targetScene,this.mesh);
 	}
 }
 
