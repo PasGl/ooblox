@@ -112,7 +112,7 @@ oobloxMasterMenu = function ()
 			var position = new THREE.Vector3();
 			targetScene.updateMatrixWorld();
 			position.setFromMatrixPosition( indicator.matrixWorld );
-			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z + "+1+1+1+0+0+0+1";
+			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
 			var d = new Date();
 			var uname = "CPG" + d.getTime();
 			var newhref = window.location.href + "&" + uname + "=CPG+" + posScaleRotString + "+4+8356747";
