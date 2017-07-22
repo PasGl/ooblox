@@ -543,7 +543,6 @@ function PSOLSystem ()
 				})];
 
 	}
-	var finalize = this.finalize;
 
 	this.fillGUI = function (targetScene)
 	{
@@ -641,7 +640,7 @@ function PSOLSystem ()
 	this.refresh = function (targetScene)
 	{
 		interpret(iterate());
-		finalize(this.mesh);
+		this.finalize(this.mesh);
 		updateMyURLArgs(targetScene,this.mesh);
 	}
 	var refresh = this.refresh;
