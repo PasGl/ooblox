@@ -617,9 +617,9 @@ function PSOLSystem ()
 	{
 		var position = new THREE.Vector3();
 		targetScene.updateMatrixWorld();
-		position.setFromMatrixPosition( this.mesh.matrixWorld );
-		updateURLargs([	this.mesh.uname,
-				this.mesh.vrObjectTypeID,
+		position.setFromMatrixPosition( mesh.matrixWorld );
+		updateURLargs([	mesh.uname,
+				mesh.vrObjectTypeID,
 				position.x,
 				position.y,
 				position.z,
