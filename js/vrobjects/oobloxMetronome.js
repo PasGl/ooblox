@@ -87,18 +87,19 @@ oobloxMetronome = function ()
 	{
 		var datFolder = dat.GUIVR.create('Metronome');
 		datFolder.position.copy(mesh.position);
-		datFolder.position.z -= 1.0;
 		datFolder.scale.set(20.0,20.0,0.1);
 		mesh.scale.set(0.05,0.05,10.0);
+		mesh.position.set(0.0,0.0,0.0);
 		
 		var bpmSlider = datFolder.add(conf,'BPM',1,300).step(1);
 		bpmSlider.onChange(refresh);
 		var pauseSwitch = datFolder.add(conf,'pause');
 		pauseSwitch.onChange(refresh);
 
+		datFolder.children[1].add(mesh);
 		targetScene.add( datFolder );
 		datFolder.close();
-		datFolder.children[0].add(mesh);
+		refresh();
 	}
 
 	this.mesh.kill = function ()
@@ -128,9 +129,9 @@ oobloxMetronome = function ()
 
 		mesh.add( tocksound );
 
-		mesh.quaternion.copy(rotation);
+		//mesh.quaternion.copy(rotation);
 		mesh.position.copy(position);
-		mesh.scale.copy(scale);
+		//mesh.scale.copy(scale);
 
 		//targetScene.add(mesh);
 
@@ -138,7 +139,6 @@ oobloxMetronome = function ()
 
 		this.mesh.fillDatGUI(targetScene);
 
-		refresh();
 	}
 }
 
