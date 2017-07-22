@@ -142,7 +142,7 @@ oobloxMasterMenu = function ()
 		datFolder.children[1].add(indicator);
 		targetScene.add( datFolder );
 		datFolder.close();
-		console.log(datFolder);
+		console.log(dat.GUIVR);
 		//datFolder.addEventListener( 'change', function() {urlRefresh(targetScene);} );
 	}
 
