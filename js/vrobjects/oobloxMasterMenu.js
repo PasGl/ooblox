@@ -143,6 +143,7 @@ oobloxMasterMenu = function ()
 		datFolder.children[1].add(indicator);
 		targetScene.add( datFolder );
 		datFolder.close();
+		datFolder.addEventListener("mouseup", function(){refresh(targetScene);console.log("woooot");})
 	}
 
 	this.load = function (targetScene, camera)
