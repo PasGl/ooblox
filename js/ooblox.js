@@ -139,7 +139,7 @@ function init()
 	l4.href = "demo";
 	l4.target= "_self";
 	l4.style.color = "#002";
-	var lt4 = document.createTextNode("dev-test");
+	var lt4 = document.createTextNode("testing");
 	l4.appendChild(lt4);  
 	p.appendChild(l4);
 	var ls4 = document.createTextNode(" - ");
