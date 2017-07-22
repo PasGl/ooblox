@@ -6,6 +6,7 @@ oobloxOrbitCamMod = function ()
 {
 	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(0, 0, 0), new THREE.MeshPhongMaterial({}));
 	this.mesh.vrObjectTypeID = "OCM";
+	var mesh = this.mesh;
 	var cam;
 
 	var refresh = function ()
