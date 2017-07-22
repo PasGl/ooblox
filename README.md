@@ -11,11 +11,7 @@ It allows me to quickly develop and deploy 3D toys, experiments, visualizations,
 
 ## demo
 
-Static html5+js, using WebGl and WebVR via three.js
-(primarily Google Chrome for now)
-
-Currently using standard three.js OrbitControls
-
+Standard three.js OrbitControls:
 * Orbit - left mouse | touch: one finger move
 * Zoom - middle mouse, or mousewheel | touch: two finger spread or squish
 * Pan - right mouse, or arrow keys | touch: three finger swipe
@@ -23,25 +19,21 @@ Currently using standard three.js OrbitControls
 ### sandbox scene
 
 A scene set up to serve as sandbox.
-
 * http://51.15.67.244/sandbox
 
 ### guitar scene
 
 A scene for guitar practise, with a metronome and a chord progression generator.
-
 * http://51.15.67.244/guitar
 
 ### geometry scene
 
 A scene about algorithmic geometry, with a Torus Knot and a (not very good, yet) L-System example.
-
 * http://51.15.67.244/geometry
 
 ### dev-test scene
 
 A scene with one instance of each Module.
-
 * http://51.15.67.244/demo
 
 ## contact
