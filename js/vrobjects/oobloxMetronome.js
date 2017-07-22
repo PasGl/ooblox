@@ -14,14 +14,10 @@ oobloxMetronome = function ()
 	this.mesh.add(ball);
 	this.mesh.receiveShadow = true;
 	this.mesh.castShadow = true;
-
 	this.mesh.vrObjectTypeID = "MET";
-
 	var mesh=this.mesh;
-
 	var tockIsLoaded = false;
 	var tickortock = true;
-
 	var timer;
 	var animT = 0.0;
 	var animStartTime = 0.0;
@@ -41,6 +37,21 @@ oobloxMetronome = function ()
 		this.pause = false;
 	};
 	var conf = new MetronomeProperties();
+
+	var urlRefresh = function (targetScene)
+	{
+		var position = new THREE.Vector3();
+		targetScene.updateMatrixWorld();
+		position.setFromMatrixPosition( mesh.matrixWorld );
+		updateURLargs([	mesh.uname,
+				mesh.vrObjectTypeID,
+				position.x,
+				position.y,
+				position.z,
+				conf.BPM,
+				conf.pause.toString()]);
+	}
+
 	var refresh = function (targetScene)
 	{
 		clearInterval(timer);
@@ -62,25 +73,7 @@ oobloxMetronome = function ()
 				else mesh.rotation.z = -Math.sin(animT*1.0*Math.PI);
 			}
 		}
-
-		var position = new THREE.Vector3();
-		targetScene.updateMatrixWorld();
-		position.setFromMatrixPosition( mesh.matrixWorld );
-
-		updateURLargs([	mesh.uname,
-				mesh.vrObjectTypeID,
-				position.x,
-				position.y,
-				position.z,
-				mesh.scale.x,
-				mesh.scale.y,
-				mesh.scale.z,
-				mesh.quaternion.x,
-				mesh.quaternion.y,
-				mesh.quaternion.z,
-				mesh.quaternion.w,
-				conf.BPM,
-				conf.pause.toString()]);
+		urlRefresh(targetScene);
 	};
 	
 	this.mesh.fillDatGUI = function (targetScene)
@@ -90,16 +83,15 @@ oobloxMetronome = function ()
 		datFolder.scale.set(20.0,20.0,0.1);
 		mesh.scale.set(0.05,0.05,10.0);
 		mesh.position.set(0.0,0.0,0.0);
-		
 		var bpmSlider = datFolder.add(conf,'BPM',1,300).step(1);
 		bpmSlider.onChange(function(){refresh(targetScene);});
 		var pauseSwitch = datFolder.add(conf,'pause');
 		pauseSwitch.onChange(function(){refresh(targetScene);});
-
 		datFolder.children[1].add(mesh);
 		targetScene.add( datFolder );
 		datFolder.close();
 		refresh(targetScene);
+		window.addEventListener("mouseup", function(){urlRefresh(targetScene);})
 	}
 
 	this.mesh.kill = function ()
@@ -114,31 +106,12 @@ oobloxMetronome = function ()
 		position.x = parseFloat(argList[1]);
 		position.y = parseFloat(argList[2]);
 		position.z = parseFloat(argList[3]);
-		var scale = new THREE.Vector3();
-		scale.x = parseFloat(argList[4]);
-		scale.y = parseFloat(argList[5]);
-		scale.z = parseFloat(argList[6]);
-		var rotation = new THREE.Quaternion();
-		rotation.x = parseFloat(argList[7]);
-		rotation.y = parseFloat(argList[8]);
-		rotation.z = parseFloat(argList[9]);
-		rotation.w = parseFloat(argList[10]);
-
-		conf.BPM = parseFloat(argList[11]);
-		conf.pause = Boolean(argList[12]=="true");
-
+		conf.BPM = parseFloat(argList[4]);
+		conf.pause = Boolean(argList[5]=="true");
 		mesh.add( tocksound );
-
-		//mesh.quaternion.copy(rotation);
 		mesh.position.copy(position);
-		//mesh.scale.copy(scale);
-
-		//targetScene.add(mesh);
-
 		camera.add( listener );
-
 		this.mesh.fillDatGUI(targetScene);
-
 	}
 }
 
