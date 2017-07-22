@@ -145,7 +145,7 @@ oobloxMasterMenu = function ()
 		datFolder.children[1].add(indicator);
 		targetScene.add( datFolder );
 		datFolder.close();
-		datFolder.children[2].addEventListener( 'grabReleased', function() {refresh(targetScene);} );
+		datFolder.children[0].addEventListener( 'grabReleased', function() {refresh(targetScene);} );
 	}
 
 	this.load = function (targetScene, camera)
