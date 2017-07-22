@@ -123,7 +123,7 @@ oobloxMasterMenu = function ()
 			importedThing.mesh.uname = uname;
 			importedThing.load(targetScene, camera);
 			refresh(targetScene);}};
-		rezFolder.add(cpgobj,'add').name("Chord Progression Generator");
+		rezFolder.add(cpgobj,'add').name("Chord Progression");
 
 		var metobj = {add: function() {
 			var position = new THREE.Vector3();
