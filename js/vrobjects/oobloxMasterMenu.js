@@ -63,7 +63,7 @@ oobloxMasterMenu = function ()
 	this.mesh.fillDatGUI = function (targetScene, camera)
 	{
 		mesh.geometry.computeBoundingBox();
-		var datFolder = dat.GUIVR.create('ooblox Menu');
+		var datFolder = dat.GUIVR.create('ooblox sandbox Menu');
 		datFolder.position.copy(mesh.position);
 		mesh.position.x=0;
 		mesh.position.y=0;
