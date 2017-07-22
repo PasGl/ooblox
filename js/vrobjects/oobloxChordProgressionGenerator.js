@@ -173,7 +173,7 @@ oobloxChordProgressionGenerator = function ()
 		var barsSlider = datFolder.add(conf,'bars',1,8).step(1);
 		barsSlider.onChange(function(){refresh(targetScene);});
 
-		var randomSeedSlider = datFolder.add(conf,'randomSeed',0,999999).step(1); // Number.MAX_SAFE_INTEGER
+		var randomSeedSlider = datFolder.add(conf,'randomSeed',0,99999999).step(1); // Number.MAX_SAFE_INTEGER
 		randomSeedSlider.onChange(function(){refresh(targetScene);});
 
 		datFolder.children[1].add(mesh);
