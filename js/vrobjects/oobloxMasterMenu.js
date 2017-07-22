@@ -131,8 +131,8 @@ oobloxMasterMenu = function ()
 		rezFolder.add(metobj,'add').name("Metronome");
 
 		datFolder.addFolder(rezFolder);
-		datFolder.children[0].add(mesh);
-		datFolder.children[0].add(indicator);
+		datFolder.children[1].add(mesh);
+		datFolder.children[1].add(indicator);
 		targetScene.add( datFolder );
 		datFolder.close();
 	}
