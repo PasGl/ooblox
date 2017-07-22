@@ -20,6 +20,12 @@ Currently using standard three.js OrbitControls
 * Zoom - middle mouse, or mousewheel | touch: two finger spread or squish
 * Pan - right mouse, or arrow keys | touch: three finger swipe
 
+### sandbox scene
+
+A scene set up to serve as sandbox.
+
+* http://51.15.67.244/sandbox
+
 ### guitar scene
 
 A scene for guitar practise, with a metronome and a chord progression generator.
@@ -32,7 +38,7 @@ A scene about algorithmic geometry, with a Torus Knot and a (not very good, yet)
 
 * http://51.15.67.244/geometry
 
-### demo scene
+### dev-test scene
 
 A scene with one instance of each Module.
 
