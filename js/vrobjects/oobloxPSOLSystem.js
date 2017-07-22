@@ -83,7 +83,6 @@ function PSOLSystem ()
 	this.finalGeometry;
 	var finalGeometry = this.finalGeometry;
 	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 1), new THREE.MeshPhongMaterial({}));
-	var mesh = this.mesh;
 	this.mesh.receiveShadow = true;
 	this.mesh.castShadow = true;
 
@@ -516,7 +515,7 @@ function PSOLSystem ()
 	}
 	var interpret = this.interpret;
 
-	this.finalize = function ()
+	this.finalize = function (mesh)
 	{
 		finalGeometry.computeBoundingBox();
 		this.finalVertexCount = finalGeometry.vertices.length;
@@ -609,11 +608,11 @@ function PSOLSystem ()
 		datFolder.children[1].add(this.mesh);
 		targetScene.add( datFolder );
 		datFolder.close();
-		window.addEventListener("mouseup", function(){updateMyURLArgs(targetScene);})
+		window.addEventListener("mouseup", function(){updateMyURLArgs(targetScene,this.mesh);})
 	}
 
 
-	this.updateMyURLArgs = function (targetScene)
+	this.updateMyURLArgs = function (targetScene,mesh)
 	{
 		var position = new THREE.Vector3();
 		targetScene.updateMatrixWorld();
@@ -642,8 +641,8 @@ function PSOLSystem ()
 	this.refresh = function (targetScene)
 	{
 		interpret(iterate());
-		finalize();
-		updateMyURLArgs(targetScene);
+		finalize(this.mesh);
+		updateMyURLArgs(targetScene,this.mesh);
 	}
 	var refresh = this.refresh;
 
