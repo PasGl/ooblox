@@ -41,7 +41,7 @@ oobloxMetronome = function ()
 		this.pause = false;
 	};
 	var conf = new MetronomeProperties();
-	var refresh = function ()
+	var refresh = function (targetScene)
 	{
 		clearInterval(timer);
 		mesh.onBeforeRender = function ( renderer, scene, camera, geometry, material, group ){};
@@ -92,14 +92,14 @@ oobloxMetronome = function ()
 		mesh.position.set(0.0,0.0,0.0);
 		
 		var bpmSlider = datFolder.add(conf,'BPM',1,300).step(1);
-		bpmSlider.onChange(refresh);
+		bpmSlider.onChange(function(){refresh(targetScene);});
 		var pauseSwitch = datFolder.add(conf,'pause');
-		pauseSwitch.onChange(refresh);
+		pauseSwitch.onChange(function(){refresh(targetScene);});
 
 		datFolder.children[1].add(mesh);
 		targetScene.add( datFolder );
 		datFolder.close();
-		refresh();
+		refresh(targetScene);
 	}
 
 	this.mesh.kill = function ()
