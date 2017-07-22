@@ -47,11 +47,11 @@ nginx config snippet, that I use ... adjust accordingly:
         }
 
         location ~ /demo {
-                rewrite ^ http://51.15.67.244/?skybox=SKY+ThickCloudsWater&aTorusKnot=TTK+-30+10+-20+1+1+1+0+0+0+1+9+0.7+246+7+6+10&chords=CPG+12+-20+0+1+1+1+0+0+0+1+4+390219&metronome=MET+7+25+0+128+true&tree=PLS+10+-10+-20+1+1+1+0+0+0+1+3+FN(1)+645101582+5+0.6+4.5+0.7+0.36+0.3+0.45+0.4+0.0001+0.0001&cammod=OCM+0+0+40+0+0+0&thisMenu=OMM+31+7+0;
+                rewrite ^ http://51.15.67.244/?skybox=SKY+ThickCloudsWater&aTorusKnot=TTK+-30+10+-20+1+1+1+0+0+0+1+9+0.7+246+7+6+10&chords=CPG+12+-20+0+4+390219&metronome=MET+7+25+0+128+true&tree=PLS+10+-10+-20+1+1+1+0+0+0+1+3+FN(1)+645101582+5+0.6+4.5+0.7+0.36+0.3+0.45+0.4+0.0001+0.0001&cammod=OCM+0+0+40+0+0+0&thisMenu=OMM+31+7+0;
         }
 
         location ~ /guitar {
-                rewrite ^ http://51.15.67.244/?skybox=SKY+TropicalSunnyDay&chords=CPG+11+-7+-5+1+1+1+0+0+0+1+4+390219&metronome=MET+0+10+0+128+true;
+                rewrite ^ http://51.15.67.244/?skybox=SKY+TropicalSunnyDay&chords=CPG+11+-7+-5+4+390219&metronome=MET+0+10+0+128+true;
         }
 
         location ~ /geometry {
