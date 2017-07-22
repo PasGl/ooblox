@@ -550,25 +550,24 @@ function PSOLSystem ()
 
 	this.fillGUI = function (targetScene)
 	{
-		mesh.geometry.computeBoundingBox();
+
 		var datFolder = dat.GUIVR.create(mesh.uname+' (PSOL-System)');
 		datFolder.position.copy(mesh.position);
-		datFolder.position.z += mesh.geometry.boundingBox.max.z;
-		datFolder.position.x += mesh.geometry.boundingBox.max.x*0.5;
-		datFolder.position.y += mesh.geometry.boundingBox.max.y*0.5;
 		datFolder.scale.set(10.0,10.0,0.1);
+		mesh.position.set(0,0,0);
+		mesh.scale.set(0.1,0.1,10.0);
 		
 		var iterationsSlider = datFolder.add(conf,'iterations',0,6).step(1);
-		iterationsSlider.onChange(refresh);
+		iterationsSlider.onChange(function(){refresh(targetScene);});
 
 		var axiomText = datFolder.add(conf,'axiom',["F","FN(1)"]);
-		axiomText.onChange(refresh);
+		axiomText.onChange(function(){refresh(targetScene);});
 		
 		var randomSeedSlider = datFolder.add(conf,'randomSeed',0,1000000000).step(1);
-		randomSeedSlider.onChange(refresh);
+		randomSeedSlider.onChange(function(){refresh(targetScene);});
 
 		var circleSegmentsSlider = datFolder.add(conf,'circleSegments',3,50).step(1);
-		circleSegmentsSlider.onChange(refresh);
+		circleSegmentsSlider.onChange(function(){refresh(targetScene);});
 
 		var diameterSlider = datFolder.add(conf,'diameter',0.1,3.0);
 		diameterSlider.onChange(function(value) 
@@ -576,26 +575,25 @@ function PSOLSystem ()
 			conf.initTurtle.scale.x=value;
 			conf.initTurtle.scale.y=value;
 			conf.initTurtle.scale.z=value;
-			refresh();
+			refresh(targetScene);
 		});
 
 		var stepSlider = datFolder.add(conf.initTurtle,'step',0.1,10.0);
-		stepSlider.onChange(refresh);
+		stepSlider.onChange(function(){refresh(targetScene);});
 		var angleSlider = datFolder.add(conf.initTurtle,'angle',0.001,1.5);
-		angleSlider.onChange(refresh);
+		angleSlider.onChange(function(){refresh(targetScene);});
 		var diameterDeltaSlider = datFolder.add(conf.initTurtle,'diameterDelta',0.0001,0.5);
-		diameterDeltaSlider.onChange(refresh);
+		diameterDeltaSlider.onChange(function(){refresh(targetScene);});
 		var stepDeltaSlider = datFolder.add(conf.initTurtle,'stepDelta',0.0001,0.5);
-		stepDeltaSlider.onChange(refresh);
+		stepDeltaSlider.onChange(function(){refresh(targetScene);});
 		var tropismAngleSlider = datFolder.add(conf.initTurtle,'tropismAngle',0.001,1.5);
-		tropismAngleSlider.onChange(refresh);
+		tropismAngleSlider.onChange(function(){refresh(targetScene);});
 		var gravityAngleSlider = datFolder.add(conf.initTurtle,'gravityAngle',0.001,1.5);
-		gravityAngleSlider.onChange(refresh);
+		gravityAngleSlider.onChange(function(){refresh(targetScene);});
 		var tropismDeltaSlider = datFolder.add(conf.initTurtle,'tropismDelta',0.0001,0.5);
-		tropismDeltaSlider.onChange(refresh);
+		tropismDeltaSlider.onChange(function(){refresh(targetScene);});
 		var gravityDeltaSlider = datFolder.add(conf.initTurtle,'gravityDelta',0.0001,0.5);
-		gravityDeltaSlider.onChange(refresh);
-
+		gravityDeltaSlider.onChange(function(){refresh(targetScene);});
 
 		var obj = {obj_and_stl:function()
 		{
@@ -610,53 +608,23 @@ function PSOLSystem ()
 			saveAs(content, "PSOLSystem.zip");
 		}};
 		datFolder.add(obj,'obj_and_stl').name('export');
-
-		var posFolder = dat.GUIVR.create('Position');
-		var posXSlider = posFolder.add(mesh.position,'x',-200.0,200.0);
-		posXSlider.onChange(refresh);
-		var posYSlider = posFolder.add(mesh.position,'y',-200.0,200.0);
-		posYSlider.onChange(refresh);
-		var posZSlider = posFolder.add(mesh.position,'z',-200.0,200.0);
-		posZSlider.onChange(refresh);
-		datFolder.addFolder(posFolder);
-
-		var scaleFolder = dat.GUIVR.create('Scale');
-		var scaleXSlider = scaleFolder.add(mesh.scale,'x',0.01,20.0);
-		scaleXSlider.onChange(refresh);
-		var scaleYSlider = scaleFolder.add(mesh.scale,'y',0.01,20.0);
-		scaleYSlider.onChange(refresh);
-		var scaleZSlider = scaleFolder.add(mesh.scale,'z',0.01,20.0);
-		scaleZSlider.onChange(refresh);
-		datFolder.addFolder(scaleFolder);
-
-		var rotFolder = dat.GUIVR.create('Rotation');
-		var rotXSlider = rotFolder.add(mesh.rotation,'x').min(0).max(Math.PI * 2).step(0.001);
-		rotXSlider.onChange(refresh);
-		var rotYSlider = rotFolder.add(mesh.rotation,'y').min(0).max(Math.PI * 2).step(0.001);
-		rotYSlider.onChange(refresh);
-		var rotZSlider = rotFolder.add(mesh.rotation,'z').min(0).max(Math.PI * 2).step(0.001);
-		rotZSlider.onChange(refresh);
-		datFolder.addFolder(rotFolder);
-
+		datFolder.children[1].add(mesh);
 		targetScene.add( datFolder );
 		datFolder.close();
+		window.addEventListener("mouseup", function(){updateMyURLArgs(targetScene);})
 	}
 
 
-	this.updateMyURLArgs = function ()
+	this.updateMyURLArgs = function (targetScene)
 	{
+		var position = new THREE.Vector3();
+		targetScene.updateMatrixWorld();
+		position.setFromMatrixPosition( mesh.matrixWorld );
 		updateURLargs([	mesh.uname,
 				mesh.vrObjectTypeID,
-				mesh.position.x,
-				mesh.position.y,
-				mesh.position.z,
-				mesh.scale.x,
-				mesh.scale.y,
-				mesh.scale.z,
-				mesh.quaternion.x,
-				mesh.quaternion.y,
-				mesh.quaternion.z,
-				mesh.quaternion.w,
+				position.x,
+				position.y,
+				position.z,
 				conf.iterations,
 				conf.axiom,
 				conf.randomSeed,
@@ -673,11 +641,11 @@ function PSOLSystem ()
 	}
 	var updateMyURLArgs = this.updateMyURLArgs;
 
-	this.refresh = function ()
+	this.refresh = function (targetScene)
 	{
 		interpret(iterate());
 		finalize();
-		updateMyURLArgs();
+		updateMyURLArgs(targetScene);
 	}
 	var refresh = this.refresh;
 
@@ -688,37 +656,23 @@ function PSOLSystem ()
 		position.x = parseFloat(argList[1]);
 		position.y = parseFloat(argList[2]);
 		position.z = parseFloat(argList[3]);
-		var scale = new THREE.Vector3();
-		scale.x = parseFloat(argList[4]);
-		scale.y = parseFloat(argList[5]);
-		scale.z = parseFloat(argList[6]);
-		var rotation = new THREE.Quaternion();
-		rotation.x = parseFloat(argList[7]);
-		rotation.y = parseFloat(argList[8]);
-		rotation.z = parseFloat(argList[9]);
-		rotation.w = parseFloat(argList[10]);
-		conf.iterations = parseInt(argList[11]);
-		conf.axiom = argList[12];
-		conf.randomSeed = parseInt(argList[13]);
-		conf.circleSegments = parseInt(argList[14]);
-		conf.diameter = parseFloat(argList[15]);
-		conf.initTurtle.step = parseFloat(argList[16]);
-		conf.initTurtle.angle = parseFloat(argList[17]);
-		conf.initTurtle.diameterDelta = parseFloat(argList[18]);
-		conf.initTurtle.stepDelta = parseFloat(argList[19]);
-		conf.initTurtle.tropismAngle = parseFloat(argList[20]);
-		conf.initTurtle.gravityAngle = parseFloat(argList[21]);
-		conf.initTurtle.tropismDelta = parseFloat(argList[22]);
-		conf.initTurtle.gravityDelta = parseFloat(argList[23]);
+		conf.iterations = parseInt(argList[4]);
+		conf.axiom = argList[5];
+		conf.randomSeed = parseInt(argList[6]);
+		conf.circleSegments = parseInt(argList[7]);
+		conf.diameter = parseFloat(argList[8]);
+		conf.initTurtle.step = parseFloat(argList[9]);
+		conf.initTurtle.angle = parseFloat(argList[10]);
+		conf.initTurtle.diameterDelta = parseFloat(argList[11]);
+		conf.initTurtle.stepDelta = parseFloat(argList[12]);
+		conf.initTurtle.tropismAngle = parseFloat(argList[13]);
+		conf.initTurtle.gravityAngle = parseFloat(argList[14]);
+		conf.initTurtle.tropismDelta = parseFloat(argList[15]);
+		conf.initTurtle.gravityDelta = parseFloat(argList[16]);
 		conf.initTurtle.scale = new THREE.Vector3(conf.diameter,conf.diameter,conf.diameter);
-
-		mesh.quaternion.copy(rotation);
 		mesh.position.copy(position);
-		mesh.scale.copy(scale);
-
 		this.initPresetRandom();
-		refresh();
-		targetScene.add(mesh);
+		refresh(targetScene);
 		this.fillGUI(targetScene);
 	}
 }
