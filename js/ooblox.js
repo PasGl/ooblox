@@ -102,8 +102,23 @@ function init()
 	infoDiv.style.borderBottom = "3px solid #002"
 	infoDiv.style.borderRight = "3px solid #002"
 	var p = document.createElement("P");
-	var t0 = document.createTextNode("ooblox sandbox by PasGl - ");
+	var t0 = document.createTextNode("ooblox by PasGl - ");
 	p.appendChild(t0);
+
+
+
+	var l1 = document.createElement("A");
+	l1.href = "sandbox";
+	l1.target= "_blank";
+	l1.style.color = "#002";
+	var lt1 = document.createTextNode("sandbox");
+	l1.appendChild(lt1);  
+	p.appendChild(l1);
+
+
+
+
+
 	var a1 = document.createElement("A");
 	a1.href = "https://github.com/PasGl/ooblox";
 	a1.target= "_blank";
