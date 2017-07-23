@@ -57,6 +57,8 @@ oobloxSkybox = function ()
 		console.log(dat);
 		gui.folder.children[2].addEventListener("onReleased", function(){ console.log("Fuck yeah 1"); });   //urlRefresh(targetScene);})
 		gui.folder.children[2].addEventListener("grabReleased", function(){ console.log("Fuck yeah 2"); });   //urlRefresh(targetScene);})
+		window.addEventListener("onReleased", function(){ console.log("Fuck yeah 3"); });
+		window.addEventListener("grabReleased", function(){ console.log("Fuck yeah 4"); });
 	}
 
 	this.load = function (targetScene, camera)
