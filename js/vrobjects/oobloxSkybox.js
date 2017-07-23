@@ -54,7 +54,7 @@ oobloxSkybox = function ()
 		targetScene.add( gui );
 		console.log(gui);
 		console.log(controls);
-		console.log(dat.GUIVR);
+		console.log(dat);
 		gui.folder.children[2].addEventListener("onReleased", function(){ console.log("Fuck yeah 1"); });   //urlRefresh(targetScene);})
 		gui.folder.children[2].addEventListener("grabReleased", function(){ console.log("Fuck yeah 2"); });   //urlRefresh(targetScene);})
 	}
