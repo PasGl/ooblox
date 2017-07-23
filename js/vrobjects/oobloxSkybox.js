@@ -53,10 +53,12 @@ oobloxSkybox = function ()
 		themeChanger.onChange(function(value) {refresh(targetScene);});
 		targetScene.add( gui );
 		console.log(gui);
+		console.log(controls);
 		gui.addEventListener("grabReleased", function(){ console.log("Fuck yeah 1"); });   //urlRefresh(targetScene);})
 		gui.children[0].addEventListener("grabReleased", function(){ console.log("Fuck yeah 2"); });   //urlRefresh(targetScene);})
 		gui.children[1].addEventListener("grabReleased", function(){ console.log("Fuck yeah 3"); });   //urlRefresh(targetScene);})
 		gui.children[2].addEventListener("grabReleased", function(){ console.log("Fuck yeah 4"); });   //urlRefresh(targetScene);})
+		
 	}
 
 	this.load = function (targetScene, camera)
