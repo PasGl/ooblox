@@ -12,6 +12,7 @@ oobloxMetronome = function ()
 	ball.position.y = -10.0;
 	ball.scale.z = 0.5;
 	this.mesh.add(ball);
+	this.mesh.computeBoundingBox();
 	this.mesh.receiveShadow = true;
 	this.mesh.castShadow = true;
 	this.mesh.vrObjectTypeID = "MET";
