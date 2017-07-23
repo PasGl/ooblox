@@ -44,7 +44,7 @@ oobloxSkybox = function ()
 				skyboxSettings.theme]);
 	};
 	
-	this.mesh.fillDatGUI = function (targetScene)
+	this.mesh.fillDatGUI = function (targetScene, camera)
 	{
 		var gui = dat.GUIVR.create('SkyboxSet by Heiko Irrgang');
 		gui.position.set(0.0, 40.00, 0.0);
@@ -52,6 +52,10 @@ oobloxSkybox = function ()
 		var themeChanger = gui.add(skyboxSettings,'theme',themenames);
 		themeChanger.onChange(function(value) {refresh(targetScene);});
 		targetScene.add( gui );
+		gui.addEventListener("grabReleased", function(){ console.log("Fuck yeah 1"); });   //urlRefresh(targetScene);})
+		gui.children[0].addEventListener("grabReleased", function(){ console.log("Fuck yeah 2"); });   //urlRefresh(targetScene);})
+		gui.children[1].addEventListener("grabReleased", function(){ console.log("Fuck yeah 3"); });   //urlRefresh(targetScene);})
+		gui.children[2].addEventListener("grabReleased", function(){ console.log("Fuck yeah 4"); });   //urlRefresh(targetScene);})
 	}
 
 	this.load = function (targetScene, camera)
@@ -64,7 +68,7 @@ oobloxSkybox = function ()
 			this.mesh.skyboxSettings.theme = chosenTheme;
 		}
 		refresh(targetScene);
-		this.mesh.fillDatGUI(targetScene);	
+		this.mesh.fillDatGUI(targetScene, camera);	
 	}
 }
 
