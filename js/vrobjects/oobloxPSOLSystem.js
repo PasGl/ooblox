@@ -551,7 +551,7 @@ function PSOLSystem ()
 		var datFolder = dat.GUIVR.create(thismesh.uname+' (PSOL-System)');
 		datFolder.position.set(thismesh.position.x+5,thismesh.position.y+5,thismesh.position.z);
 		datFolder.scale.set(10.0,10.0,0.1);
-		thismesh.position.set(0,0,0);
+		thismesh.position.set(-0.5,-0.5,0);
 		thismesh.scale.set(0.1,0.1,10.0);
 		
 		var iterationsSlider = datFolder.add(conf,'iterations',0,6).step(1);
