@@ -57,8 +57,8 @@ oobloxTorusKnot = function ()
 	{
 		mesh.geometry.computeBoundingBox();
 		var datFolder = dat.GUIVR.create(mesh.uname+' (Torus Knot)');
-		datFolder.position.copy(mesh.position);
-		mesh.position.set(0,0,0);
+		datFolder.position.set(mesh.position.x-10,mesh.position.y-10,mesh.position.z-10);
+		mesh.position.set(0.5,0.5,100.0);
 		datFolder.scale.set(20.0,20.0,0.1);
 		mesh.scale.set(0.05,0.05,10.0);
 		var radiusSlider = datFolder.add(conf,'radius',0.0001,20);
