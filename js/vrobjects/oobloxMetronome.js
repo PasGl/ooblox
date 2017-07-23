@@ -11,8 +11,8 @@ oobloxMetronome = function ()
 	var ball = new THREE.Mesh( new THREE.SphereGeometry(2, 64, 64), new THREE.MeshStandardMaterial({metalness: 0.5, roughness: 0.12}));
 	ball.position.y = -10.0;
 	ball.scale.z = 0.5;
+	ball.geometry.computeBoundingBox();
 	this.mesh.add(ball);
-	this.mesh.computeBoundingBox();
 	this.mesh.receiveShadow = true;
 	this.mesh.castShadow = true;
 	this.mesh.vrObjectTypeID = "MET";
