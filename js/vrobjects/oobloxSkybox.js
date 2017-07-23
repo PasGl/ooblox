@@ -24,6 +24,19 @@ oobloxSkybox = function ()
 	var color = this.mesh.material.color;
 	var themenames = ["CloudyLightRays","DarkStormy","FullMoon","SunSet","ThickCloudsWater","TropicalSunnyDay"];
 
+	var refreshURL = function (targetScene)
+	{
+		var position = new THREE.Vector3();
+		targetScene.updateMatrixWorld();
+		position.setFromMatrixPosition( mesh.matrixWorld );
+		updateURLargs([	mesh.uname,
+				mesh.vrObjectTypeID,
+				position.x,
+				position.y,
+				position.z,
+				skyboxSettings.theme]);
+	}
+
 	var refresh = function (targetScene)
 	{
 		if (themenames.indexOf(skyboxSettings.theme) >=0 )
@@ -37,41 +50,37 @@ oobloxSkybox = function ()
 			textureCube.format = THREE.RGBFormat;
 			targetScene.background = textureCube;
 		}
-
-
-		updateURLargs([	mesh.uname,
-				mesh.vrObjectTypeID,
-				skyboxSettings.theme]);
+		refreshURL(targetScene);
 	};
 	
 	this.mesh.fillDatGUI = function (targetScene, camera)
 	{
 		var gui = dat.GUIVR.create('SkyboxSet by Heiko Irrgang');
-		gui.position.set(0.0, 40.00, 0.0);
+		gui.position.copy(mesh.position);
+		mesh.position.set(0,0,0);
 		gui.scale.set(20.0,20.0,0.1);
 		var themeChanger = gui.add(skyboxSettings,'theme',themenames);
 		themeChanger.onChange(function(value) {refresh(targetScene);});
 		targetScene.add( gui );
-		console.log(gui);
-		console.log(controls);
-		console.log(dat);
-		gui.folder.children[2].addEventListener("onReleased", function(){ console.log("Fuck yeah 1"); });   //urlRefresh(targetScene);})
-		gui.folder.children[2].addEventListener("grabReleased", function(){ console.log("Fuck yeah 2"); });   //urlRefresh(targetScene);})
-		window.addEventListener("onReleased", function(){ console.log("Fuck yeah 3"); });
-		window.addEventListener("grabReleased", function(){ console.log("Fuck yeah 4"); });
+		gui.children[1].add(this.mesh);
+		window.addEventListener("mouseup", function(){refreshURL(targetScene);});
 	}
 
 	this.load = function (targetScene, camera)
 	{
 		var argList = getURLargs(this.mesh.uname);
-		var chosenTheme = argList[1];
-		
+		var position = new THREE.Vector3();
+		position.x = parseFloat(argList[1]);
+		position.y = parseFloat(argList[2]);
+		position.z = parseFloat(argList[3]);
+		var chosenTheme = argList[4];
+		this.mesh.position.copy(position);
 		if (themenames.indexOf(chosenTheme) >=0 )
 		{
 			this.mesh.skyboxSettings.theme = chosenTheme;
 		}
-		refresh(targetScene);
-		this.mesh.fillDatGUI(targetScene, camera);	
+		this.mesh.fillDatGUI(targetScene, camera);
+		refresh(targetScene);	
 	}
 }
 
