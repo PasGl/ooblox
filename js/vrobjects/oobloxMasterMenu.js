@@ -85,7 +85,7 @@ oobloxMasterMenu = function ()
 			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
 			var d = new Date();
 			var uname = "TK" + d.getTime();
-			var newhref = window.location.href + "&" + uname + "=TTK+" + posScaleRotString + "+9+0.7+240+7+6+10";
+			var newhref = window.location.href + "&" + uname + "=TTK+" + posScaleRotString + "+9+0.7+240+7+"+Math.floor(Math.random() * 25)+"+"+Math.floor(Math.random() * 25);
 			window.history.pushState({}, '', newhref);
 			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("TTK")]();
 			importedThing.mesh.uname = uname;
@@ -100,7 +100,9 @@ oobloxMasterMenu = function ()
 			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
 			var d = new Date();
 			var uname = "PSOL" + d.getTime();
-			var newhref = window.location.href + "&" + uname + "=PLS+" + posScaleRotString + "+3+FN(1)+645101582+5+0.6+4.5+0.7+0.36+0.3+0.45+0.4+0.0001+0.0001";
+			var newhref = window.location.href + "&" + uname + "=PLS+" + posScaleRotString + "+3+FN(1)+"+Math.floor(Math.random() * 99999999)+
+				"+5+"+(0.5+Math.random())+"+"+(2.0+(3.0*Math.random()))+"+"+(0.1+Math.random())+"+"+(0.2+(0.3*Math.random()))+
+				"+"+(0.2+(0.3*Math.random()))+"+"+Math.random()+"+"+Math.random()+"+"+(0.0001+(0.4*Math.random()))+"+"+(0.0001+(0.4*Math.random()));
 			window.history.pushState({}, '', newhref);
 			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("PLS")]();
 			importedThing.mesh.uname = uname;
@@ -115,7 +117,7 @@ oobloxMasterMenu = function ()
 			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
 			var d = new Date();
 			var uname = "CPG" + d.getTime();
-			var newhref = window.location.href + "&" + uname + "=CPG+" + posScaleRotString + "+4+8356747";
+			var newhref = window.location.href + "&" + uname + "=CPG+" + posScaleRotString + "+4+" +  Math.floor(Math.random() * 99999999);
 			window.history.pushState({}, '', newhref);
 			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("CPG")]();
 			importedThing.mesh.uname = uname;
@@ -143,7 +145,7 @@ oobloxMasterMenu = function ()
 		datFolder.children[1].add(indicator);
 		targetScene.add( datFolder );
 		datFolder.close();
-		window.addEventListener("mouseup", function(){urlRefresh(targetScene);})
+		window.addEventListener("mouseup", function(){urlRefresh(targetScene);});
 	}
 
 	this.load = function (targetScene, camera)
