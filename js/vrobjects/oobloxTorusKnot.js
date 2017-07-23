@@ -8,7 +8,6 @@ oobloxTorusKnot = function ()
 	this.mesh.receiveShadow = true;
 	this.mesh.castShadow = true;
 	this.mesh.vrObjectTypeID = "TTK";
-
 	var mesh=this.mesh;
 
 	var TorusKnotProperties = function ()
@@ -55,7 +54,6 @@ oobloxTorusKnot = function ()
 	
 	this.mesh.fillDatGUI = function (targetScene)
 	{
-		mesh.geometry.computeBoundingBox();
 		var datFolder = dat.GUIVR.create(mesh.uname+' (Torus Knot)');
 		datFolder.position.set(mesh.position.x-10,mesh.position.y-10,mesh.position.z+10);
 		mesh.position.set(0.5,0.5,-100.0);
