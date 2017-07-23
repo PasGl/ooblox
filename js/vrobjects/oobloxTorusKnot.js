@@ -76,7 +76,7 @@ oobloxTorusKnot = function ()
 		targetScene.add( datFolder );
 		datFolder.close();
 		datFolder.children[1].add(mesh);
-		window.addEventListener("mouseup", function(){refreshURL(targetScene);})
+		window.addEventListener("mouseup", function(){refreshURL(targetScene);});
 	}
 
 	this.load = function (targetScene, camera)
@@ -93,8 +93,8 @@ oobloxTorusKnot = function ()
 		conf.p = parseInt(argList[8]);
 		conf.q = parseInt(argList[9]);
 		this.mesh.position.copy(position);
-		refresh(targetScene);
 		this.mesh.fillDatGUI(targetScene);
+		refresh(targetScene);	
 	}
 }
 
