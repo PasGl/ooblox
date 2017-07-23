@@ -52,6 +52,7 @@ oobloxSkybox = function ()
 		var themeChanger = gui.add(skyboxSettings,'theme',themenames);
 		themeChanger.onChange(function(value) {refresh(targetScene);});
 		targetScene.add( gui );
+		console.log(gui);
 		gui.addEventListener("grabReleased", function(){ console.log("Fuck yeah 1"); });   //urlRefresh(targetScene);})
 		gui.children[0].addEventListener("grabReleased", function(){ console.log("Fuck yeah 2"); });   //urlRefresh(targetScene);})
 		gui.children[1].addEventListener("grabReleased", function(){ console.log("Fuck yeah 3"); });   //urlRefresh(targetScene);})
