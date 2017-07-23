@@ -54,12 +54,8 @@ oobloxSkybox = function ()
 		targetScene.add( gui );
 		console.log(gui);
 		console.log(controls);
-		gui.addEventListener("onReleased", function(){ console.log("Fuck yeah 1"); });   //urlRefresh(targetScene);})
-		gui.children[0].addEventListener("onReleased", function(){ console.log("Fuck yeah 2"); });   //urlRefresh(targetScene);})
-		gui.children[1].addEventListener("onReleased", function(){ console.log("Fuck yeah 3"); });   //urlRefresh(targetScene);})
-		gui.children[2].addEventListener("onReleased", function(){ console.log("Fuck yeah 4"); });   //urlRefresh(targetScene);})
-		controls.addEventListener("onReleased", function(){ console.log("Fuck yeah 5"); });   //urlRefresh(targetScene);})
-		
+		gui.folder.addEventListener("onReleased", function(){ console.log("Fuck yeah 1"); });   //urlRefresh(targetScene);})
+		gui.folder.addEventListener("grabReleased", function(){ console.log("Fuck yeah 2"); });   //urlRefresh(targetScene);})
 	}
 
 	this.load = function (targetScene, camera)
