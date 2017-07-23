@@ -51,7 +51,7 @@ nginx config snippet, that I use ... adjust accordingly:
         }
 
         location ~ /guitar {
-                rewrite ^ http://51.15.67.244/?skybox=SKY+TropicalSunnyDay&chords=CPG+11+-7+-5+4+390219&metronome=MET+0+10+0+128+true;
+                rewrite ^ http://51.15.67.244/?skybox=SKY+TropicalSunnyDay&chords=CPG+0+-7+-5+4+390219&metronome=MET+0+10+0+128+true;
         }
 
         location ~ /geometry {
