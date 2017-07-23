@@ -23,7 +23,7 @@ oobloxTorusKnot = function ()
 
 	var conf = new TorusKnotProperties();
 
-	var refreshURL (targetScene)
+	var refreshURL = function (targetScene)
 	{
 		var position = new THREE.Vector3();
 		targetScene.updateMatrixWorld();
