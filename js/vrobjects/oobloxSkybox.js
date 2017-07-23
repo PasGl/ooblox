@@ -42,6 +42,28 @@ oobloxSkybox = function ()
 		if (themenames.indexOf(skyboxSettings.theme) >=0 )
 		{
 			var skyboxname = skyboxSettings.theme;
+
+			switch (skyboxname) {
+			    case "CloudyLightRays":
+				targetScene.fog = new THREE.Fog( 0x42474c, 0, 750 );
+				break;
+			    case "DarkStormy":
+				targetScene.fog = new THREE.Fog( 0x222629, 0, 750 );
+				break;
+			    case "FullMoon":
+				targetScene.fog = new THREE.Fog( 0x343c3a, 0, 750 );
+				break;
+			    case "SunSet":
+				targetScene.fog = new THREE.Fog( 0x414544, 0, 750 );
+				break;
+			    case "ThickCloudsWater":
+				targetScene.fog = new THREE.Fog( 0x5e4b3f, 0, 750 );
+				break;
+			    case "TropicalSunnyDay":
+				targetScene.fog = new THREE.Fog( 0xf7f9f4, 0, 750 );
+				break;
+			}
+
 			var urls = [  skyboxname + "Front2048.png", skyboxname + "Back2048.png",
 				skyboxname + "Up2048-rot270.png", skyboxname + "Down2048-rot90.png",
 				skyboxname + "Right2048.png", skyboxname + "Left2048.png" ];
