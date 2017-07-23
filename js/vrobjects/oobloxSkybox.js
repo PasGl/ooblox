@@ -62,7 +62,7 @@ oobloxSkybox = function ()
 		var themeChanger = gui.add(skyboxSettings,'theme',themenames);
 		themeChanger.onChange(function(value) {refresh(targetScene);});
 		targetScene.add( gui );
-		gui.children[1].add(this.mesh);
+		gui.children[1].add(mesh);
 		window.addEventListener("mouseup", function(){refreshURL(targetScene);});
 	}
 
