@@ -549,7 +549,7 @@ function PSOLSystem ()
 	{
 
 		var datFolder = dat.GUIVR.create(thismesh.uname+' (PSOL-System)');
-		datFolder.position.copy(thismesh.position);
+		datFolder.position.set(thismesh.position.x+5,thismesh.position.y+5,thismesh.position.z);
 		datFolder.scale.set(10.0,10.0,0.1);
 		thismesh.position.set(0,0,0);
 		thismesh.scale.set(0.1,0.1,10.0);
@@ -560,7 +560,7 @@ function PSOLSystem ()
 		var axiomText = datFolder.add(conf,'axiom',["F","FN(1)"]);
 		axiomText.onChange(function(){refresh(targetScene,thismesh);});
 		
-		var randomSeedSlider = datFolder.add(conf,'randomSeed',0,1000000000).step(1);
+		var randomSeedSlider = datFolder.add(conf,'randomSeed',0,99999999).step(1);
 		randomSeedSlider.onChange(function(){refresh(targetScene,thismesh);});
 
 		var circleSegmentsSlider = datFolder.add(conf,'circleSegments',3,50).step(1);
@@ -608,7 +608,7 @@ function PSOLSystem ()
 		datFolder.children[1].add(thismesh);
 		targetScene.add( datFolder );
 		datFolder.close();
-		window.addEventListener("mouseup", function(){updateMyURLArgs(targetScene,thismesh);})
+		window.addEventListener("mouseup", function(){updateMyURLArgs(targetScene,thismesh);});
 	}
 
 
