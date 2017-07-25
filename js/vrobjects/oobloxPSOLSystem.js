@@ -43,8 +43,7 @@ function PTurtle3D ()
 	this.tropismDelta = 0.03;
 	this.gravityDelta = 0.03;
 	this.primaryColor = "#FFFFFF";//+("000000"+Math.floor(Math.random()*16777215).toString(16)).slice(-6);
-	this.secondaryColor = "#FF0000";//+("000000"+Math.floor(Math.random()*16777215).toString(16)).slice(-6);
-	this.tertiaryColor =  "#00FF00";//+("000000"+Math.floor(Math.random()*16777215).toString(16)).slice(-6);
+	this.secondaryColor = "#FFFFFF";//+("000000"+Math.floor(Math.random()*16777215).toString(16)).slice(-6);
 
 	this.rotate = function (axis,angle)
 	{
@@ -69,7 +68,6 @@ function PTurtle3D ()
 		newTurtle.gravityDelta = this.gravityDelta;
 		newTurtle.primaryColor = this.primaryColor;
 		newTurtle.secondaryColor = this.secondaryColor;
-		newTurtle.tertiaryColor = this.tertiaryColor;
 		return newTurtle;
 	}
 }
@@ -87,6 +85,31 @@ function PSOLSystem ()
 	this.mesh.castShadow = true;
 
 	this.mesh.vrObjectTypeID = "PLS";
+
+	var barktexture = new THREE.TextureLoader().load( "images/bark-template.png" );
+	var foliagetexture = new THREE.TextureLoader().load( "images/foliage-template.png" );
+	barktexture.wrapS = THREE.RepeatWrapping;
+	barktexture.wrapT = THREE.RepeatWrapping;
+	this.mesh.material  = [new THREE.MeshStandardMaterial(
+				{
+					color: "#FFFFFF",
+					shading: THREE.SmoothShading,
+					map: barktexture,
+					metalness: 0.0,
+					roughness: 0.9,
+					
+				}),
+				new THREE.MeshStandardMaterial(
+				{
+					color: "#FFFFFF",
+					shading: THREE.SmoothShading,
+					side: THREE.DoubleSide,
+					transparent: true,
+					map: foliagetexture,
+					alphaTest: 0.2,
+					metalness: 0.1,
+					roughness: 0.32
+				})];
 
 	var PSOLGUIProperties = function ()
 	{
@@ -109,23 +132,30 @@ function PSOLSystem ()
 		conf.rules.push(new PSOLRule("F","",0.02,"FF"));
 	}
 
- 	this.flower = function (turtle,params)
+ 	this.flower = function (turtle)
 	{
-		var paramList = params.split(",");
-		
-		var step = turtle.step;
-		var petals = 5;
-		
-		if (paramList.length>0) step = parseFloatDefault(paramList[0],step);
-		if (paramList.length>1) petals = Math.round(parseFloatDefault(paramList[1],petals));
-
-		var closingGeometry = new THREE.SphereGeometry(1,5,7,0,Math.PI*2,0,Math.PI*0.7);
+		var tsx = turtle.scale.x * 15.0;
+		var closingGeometry = new THREE.PlaneGeometry(tsx*2.0,tsx*2.0,1,1);
 		var closingGeometryMatrix = new THREE.Matrix4 ();
 		closingGeometryMatrix.compose(
-			turtle.position.clone(),
+			turtle.position.clone().add( (new THREE.Vector3( 0, tsx, 0 )).applyQuaternion(turtle.orientation)),
 			turtle.orientation.clone(),
-			turtle.scale.clone().multiplyScalar(step));
+			(new THREE.Vector3( 1.0, 1.0, 1.0 )));
 		closingGeometry.applyMatrix(closingGeometryMatrix);
+
+		var secondquaternion = new THREE.Quaternion();
+		secondquaternion.setFromAxisAngle( new THREE.Vector3( 0, 1, 0 ), Math.PI / 2 );
+
+		var secondPlane = new THREE.PlaneGeometry(tsx*2.0,tsx*2.0,1,1);
+		var secondPlaneMatrix = new THREE.Matrix4 ();
+		secondPlaneMatrix.compose(
+			turtle.position.clone().add( (new THREE.Vector3( 0, tsx, 0 )).applyQuaternion(turtle.orientation)),
+			turtle.orientation.clone().multiply(secondquaternion),
+			(new THREE.Vector3( 1.0, 1.0, 1.0 )));
+		secondPlane.applyMatrix(secondPlaneMatrix);
+
+		closingGeometry.merge( secondPlane,secondPlane.matrix,0 );
+
 		return closingGeometry;
 	}
 	var flower = this.flower;
@@ -324,6 +354,19 @@ function PSOLSystem ()
 					tubeRadii.push(currentTurtle.scale.clone());
 					break;
 				case "N":
+					var stepvec = new THREE.Vector3(0,currentTurtle.scale.x*5.0,0);
+					stepvec.applyQuaternion(currentTurtle.orientation);
+
+					var nextPos = currentTurtle.position.clone();
+					nextPos.add(stepvec);
+					var nextRad = currentTurtle.scale.clone();
+
+					tubePoints.push(nextPos.clone());
+					tubeRadii.push(nextRad.clone());
+
+			
+
+
 					if (tubePoints.length>1)
 					{
 						var tubeSpline =  new THREE.CatmullRomCurve3(tubePoints);
@@ -339,7 +382,7 @@ function PSOLSystem ()
 					}
 					tubePoints = [];
 					tubeRadii = [];
-					var closingGeometry = flower(currentTurtle, params);
+					var closingGeometry = flower(currentTurtle);
 					finalGeometry.merge( closingGeometry,closingGeometry.matrix,1 );
 					break;
 				case "+":
@@ -519,29 +562,8 @@ function PSOLSystem ()
 	{
 		finalGeometry.computeBoundingBox();
 		this.finalVertexCount = finalGeometry.vertices.length;
-		var c1 = new THREE.Color(conf.initTurtle.primaryColor);
-		var c2 = new THREE.Color(conf.initTurtle.secondaryColor);
-		var c3 = new THREE.Color(conf.initTurtle.tertiaryColor);
 		mesh.geometry = finalGeometry;
-		mesh.material  = [new THREE.MeshPhongMaterial(
-				{
-					color: c1.getHex(),
-					specular: 0x333333,
-					shading: THREE.SmoothShading
-				}),
-				new THREE.MeshPhongMaterial(
-				{
-					color: c2.getHex(),
-					specular: 0x333333,
-					shading: THREE.SmoothShading
-				}),
-			 	new THREE.MeshPhongMaterial(
-				{
-					color: c3.getHex(),
-					specular: 0x333333,
-					shading: THREE.SmoothShading
-				})];
-
+		barktexture.repeat.set( -(conf.iterations + 1) , -2);
 	}
 	var finalize = this.finalize;
 
@@ -553,45 +575,16 @@ function PSOLSystem ()
 		datFolder.scale.set(10.0,10.0,0.1);
 		thismesh.position.set(-1.0,-1.0,0);
 		thismesh.scale.set(0.1,0.1,10.0);
-		
-		var iterationsSlider = datFolder.add(conf,'iterations',0,6).step(1);
+
+		var setFolder = dat.GUIVR.create('Settings');
+		var iterationsSlider = setFolder.add(conf,'iterations',0,6).step(1);
 		iterationsSlider.onChange(function(){refresh(targetScene,thismesh);});
-
-		var axiomText = datFolder.add(conf,'axiom',["F","FN(1)"]);
+		var axiomText = setFolder.add(conf,'axiom',["F","FN(1)"]);
 		axiomText.onChange(function(){refresh(targetScene,thismesh);});
-		
-		var randomSeedSlider = datFolder.add(conf,'randomSeed',0,99999999).step(1);
+		var randomSeedSlider = setFolder.add(conf,'randomSeed',0,99999999).step(1);
 		randomSeedSlider.onChange(function(){refresh(targetScene,thismesh);});
-
-		var circleSegmentsSlider = datFolder.add(conf,'circleSegments',3,50).step(1);
+		var circleSegmentsSlider = setFolder.add(conf,'circleSegments',3,50).step(1);
 		circleSegmentsSlider.onChange(function(){refresh(targetScene,thismesh);});
-
-		var diameterSlider = datFolder.add(conf,'diameter',0.1,3.0);
-		diameterSlider.onChange(function(value) 
-		{
-			conf.initTurtle.scale.x=value;
-			conf.initTurtle.scale.y=value;
-			conf.initTurtle.scale.z=value;
-			refresh(targetScene,thismesh);
-		});
-
-		var stepSlider = datFolder.add(conf.initTurtle,'step',0.1,10.0);
-		stepSlider.onChange(function(){refresh(targetScene,thismesh);});
-		var angleSlider = datFolder.add(conf.initTurtle,'angle',0.001,1.5);
-		angleSlider.onChange(function(){refresh(targetScene,thismesh);});
-		var diameterDeltaSlider = datFolder.add(conf.initTurtle,'diameterDelta',0.0001,0.5);
-		diameterDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
-		var stepDeltaSlider = datFolder.add(conf.initTurtle,'stepDelta',0.0001,0.5);
-		stepDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
-		var tropismAngleSlider = datFolder.add(conf.initTurtle,'tropismAngle',0.001,1.5);
-		tropismAngleSlider.onChange(function(){refresh(targetScene,thismesh);});
-		var gravityAngleSlider = datFolder.add(conf.initTurtle,'gravityAngle',0.001,1.5);
-		gravityAngleSlider.onChange(function(){refresh(targetScene,thismesh);});
-		var tropismDeltaSlider = datFolder.add(conf.initTurtle,'tropismDelta',0.0001,0.5);
-		tropismDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
-		var gravityDeltaSlider = datFolder.add(conf.initTurtle,'gravityDelta',0.0001,0.5);
-		gravityDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
-
 		var obj = {obj_and_stl:function()
 		{
 			var zip = new JSZip();
@@ -604,7 +597,43 @@ function PSOLSystem ()
 			var content = zip.generate({type:"blob"});
 			saveAs(content, "PSOLSystem.zip");
 		}};
-		datFolder.add(obj,'obj_and_stl').name('export');
+		setFolder.add(obj,'obj_and_stl').name('export');
+		datFolder.addFolder(setFolder);
+
+		var propFolder = dat.GUIVR.create('Properties');
+		var diameterSlider = propFolder.add(conf,'diameter',0.1,3.0);
+		diameterSlider.onChange(function(value) 
+		{
+			conf.initTurtle.scale.x=value;
+			conf.initTurtle.scale.y=value;
+			conf.initTurtle.scale.z=value;
+			refresh(targetScene,thismesh);
+		});
+		var stepSlider = propFolder.add(conf.initTurtle,'step',0.1,10.0);
+		stepSlider.onChange(function(){refresh(targetScene,thismesh);});
+		var angleSlider = propFolder.add(conf.initTurtle,'angle',0.001,1.5);
+		angleSlider.onChange(function(){refresh(targetScene,thismesh);});
+		var diameterDeltaSlider = propFolder.add(conf.initTurtle,'diameterDelta',0.0001,0.5);
+		diameterDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
+		var stepDeltaSlider = propFolder.add(conf.initTurtle,'stepDelta',0.0001,0.5);
+		stepDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
+		var tropismAngleSlider = propFolder.add(conf.initTurtle,'tropismAngle',0.001,1.5);
+		tropismAngleSlider.onChange(function(){refresh(targetScene,thismesh);});
+		var gravityAngleSlider = propFolder.add(conf.initTurtle,'gravityAngle',0.001,1.5);
+		gravityAngleSlider.onChange(function(){refresh(targetScene,thismesh);});
+		var tropismDeltaSlider = propFolder.add(conf.initTurtle,'tropismDelta',0.0001,0.5);
+		tropismDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
+		var gravityDeltaSlider = propFolder.add(conf.initTurtle,'gravityDelta',0.0001,0.5);
+		gravityDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
+		datFolder.addFolder(propFolder);
+
+		var matFolder = dat.GUIVR.create('Materials');
+		matFolder.add(thismesh.material[0],'visible').name("Bark visible");
+		matFolder.add(thismesh.material[0],'wireframe').name("Bark wireframe");
+		matFolder.add(thismesh.material[0],'wireframeLinewidth',1,20).name("Bark wire width").step(1);
+		matFolder.add(thismesh.material[1],'visible').name("Foliage visible");
+		datFolder.addFolder(matFolder);
+
 		datFolder.children[1].add(thismesh);
 		targetScene.add( datFolder );
 		datFolder.close();
