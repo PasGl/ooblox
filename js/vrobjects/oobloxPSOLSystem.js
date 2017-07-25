@@ -327,21 +327,27 @@ function PSOLSystem ()
 					var nextPos = currentTurtle.position.clone();
 					nextPos.add(stepvec);
 					var nextRad = currentTurtle.scale.clone();
-					nextRad.addScalar(0.6180339887)
 
 					tubePoints.push(nextPos);
 					tubeRadii.push(nextRad);
 
-					stepvec = new THREE.Vector3(0,currentTurtle.scale.x*5.0*1.6180339887,0);
-					stepvec.applyQuaternion(currentTurtle.orientation);
+		//			var nextPos = currentTurtle.position.clone();
+		//			nextPos.add(stepvec);
+		//			var nextRad = currentTurtle.scale.clone();
 
-					var nextPos = currentTurtle.position.clone();
-					nextPos.add(stepvec);
-					var nextRad = currentTurtle.scale.clone();
-					nextRad.addScalar(0)
+//					tubePoints.push(nextPos);
+//					tubeRadii.push(nextRad);
 
-					tubePoints.push(nextPos);
-					tubeRadii.push(nextRad);
+
+//					stepvec = new THREE.Vector3(0,currentTurtle.scale.x*5.0*1.6180339887,0);
+//					stepvec.applyQuaternion(currentTurtle.orientation);
+
+//					var nextPos = currentTurtle.position.clone();
+//					nextPos.add(stepvec);
+//					var nextRad = new THREE.Vector3(0,0,0);
+
+//					tubePoints.push(nextPos);
+//					tubeRadii.push(nextRad);
 
 
 					if (tubePoints.length>1)
