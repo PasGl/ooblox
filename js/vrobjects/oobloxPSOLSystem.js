@@ -621,7 +621,8 @@ function PSOLSystem ()
 				var newURLstring = "?"+urlCallParametersList.join("&");
 				window.history.pushState({}, '', newURLstring);
 				//location.reload();
-				datFolder.destroy();
+				datFolder.children[1].remove(thismesh);
+				targetScene.remove( datFolder );
 			}
 		};
 		setFolder.add(obj2,'remove');
