@@ -321,23 +321,7 @@ function PSOLSystem ()
 					tubeRadii.push(currentTurtle.scale.clone());
 					break;
 				case "N":
-					/* if (tubePoints.length>1)
-					{
-						var tubeSpline =  new THREE.CatmullRomCurve3(tubePoints);
-						var tubeSplineRadii =  new THREE.CatmullRomCurve3(tubeRadii);
-						var tubeGeometry = new THREE.BBTubeGeometry(
-							tubeSpline,
-							tubeSplineRadii,
-							(tubePoints.length-1)*3,
-							conf.circleSegments,
-							false,
-							false);
-						finalGeometry.merge( tubeGeometry,tubeGeometry.matrix,0 );
-					}
-					tubePoints = [currentTurtle.position.clone()];
-					tubeRadii = [currentTurtle.scale.clone()]; */
-
-					var stepvec = new THREE.Vector3(0,currentTurtle.scale.x*2.0,0);
+					var stepvec = new THREE.Vector3(0,currentTurtle.scale.x*5.0,0);
 					stepvec.applyQuaternion(currentTurtle.orientation);
 
 					var nextPos = currentTurtle.position.clone();
@@ -347,36 +331,7 @@ function PSOLSystem ()
 					tubePoints.push(nextPos.clone());
 					tubeRadii.push(nextRad.clone());
 
-					stepvec = new THREE.Vector3(0,currentTurtle.scale.x*4.0,0);
-					stepvec.applyQuaternion(currentTurtle.orientation);
-
-					nextPos = currentTurtle.position.clone();
-					nextPos.add(stepvec);
-					nextRad = currentTurtle.scale.clone();
-
-					tubePoints.push(nextPos.clone());
-					tubeRadii.push(nextRad.clone());
-
-
-					stepvec = new THREE.Vector3(0,currentTurtle.scale.x*6.0,0);
-					stepvec.applyQuaternion(currentTurtle.orientation);
-
-					nextPos = currentTurtle.position.clone();
-					nextPos.add(stepvec);
-					nextRad = currentTurtle.scale.clone();
-
-					tubePoints.push(nextPos.clone());
-					tubeRadii.push(nextRad.clone());
-
-					stepvec = new THREE.Vector3(0,currentTurtle.scale.x*8.0,0);
-					stepvec.applyQuaternion(currentTurtle.orientation);
-
-					nextPos = currentTurtle.position.clone();
-					nextPos.add(stepvec);
-					nextRad = new THREE.Vector3(0.001,0.001,0.001);
-
-					tubePoints.push(nextPos.clone());
-					tubeRadii.push(nextRad.clone());
+			
 
 
 					if (tubePoints.length>1)
