@@ -18,10 +18,6 @@ var clock = new THREE.Clock();
 var loadcounter = 0;
 var totalModules = 0;
 
-// list for contructors and vrObjectTypeIDs, to which each module contributes one of each
-var vrObjectConstructorList = [];
-var importTypesAvailable = [];
-
 // for modules, to get their parameters from the URL query string
 var getURLargs = function (uname){
 	var allmodulArgs = window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
