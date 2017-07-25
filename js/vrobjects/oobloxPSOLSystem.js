@@ -323,6 +323,12 @@ function PSOLSystem ()
 				case "N":
 					var stepvec = new THREE.Vector3(0,currentTurtle.scale.x*5.0,0);
 					stepvec.applyQuaternion(currentTurtle.orientation);
+					currentTurtle.position.add(stepvec);
+					tubePoints.push(currentTurtle.position.clone());
+					tubeRadii.push(currentTurtle.scale.clone());
+
+					stepvec = new THREE.Vector3(0,currentTurtle.scale.x*5.0,0);
+					stepvec.applyQuaternion(currentTurtle.orientation);
 					tubePoints.push(currentTurtle.position.clone().add(stepvec));
 					tubeRadii.push(new THREE.Vector3(0,0,0));
 					if (tubePoints.length>1)
