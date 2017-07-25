@@ -36,11 +36,13 @@ A scene about algorithmic geometry, with a Torus Knot and a (not very good, yet)
 A scene with one instance of each Module.
 * http://51.15.67.244/demo
 
-## hosting
+## deployment & hosting
 
-git clone&pull from master to your webserver
+git clone from master to your webserver.
 
-nginx config snippet, that I use ... adjust accordingly:
+Nginx config snippet, that I use (adjust accordingly).
+The first entry is for gathering all available Modules automatically.
+The other entries are shortcuts for scenes.
 ```
         location ~ /js/vrobjects {
                 autoindex on;
