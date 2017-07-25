@@ -545,7 +545,7 @@ function PSOLSystem ()
 					specular: 0x333333,
 					shading: THREE.SmoothShading,
 					side: THREE.DoubleSide,
-					tansparent: true,
+					transparent: true,
 					map: (new THREE.TextureLoader().load( "images/foliage-template.png" )),
 					metalness: 0.1,
 					roughness: 0.32
