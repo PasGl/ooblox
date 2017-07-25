@@ -373,7 +373,7 @@ function PSOLSystem ()
 
 					nextPos = currentTurtle.position.clone();
 					nextPos.add(stepvec);
-					nextRad = new THREE.Vector3(0,0,0);
+					nextRad = new THREE.Vector3(0.001,0.001,0.001);
 
 					tubePoints.push(nextPos.clone());
 					tubeRadii.push(nextRad.clone());
