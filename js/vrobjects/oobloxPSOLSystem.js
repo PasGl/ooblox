@@ -109,24 +109,15 @@ function PSOLSystem ()
 		conf.rules.push(new PSOLRule("F","",0.02,"FF"));
 	}
 
- 	this.flower = function (turtle,params)
+ 	this.flower = function (turtle)
 	{
-		var paramList = params.split(",");
-		
-		var step = turtle.step;
-		
-		if (paramList.length>0) step = parseFloatDefault(paramList[0],step);
-
-//		var closingGeometry = new THREE.SphereGeometry(1,5,7,0,Math.PI*2,0,Math.PI*0.7);
-		var closingGeometry = new THREE.PlaneGeometry(step,step,1,1);
-
 		var tsx = turtle.scale.x * 10.0;
-
+		var closingGeometry = new THREE.PlaneGeometry(tsx*2.0,tsx*2.0,1,1);
 		var closingGeometryMatrix = new THREE.Matrix4 ();
 		closingGeometryMatrix.compose(
 			turtle.position.clone().add( (new THREE.Vector3( 0, tsx, 0 )).applyQuaternion(turtle.orientation)),
 			turtle.orientation.clone(),
-			(new THREE.Vector3( tsx*2.0, tsx*2.0, tsx*2.0 )));
+			(new THREE.Vector3( 1.0, 1.0, 1.0 )));
 		closingGeometry.applyMatrix(closingGeometryMatrix);
 		return closingGeometry;
 	}
@@ -341,7 +332,7 @@ function PSOLSystem ()
 					}
 					tubePoints = [];
 					tubeRadii = [];
-					var closingGeometry = flower(currentTurtle, params);
+					var closingGeometry = flower(currentTurtle);
 					finalGeometry.merge( closingGeometry,closingGeometry.matrix,1 );
 					break;
 				case "+":
