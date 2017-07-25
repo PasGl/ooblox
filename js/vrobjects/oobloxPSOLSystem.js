@@ -633,6 +633,8 @@ function PSOLSystem ()
 		matFolder.add(thismesh.material[0],'wireframe').name("Bark wireframe");
 		matFolder.add(thismesh.material[0],'wireframeLinewidth',1,20).name("Bark wire width").step(1);
 		matFolder.add(thismesh.material[1],'visible').name("Foliage visible");
+		matFolder.add(thismesh.material[1],'transparent').name("Foliage transparent");
+		matFolder.add(thismesh.material[1],'alphaTest',0.0,1.0).name("Foliage alpha threshold");
 		datFolder.addFolder(matFolder);
 
 		var remobj = {remove: function(){removeInstance(thismesh.uname);}};
