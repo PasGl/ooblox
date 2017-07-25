@@ -86,6 +86,11 @@ function PSOLSystem ()
 
 	this.mesh.vrObjectTypeID = "PLS";
 
+	var barktexture = new THREE.TextureLoader().load( "images/bark-template.png" );
+	var foliagetexture = new THREE.TextureLoader().load( "images/foliage-template.png" );
+	barktexture.wrapS = THREE.RepeatWrapping;
+	barktexture.wrapT = THREE.RepeatWrapping;
+
 	var PSOLGUIProperties = function ()
 	{
 		this.iterations = 4;
@@ -540,13 +545,7 @@ function PSOLSystem ()
 		var c1 = new THREE.Color(conf.initTurtle.primaryColor);
 		var c2 = new THREE.Color(conf.initTurtle.secondaryColor);
 		mesh.geometry = finalGeometry;
-
-		var barktexture = new THREE.TextureLoader().load( "images/bark-template.png" );
-		barktexture.wrapS = THREE.RepeatWrapping;
-		barktexture.wrapT = THREE.RepeatWrapping;
 		barktexture.repeat.set( -(conf.iterations + 1) , -2);
-		var foliagetexture = new THREE.TextureLoader().load( "images/foliage-template.png" )
-
 
 		mesh.material  = [new THREE.MeshStandardMaterial(
 				{
