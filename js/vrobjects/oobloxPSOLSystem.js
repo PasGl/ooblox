@@ -44,7 +44,6 @@ function PTurtle3D ()
 	this.gravityDelta = 0.03;
 	this.primaryColor = "#FFFFFF";//+("000000"+Math.floor(Math.random()*16777215).toString(16)).slice(-6);
 	this.secondaryColor = "#FFFFFF";//+("000000"+Math.floor(Math.random()*16777215).toString(16)).slice(-6);
-	this.tertiaryColor =  "#00FF00";//+("000000"+Math.floor(Math.random()*16777215).toString(16)).slice(-6);
 
 	this.rotate = function (axis,angle)
 	{
@@ -69,7 +68,6 @@ function PTurtle3D ()
 		newTurtle.gravityDelta = this.gravityDelta;
 		newTurtle.primaryColor = this.primaryColor;
 		newTurtle.secondaryColor = this.secondaryColor;
-		newTurtle.tertiaryColor = this.tertiaryColor;
 		return newTurtle;
 	}
 }
@@ -531,30 +529,28 @@ function PSOLSystem ()
 		this.finalVertexCount = finalGeometry.vertices.length;
 		var c1 = new THREE.Color(conf.initTurtle.primaryColor);
 		var c2 = new THREE.Color(conf.initTurtle.secondaryColor);
-		var c3 = new THREE.Color(conf.initTurtle.tertiaryColor);
 		mesh.geometry = finalGeometry;
-		mesh.material  = [new THREE.MeshPhongMaterial(
+		mesh.material  = [new THREE.MeshStandardMaterial(
 				{
 					color: c1.getHex(),
 					specular: 0x333333,
 					shading: THREE.SmoothShading,
-					map: (new THREE.TextureLoader().load( "images/bark-template.png" ))
+					map: (new THREE.TextureLoader().load( "images/bark-template.png" )),
+					metalness: 0.01,
+					roughness: 0.32
 				}),
-				new THREE.MeshPhongMaterial(
+				new THREE.MeshStandardMaterial(
 				{
 					color: c2.getHex(),
 					specular: 0x333333,
 					shading: THREE.SmoothShading,
 					side: THREE.DoubleSide,
-					map: (new THREE.TextureLoader().load( "images/foliage-template.png" ))
-				}),
-			 	new THREE.MeshPhongMaterial(
-				{
-					color: c3.getHex(),
-					specular: 0x333333,
-					shading: THREE.SmoothShading
+					tansparent: true,
+					map: (new THREE.TextureLoader().load( "images/foliage-template.png" )),
+					metalness: 0.1,
+					roughness: 0.32
 				})];
-
+new THREE.MeshStandardMaterial({metalness: 0.01, roughness: 0.32})
 	}
 	var finalize = this.finalize;
 
