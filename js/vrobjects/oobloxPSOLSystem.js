@@ -124,7 +124,7 @@ function PSOLSystem ()
 		closingGeometryMatrix.compose(
 			turtle.position.clone().add( (new THREE.Vector3( 0, step*0.5, 0 )).applyQuaternion(turtle.orientation)),
 			turtle.orientation.clone(),
-			turtle.scale.clone().multiplyScalar(step));
+			(new THREE.Vector3( 1, 1, 1 )));
 		closingGeometry.applyMatrix(closingGeometryMatrix);
 		return closingGeometry;
 	}
@@ -533,7 +533,8 @@ function PSOLSystem ()
 				{
 					color: c2.getHex(),
 					specular: 0x333333,
-					shading: THREE.SmoothShading
+					shading: THREE.SmoothShading,
+					side: THREE.DoubleSide
 				}),
 			 	new THREE.MeshPhongMaterial(
 				{
