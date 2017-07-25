@@ -571,6 +571,8 @@ function PSOLSystem ()
 	{
 
 		var datFolder = dat.GUIVR.create(thismesh.uname+' (PSOL-System)');
+console.log(dat.GUIVR);
+console.log(datFolder);
 		datFolder.position.set(thismesh.position.x+10,thismesh.position.y+10,thismesh.position.z);
 		datFolder.scale.set(10.0,10.0,0.1);
 		thismesh.position.set(-1.0,-1.0,0);
