@@ -547,7 +547,7 @@ function PSOLSystem ()
 					side: THREE.DoubleSide,
 					transparent: true,
 					map: (new THREE.TextureLoader().load( "images/foliage-template.png" )),
-					alphaTest: 0.5,
+					alphaTest: 0.8,
 					metalness: 0.1,
 					roughness: 0.32
 				})];
