@@ -599,31 +599,6 @@ function PSOLSystem ()
 		}};
 		setFolder.add(obj,'obj_and_stl').name('export');
 
-		var allmodulArgs=window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
-		var allmodulArgsList = allmodulArgs.split("&");
-		var indexInList = -1;
-		for (var i=0;i<allmodulArgsList.length;i++)
-		{
-			if (thismesh.uname === allmodulArgsList[i].substring(0, thismesh.uname.length))
-			{
-				indexInList = i;
-				break;
-			}
-		}
-		var obj2 = {
-			myIndex: indexInList,
-			remove: function()
-			{
-				updateMyURLArgs(targetScene,thismesh);
-				var allmodulArgs=window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
-				var urlCallParametersList = allmodulArgs.split("&");	
-				urlCallParametersList.splice(this.myIndex, 1);
-				var newURLstring = "?"+urlCallParametersList.join("&");
-				window.history.pushState({}, '', newURLstring);
-				location.reload();
-			}
-		};
-		setFolder.add(obj2,'remove');
 		datFolder.addFolder(setFolder);
 
 		var propFolder = dat.GUIVR.create('Properties');
@@ -660,9 +635,34 @@ function PSOLSystem ()
 		matFolder.add(thismesh.material[1],'visible').name("Foliage visible");
 		datFolder.addFolder(matFolder);
 
+		var allmodulArgs=window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
+		var allmodulArgsList = allmodulArgs.split("&");
+		var indexInList = -1;
+		for (var i=0;i<allmodulArgsList.length;i++)
+		{
+			if (thismesh.uname === allmodulArgsList[i].substring(0, thismesh.uname.length))
+			{
+				indexInList = i;
+				break;
+			}
+		}
+		var obj2 = {
+			myIndex: indexInList,
+			remove: function()
+			{
+				updateMyURLArgs(targetScene,thismesh);
+				var allmodulArgs=window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
+				var urlCallParametersList = allmodulArgs.split("&");	
+				urlCallParametersList.splice(this.myIndex, 1);
+				var newURLstring = "?"+urlCallParametersList.join("&");
+				window.history.pushState({}, '', newURLstring);
+				location.reload();
+			}
+		};
+		datFolder.add(obj2,'remove');
+
 		datFolder.children[1].add(thismesh);
 		targetScene.add( datFolder );
-		datFolder.close();
 		window.addEventListener("mouseup", function(){updateMyURLArgs(targetScene,thismesh);});
 	}
 
