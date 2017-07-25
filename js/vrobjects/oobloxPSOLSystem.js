@@ -622,11 +622,7 @@ console.log(datFolder);
 				urlCallParametersList.splice(this.myIndex, 1);
 				var newURLstring = "?"+urlCallParametersList.join("&");
 				window.history.pushState({}, '', newURLstring);
-				//location.reload();
-				datFolder.children[1].remove(thismesh);
-				dat.GUIVR.disableMouse();
-				targetScene.remove( datFolder );
-				dat.GUIVR.enableMouse( camera );
+				location.reload();
 			}
 		};
 		setFolder.add(obj2,'remove');
