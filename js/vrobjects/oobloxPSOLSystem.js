@@ -540,14 +540,23 @@ function PSOLSystem ()
 		var c1 = new THREE.Color(conf.initTurtle.primaryColor);
 		var c2 = new THREE.Color(conf.initTurtle.secondaryColor);
 		mesh.geometry = finalGeometry;
+
+		var barktexture = new THREE.TextureLoader().load( "images/bark-template.png" );
+		barktexture.wrapS = THREE.RepeatWrapping;
+		barktexture.wrapT = THREE.RepeatWrapping;
+		barktexture.repeat.set( 2, conf.iterations * 2 );
+		var foliagetexture = new THREE.TextureLoader().load( "images/foliage-template.png" )
+
+
 		mesh.material  = [new THREE.MeshStandardMaterial(
 				{
 					color: c1.getHex(),
 					specular: 0x333333,
 					shading: THREE.SmoothShading,
-					map: (new THREE.TextureLoader().load( "images/bark-template.png" )),
+					map: barktexture,
 					metalness: 0.01,
-					roughness: 0.32
+					roughness: 0.32,
+					
 				}),
 				new THREE.MeshStandardMaterial(
 				{
@@ -556,7 +565,7 @@ function PSOLSystem ()
 					shading: THREE.SmoothShading,
 					side: THREE.DoubleSide,
 					transparent: true,
-					map: (new THREE.TextureLoader().load( "images/foliage-template.png" )),
+					map: foliagetexture,
 					alphaTest: 0.2,
 					metalness: 0.1,
 					roughness: 0.32
