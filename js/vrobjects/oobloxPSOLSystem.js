@@ -327,7 +327,7 @@ function PSOLSystem ()
 					tubePoints.push(currentTurtle.position.clone().add(stepvec));
 					tubeRadii.push(currentTurtle.scale.clone().addScalar(0.6180339887));
 
-					tubePoints.push(currentTurtle.position.clone().add(stepvec*1.6180339887));
+					tubePoints.push(currentTurtle.position.clone().add(stepvec.addScalar(1.6180339887)));
 					tubeRadii.push(new THREE.Vector3(0,0,0));
 
 
