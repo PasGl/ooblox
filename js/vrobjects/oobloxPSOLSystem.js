@@ -636,7 +636,7 @@ function PSOLSystem ()
 		datFolder.addFolder(matFolder);
 
 		var remobj = {remove: function(){removeInstance(thismesh.uname);}};
-		datFolder.add(remobj,'remove');
+		datFolder.add(remobj,'remove').name(thismesh.uname);
 
 		datFolder.children[1].add(thismesh);
 		targetScene.add( datFolder );
