@@ -95,8 +95,8 @@ function PSOLSystem ()
 					color: "#FFFFFF",
 					shading: THREE.SmoothShading,
 					map: barktexture,
-					metalness: 0.01,
-					roughness: 0.32,
+					metalness: 0.0,
+					roughness: 0.9,
 					
 				}),
 				new THREE.MeshStandardMaterial(
