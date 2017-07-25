@@ -544,7 +544,7 @@ function PSOLSystem ()
 		var barktexture = new THREE.TextureLoader().load( "images/bark-template.png" );
 		barktexture.wrapS = THREE.RepeatWrapping;
 		barktexture.wrapT = THREE.RepeatWrapping;
-		barktexture.repeat.set( 2, conf.iterations 1 + 1);
+		barktexture.repeat.set( 2, conf.iterations + 1);
 		var foliagetexture = new THREE.TextureLoader().load( "images/foliage-template.png" )
 
 
