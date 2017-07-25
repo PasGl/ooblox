@@ -547,11 +547,10 @@ function PSOLSystem ()
 					side: THREE.DoubleSide,
 					transparent: true,
 					map: (new THREE.TextureLoader().load( "images/foliage-template.png" )),
-					alphaTest: 0.8,
+					alphaTest: 0.2,
 					metalness: 0.1,
 					roughness: 0.32
 				})];
-new THREE.MeshStandardMaterial({metalness: 0.01, roughness: 0.32})
 	}
 	var finalize = this.finalize;
 
