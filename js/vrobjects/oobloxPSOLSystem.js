@@ -111,16 +111,26 @@ function PSOLSystem ()
 	{
 		var tsx = turtle.scale.x * 15.0;
 		var closingGeometry = new THREE.PlaneGeometry(tsx*2.0,tsx*2.0,1,1);
-
-
-
-
 		var closingGeometryMatrix = new THREE.Matrix4 ();
 		closingGeometryMatrix.compose(
 			turtle.position.clone().add( (new THREE.Vector3( 0, tsx, 0 )).applyQuaternion(turtle.orientation)),
 			turtle.orientation.clone(),
 			(new THREE.Vector3( 1.0, 1.0, 1.0 )));
 		closingGeometry.applyMatrix(closingGeometryMatrix);
+
+		var secondquaternion = new THREE.Quaternion();
+		secondquaternion.setFromAxisAngle( new THREE.Vector3( 0, 1, 0 ), Math.PI / 2 );
+
+		var secondPlane = new THREE.PlaneGeometry(tsx*2.0,tsx*2.0,1,1);
+		var secondPlaneMatrix = new THREE.Matrix4 ();
+		secondPlaneMatrix.compose(
+			turtle.position.clone().add( (new THREE.Vector3( 0, tsx, 0 )).applyQuaternion(turtle.orientation)),
+			turtle.orientation.clone().multiply(secondquaternion),
+			(new THREE.Vector3( 1.0, 1.0, 1.0 )));
+		secondPlane.applyMatrix(secondPlaneMatrix);
+
+		closingGeometry.merge( secondPlane,secondPlane.matrix,0 );
+
 		return closingGeometry;
 	}
 	var flower = this.flower;
