@@ -337,7 +337,7 @@ function PSOLSystem ()
 					tubePoints = [currentTurtle.position.clone()];
 					tubeRadii = [currentTurtle.scale.clone()]; */
 
-					var stepvec = new THREE.Vector3(0,currentTurtle.scale.x*5.0,0);
+					var stepvec = new THREE.Vector3(0,currentTurtle.scale.x*2.0,0);
 					stepvec.applyQuaternion(currentTurtle.orientation);
 
 					var nextPos = currentTurtle.position.clone();
@@ -347,7 +347,7 @@ function PSOLSystem ()
 					tubePoints.push(nextPos.clone());
 					tubeRadii.push(nextRad.clone());
 
-					stepvec = new THREE.Vector3(0,currentTurtle.scale.x*5.0*1.6180339887,0);
+					stepvec = new THREE.Vector3(0,currentTurtle.scale.x*4.0,0);
 					stepvec.applyQuaternion(currentTurtle.orientation);
 
 					nextPos = currentTurtle.position.clone();
@@ -358,7 +358,7 @@ function PSOLSystem ()
 					tubeRadii.push(nextRad.clone());
 
 
-					stepvec = new THREE.Vector3(0,currentTurtle.scale.x*5.0*1.6180339887*1.6180339887,0);
+					stepvec = new THREE.Vector3(0,currentTurtle.scale.x*6.0,0);
 					stepvec.applyQuaternion(currentTurtle.orientation);
 
 					nextPos = currentTurtle.position.clone();
@@ -368,7 +368,7 @@ function PSOLSystem ()
 					tubePoints.push(nextPos.clone());
 					tubeRadii.push(nextRad.clone());
 
-					stepvec = new THREE.Vector3(0,currentTurtle.scale.x*5.0*1.6180339887*1.6180339887*1.6180339887,0);
+					stepvec = new THREE.Vector3(0,currentTurtle.scale.x*8.0,0);
 					stepvec.applyQuaternion(currentTurtle.orientation);
 
 					nextPos = currentTurtle.position.clone();
