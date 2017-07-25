@@ -39,18 +39,8 @@ oobloxMasterMenu = function ()
 			while (remsAdded<urlCallParametersList.length)
 			{		
 				var uname = urlCallParametersList[remsAdded].substring(0, urlCallParametersList[remsAdded].indexOf("="));
-				var obj = {	myIndex: remsAdded,
-						remove: function()
-						{
-							urlRefresh(targetScene);
-							allmodulArgs=window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
-							urlCallParametersList = allmodulArgs.split("&");	
-							urlCallParametersList.splice(this.myIndex, 1);
-							var newURLstring = "?"+urlCallParametersList.join("&");
-							window.history.pushState({}, '', newURLstring);
-							location.reload();
-						}};
-				remFolder.add(obj,'remove').name(uname);
+				var remobj = {myuname:uname, remove: function(){removeInstance(this.myuname);}};
+				remFolder.add(remobj,'remove').name(uname);;
 				remsAdded++;
 			}
 	
