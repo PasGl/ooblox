@@ -577,7 +577,6 @@ function PSOLSystem ()
 		thismesh.scale.set(0.1,0.1,10.0);
 
 		var setFolder = dat.GUIVR.create('Settings');
-
 		var iterationsSlider = setFolder.add(conf,'iterations',0,6).step(1);
 		iterationsSlider.onChange(function(){refresh(targetScene,thismesh);});
 		var axiomText = setFolder.add(conf,'axiom',["F","FN(1)"]);
@@ -627,6 +626,12 @@ function PSOLSystem ()
 		var gravityDeltaSlider = propFolder.add(conf.initTurtle,'gravityDelta',0.0001,0.5);
 		gravityDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
 		datFolder.addFolder(propFolder);
+
+		var matFolder = dat.GUIVR.create('Materials');
+		matFolder.add(thismesh.material,'visible');
+		matFolder.add(thismesh.material,'wireframe');
+		matFolder.add(thismesh.material,'wireframeLinewidth');
+		datFolder.addFolder(matFolder);
 
 		datFolder.children[1].add(thismesh);
 		targetScene.add( datFolder );
