@@ -43,7 +43,7 @@ function PTurtle3D ()
 	this.tropismDelta = 0.03;
 	this.gravityDelta = 0.03;
 	this.primaryColor = "#FFFFFF";//+("000000"+Math.floor(Math.random()*16777215).toString(16)).slice(-6);
-	this.secondaryColor = "#FF0000";//+("000000"+Math.floor(Math.random()*16777215).toString(16)).slice(-6);
+	this.secondaryColor = "#FFFFFF";//+("000000"+Math.floor(Math.random()*16777215).toString(16)).slice(-6);
 	this.tertiaryColor =  "#00FF00";//+("000000"+Math.floor(Math.random()*16777215).toString(16)).slice(-6);
 
 	this.rotate = function (axis,angle)
@@ -537,14 +537,16 @@ function PSOLSystem ()
 				{
 					color: c1.getHex(),
 					specular: 0x333333,
-					shading: THREE.SmoothShading
+					shading: THREE.SmoothShading,
+					map: (new THREE.TextureLoader().load( "images/bark-template.png" ));
 				}),
 				new THREE.MeshPhongMaterial(
 				{
 					color: c2.getHex(),
 					specular: 0x333333,
 					shading: THREE.SmoothShading,
-					side: THREE.DoubleSide
+					side: THREE.DoubleSide,
+					map: (new THREE.TextureLoader().load( "images/foliage-template.png" ));
 				}),
 			 	new THREE.MeshPhongMaterial(
 				{
