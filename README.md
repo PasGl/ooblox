@@ -3,42 +3,42 @@ ooblox
 
 ooblox is a browser-based 3D sandbox framework, with optional VR support, in its infancy.
 
-## why ?
+## Why ?
 
 I want to have a framework like this.
 
 It allows me to quickly develop and deploy 3D toys, experiments, visualizations, applications, etc. Having them all in a common framework means these 3D "things" can be combined and reused conveniently. The amount of time/work/code required to create a new kind of "thing" (a new Module/available object type) is significantly reduced by the framework.
 
-## demo
+## Demo
 
 Standard three.js OrbitControls:
 * Orbit - left mouse | touch: one finger move
 * Zoom - middle mouse, or mousewheel | touch: two finger spread or squish
 * Pan - right mouse, or arrow keys | touch: three finger swipe
 
-### sandbox scene
+### Sandbox scene
 
 A scene set up to serve as sandbox.
 * http://51.15.67.244/sandbox
 
-### guitar scene
+### Guitar scene
 
 A scene for guitar practise, with a metronome and a chord progression generator.
 * http://51.15.67.244/guitar
 
-### geometry scene
+### Geometry scene
 
 A scene about algorithmic geometry, with a Torus Knot and a (not very good, yet) L-System example.
 * http://51.15.67.244/geometry
 
-### dev-test scene
+### Dev-test scene
 
 A scene with one instance of each Module.
 * http://51.15.67.244/demo
 
-## deployment & hosting
+## Deployment & hosting
 
-git clone from master to your webserver.
+Git clone from master to your webserver.
 
 Nginx config snippet, that I use (adjust accordingly).
 The first entry is for gathering all available Modules automatically.
@@ -65,7 +65,7 @@ The other entries are shortcuts for scenes.
         }
 ```
 
-## contact
+## Contact
 
 * Discord | https://discord.gg/Ux52EYw
 * Patreon | https://www.patreon.com/PasGl
@@ -83,6 +83,6 @@ The other entries are shortcuts for scenes.
 * FileSaver.js | https://github.com/eligrey/FileSaver.js
 * jszip | https://github.com/Stuk/jszip
 
-## license
+## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
