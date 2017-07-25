@@ -624,7 +624,9 @@ console.log(datFolder);
 				window.history.pushState({}, '', newURLstring);
 				//location.reload();
 				datFolder.children[1].remove(thismesh);
+				dat.GUIVR.disableMouse();
 				targetScene.remove( datFolder );
+				dat.GUIVR.enableMouse( camera );
 			}
 		};
 		setFolder.add(obj2,'remove');
