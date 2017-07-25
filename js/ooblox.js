@@ -19,7 +19,7 @@ var loadcounter = 0;
 var totalModules = 0;
 
 // for modules, to get their parameters from the URL query string
-var getURLargs = function (uname){
+var getURLargs = function (uname) {
 	var allmodulArgs = window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
 	var allmodulArgsList = allmodulArgs.split("&");
 	var indexInList = -1;
@@ -52,6 +52,30 @@ var updateURLargs = function (argList) {
 	allmodulArgsList[indexInList] = thisModuleArgs[0] + "=" + thisModuleArgs.slice(1,thisModuleArgs.length).join("+");
 	var newURLstring = "?"+allmodulArgsList.join("&");
 	window.history.replaceState({}, '', newURLstring);
+}
+
+// for modules, to remove instances of modules
+var removeInstance = function (uname) {
+	var allmodulArgs=window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
+	var allmodulArgsList = allmodulArgs.split("&");
+	var indexInList = -1;
+	for (var i=0;i<allmodulArgsList.length;i++)
+	{
+		if (uname === allmodulArgsList[i].substring(0, uname.length))
+		{
+			indexInList = i;
+			break;
+		}
+	}
+	if (indexInList>-1)
+	{
+		var allmodulArgs=window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
+		var urlCallParametersList = allmodulArgs.split("&");	
+		urlCallParametersList.splice(indexInList, 1);
+		var newURLstring = "?"+urlCallParametersList.join("&");
+		window.history.pushState({}, '', newURLstring);
+		location.reload();
+	}
 }
 
 var bootVR = function ()
