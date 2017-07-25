@@ -620,7 +620,8 @@ function PSOLSystem ()
 				urlCallParametersList.splice(this.myIndex, 1);
 				var newURLstring = "?"+urlCallParametersList.join("&");
 				window.history.pushState({}, '', newURLstring);
-				location.reload();
+				//location.reload();
+				datFolder.destroy();
 			}
 		};
 		setFolder.add(obj2,'remove');
