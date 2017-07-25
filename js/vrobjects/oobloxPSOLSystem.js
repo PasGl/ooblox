@@ -104,7 +104,7 @@ function PSOLSystem ()
 					color: "#FFFFFF",
 					shading: THREE.SmoothShading,
 					side: THREE.DoubleSide,
-					transparent: true,
+					//transparent: true,
 					map: foliagetexture,
 					alphaTest: 0.2,
 					metalness: 0.1,
