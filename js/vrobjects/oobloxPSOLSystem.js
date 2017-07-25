@@ -575,45 +575,17 @@ function PSOLSystem ()
 		datFolder.scale.set(10.0,10.0,0.1);
 		thismesh.position.set(-1.0,-1.0,0);
 		thismesh.scale.set(0.1,0.1,10.0);
-		
-		var iterationsSlider = datFolder.add(conf,'iterations',0,6).step(1);
+
+		var setFolder = dat.GUIVR.create('Settings');
+
+		var iterationsSlider = setFolder.add(conf,'iterations',0,6).step(1);
 		iterationsSlider.onChange(function(){refresh(targetScene,thismesh);});
-
-		var axiomText = datFolder.add(conf,'axiom',["F","FN(1)"]);
+		var axiomText = setFolder.add(conf,'axiom',["F","FN(1)"]);
 		axiomText.onChange(function(){refresh(targetScene,thismesh);});
-		
-		var randomSeedSlider = datFolder.add(conf,'randomSeed',0,99999999).step(1);
+		var randomSeedSlider = setFolder.add(conf,'randomSeed',0,99999999).step(1);
 		randomSeedSlider.onChange(function(){refresh(targetScene,thismesh);});
-
-		var circleSegmentsSlider = datFolder.add(conf,'circleSegments',3,50).step(1);
+		var circleSegmentsSlider = setFolder.add(conf,'circleSegments',3,50).step(1);
 		circleSegmentsSlider.onChange(function(){refresh(targetScene,thismesh);});
-
-		var diameterSlider = datFolder.add(conf,'diameter',0.1,3.0);
-		diameterSlider.onChange(function(value) 
-		{
-			conf.initTurtle.scale.x=value;
-			conf.initTurtle.scale.y=value;
-			conf.initTurtle.scale.z=value;
-			refresh(targetScene,thismesh);
-		});
-
-		var stepSlider = datFolder.add(conf.initTurtle,'step',0.1,10.0);
-		stepSlider.onChange(function(){refresh(targetScene,thismesh);});
-		var angleSlider = datFolder.add(conf.initTurtle,'angle',0.001,1.5);
-		angleSlider.onChange(function(){refresh(targetScene,thismesh);});
-		var diameterDeltaSlider = datFolder.add(conf.initTurtle,'diameterDelta',0.0001,0.5);
-		diameterDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
-		var stepDeltaSlider = datFolder.add(conf.initTurtle,'stepDelta',0.0001,0.5);
-		stepDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
-		var tropismAngleSlider = datFolder.add(conf.initTurtle,'tropismAngle',0.001,1.5);
-		tropismAngleSlider.onChange(function(){refresh(targetScene,thismesh);});
-		var gravityAngleSlider = datFolder.add(conf.initTurtle,'gravityAngle',0.001,1.5);
-		gravityAngleSlider.onChange(function(){refresh(targetScene,thismesh);});
-		var tropismDeltaSlider = datFolder.add(conf.initTurtle,'tropismDelta',0.0001,0.5);
-		tropismDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
-		var gravityDeltaSlider = datFolder.add(conf.initTurtle,'gravityDelta',0.0001,0.5);
-		gravityDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
-
 		var obj = {obj_and_stl:function()
 		{
 			var zip = new JSZip();
@@ -626,7 +598,36 @@ function PSOLSystem ()
 			var content = zip.generate({type:"blob"});
 			saveAs(content, "PSOLSystem.zip");
 		}};
-		datFolder.add(obj,'obj_and_stl').name('export');
+		setFolder.add(obj,'obj_and_stl').name('export');
+		datFolder.addFolder(setFolder);
+
+		var propFolder = dat.GUIVR.create('Properties');
+		var diameterSlider = propFolder.add(conf,'diameter',0.1,3.0);
+		diameterSlider.onChange(function(value) 
+		{
+			conf.initTurtle.scale.x=value;
+			conf.initTurtle.scale.y=value;
+			conf.initTurtle.scale.z=value;
+			refresh(targetScene,thismesh);
+		});
+		var stepSlider = propFolder.add(conf.initTurtle,'step',0.1,10.0);
+		stepSlider.onChange(function(){refresh(targetScene,thismesh);});
+		var angleSlider = propFolder.add(conf.initTurtle,'angle',0.001,1.5);
+		angleSlider.onChange(function(){refresh(targetScene,thismesh);});
+		var diameterDeltaSlider = propFolder.add(conf.initTurtle,'diameterDelta',0.0001,0.5);
+		diameterDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
+		var stepDeltaSlider = propFolder.add(conf.initTurtle,'stepDelta',0.0001,0.5);
+		stepDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
+		var tropismAngleSlider = propFolder.add(conf.initTurtle,'tropismAngle',0.001,1.5);
+		tropismAngleSlider.onChange(function(){refresh(targetScene,thismesh);});
+		var gravityAngleSlider = propFolder.add(conf.initTurtle,'gravityAngle',0.001,1.5);
+		gravityAngleSlider.onChange(function(){refresh(targetScene,thismesh);});
+		var tropismDeltaSlider = propFolder.add(conf.initTurtle,'tropismDelta',0.0001,0.5);
+		tropismDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
+		var gravityDeltaSlider = propFolder.add(conf.initTurtle,'gravityDelta',0.0001,0.5);
+		gravityDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
+		datFolder.addFolder(propFolder);
+
 		datFolder.children[1].add(thismesh);
 		targetScene.add( datFolder );
 		datFolder.close();
