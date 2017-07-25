@@ -628,9 +628,12 @@ function PSOLSystem ()
 		datFolder.addFolder(propFolder);
 
 		var matFolder = dat.GUIVR.create('Materials');
-		matFolder.add(thismesh.material,'visible');
-		matFolder.add(thismesh.material,'wireframe');
-		matFolder.add(thismesh.material,'wireframeLinewidth');
+		matFolder.add(thismesh.material[0],'visible').name("Bark visible");
+		matFolder.add(thismesh.material[0],'wireframe').name("Bark wireframe");
+		matFolder.add(thismesh.material[0],'wireframeLinewidth').name("Bark wire width");
+		matFolder.add(thismesh.material[1],'visible').name("Foliage visible");
+		matFolder.add(thismesh.material[1],'wireframe').name("Foliage wireframe");
+		matFolder.add(thismesh.material[1],'wireframeLinewidth').name("Foliage wire width");
 		datFolder.addFolder(matFolder);
 
 		datFolder.children[1].add(thismesh);
