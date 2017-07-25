@@ -122,7 +122,7 @@ function PSOLSystem ()
 
 		var closingGeometryMatrix = new THREE.Matrix4 ();
 		closingGeometryMatrix.compose(
-			turtle.position.clone(),
+			turtle.position.clone().add( (new THREE.Vector3( 0, step, 0 )).applyQuaternion(turtle.orientation)),
 			turtle.orientation.clone(),
 			turtle.scale.clone().multiplyScalar(step));
 		closingGeometry.applyMatrix(closingGeometryMatrix);
