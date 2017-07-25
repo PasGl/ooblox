@@ -114,12 +114,12 @@ function PSOLSystem ()
 		var paramList = params.split(",");
 		
 		var step = turtle.step;
-		var petals = 5;
 		
 		if (paramList.length>0) step = parseFloatDefault(paramList[0],step);
-		if (paramList.length>1) petals = Math.round(parseFloatDefault(paramList[1],petals));
 
-		var closingGeometry = new THREE.SphereGeometry(1,5,7,0,Math.PI*2,0,Math.PI*0.7);
+//		var closingGeometry = new THREE.SphereGeometry(1,5,7,0,Math.PI*2,0,Math.PI*0.7);
+		var closingGeometry = new THREE.PlaneGeometry(1,1,1,1);
+
 		var closingGeometryMatrix = new THREE.Matrix4 ();
 		closingGeometryMatrix.compose(
 			turtle.position.clone(),
