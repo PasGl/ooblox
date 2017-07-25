@@ -118,13 +118,13 @@ function PSOLSystem ()
 		if (paramList.length>0) step = parseFloatDefault(paramList[0],step);
 
 //		var closingGeometry = new THREE.SphereGeometry(1,5,7,0,Math.PI*2,0,Math.PI*0.7);
-		var closingGeometry = new THREE.PlaneGeometry(1,1,1,1);
+		var closingGeometry = new THREE.PlaneGeometry(step,step,1,1);
 
 		var closingGeometryMatrix = new THREE.Matrix4 ();
 		closingGeometryMatrix.compose(
-			turtle.position.clone().add( (new THREE.Vector3( 0, step, 0 )).applyQuaternion(turtle.orientation)),
+			turtle.position.clone().add( (new THREE.Vector3( 0, step*0.5, 0 )).applyQuaternion(turtle.orientation)),
 			turtle.orientation.clone(),
-			turtle.scale.clone().multiplyScalar(step));
+			turtle.scale.clone());
 		closingGeometry.applyMatrix(closingGeometryMatrix);
 		return closingGeometry;
 	}
