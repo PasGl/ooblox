@@ -538,7 +538,7 @@ function PSOLSystem ()
 					color: c1.getHex(),
 					specular: 0x333333,
 					shading: THREE.SmoothShading,
-					map: (new THREE.TextureLoader().load( "images/bark-template.png" ));
+					map: (new THREE.TextureLoader().load( "images/bark-template.png" ))
 				}),
 				new THREE.MeshPhongMaterial(
 				{
@@ -546,7 +546,7 @@ function PSOLSystem ()
 					specular: 0x333333,
 					shading: THREE.SmoothShading,
 					side: THREE.DoubleSide,
-					map: (new THREE.TextureLoader().load( "images/foliage-template.png" ));
+					map: (new THREE.TextureLoader().load( "images/foliage-template.png" ))
 				}),
 			 	new THREE.MeshPhongMaterial(
 				{
