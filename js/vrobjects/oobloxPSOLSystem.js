@@ -111,8 +111,12 @@ function PSOLSystem ()
 
  	this.flower = function (turtle)
 	{
-		var tsx = turtle.scale.x * 10.0;
+		var tsx = turtle.scale.x * 15.0;
 		var closingGeometry = new THREE.PlaneGeometry(tsx*2.0,tsx*2.0,1,1);
+
+
+
+
 		var closingGeometryMatrix = new THREE.Matrix4 ();
 		closingGeometryMatrix.compose(
 			turtle.position.clone().add( (new THREE.Vector3( 0, tsx, 0 )).applyQuaternion(turtle.orientation)),
@@ -317,6 +321,10 @@ function PSOLSystem ()
 					tubeRadii.push(currentTurtle.scale.clone());
 					break;
 				case "N":
+					var stepvec = new THREE.Vector3(0,currentTurtle.scale.x*5.0,0);
+					stepvec.applyQuaternion(currentTurtle.orientation);
+					tubePoints.push(currentTurtle.position.clone().add(stepvec));
+					tubeRadii.push(new THREE.Vector3(0,0,0););
 					if (tubePoints.length>1)
 					{
 						var tubeSpline =  new THREE.CatmullRomCurve3(tubePoints);
