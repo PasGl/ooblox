@@ -85,7 +85,7 @@ oobloxTorusKnot = function ()
 		datFolder.addFolder(matFolder);
 
 		var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
-		datFolder.add(remobj,'remove');
+		datFolder.add(remobj,'remove').name(mesh.uname);
 
 		targetScene.add( datFolder );
 		datFolder.children[1].add(mesh);
