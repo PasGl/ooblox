@@ -104,7 +104,6 @@ function PSOLSystem ()
 					color: "#FFFFFF",
 					shading: THREE.SmoothShading,
 					side: THREE.DoubleSide,
-					transparent: true,
 					map: foliagetexture,
 					alphaTest: 0.2,
 					metalness: 0.1,
@@ -598,6 +597,7 @@ function PSOLSystem ()
 			saveAs(content, "PSOLSystem.zip");
 		}};
 		setFolder.add(obj,'obj_and_stl').name('export');
+
 		datFolder.addFolder(setFolder);
 
 		var propFolder = dat.GUIVR.create('Properties');
@@ -632,11 +632,15 @@ function PSOLSystem ()
 		matFolder.add(thismesh.material[0],'wireframe').name("Bark wireframe");
 		matFolder.add(thismesh.material[0],'wireframeLinewidth',1,20).name("Bark wire width").step(1);
 		matFolder.add(thismesh.material[1],'visible').name("Foliage visible");
+		matFolder.add(thismesh.material[1],'transparent').name("Foliage transparent");
+		matFolder.add(thismesh.material[1],'alphaTest',0.0,1.0).name("Foliage alpha threshold");
 		datFolder.addFolder(matFolder);
+
+		var remobj = {remove: function(){removeInstance(thismesh.uname);}};
+		datFolder.add(remobj,'remove').name(thismesh.uname);
 
 		datFolder.children[1].add(thismesh);
 		targetScene.add( datFolder );
-		datFolder.close();
 		window.addEventListener("mouseup", function(){updateMyURLArgs(targetScene,thismesh);});
 	}
 

@@ -4,7 +4,7 @@
 
 oobloxTorusKnot = function ()
 {
-	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 1), new THREE.MeshPhongMaterial({}));
+	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 1), new THREE.MeshStandardMaterial({metalness: 0.01,roughness: 0.3}));
 	this.mesh.receiveShadow = true;
 	this.mesh.castShadow = true;
 	this.mesh.vrObjectTypeID = "TTK";
@@ -59,20 +59,35 @@ oobloxTorusKnot = function ()
 		mesh.position.set(0.5,0.5,-100.0);
 		datFolder.scale.set(20.0,20.0,0.1);
 		mesh.scale.set(0.05,0.05,10.0);
-		var radiusSlider = datFolder.add(conf,'radius',0.0001,20);
+
+		var propFolder = dat.GUIVR.create('Properties');
+		var radiusSlider = propFolder.add(conf,'radius',0.0001,20);
 		radiusSlider.onChange(function(){refresh(targetScene);});
-		var tubeSlider = datFolder.add(conf,'tube',0.0001,2);
+		var tubeSlider = propFolder.add(conf,'tube',0.0001,2);
 		tubeSlider.onChange(function(){refresh(targetScene);});
-		var radialSegmentsSlider = datFolder.add(conf,'radialSegments',8,300).step(1);
+		var radialSegmentsSlider = propFolder.add(conf,'radialSegments',8,300).step(1);
 		radialSegmentsSlider.onChange(function(){refresh(targetScene);});
-		var tubularSegmentsSlider = datFolder.add(conf,'tubularSegments',3,32).step(1);
+		var tubularSegmentsSlider = propFolder.add(conf,'tubularSegments',3,32).step(1);
 		tubularSegmentsSlider.onChange(function(){refresh(targetScene);});
-		var pSlider = datFolder.add(conf,'p',0,32).step(1);
+		var pSlider = propFolder.add(conf,'p',0,32).step(1);
 		pSlider.onChange(function(){refresh(targetScene);});
-		var qSlider = datFolder.add(conf,'q',0,32).step(1);
+		var qSlider = propFolder.add(conf,'q',0,32).step(1);
 		qSlider.onChange(function(){refresh(targetScene);});
+		datFolder.addFolder(propFolder);
+
+		var matFolder = dat.GUIVR.create('Material');
+		matFolder.add(mesh.material,'visible');
+		matFolder.add(mesh.material,'wireframe');
+		matFolder.add(mesh.material,'wireframeLinewidth',1,20).name("wire width").step(1);
+		matFolder.add(mesh.material,'metalness',0.0,1.0);
+		matFolder.add(mesh.material,'roughness',0.0,1.0);
+		matFolder.add(mesh.material,'color');
+		datFolder.addFolder(matFolder);
+
+		var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
+		datFolder.add(remobj,'remove').name(mesh.uname);
+
 		targetScene.add( datFolder );
-		datFolder.close();
 		datFolder.children[1].add(mesh);
 		window.addEventListener("mouseup", function(){refreshURL(targetScene);});
 	}

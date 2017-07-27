@@ -39,18 +39,8 @@ oobloxMasterMenu = function ()
 			while (remsAdded<urlCallParametersList.length)
 			{		
 				var uname = urlCallParametersList[remsAdded].substring(0, urlCallParametersList[remsAdded].indexOf("="));
-				var obj = {	myIndex: remsAdded,
-						remove: function()
-						{
-							urlRefresh(targetScene);
-							allmodulArgs=window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
-							urlCallParametersList = allmodulArgs.split("&");	
-							urlCallParametersList.splice(this.myIndex, 1);
-							var newURLstring = "?"+urlCallParametersList.join("&");
-							window.history.pushState({}, '', newURLstring);
-							location.reload();
-						}};
-				remFolder.add(obj,'remove').name(uname);
+				var remobj = {myuname:uname, remove: function(){removeInstance(this.myuname);}};
+				remFolder.add(remobj,'remove').name(uname);;
 				remsAdded++;
 			}
 	
@@ -85,7 +75,7 @@ oobloxMasterMenu = function ()
 			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
 			var d = new Date();
 			var uname = "TK" + d.getTime();
-			var newhref = window.location.href + "&" + uname + "=TTK+" + posScaleRotString + "+9+0.7+240+7+"+Math.floor(Math.random() * 25)+"+"+Math.floor(Math.random() * 25);
+			var newhref = window.location.href + "&" + uname + "=TTK+" + posScaleRotString + "+6+0.4+240+7+"+Math.floor(Math.random() * 25)+"+"+Math.floor(Math.random() * 25);
 			window.history.pushState({}, '', newhref);
 			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("TTK")]();
 			importedThing.mesh.uname = uname;
