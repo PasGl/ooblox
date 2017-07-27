@@ -59,9 +59,7 @@ oobloxTorusKnot = function ()
 	this.mesh.fillDatGUI = function (targetScene)
 	{
 		var datFolder = dat.GUIVR.create(mesh.uname+' (Torus Knot)');
-		groupNode.position.copy(mesh.position);
-		mesh.position.set(0.0,0.0,0.0);
-		datFolder.position.copy(guioffset);
+		datFolder.position.copy(guioffset).add(mesh.position);
 		datFolder.scale.set(20.0,20.0,0.1);
 		//mesh.scale.set(0.05,0.05,10.0);
 
@@ -70,7 +68,7 @@ oobloxTorusKnot = function ()
 		radiusSlider.onChange(function(){refresh(targetScene);});
 		var tubeSlider = propFolder.add(conf,'tube',0.0001,2);
 		tubeSlider.onChange(function(){refresh(targetScene);});
-		var radialSegmentsSlider = propFolder.add(conf,'radialSegments',8,300).step(1);
+		var radialSegmentsSlider = propFolder.add(conf,'radialSegments',8,500).step(1);
 		radialSegmentsSlider.onChange(function(){refresh(targetScene);});
 		var tubularSegmentsSlider = propFolder.add(conf,'tubularSegments',3,32).step(1);
 		tubularSegmentsSlider.onChange(function(){refresh(targetScene);});
