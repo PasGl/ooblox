@@ -118,6 +118,8 @@ var bootVR = function ()
 			});
 		}
         });
+
+	
 }
 
 function init()
@@ -233,6 +235,15 @@ function init()
         infoDiv.appendChild(p);
 	container.appendChild(infoDiv);
 	// end of shameless self-promotion
+
+	document.addEventListener("keydown", onDocumentKeyDown, false);
+	function onDocumentKeyDown(event) {
+		console.log(event.which);
+		switch(event.which)
+		{
+			case 87:
+		}
+	};
 }
 
 function createCamera()
