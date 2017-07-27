@@ -18,6 +18,8 @@ var clock = new THREE.Clock();
 var loadcounter = 0;
 var totalModules = 0;
 
+var menusHidden = false;
+
 // for modules, to get their parameters from the URL query string
 getURLargs = function (uname) {
 	var allmodulArgs = window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
@@ -238,10 +240,11 @@ function init()
 
 	document.addEventListener("keydown", onDocumentKeyDown, false);
 	function onDocumentKeyDown(event) {
-		console.log(event.which);
 		switch(event.which)
 		{
-			case 87:
+			case 77:
+				menusHidden=!menusHidden;
+				showHideMenus();
 		}
 	};
 }
@@ -352,4 +355,11 @@ function animate()
 	}
 	
 	stats.update();
+}
+
+function showHideMenus()
+{
+	scene.traverse(function(obj) {
+		console.log(obj.type + ' ' + obj.name);
+	});
 }
