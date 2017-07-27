@@ -34,7 +34,7 @@ oobloxTorusKnot = function ()
 		targetScene.updateMatrixWorld();
 		position.setFromMatrixPosition( mesh.matrixWorld );
 		var guiposition = new THREE.Vector3();
-		guiposition.setFromMatrixPosition( groupNode[1].matrixWorld );
+		guiposition.setFromMatrixPosition( groupNode.children[1].matrixWorld );
 
 		if (conf.followGUI)
 		{
