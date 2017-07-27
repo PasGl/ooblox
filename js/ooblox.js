@@ -19,7 +19,7 @@ var loadcounter = 0;
 var totalModules = 0;
 
 // for modules, to get their parameters from the URL query string
-var getURLargs = function (uname) {
+getURLargs = function (uname) {
 	var allmodulArgs = window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
 	var allmodulArgsList = allmodulArgs.split("&");
 	var indexInList = -1;
@@ -36,7 +36,7 @@ var getURLargs = function (uname) {
 }
 
 // for modules, to write changes made in their gui back into the URL query string
-var updateURLargs = function (argList) {
+updateURLargs = function (argList) {
 	var allmodulArgs = window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
 	var allmodulArgsList = allmodulArgs.split("&");
 	var indexInList = -1;
@@ -55,7 +55,7 @@ var updateURLargs = function (argList) {
 }
 
 // for modules, to remove instances of modules
-var removeInstance = function (uname) {
+removeInstance = function (uname) {
 	var allmodulArgs=window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
 	var allmodulArgsList = allmodulArgs.split("&");
 	var indexInList = -1;
