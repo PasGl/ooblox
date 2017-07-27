@@ -48,9 +48,9 @@ oobloxTorusKnot = function ()
 
 		updateURLargs([	mesh.uname,
 				mesh.vrObjectTypeID,
-				position.x,
-				position.y,
-				position.z,
+				mesh.position.x,
+				mesh.position.y,
+				mesh.position.z,
 				conf.radius,
 				conf.tube,
 				conf.radialSegments,
