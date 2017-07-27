@@ -362,6 +362,7 @@ function showHideMenus()
 	scene.traverse(function(obj) {
 		if (obj.hasOwnProperty('beingMoved'))
 		{
+			console.log(obj);
 			obj.visible = !menusHidden;
 		}
 	});
