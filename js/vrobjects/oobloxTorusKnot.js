@@ -14,7 +14,7 @@ oobloxTorusKnot = function ()
 	groupNode.add(this.mesh);
 	var guioffset = new THREE.Vector3();
 
-	var datFolder = dat.GUIVR.create(mesh.uname+' (Torus Knot)');
+	var datFolder = dat.GUIVR.create('Torus Knot');
 	groupNode.add( datFolder );
 
 	var TorusKnotProperties = function ()
