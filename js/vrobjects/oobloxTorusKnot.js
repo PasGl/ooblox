@@ -12,7 +12,7 @@ oobloxTorusKnot = function ()
 
 	var groupNode = new THREE.Group();
 	groupNode.add(this.mesh);
-	var guioffset = new THREE.Vector3();
+	var guioffset = new THREE.Vector3(0,-2,4);
 
 	var TorusKnotProperties = function ()
 	{
