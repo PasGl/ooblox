@@ -21,16 +21,31 @@ oobloxTorusKnot = function ()
 		this.radialSegments = 200;
 		this.tubularSegments = 16;
 		this.p = 3;
-		this.q = 7;	
+		this.q = 7;
+		this.followGUI = true;	
 	}
 
 	var conf = new TorusKnotProperties();
 
 	var refreshURL = function (targetScene)
 	{
+
 		var position = new THREE.Vector3();
 		targetScene.updateMatrixWorld();
 		position.setFromMatrixPosition( mesh.matrixWorld );
+		var guiposition = new THREE.Vector3();
+		guiposition.setFromMatrixPosition( groupNode[1].matrixWorld );
+
+		if (conf.followGUI)
+		{
+			mesh.position.add(guiposition.subtract(guioffset));
+		}
+		else
+		{
+			guioffset.copy(guiposition.subtract(position));
+		}
+
+
 		updateURLargs([	mesh.uname,
 				mesh.vrObjectTypeID,
 				position.x,
@@ -62,6 +77,8 @@ oobloxTorusKnot = function ()
 		datFolder.position.copy(guioffset).add(mesh.position);
 		datFolder.scale.set(20.0,20.0,0.1);
 		//mesh.scale.set(0.05,0.05,10.0);
+
+		var followFlag = datFolder.add(conf,'followGUI');
 
 		var propFolder = dat.GUIVR.create('Properties');
 		var radiusSlider = propFolder.add(conf,'radius',0.0001,20);
