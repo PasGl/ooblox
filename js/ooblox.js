@@ -362,9 +362,9 @@ function showHideMenus()
 	scene.traverse(function(obj) {
 		if (obj.hasOwnProperty('beingMoved'))
 		{
+			console.log(obj);
 			if (obj.parent.name==="vrObjectGroup")
 			{
-				console.log(obj);
 				obj.visible = !menusHidden;
 			}
 		}
