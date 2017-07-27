@@ -38,7 +38,7 @@ oobloxTorusKnot = function ()
 
 		if (conf.followGUI)
 		{
-			mesh.position.add(guiposition.sub(guioffset));
+			mesh.position.copy(guiposition.sub(guioffset));
 		}
 		else
 		{
