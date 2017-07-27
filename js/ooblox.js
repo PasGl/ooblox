@@ -360,7 +360,6 @@ function animate()
 function showHideMenus()
 {
 	scene.traverse(function(obj) {
-		obj.hasOwnProperty('beingMoved')
-		console.log(obj);
+		if (obj.hasOwnProperty('beingMoved')) console.log(obj);
 	});
 }
