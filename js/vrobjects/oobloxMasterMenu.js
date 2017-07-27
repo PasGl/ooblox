@@ -75,7 +75,8 @@ oobloxMasterMenu = function ()
 			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
 			var d = new Date();
 			var uname = "TK" + d.getTime();
-			var newhref = window.location.href + "&" + uname + "=TTK+" + posScaleRotString + "+6+0.4+240+7+"+Math.floor(Math.random() * 25)+"+"+Math.floor(Math.random() * 25);
+			var newhref = window.location.href + "&" + uname + "=TTK+" + posScaleRotString + 
+				"+6+0.4+240+7+"+Math.floor(Math.random() * 25)+"+"+Math.floor(Math.random() * 25) +"+-10+-5+6;
 			window.history.pushState({}, '', newhref);
 			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("TTK")]();
 			importedThing.mesh.uname = uname;
