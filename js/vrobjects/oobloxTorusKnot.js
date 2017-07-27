@@ -12,7 +12,10 @@ oobloxTorusKnot = function ()
 
 	var groupNode = new THREE.Group();
 	groupNode.add(this.mesh);
-	var guioffset = new THREE.Vector3(-10,-5,6);
+	var guioffset = new THREE.Vector3();
+
+	var datFolder = dat.GUIVR.create(mesh.uname+' (Torus Knot)');
+	groupNode.add( datFolder );
 
 	var TorusKnotProperties = function ()
 	{
@@ -34,7 +37,7 @@ oobloxTorusKnot = function ()
 		targetScene.updateMatrixWorld();
 		position.setFromMatrixPosition( mesh.matrixWorld );
 		var guiposition = new THREE.Vector3();
-		guiposition.setFromMatrixPosition( groupNode.children[1].matrixWorld );
+		guiposition.setFromMatrixPosition( datFolder.matrixWorld );
 
 		if (conf.followGUI)
 		{
@@ -56,7 +59,10 @@ oobloxTorusKnot = function ()
 				conf.radialSegments,
 				conf.tubularSegments,
 				conf.p,
-				conf.q]);
+				conf.q,
+				guioffset.x,
+				guioffset.y,
+				guioffset.z]);
 	}
 
 	var refresh = function (targetScene)
@@ -73,7 +79,6 @@ oobloxTorusKnot = function ()
 	
 	this.mesh.fillDatGUI = function (targetScene)
 	{
-		var datFolder = dat.GUIVR.create(mesh.uname+' (Torus Knot)');
 		datFolder.position.copy(guioffset).add(mesh.position);
 		datFolder.scale.set(20.0,20.0,0.1);
 		//mesh.scale.set(0.05,0.05,10.0);
@@ -107,8 +112,6 @@ oobloxTorusKnot = function ()
 		var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
 		datFolder.add(remobj,'remove').name(mesh.uname);
 
-		groupNode.add( datFolder );
-
 		window.addEventListener("mouseup", function(){refreshURL(targetScene);});
 	}
 
@@ -125,6 +128,9 @@ oobloxTorusKnot = function ()
 		conf.tubularSegments = parseInt(argList[7]);
 		conf.p = parseInt(argList[8]);
 		conf.q = parseInt(argList[9]);
+		guioffset.x = parseFloat(argList[10]);
+		guioffset.y = parseFloat(argList[11]);
+		guioffset.z = parseFloat(argList[12]);
 		this.mesh.position.copy(position);
 		this.mesh.fillDatGUI(targetScene);
 		targetScene.add( groupNode );
