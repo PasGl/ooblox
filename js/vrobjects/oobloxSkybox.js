@@ -18,7 +18,11 @@ oobloxSkybox = function ()
 	this.mesh.skyboxSettings = {theme: "ThickCloudsWater"};
 	var skyboxSettings = this.mesh.skyboxSettings;
 
-	this.datFolder = null;
+	var gui = dat.GUIVR.create('SkyboxSet by Heiko Irrgang');
+
+	var groupNode = new THREE.Group();
+	groupNode.add(gui);
+	groupNode.name = "vrObjectGroup";
 
 	var mesh=this.mesh;
 	var color = this.mesh.material.color;
@@ -77,13 +81,11 @@ oobloxSkybox = function ()
 	
 	this.mesh.fillDatGUI = function (targetScene, camera)
 	{
-		var gui = dat.GUIVR.create('SkyboxSet by Heiko Irrgang');
 		gui.position.copy(mesh.position);
 		mesh.position.set(0,0,0);
 		gui.scale.set(20.0,20.0,0.1);
 		var themeChanger = gui.add(skyboxSettings,'theme',themenames);
 		themeChanger.onChange(function(value) {refresh(targetScene);});
-		targetScene.add( gui );
 		gui.children[1].add(mesh);
 		window.addEventListener("mouseup", function(){refreshURL(targetScene);});
 	}
@@ -102,6 +104,7 @@ oobloxSkybox = function ()
 			this.mesh.skyboxSettings.theme = chosenTheme;
 		}
 		this.mesh.fillDatGUI(targetScene, camera);
+		targetScene.add( groupNode );
 		refresh(targetScene);	
 	}
 }
