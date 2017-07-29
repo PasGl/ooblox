@@ -22,6 +22,14 @@ oobloxMetronome = function ()
 	var animT = 0.0;
 	var animStartTime = 0.0;
 
+	var groupNode = new THREE.Group();
+	groupNode.add(this.mesh);
+	groupNode.name = "vrObjectGroup";
+	var guioffset = new THREE.Vector3();
+
+	var datFolder = dat.GUIVR.create('Metronome');
+	groupNode.add( datFolder )
+
 	var listener = new THREE.AudioListener();
 	var audioLoader = new THREE.AudioLoader();
 	var tocksound = new THREE.PositionalAudio( listener );
@@ -78,18 +86,16 @@ oobloxMetronome = function ()
 	
 	this.mesh.fillDatGUI = function (targetScene)
 	{
-		var datFolder = dat.GUIVR.create('Metronome');
 		datFolder.position.copy(mesh.position);
 		datFolder.scale.set(20.0,20.0,0.1);
-		mesh.scale.set(0.05,0.05,10.0);
-		mesh.position.set(0.0,0.0,0.0);
+		//mesh.scale.set(0.05,0.05,10.0);
+		//mesh.position.set(0.0,0.0,0.0);
 		var bpmSlider = datFolder.add(conf,'BPM',1,300).step(1);
 		bpmSlider.onChange(function(){refresh(targetScene);});
 		var pauseSwitch = datFolder.add(conf,'pause');
 		pauseSwitch.onChange(function(){refresh(targetScene);});
-		datFolder.children[1].add(mesh);
-		targetScene.add( datFolder );
 		datFolder.close();
+		targetScene.add( groupNode );
 		refresh(targetScene);
 		window.addEventListener("mouseup", function(){urlRefresh(targetScene);})
 	}
