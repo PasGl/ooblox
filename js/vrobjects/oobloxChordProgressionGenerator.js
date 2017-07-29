@@ -15,6 +15,14 @@ oobloxChordProgressionGenerator = function ()
 	this.mesh.uname = "";
 	var mesh = this.mesh;
 
+	var groupNode = new THREE.Group();
+	groupNode.add(this.mesh);
+	groupNode.name = "vrObjectGroup";
+	var guioffset = new THREE.Vector3();
+
+	var datFolder = dat.GUIVR.create('Chord Progression');
+	groupNode.add( datFolder )
+
 	var CPGProperties = function ()
 	{
 		this.chords = ["C  ","Dm ","Em ","F  ","G  ","Am ","Bdim","Cmaj7","Dm7","Em7","Fmaj7","G7 ","Am7","Bm7b5","Csus2","Csus4","Dsus2","Dsus4","Esus4","Fsus2","Fsus4","Gsus2","Gsus4","Asus2","Asus4"];
@@ -46,6 +54,7 @@ oobloxChordProgressionGenerator = function ()
 					[0.01,0.01,0.01,0.01,0.01,0.51,0.005,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.0005,0.001,0.0005,0.001,0.001,0.0005,0.001,0.0005,0.001,0.0005,0.001], // from Asus2
 					[0.01,0.01,0.01,0.01,0.01,0.51,0.005,0.001,0.001,0.001,0.001,0.001,0.001,0.001,0.0005,0.001,0.0005,0.001,0.001,0.0005,0.001,0.0005,0.001,0.0005,0.001]];// from Asus4
 		this.position = new THREE.Vector3(0,0,0);
+		this.followGUI = true;	
 	}
 
 	var conf = new CPGProperties();
@@ -139,13 +148,28 @@ oobloxChordProgressionGenerator = function ()
 		var position = new THREE.Vector3();
 		targetScene.updateMatrixWorld();
 		position.setFromMatrixPosition( mesh.matrixWorld );
+		var guiposition = new THREE.Vector3();
+		guiposition.setFromMatrixPosition( datFolder.matrixWorld );
+
+		if (conf.followGUI)
+		{
+			mesh.position.copy(guiposition.sub(guioffset));
+		}
+		else
+		{
+			guioffset.copy(guiposition.sub(position));
+		}
+
 		updateURLargs([	mesh.uname,
 				mesh.vrObjectTypeID,
-				position.x,
-				position.y,
-				position.z,
+				mesh.position.x,
+				mesh.position.y,
+				mesh.position.z,
 				conf.bars,
-				conf.randomSeed]);
+				conf.randomSeed,
+				guioffset.x,
+				guioffset.y,
+				guioffset.z]);
 	}
 
 	var refresh = function (targetScene)
@@ -164,22 +188,15 @@ oobloxChordProgressionGenerator = function ()
 
 	this.mesh.fillDatGUI = function (targetScene,mesh)
 	{
-		var datFolder = dat.GUIVR.create('Chord Progression');
-
 		datFolder.position.set(conf.position.x-10,conf.position.y-5,conf.position.z);
 		datFolder.scale.set(20.0,20.0,0.1);
 		mesh.scale.set(0.05,0.05,10.0);
 		mesh.position.set(0.5,0.25,0);
 		var barsSlider = datFolder.add(conf,'bars',1,8).step(1);
 		barsSlider.onChange(function(){refresh(targetScene);});
-
-		var randomSeedSlider = datFolder.add(conf,'randomSeed',0,99999999).step(1); // Number.MAX_SAFE_INTEGER
+		var randomSeedSlider = datFolder.add(conf,'randomSeed',0,9999999999).step(1); // Number.MAX_SAFE_INTEGER
 		randomSeedSlider.onChange(function(){refresh(targetScene);});
-
-		datFolder.children[1].add(mesh);
-
-		targetScene.add( datFolder );
-		datFolder.close();
+		targetScene.add( groupNode );
 		window.addEventListener("mouseup", function(){refreshURL(targetScene);})
 	}
 
@@ -192,6 +209,9 @@ oobloxChordProgressionGenerator = function ()
 		conf.position.z = parseFloat(argList[3]);
 		conf.bars = parseInt(argList[4]);
 		conf.randomSeed = parseInt(argList[5]);
+		guioffset.x = parseFloat(argList[6]);
+		guioffset.y = parseFloat(argList[7]);
+		guioffset.z = parseFloat(argList[8]);
 		this.mesh.position.copy(conf.position);
 		this.mesh.fillDatGUI(targetScene,this.mesh);
 		refresh(targetScene);
