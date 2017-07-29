@@ -86,6 +86,14 @@ function PSOLSystem ()
 
 	this.mesh.vrObjectTypeID = "PLS";
 
+	var groupNode = new THREE.Group();
+	groupNode.add(this.mesh);
+	groupNode.name = "vrObjectGroup";
+	var guioffset = new THREE.Vector3();
+
+	var datFolder = dat.GUIVR.create(thismesh.uname+' (PSOL-System)');
+	groupNode.add( datFolder );
+
 	var barktexture = new THREE.TextureLoader().load( "images/bark-template.png" );
 	var foliagetexture = new THREE.TextureLoader().load( "images/foliage-template.png" );
 	barktexture.wrapS = THREE.RepeatWrapping;
@@ -121,6 +129,7 @@ function PSOLSystem ()
 		this.diameter = 0.5;
 		this.circleSegments = 5;
 		this.initTurtle = new PTurtle3D ();
+		this.followGUI = true;	
 	};
 
 	var conf = new PSOLGUIProperties();
@@ -568,12 +577,9 @@ function PSOLSystem ()
 
 	this.fillGUI = function (targetScene,thismesh)
 	{
-
-		var datFolder = dat.GUIVR.create(thismesh.uname+' (PSOL-System)');
-		datFolder.position.set(thismesh.position.x+10,thismesh.position.y+10,thismesh.position.z);
+		datFolder.position.copy(guioffset).add(thismesh.position);
 		datFolder.scale.set(10.0,10.0,0.1);
-		thismesh.position.set(-1.0,-1.0,0);
-		thismesh.scale.set(0.1,0.1,10.0);
+		var followFlag = datFolder.add(conf,'followGUI');
 
 		var setFolder = dat.GUIVR.create('Settings');
 		var iterationsSlider = setFolder.add(conf,'iterations',0,6).step(1);
@@ -639,22 +645,33 @@ function PSOLSystem ()
 		var remobj = {remove: function(){removeInstance(thismesh.uname);}};
 		datFolder.add(remobj,'remove').name(thismesh.uname);
 
-		datFolder.children[1].add(thismesh);
-		targetScene.add( datFolder );
+		targetScene.add( groupNode );
 		window.addEventListener("mouseup", function(){updateMyURLArgs(targetScene,thismesh);});
 	}
 
 
 	this.updateMyURLArgs = function (targetScene,thismesh)
 	{
+
 		var position = new THREE.Vector3();
 		targetScene.updateMatrixWorld();
 		position.setFromMatrixPosition( thismesh.matrixWorld );
+		var guiposition = new THREE.Vector3();
+		guiposition.setFromMatrixPosition( datFolder.matrixWorld );
+		if (conf.followGUI)
+		{
+			thismesh.position.copy(guiposition.sub(guioffset));
+		}
+		else
+		{
+			guioffset.copy(guiposition.sub(position));
+		}
+
 		updateURLargs([	thismesh.uname,
 				thismesh.vrObjectTypeID,
-				position.x,
-				position.y,
-				position.z,
+				thismesh.position.x,
+				thismesh.position.y,
+				thismesh.position.z,
 				conf.iterations,
 				conf.axiom,
 				conf.randomSeed,
@@ -667,7 +684,10 @@ function PSOLSystem ()
 				conf.initTurtle.tropismAngle,
 				conf.initTurtle.gravityAngle,
 				conf.initTurtle.tropismDelta,
-				conf.initTurtle.gravityDelta]);
+				conf.initTurtle.gravityDelta,
+				guioffset.x,
+				guioffset.y,
+				guioffset.z]);
 	}
 	var updateMyURLArgs = this.updateMyURLArgs;
 
@@ -699,6 +719,9 @@ function PSOLSystem ()
 		conf.initTurtle.gravityAngle = parseFloat(argList[14]);
 		conf.initTurtle.tropismDelta = parseFloat(argList[15]);
 		conf.initTurtle.gravityDelta = parseFloat(argList[16]);
+		guioffset.x = parseFloat(argList[17]);
+		guioffset.y = parseFloat(argList[18]);
+		guioffset.z = parseFloat(argList[19]);
 		conf.initTurtle.scale = new THREE.Vector3(conf.diameter,conf.diameter,conf.diameter);
 		this.mesh.position.copy(position);
 		this.initPresetRandom();
