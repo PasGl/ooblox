@@ -91,7 +91,7 @@ function PSOLSystem ()
 	groupNode.name = "vrObjectGroup";
 	var guioffset = new THREE.Vector3();
 
-	var datFolder = dat.GUIVR.create(thismesh.uname+' (PSOL-System)');
+	var datFolder = dat.GUIVR.create("PS0L-System");
 	groupNode.add( datFolder );
 
 	var barktexture = new THREE.TextureLoader().load( "images/bark-template.png" );
