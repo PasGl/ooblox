@@ -18,6 +18,8 @@ var clock = new THREE.Clock();
 var loadcounter = 0;
 var totalModules = 0;
 
+var menusHidden = false;
+
 // for modules, to get their parameters from the URL query string
 getURLargs = function (uname) {
 	var allmodulArgs = window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
@@ -118,6 +120,8 @@ var bootVR = function ()
 			});
 		}
         });
+
+	
 }
 
 function init()
@@ -233,6 +237,16 @@ function init()
         infoDiv.appendChild(p);
 	container.appendChild(infoDiv);
 	// end of shameless self-promotion
+
+	document.addEventListener("keydown", onDocumentKeyDown, false);
+	function onDocumentKeyDown(event) {
+		switch(event.which)
+		{
+			case 77:
+				menusHidden=!menusHidden;
+				showHideMenus();
+		}
+	};
 }
 
 function createCamera()
@@ -341,4 +355,17 @@ function animate()
 	}
 	
 	stats.update();
+}
+
+function showHideMenus()
+{
+	scene.traverse(function(obj) {
+		if (obj.hasOwnProperty('beingMoved'))
+		{
+			if (obj.parent.name==="vrObjectGroup")
+			{
+				obj.visible = !menusHidden;
+			}
+		}
+	});
 }

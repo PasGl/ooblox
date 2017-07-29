@@ -15,6 +15,12 @@ oobloxMasterMenu = function ()
 	var remFolder;
 	var remsAdded=0;
 
+	var datFolder = dat.GUIVR.create('ooblox sandbox Menu');
+
+	var groupNode = new THREE.Group();
+	groupNode.add(datFolder);
+	groupNode.name = "vrObjectGroup";
+
 	var urlRefresh = function (targetScene)
 	{
 		var position = new THREE.Vector3();
@@ -49,8 +55,6 @@ oobloxMasterMenu = function ()
 	
 	this.mesh.fillDatGUI = function (targetScene, camera)
 	{
-		mesh.geometry.computeBoundingBox();
-		var datFolder = dat.GUIVR.create('ooblox sandbox Menu');
 		datFolder.position.copy(mesh.position);
 		mesh.position.x=0;
 		mesh.position.y=0;
@@ -75,7 +79,8 @@ oobloxMasterMenu = function ()
 			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
 			var d = new Date();
 			var uname = "TK" + d.getTime();
-			var newhref = window.location.href + "&" + uname + "=TTK+" + posScaleRotString + "+6+0.4+240+7+"+Math.floor(Math.random() * 25)+"+"+Math.floor(Math.random() * 25);
+			var newhref = window.location.href + "&" + uname + "=TTK+" + posScaleRotString + 
+				"+6+0.4+240+7+"+Math.floor(Math.random() * 25)+"+"+Math.floor(Math.random() * 25) +"+-10+-5+6";
 			window.history.pushState({}, '', newhref);
 			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("TTK")]();
 			importedThing.mesh.uname = uname;
@@ -92,7 +97,7 @@ oobloxMasterMenu = function ()
 			var uname = "PSOL" + d.getTime();
 			var newhref = window.location.href + "&" + uname + "=PLS+" + posScaleRotString + "+3+FN(1)+"+Math.floor(Math.random() * 99999999)+
 				"+5+"+(0.4+(0.6*Math.random()))+"+"+(2.0+(3.0*Math.random()))+"+"+(0.1+(0.6*Math.random()))+"+"+(0.2+(0.3*Math.random()))+
-				"+"+(0.2+(0.3*Math.random()))+"+"+(0.6*Math.random())+"+"+(0.6*Math.random())+"+"+(0.0001+(0.4*Math.random()))+"+"+(0.0001+(0.4*Math.random()));
+				"+"+(0.2+(0.3*Math.random()))+"+"+(0.6*Math.random())+"+"+(0.6*Math.random())+"+"+(0.0001+(0.4*Math.random()))+"+"+(0.0001+(0.4*Math.random()))+"+5+5+0";
 			window.history.pushState({}, '', newhref);
 			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("PLS")]();
 			importedThing.mesh.uname = uname;
@@ -107,7 +112,7 @@ oobloxMasterMenu = function ()
 			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
 			var d = new Date();
 			var uname = "CPG" + d.getTime();
-			var newhref = window.location.href + "&" + uname + "=CPG+" + posScaleRotString + "+4+" +  Math.floor(Math.random() * 99999999);
+			var newhref = window.location.href + "&" + uname + "=CPG+" + posScaleRotString + "+4+" +  Math.floor(Math.random() * 99999999) +"+-10+-5+0";
 			window.history.pushState({}, '', newhref);
 			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("CPG")]();
 			importedThing.mesh.uname = uname;
@@ -122,7 +127,7 @@ oobloxMasterMenu = function ()
 			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
 			var d = new Date();
 			var uname = "MET" + d.getTime();
-			var newhref = window.location.href + "&" + uname + "=MET+" + posScaleRotString + "+128+true";
+			var newhref = window.location.href + "&" + uname + "=MET+" + posScaleRotString + "+128+true+0+0+0";
 			window.history.pushState({}, '', newhref);
 			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("MET")]();
 			importedThing.mesh.uname = uname;
@@ -133,7 +138,7 @@ oobloxMasterMenu = function ()
 		datFolder.addFolder(rezFolder);
 		datFolder.children[1].add(mesh);
 		datFolder.children[1].add(indicator);
-		targetScene.add( datFolder );
+		targetScene.add( groupNode );
 		datFolder.close();
 		window.addEventListener("mouseup", function(){urlRefresh(targetScene);});
 	}

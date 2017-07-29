@@ -10,6 +10,14 @@ oobloxTorusKnot = function ()
 	this.mesh.vrObjectTypeID = "TTK";
 	var mesh=this.mesh;
 
+	var groupNode = new THREE.Group();
+	groupNode.add(this.mesh);
+	groupNode.name = "vrObjectGroup";
+	var guioffset = new THREE.Vector3();
+
+	var datFolder = dat.GUIVR.create('Torus Knot');
+	groupNode.add( datFolder );
+
 	var TorusKnotProperties = function ()
 	{
 		this.radius = 5;
@@ -17,27 +25,45 @@ oobloxTorusKnot = function ()
 		this.radialSegments = 200;
 		this.tubularSegments = 16;
 		this.p = 3;
-		this.q = 7;	
+		this.q = 7;
+		this.followGUI = true;	
 	}
 
 	var conf = new TorusKnotProperties();
 
 	var refreshURL = function (targetScene)
 	{
+
 		var position = new THREE.Vector3();
 		targetScene.updateMatrixWorld();
 		position.setFromMatrixPosition( mesh.matrixWorld );
+		var guiposition = new THREE.Vector3();
+		guiposition.setFromMatrixPosition( datFolder.matrixWorld );
+
+		if (conf.followGUI)
+		{
+			mesh.position.copy(guiposition.sub(guioffset));
+		}
+		else
+		{
+			guioffset.copy(guiposition.sub(position));
+		}
+
+
 		updateURLargs([	mesh.uname,
 				mesh.vrObjectTypeID,
-				position.x,
-				position.y,
-				position.z,
+				mesh.position.x,
+				mesh.position.y,
+				mesh.position.z,
 				conf.radius,
 				conf.tube,
 				conf.radialSegments,
 				conf.tubularSegments,
 				conf.p,
-				conf.q]);
+				conf.q,
+				guioffset.x,
+				guioffset.y,
+				guioffset.z]);
 	}
 
 	var refresh = function (targetScene)
@@ -54,18 +80,18 @@ oobloxTorusKnot = function ()
 	
 	this.mesh.fillDatGUI = function (targetScene)
 	{
-		var datFolder = dat.GUIVR.create(mesh.uname+' (Torus Knot)');
-		datFolder.position.set(mesh.position.x-10,mesh.position.y-10,mesh.position.z+10);
-		mesh.position.set(0.5,0.5,-100.0);
+		datFolder.position.copy(guioffset).add(mesh.position);
 		datFolder.scale.set(20.0,20.0,0.1);
-		mesh.scale.set(0.05,0.05,10.0);
+		//mesh.scale.set(0.05,0.05,10.0);
+
+		var followFlag = datFolder.add(conf,'followGUI');
 
 		var propFolder = dat.GUIVR.create('Properties');
 		var radiusSlider = propFolder.add(conf,'radius',0.0001,20);
 		radiusSlider.onChange(function(){refresh(targetScene);});
 		var tubeSlider = propFolder.add(conf,'tube',0.0001,2);
 		tubeSlider.onChange(function(){refresh(targetScene);});
-		var radialSegmentsSlider = propFolder.add(conf,'radialSegments',8,300).step(1);
+		var radialSegmentsSlider = propFolder.add(conf,'radialSegments',8,500).step(1);
 		radialSegmentsSlider.onChange(function(){refresh(targetScene);});
 		var tubularSegmentsSlider = propFolder.add(conf,'tubularSegments',3,32).step(1);
 		tubularSegmentsSlider.onChange(function(){refresh(targetScene);});
@@ -87,8 +113,6 @@ oobloxTorusKnot = function ()
 		var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
 		datFolder.add(remobj,'remove').name(mesh.uname);
 
-		targetScene.add( datFolder );
-		datFolder.children[1].add(mesh);
 		window.addEventListener("mouseup", function(){refreshURL(targetScene);});
 	}
 
@@ -105,8 +129,12 @@ oobloxTorusKnot = function ()
 		conf.tubularSegments = parseInt(argList[7]);
 		conf.p = parseInt(argList[8]);
 		conf.q = parseInt(argList[9]);
+		guioffset.x = parseFloat(argList[10]);
+		guioffset.y = parseFloat(argList[11]);
+		guioffset.z = parseFloat(argList[12]);
 		this.mesh.position.copy(position);
 		this.mesh.fillDatGUI(targetScene);
+		targetScene.add( groupNode );
 		refresh(targetScene);	
 	}
 }
