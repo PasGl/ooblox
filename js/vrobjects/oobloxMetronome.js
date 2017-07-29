@@ -43,6 +43,7 @@ oobloxMetronome = function ()
 	{
 		this.BPM = 128.0;
 		this.pause = false;
+		this.followGUI = true;
 	};
 	var conf = new MetronomeProperties();
 
@@ -51,13 +52,28 @@ oobloxMetronome = function ()
 		var position = new THREE.Vector3();
 		targetScene.updateMatrixWorld();
 		position.setFromMatrixPosition( mesh.matrixWorld );
+		var guiposition = new THREE.Vector3();
+		guiposition.setFromMatrixPosition( datFolder.matrixWorld );
+
+		if (conf.followGUI)
+		{
+			mesh.position.copy(guiposition.sub(guioffset));
+		}
+		else
+		{
+			guioffset.copy(guiposition.sub(position));
+		}
+
 		updateURLargs([	mesh.uname,
 				mesh.vrObjectTypeID,
-				position.x,
-				position.y,
-				position.z,
+				mesh.position.x,
+				mesh.position.y,
+				mesh.position.z,
 				conf.BPM,
-				conf.pause.toString()]);
+				conf.pause.toString(),
+				guioffset.x,
+				guioffset.y,
+				guioffset.z]);
 	}
 
 	var refresh = function (targetScene)
@@ -88,8 +104,7 @@ oobloxMetronome = function ()
 	{
 		datFolder.position.copy(mesh.position);
 		datFolder.scale.set(20.0,20.0,0.1);
-		//mesh.scale.set(0.05,0.05,10.0);
-		//mesh.position.set(0.0,0.0,0.0);
+		var followFlag = datFolder.add(conf,'followGUI');
 		var bpmSlider = datFolder.add(conf,'BPM',1,300).step(1);
 		bpmSlider.onChange(function(){refresh(targetScene);});
 		var pauseSwitch = datFolder.add(conf,'pause');
@@ -114,6 +129,9 @@ oobloxMetronome = function ()
 		position.z = parseFloat(argList[3]);
 		conf.BPM = parseFloat(argList[4]);
 		conf.pause = Boolean(argList[5]=="true");
+		guioffset.x = parseFloat(argList[6]);
+		guioffset.y = parseFloat(argList[7]);
+		guioffset.z = parseFloat(argList[8]);
 		mesh.add( tocksound );
 		mesh.position.copy(position);
 		camera.add( listener );
