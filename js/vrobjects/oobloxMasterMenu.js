@@ -112,7 +112,7 @@ oobloxMasterMenu = function ()
 			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
 			var d = new Date();
 			var uname = "CPG" + d.getTime();
-			var newhref = window.location.href + "&" + uname + "=CPG+" + posScaleRotString + "+4+" +  Math.floor(Math.random() * 99999999) +"+0+-4+0";
+			var newhref = window.location.href + "&" + uname + "=CPG+" + posScaleRotString + "+4+" +  Math.floor(Math.random() * 99999999) +"+-10+-5+0";
 			window.history.pushState({}, '', newhref);
 			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("CPG")]();
 			importedThing.mesh.uname = uname;
