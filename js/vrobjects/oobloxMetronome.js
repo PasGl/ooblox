@@ -92,7 +92,6 @@ oobloxMetronome = function ()
 				var now = Date.now();
 				animT += ((now - animStartTime) /  (60000.0/conf.BPM));
 				animStartTime = now;
-				//console.log(animT);
 				if (tickortock)	mesh.rotation.z = Math.sin(animT*1.0*Math.PI);
 				else mesh.rotation.z = -Math.sin(animT*1.0*Math.PI);
 			}
@@ -109,7 +108,6 @@ oobloxMetronome = function ()
 		bpmSlider.onChange(function(){refresh(targetScene);});
 		var pauseSwitch = datFolder.add(conf,'pause');
 		pauseSwitch.onChange(function(){refresh(targetScene);});
-		datFolder.close();
 		targetScene.add( groupNode );
 		refresh(targetScene);
 		window.addEventListener("mouseup", function(){urlRefresh(targetScene);})
