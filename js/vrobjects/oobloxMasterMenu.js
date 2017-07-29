@@ -15,6 +15,12 @@ oobloxMasterMenu = function ()
 	var remFolder;
 	var remsAdded=0;
 
+	var datFolder = dat.GUIVR.create('ooblox sandbox Menu');
+
+	var groupNode = new THREE.Group();
+	groupNode.add(datFolder);
+	groupNode.name = "vrObjectGroup";
+
 	var urlRefresh = function (targetScene)
 	{
 		var position = new THREE.Vector3();
@@ -49,8 +55,6 @@ oobloxMasterMenu = function ()
 	
 	this.mesh.fillDatGUI = function (targetScene, camera)
 	{
-		mesh.geometry.computeBoundingBox();
-		var datFolder = dat.GUIVR.create('ooblox sandbox Menu');
 		datFolder.position.copy(mesh.position);
 		mesh.position.x=0;
 		mesh.position.y=0;
@@ -134,7 +138,7 @@ oobloxMasterMenu = function ()
 		datFolder.addFolder(rezFolder);
 		datFolder.children[1].add(mesh);
 		datFolder.children[1].add(indicator);
-		targetScene.add( datFolder );
+		targetScene.add( groupNode );
 		datFolder.close();
 		window.addEventListener("mouseup", function(){urlRefresh(targetScene);});
 	}
