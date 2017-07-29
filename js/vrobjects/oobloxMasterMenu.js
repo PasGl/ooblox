@@ -123,7 +123,7 @@ oobloxMasterMenu = function ()
 			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
 			var d = new Date();
 			var uname = "MET" + d.getTime();
-			var newhref = window.location.href + "&" + uname + "=MET+" + posScaleRotString + "+128+true";
+			var newhref = window.location.href + "&" + uname + "=MET+" + posScaleRotString + "+128+true+0+0+0";
 			window.history.pushState({}, '', newhref);
 			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("MET")]();
 			importedThing.mesh.uname = uname;
