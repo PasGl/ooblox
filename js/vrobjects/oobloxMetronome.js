@@ -101,7 +101,7 @@ oobloxMetronome = function ()
 	
 	this.mesh.fillDatGUI = function (targetScene)
 	{
-		datFolder.position.copy(mesh.position);
+		datFolder.position.copy(guioffset).add(mesh.position);
 		datFolder.scale.set(20.0,20.0,0.1);
 		var followFlag = datFolder.add(conf,'followGUI');
 		var bpmSlider = datFolder.add(conf,'BPM',1,300).step(1);
