@@ -188,10 +188,9 @@ oobloxChordProgressionGenerator = function ()
 
 	this.mesh.fillDatGUI = function (targetScene,mesh)
 	{
-		datFolder.position.set(conf.position.x-10,conf.position.y-5,conf.position.z);
+		datFolder.position.copy(guioffset).add(mesh.position);
 		datFolder.scale.set(20.0,20.0,0.1);
-		mesh.scale.set(0.05,0.05,10.0);
-		mesh.position.set(0.5,0.25,0);
+		var followFlag = datFolder.add(conf,'followGUI');
 		var barsSlider = datFolder.add(conf,'bars',1,8).step(1);
 		barsSlider.onChange(function(){refresh(targetScene);});
 		var randomSeedSlider = datFolder.add(conf,'randomSeed',0,9999999999).step(1); // Number.MAX_SAFE_INTEGER
