@@ -100,7 +100,7 @@ oobloxTexturePanel = function ()
 		guioffset.x = parseFloat(argList[9]);
 		guioffset.y = parseFloat(argList[10]);
 		guioffset.z = parseFloat(argList[11]);
-		conf.textureFilename = "./"+decodeURIComponent(argList.slice(12).join(""));
+		conf.textureFilename = decodeURIComponent(argList.slice(12).join(""));
 		this.mesh.fillDatGUI(targetScene,this.mesh);
 		refresh(targetScene);
 	}
