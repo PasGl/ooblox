@@ -11,7 +11,7 @@ oobloxTorusKnot = function ()
 	var mesh=this.mesh;
 
 	var groupNode = new THREE.Group();
-	
+	groupNode.add(this.mesh);
 	groupNode.name = "vrObjectGroup";
 	var guioffset = new THREE.Vector3();
 
@@ -42,11 +42,11 @@ oobloxTorusKnot = function ()
 
 		if (conf.followGUI)
 		{
-			//mesh.position.copy(guiposition.sub(guioffset));
+			mesh.position.copy(guiposition.sub(guioffset));
 		}
 		else
 		{
-			//guioffset.copy(guiposition.sub(position));
+			guioffset.copy(guiposition.sub(position));
 		}
 
 
@@ -81,23 +81,11 @@ oobloxTorusKnot = function ()
 	this.mesh.fillDatGUI = function (targetScene)
 	{
 		datFolder.position.copy(guioffset).add(mesh.position);
-		mesh.position.copy(datFolder.position).sub(guioffset);
 		datFolder.scale.set(20.0,20.0,0.1);
+		//mesh.scale.set(0.05,0.05,10.0);
+
 		var followFlag = datFolder.add(conf,'followGUI');
-		followFlag.onChange(function(){
-			if (conf.followGUI){
-				groupNode.remove(mesh);
-				mesh.scale.set(0.05,0.05,10.0);
-				mesh.position.set(0,0,0).sub(guioffset);
-				datFolder.children[1].add(mesh);
-			}
-			else {
-				datFolder.children[1].remove(mesh);
-				mesh.scale.set(1,1,1);
-				mesh.position.copy(datFolder.position).sub(guioffset);
-				groupNode.add(mesh);
-			}
-		});
+
 		var propFolder = dat.GUIVR.create('Properties');
 		var radiusSlider = propFolder.add(conf,'radius',0.0001,20);
 		radiusSlider.onChange(function(){refresh(targetScene);});
@@ -124,7 +112,7 @@ oobloxTorusKnot = function ()
 
 		var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
 		datFolder.add(remobj,'remove').name(mesh.uname);
-		datFolder.children[1].add(mesh);
+
 		window.addEventListener("mouseup", function(){refreshURL(targetScene);});
 	}
 
