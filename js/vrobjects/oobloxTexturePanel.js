@@ -75,11 +75,11 @@ oobloxTexturePanel = function ()
 		scxSlider.onChange(function(){refreshURL(targetScene);});
 		var scySlider = propFolder.add(mesh.scale,'y',0.0001,100).name("Scale Y");
 		scySlider.onChange(function(){refreshURL(targetScene);});
-		var rotxSlider = propFolder.add(mesh.rotation,'x',0.0,1.0).name("Rotation X");
+		var rotxSlider = propFolder.add(mesh.rotation,'x',0.0,Math.PI*2.0).name("Rotation X");
 		rotxSlider.onChange(function(){refreshURL(targetScene);});
-		var rotySlider = propFolder.add(mesh.rotation,'y',0.0,1.0).name("Rotation Y");;
+		var rotySlider = propFolder.add(mesh.rotation,'y',0.0,Math.PI*2.0).name("Rotation Y");;
 		rotySlider.onChange(function(){refreshURL(targetScene);});
-		var rotzSlider = propFolder.add(mesh.rotation,'z',0.0,1.0).name("Rotation Z");;
+		var rotzSlider = propFolder.add(mesh.rotation,'z',0.0,Math.PI*2.0).name("Rotation Z");;
 		rotzSlider.onChange(function(){refreshURL(targetScene);});
 		datFolder.addFolder(propFolder);
 
