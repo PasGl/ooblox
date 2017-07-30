@@ -81,6 +81,7 @@ oobloxTexturePanel = function ()
 		rotySlider.onChange(function(){refreshURL(targetScene);});
 		var rotzSlider = propFolder.add(mesh.scale,'z',0.0001,100);
 		rotzSlider.onChange(function(){refreshURL(targetScene);});
+		datFolder.addFolder(propFolder);
 
 		targetScene.add( groupNode );
 		window.addEventListener("mouseup", function(){refreshURL(targetScene);})
