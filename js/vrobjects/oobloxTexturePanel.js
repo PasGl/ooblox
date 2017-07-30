@@ -71,15 +71,15 @@ oobloxTexturePanel = function ()
 		var followFlag = datFolder.add(conf,'followGUI');
 
 		var propFolder = dat.GUIVR.create('Properties');
-		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100);
+		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
 		scxSlider.onChange(function(){refreshURL(targetScene);});
-		var scySlider = propFolder.add(mesh.scale,'y',0.0001,100);
+		var scySlider = propFolder.add(mesh.scale,'y',0.0001,100).name("Scale Y");
 		scySlider.onChange(function(){refreshURL(targetScene);});
-		var rotxSlider = propFolder.add(mesh.scale,'x',0.0001,100);
+		var rotxSlider = propFolder.add(mesh.rotation,'x',0.0,Math.pi*2).name("Rotation X");
 		rotxSlider.onChange(function(){refreshURL(targetScene);});
-		var rotySlider = propFolder.add(mesh.scale,'y',0.0001,100);
+		var rotySlider = propFolder.add(mesh.rotation,'y',0.0,Math.pi*2).name("Rotation Y");;
 		rotySlider.onChange(function(){refreshURL(targetScene);});
-		var rotzSlider = propFolder.add(mesh.scale,'z',0.0001,100);
+		var rotzSlider = propFolder.add(mesh.rotation,'z',0.0,Math.pi*2).name("Rotation Z");;
 		rotzSlider.onChange(function(){refreshURL(targetScene);});
 		datFolder.addFolder(propFolder);
 
