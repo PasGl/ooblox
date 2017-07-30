@@ -88,15 +88,15 @@ oobloxTexturePanel = function ()
 
 	this.load = function (targetScene, camera)
 	{
-		var argList = getURLargs(this.mesh.uname);
-		this.mesh.position.x = parseFloat(argList[1]);
-		this.mesh.position.y = parseFloat(argList[2]);
-		this.mesh.position.z = parseFloat(argList[3]);
-		this.mesh.scale.x = parseFloat(argList[4]);
-		this.mesh.scale.y = parseFloat(argList[5]);
-		this.mesh.rotation.x = parseFloat(argList[6]);
-		this.mesh.rotation.y = parseFloat(argList[7]);
-		this.mesh.rotation.z = parseFloat(argList[8]);
+		var argList = getURLargs(mesh.uname);
+		mesh.position.x = parseFloat(argList[1]);
+		mesh.position.y = parseFloat(argList[2]);
+		mesh.position.z = parseFloat(argList[3]);
+		mesh.scale.x = parseFloat(argList[4]);
+		mesh.scale.y = parseFloat(argList[5]);
+		mesh.rotation.x = parseFloat(argList[6]);
+		mesh.rotation.y = parseFloat(argList[7]);
+		mesh.rotation.z = parseFloat(argList[8]);
 		guioffset.x = parseFloat(argList[9]);
 		guioffset.y = parseFloat(argList[10]);
 		guioffset.z = parseFloat(argList[11]);
