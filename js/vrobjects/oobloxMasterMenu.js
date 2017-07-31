@@ -142,7 +142,7 @@ oobloxMasterMenu = function ()
 			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
 			var d = new Date();
 			var uname = "TPL" + d.getTime();
-			var newhref = window.location.href + "&" + uname + "=TPL+" + posScaleRotString + "+20.0+20.0+0+0+0+-10+-15+0.1+images%2Fbark-template.png";
+			var newhref = window.location.href + "&" + uname + "=TPL+" + posScaleRotString + "+20.0+20.0+0+0+0+-10+-15+0.1+images%2Ftextures%2Fbark-template.png";
 			window.history.pushState({}, '', newhref);
 			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("TPL")]();
 			importedThing.mesh.uname = uname;
