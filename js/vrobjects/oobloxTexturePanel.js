@@ -72,6 +72,9 @@ oobloxTexturePanel = function ()
 		rotzSlider.onChange(function(){refreshURL(targetScene);});
 		datFolder.addFolder(propFolder);
 
+		var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
+		datFolder.add(remobj,'remove').name(mesh.uname);
+
 		targetScene.add( groupNode );
 		window.addEventListener("mouseup", function(){refreshURL(targetScene);})
 	}
