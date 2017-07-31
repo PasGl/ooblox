@@ -17,13 +17,8 @@ oobloxTexturePanel = function ()
 	var datFolder = dat.GUIVR.create('Texture Panel');
 	groupNode.add( datFolder )
 
-	var TPLProperties = function ()
-	{
-		this.followGUI = true;	
-	}
-
+	var TPLProperties = function ()	{this.followGUI = true;}
 	var conf = new TPLProperties();
-
 
 	var refreshURL = function (targetScene)
 	{
@@ -33,14 +28,8 @@ oobloxTexturePanel = function ()
 		var guiposition = new THREE.Vector3();
 		guiposition.setFromMatrixPosition( datFolder.matrixWorld );
 
-		if (conf.followGUI)
-		{
-			mesh.position.copy(guiposition.sub(guioffset));
-		}
-		else
-		{
-			guioffset.copy(guiposition.sub(position));
-		}
+		if (conf.followGUI) mesh.position.copy(guiposition.sub(guioffset));
+		else guioffset.copy(guiposition.sub(position));
 
 		updateURLargs([	mesh.uname,
 				mesh.vrObjectTypeID,
