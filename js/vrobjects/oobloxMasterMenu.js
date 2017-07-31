@@ -135,6 +135,21 @@ oobloxMasterMenu = function ()
 			refresh(targetScene);}};
 		rezFolder.add(metobj,'add').name("Metronome");
 
+		var metobj = {add: function() {
+			var position = new THREE.Vector3();
+			targetScene.updateMatrixWorld();
+			position.setFromMatrixPosition( indicator.matrixWorld );
+			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
+			var d = new Date();
+			var uname = "TPL" + d.getTime();
+			var newhref = window.location.href + "&" + uname + "=TPL+" + posScaleRotString + "+8.0+4.0+0+0+0+-10+4+-0.1+images%2Fbark-template.png";
+			window.history.pushState({}, '', newhref);
+			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("TPL")]();
+			importedThing.mesh.uname = uname;
+			importedThing.load(targetScene, camera);
+			refresh(targetScene);}};
+		rezFolder.add(metobj,'add').name("Texture Panel");
+
 		datFolder.addFolder(rezFolder);
 		datFolder.children[1].add(mesh);
 		datFolder.children[1].add(indicator);
