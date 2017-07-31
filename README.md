@@ -42,9 +42,15 @@ Git clone from master to your webserver.
 
 Nginx config snippet, that I use (adjust accordingly).
 The first entry is for gathering all available Modules automatically.
+The second entry allows Modules to find all available textures.
+
 The other entries are shortcuts for scenes.
 ```
         location ~ /js/vrobjects {
+                autoindex on;
+        }
+
+        location ~ /images/textures {
                 autoindex on;
         }
 
