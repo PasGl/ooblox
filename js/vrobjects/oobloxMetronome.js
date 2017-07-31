@@ -108,6 +108,9 @@ oobloxMetronome = function ()
 		bpmSlider.onChange(function(){refresh(targetScene);});
 		var pauseSwitch = datFolder.add(conf,'pause');
 		pauseSwitch.onChange(function(){refresh(targetScene);});
+		var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
+		datFolder.add(remobj,'remove').name(mesh.uname);
+
 		targetScene.add( groupNode );
 		refresh(targetScene);
 		window.addEventListener("mouseup", function(){urlRefresh(targetScene);})
