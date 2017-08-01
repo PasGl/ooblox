@@ -100,21 +100,20 @@ oobloxTexturePanel = function ()
 
 		$.get("./images/textures", function(data) {
 			var textures = data.split("href=\"");
-
 			var n = 0;
 			while (n<textures.length)
 			{
 				var thisfilename = textures[n].substring(0,textures[n].indexOf("\""));
-				textures[n] = thisfilename;
-				n++;
+
+				if ( [".png",".PNG",".jpg",".JPG",".jpeg",".JPEG",".tga",".TGA"].indexOf(thisfilename.substring(thisfilename.length-4,thisfilename.length+1)) >=0)
+				{
+					textures[n] = thisfilename;
+					n++;
+				}
+				else modules.splice(n,1);
 			}
-			console.log(textures);
-			
-        	});
-
-
-
-		
+			console.log(textures);	
+        	});	
 	}
 }
 
