@@ -135,7 +135,9 @@ oobloxTorusKnot = function ()
 		this.mesh.position.copy(position);
 		this.mesh.fillDatGUI(targetScene);
 		targetScene.add( groupNode );
-		refresh(targetScene);	
+		refresh(targetScene);
+		var event = new Event('vrObjectInstantiated');
+		document.dispatchEvent(event);
 	}
 }
 
