@@ -190,7 +190,7 @@ oobloxMasterMenu = function ()
 			{
 				case 77:
 					conf.menusHidden=!conf.menusHidden;
-					showHideMenus();
+					showHideMenus(targetScene);
 			}
 		};
 	}
