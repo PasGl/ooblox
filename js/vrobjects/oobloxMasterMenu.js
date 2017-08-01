@@ -195,6 +195,7 @@ oobloxMasterMenu = function ()
 				case 77:
 					conf.menusHidden=!conf.menusHidden;
 					showHideMenus(targetScene);
+					urlRefresh(targetScene);
 			}
 		};
 	}
