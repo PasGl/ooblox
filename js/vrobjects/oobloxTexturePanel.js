@@ -118,7 +118,9 @@ oobloxTexturePanel = function ()
 				else textures.splice(n,1);
 			}
 			mesh.fillDatGUI(targetScene,mesh);
-			refresh(targetScene);	
+			refresh(targetScene);
+			var event = new Event('vrObjectInstantiated');
+			document.dispatchEvent(event);
         	});
 	}
 }
