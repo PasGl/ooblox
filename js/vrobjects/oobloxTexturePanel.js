@@ -96,7 +96,7 @@ oobloxTexturePanel = function ()
 		conf.textureFilename = decodeURIComponent(argList.slice(12).join(""));
 		this.mesh.fillDatGUI(targetScene,this.mesh);
 
-
+		refresh(targetScene);
 
 		$.get("./images/textures", function(data) {
 			var textures = data.split("href=\"");
@@ -109,7 +109,7 @@ oobloxTexturePanel = function ()
 				n++;
 			}
 			console.log(textures);
-			refresh(targetScene);
+			
         	});
 
 
