@@ -217,6 +217,8 @@ oobloxChordProgressionGenerator = function ()
 		this.mesh.position.copy(conf.position);
 		this.mesh.fillDatGUI(targetScene,this.mesh);
 		refresh(targetScene);
+		var event = new Event('vrObjectInstantiated');
+		document.dispatchEvent(event);
 	}
 }
 
