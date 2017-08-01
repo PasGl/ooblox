@@ -21,6 +21,8 @@ oobloxMasterMenu = function ()
 	groupNode.add(datFolder);
 	groupNode.name = "vrObjectGroup";
 
+	var conf = {menusHidden:false};
+
 	var urlRefresh = function (targetScene)
 	{
 		var position = new THREE.Vector3();
@@ -31,6 +33,19 @@ oobloxMasterMenu = function ()
 				position.x,
 				position.y,
 				position.z]);
+	}
+
+	var showHideMenus = function (targetScene)
+	{
+		targetScene.traverse(function(obj) {
+			if (obj.hasOwnProperty('beingMoved'))
+			{
+				if (obj.parent.name==="vrObjectGroup")
+				{
+					obj.visible = !conf.menusHidden;
+				}
+			}
+		});
 	}
 
 	var refresh = function (targetScene)
@@ -168,6 +183,16 @@ oobloxMasterMenu = function ()
 		this.mesh.position.copy(position);
 		this.mesh.fillDatGUI(targetScene, camera);
 		refresh(targetScene);
+
+		document.addEventListener("keydown", onDocumentKeyDown, false);
+		function onDocumentKeyDown(event) {
+			switch(event.which)
+			{
+				case 77:
+					conf.menusHidden=!conf.menusHidden;
+					showHideMenus();
+			}
+		};
 	}
 }
 
