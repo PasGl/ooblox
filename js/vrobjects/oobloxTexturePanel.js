@@ -4,7 +4,7 @@
 
 oobloxTexturePanel = function ()
 {
-	this.mesh = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshStandardMaterial({transparent:true}));
+	this.mesh = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshStandardMaterial({}));
 	this.mesh.vrObjectTypeID = "TPL";
 	this.mesh.uname = "";
 	var mesh = this.mesh;
@@ -65,6 +65,9 @@ oobloxTexturePanel = function ()
 
 		var sourceChanger = propFolder.add(conf,'textureFilename',textures);
 		sourceChanger.onChange(function(value) {refresh(targetScene);});
+
+		propFolder.add(mesh.material,'transparent').name("Texture transparent");
+		propFolder.add(mesh.material,'alphaTest',0.0,1.0).name("Texture alpha threshold");
 
 		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
 		scxSlider.onChange(function(){refreshURL(targetScene);});
