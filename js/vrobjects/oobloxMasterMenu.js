@@ -180,9 +180,12 @@ oobloxMasterMenu = function ()
 		position.x = parseFloat(argList[1]);
 		position.y = parseFloat(argList[2]);
 		position.z = parseFloat(argList[3]);
+		conf.menusHidden = Boolean(argList[4]=="true");
 		this.mesh.position.copy(position);
 		this.mesh.fillDatGUI(targetScene, camera);
 		refresh(targetScene);
+
+		if (conf.menusHidden) showHideMenus(targetScene);
 
 		document.addEventListener("keydown", onDocumentKeyDown, false);
 		function onDocumentKeyDown(event) {
