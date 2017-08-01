@@ -199,6 +199,9 @@ oobloxMasterMenu = function ()
 					urlRefresh(targetScene);
 			}
 		};
+
+		var event = new Event('vrObjectInstantiated');
+		document.dispatchEvent(event);
 	}
 }
 
