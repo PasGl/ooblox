@@ -4,7 +4,7 @@
 
 oobloxTexturePanel = function ()
 {
-	this.mesh = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshPhongMaterial({}));
+	this.mesh = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshStandardMaterial({}));
 	this.mesh.vrObjectTypeID = "TPL";
 	this.mesh.uname = "";
 	var mesh = this.mesh;
