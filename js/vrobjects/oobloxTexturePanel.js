@@ -115,11 +115,9 @@ oobloxTexturePanel = function ()
 				}
 				else textures.splice(n,1);
 			}
-			console.log(textures);	
+			this.mesh.fillDatGUI(targetScene,this.mesh);
+			refresh(targetScene);	
         	});
-
-		this.mesh.fillDatGUI(targetScene,this.mesh);
-		refresh(targetScene);
 	}
 }
 
