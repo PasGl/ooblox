@@ -67,7 +67,6 @@ oobloxTexturePanel = function ()
 		sourceChanger.onChange(function(value) {refresh(targetScene);});
 
 		propFolder.add(mesh.material,'transparent').name("Texture transparent");
-		propFolder.add(mesh.material,'alphaTest',0.0,1.0).name("Texture alpha threshold");
 
 		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
 		scxSlider.onChange(function(){refreshURL(targetScene);});
