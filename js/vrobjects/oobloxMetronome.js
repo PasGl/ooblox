@@ -137,6 +137,8 @@ oobloxMetronome = function ()
 		mesh.position.copy(position);
 		camera.add( listener );
 		this.mesh.fillDatGUI(targetScene);
+		var event = new Event('vrObjectInstantiated');
+		document.dispatchEvent(event);
 	}
 }
 
