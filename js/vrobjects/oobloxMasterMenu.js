@@ -186,8 +186,8 @@ oobloxMasterMenu = function ()
 		this.mesh.fillDatGUI(targetScene, camera);
 		refresh(targetScene);
 
-		window.addEventListener("onload", onWindowOnLoad, false);
-		function onWindowOnLoad(event) {console.log("now");if (conf.menusHidden) showHideMenus(targetScene);};
+		document.addEventListener("allinstantiated", onAllinstantiated, false);
+		function onAllinstantiated(event) {if (conf.menusHidden) showHideMenus(targetScene);};
 
 		document.addEventListener("keydown", onDocumentKeyDown, false);
 		function onDocumentKeyDown(event) {
