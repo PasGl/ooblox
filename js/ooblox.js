@@ -237,16 +237,6 @@ function init()
         infoDiv.appendChild(p);
 	container.appendChild(infoDiv);
 	// end of shameless self-promotion
-
-	document.addEventListener("keydown", onDocumentKeyDown, false);
-	function onDocumentKeyDown(event) {
-		switch(event.which)
-		{
-			case 77:
-				menusHidden=!menusHidden;
-				showHideMenus();
-		}
-	};
 }
 
 function createCamera()
@@ -355,17 +345,4 @@ function animate()
 	}
 	
 	stats.update();
-}
-
-function showHideMenus()
-{
-	scene.traverse(function(obj) {
-		if (obj.hasOwnProperty('beingMoved'))
-		{
-			if (obj.parent.name==="vrObjectGroup")
-			{
-				obj.visible = !menusHidden;
-			}
-		}
-	});
 }
