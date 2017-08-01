@@ -107,6 +107,8 @@ var bootVR = function ()
 				if (loadcounter==totalModules)
 				{
 					init();
+					var event = new Event('allinstantiated');
+					document.dispatchEvent(event);
 					animate();
 				}
 			}).fail(function()
@@ -115,6 +117,8 @@ var bootVR = function ()
 				if (loadcounter==totalModules)
 				{
 					init();
+					var event = new Event('allinstantiated');
+					document.dispatchEvent(event);
 					animate();
 				}
 			});
@@ -301,9 +305,6 @@ function processURLParams()
 			importedThing.mesh.uname = uname;
 			importedThing.load(scene, camera);
 	}
-
-	var event = new Event('allinstantiated');
-	document.dispatchEvent(event);
 }
 
 function createRenderer()
