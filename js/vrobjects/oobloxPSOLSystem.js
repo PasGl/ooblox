@@ -727,6 +727,8 @@ function PSOLSystem ()
 		this.initPresetRandom();
 		this.fillGUI(targetScene,this.mesh);
 		refresh(targetScene,this.mesh);
+		var event = new Event('vrObjectInstantiated');
+		document.dispatchEvent(event);
 	}
 }
 
