@@ -95,7 +95,26 @@ oobloxTexturePanel = function ()
 		guioffset.z = parseFloat(argList[11]);
 		conf.textureFilename = decodeURIComponent(argList.slice(12).join(""));
 		this.mesh.fillDatGUI(targetScene,this.mesh);
-		refresh(targetScene);
+
+
+
+		$.get("./images/textures", function(data) {
+			var textures = data.split("href=\"");
+
+			var n = 0;
+			while (n<textures.length)
+			{
+				var thisfilename = textures[n].substring(0,textures[n].indexOf("\""));
+				textures[n] = thisfilename;
+				n++;
+			}
+			console.log(textures);
+			refresh(targetScene);
+        	});
+
+
+
+		
 	}
 }
 
