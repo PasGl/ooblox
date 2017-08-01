@@ -20,6 +20,8 @@ oobloxTexturePanel = function ()
 	var TPLProperties = function ()	{this.followGUI = true;}
 	var conf = new TPLProperties();
 
+	var textures = [];
+
 	var refreshURL = function (targetScene)
 	{
 		var position = new THREE.Vector3();
@@ -60,6 +62,10 @@ oobloxTexturePanel = function ()
 		var followFlag = datFolder.add(conf,'followGUI');
 
 		var propFolder = dat.GUIVR.create('Properties');
+
+		var sourceChanger = propFolder.add(conf,'textureFilename',textures);
+		sourceChanger.onChange(function(value) {refresh(targetScene);});
+
 		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
 		scxSlider.onChange(function(){refreshURL(targetScene);});
 		var scySlider = propFolder.add(mesh.scale,'y',0.0001,100).name("Scale Y");
@@ -94,12 +100,9 @@ oobloxTexturePanel = function ()
 		guioffset.y = parseFloat(argList[10]);
 		guioffset.z = parseFloat(argList[11]);
 		conf.textureFilename = decodeURIComponent(argList.slice(12).join(""));
-		this.mesh.fillDatGUI(targetScene,this.mesh);
-
-		refresh(targetScene);
 
 		$.get("./images/textures", function(data) {
-			var textures = data.split("href=\"");
+			textures = data.split("href=\"");
 			var n = 0;
 			while (n<textures.length)
 			{
@@ -113,7 +116,10 @@ oobloxTexturePanel = function ()
 				else textures.splice(n,1);
 			}
 			console.log(textures);	
-        	});	
+        	});
+
+		this.mesh.fillDatGUI(targetScene,this.mesh);
+		refresh(targetScene);
 	}
 }
 
