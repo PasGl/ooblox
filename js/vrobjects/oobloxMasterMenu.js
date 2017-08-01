@@ -187,7 +187,7 @@ oobloxMasterMenu = function ()
 		refresh(targetScene);
 
 		document.addEventListener("vrObjectInstantiated", onvrObjectInstantiated, false);
-		function vrObjectInstantiated(event) {if (conf.menusHidden) showHideMenus(targetScene);};
+		function onvrObjectInstantiated(event) {if (conf.menusHidden) showHideMenus(targetScene);};
 
 		document.addEventListener("keydown", onDocumentKeyDown, false);
 		function onDocumentKeyDown(event) {
