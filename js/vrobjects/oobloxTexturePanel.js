@@ -110,7 +110,7 @@ oobloxTexturePanel = function ()
 					textures[n] = thisfilename;
 					n++;
 				}
-				else modules.splice(n,1);
+				else textures.splice(n,1);
 			}
 			console.log(textures);	
         	});	
