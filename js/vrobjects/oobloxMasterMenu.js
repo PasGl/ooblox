@@ -32,7 +32,8 @@ oobloxMasterMenu = function ()
 				mesh.vrObjectTypeID,
 				position.x,
 				position.y,
-				position.z]);
+				position.z,
+				conf.menusHidden]);
 	}
 
 	var showHideMenus = function (targetScene)
