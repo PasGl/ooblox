@@ -94,8 +94,8 @@ function PSOLSystem ()
 	var datFolder = dat.GUIVR.create("PS0L-System");
 	groupNode.add( datFolder );
 
-	var barktexture = new THREE.TextureLoader().load( "images/bark-template.png" );
-	var foliagetexture = new THREE.TextureLoader().load( "images/foliage-template.png" );
+	var barktexture = new THREE.TextureLoader().load( "images/textures/bark-template.png" );
+	var foliagetexture = new THREE.TextureLoader().load( "images/textures/foliage-template.png" );
 	barktexture.wrapS = THREE.RepeatWrapping;
 	barktexture.wrapT = THREE.RepeatWrapping;
 	this.mesh.material  = [new THREE.MeshStandardMaterial(
@@ -727,6 +727,8 @@ function PSOLSystem ()
 		this.initPresetRandom();
 		this.fillGUI(targetScene,this.mesh);
 		refresh(targetScene,this.mesh);
+		var event = new Event('vrObjectInstantiated');
+		document.dispatchEvent(event);
 	}
 }
 

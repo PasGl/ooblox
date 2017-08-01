@@ -21,6 +21,8 @@ oobloxMasterMenu = function ()
 	groupNode.add(datFolder);
 	groupNode.name = "vrObjectGroup";
 
+	var conf = {menusHidden:false};
+
 	var urlRefresh = function (targetScene)
 	{
 		var position = new THREE.Vector3();
@@ -30,7 +32,21 @@ oobloxMasterMenu = function ()
 				mesh.vrObjectTypeID,
 				position.x,
 				position.y,
-				position.z]);
+				position.z,
+				conf.menusHidden]);
+	}
+
+	var showHideMenus = function (targetScene)
+	{
+		targetScene.traverse(function(obj) {
+			if (obj.hasOwnProperty('beingMoved'))
+			{
+				if (obj.parent.name==="vrObjectGroup")
+				{
+					obj.visible = !conf.menusHidden;
+				}
+			}
+		});
 	}
 
 	var refresh = function (targetScene)
@@ -135,6 +151,21 @@ oobloxMasterMenu = function ()
 			refresh(targetScene);}};
 		rezFolder.add(metobj,'add').name("Metronome");
 
+		var texobj = {add: function() {
+			var position = new THREE.Vector3();
+			targetScene.updateMatrixWorld();
+			position.setFromMatrixPosition( indicator.matrixWorld );
+			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
+			var d = new Date();
+			var uname = "TPL" + d.getTime();
+			var newhref = window.location.href + "&" + uname + "=TPL+" + posScaleRotString + "+30.0+15.0+0+0+0+-10+-8+0.1+ooblox-controls.png";
+			window.history.pushState({}, '', newhref);
+			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("TPL")]();
+			importedThing.mesh.uname = uname;
+			importedThing.load(targetScene, camera);
+			refresh(targetScene);}};
+		rezFolder.add(texobj,'add').name("Texture Panel");
+
 		datFolder.addFolder(rezFolder);
 		datFolder.children[1].add(mesh);
 		datFolder.children[1].add(indicator);
@@ -150,9 +181,27 @@ oobloxMasterMenu = function ()
 		position.x = parseFloat(argList[1]);
 		position.y = parseFloat(argList[2]);
 		position.z = parseFloat(argList[3]);
+		conf.menusHidden = Boolean(argList[4]=="true");
 		this.mesh.position.copy(position);
 		this.mesh.fillDatGUI(targetScene, camera);
 		refresh(targetScene);
+
+		document.addEventListener("vrObjectInstantiated", onvrObjectInstantiated, false);
+		function onvrObjectInstantiated(event) {if (conf.menusHidden) showHideMenus(targetScene);};
+
+		document.addEventListener("keydown", onDocumentKeyDown, false);
+		function onDocumentKeyDown(event) {
+			switch(event.which)
+			{
+				case 77:
+					conf.menusHidden=!conf.menusHidden;
+					showHideMenus(targetScene);
+					urlRefresh(targetScene);
+			}
+		};
+
+		var event = new Event('vrObjectInstantiated');
+		document.dispatchEvent(event);
 	}
 }
 

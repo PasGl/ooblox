@@ -195,6 +195,9 @@ oobloxChordProgressionGenerator = function ()
 		barsSlider.onChange(function(){refresh(targetScene);});
 		var randomSeedSlider = datFolder.add(conf,'randomSeed',0,9999999999).step(1); // Number.MAX_SAFE_INTEGER
 		randomSeedSlider.onChange(function(){refresh(targetScene);});
+		var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
+		datFolder.add(remobj,'remove').name(mesh.uname);
+
 		targetScene.add( groupNode );
 		window.addEventListener("mouseup", function(){refreshURL(targetScene);})
 	}
@@ -214,6 +217,8 @@ oobloxChordProgressionGenerator = function ()
 		this.mesh.position.copy(conf.position);
 		this.mesh.fillDatGUI(targetScene,this.mesh);
 		refresh(targetScene);
+		var event = new Event('vrObjectInstantiated');
+		document.dispatchEvent(event);
 	}
 }
 

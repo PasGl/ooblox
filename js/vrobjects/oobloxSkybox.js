@@ -105,7 +105,9 @@ oobloxSkybox = function ()
 		}
 		this.mesh.fillDatGUI(targetScene, camera);
 		targetScene.add( groupNode );
-		refresh(targetScene);	
+		refresh(targetScene);
+		var event = new Event('vrObjectInstantiated');
+		document.dispatchEvent(event);
 	}
 }
 

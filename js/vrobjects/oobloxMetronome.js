@@ -108,6 +108,9 @@ oobloxMetronome = function ()
 		bpmSlider.onChange(function(){refresh(targetScene);});
 		var pauseSwitch = datFolder.add(conf,'pause');
 		pauseSwitch.onChange(function(){refresh(targetScene);});
+		var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
+		datFolder.add(remobj,'remove').name(mesh.uname);
+
 		targetScene.add( groupNode );
 		refresh(targetScene);
 		window.addEventListener("mouseup", function(){urlRefresh(targetScene);})
@@ -134,6 +137,8 @@ oobloxMetronome = function ()
 		mesh.position.copy(position);
 		camera.add( listener );
 		this.mesh.fillDatGUI(targetScene);
+		var event = new Event('vrObjectInstantiated');
+		document.dispatchEvent(event);
 	}
 }
 
