@@ -107,8 +107,6 @@ var bootVR = function ()
 				if (loadcounter==totalModules)
 				{
 					init();
-					var event = new Event('allinstantiated');
-					document.dispatchEvent(event);
 					animate();
 				}
 			}).fail(function()
@@ -117,15 +115,11 @@ var bootVR = function ()
 				if (loadcounter==totalModules)
 				{
 					init();
-					var event = new Event('allinstantiated');
-					document.dispatchEvent(event);
 					animate();
 				}
 			});
 		}
         });
-
-	
 }
 
 function init()
