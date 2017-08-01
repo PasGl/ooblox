@@ -301,6 +301,9 @@ function processURLParams()
 			importedThing.mesh.uname = uname;
 			importedThing.load(scene, camera);
 	}
+
+	var event = new Event('allinstantiated');
+	document.dispatchEvent(event);
 }
 
 function createRenderer()
