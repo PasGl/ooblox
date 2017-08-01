@@ -17,7 +17,7 @@ oobloxTexturePanel = function ()
 	var datFolder = dat.GUIVR.create('Texture Panel');
 	groupNode.add( datFolder )
 
-	var TPLProperties = function ()	{this.followGUI = true;}
+	var TPLProperties = function ()	{this.followGUI = true;this.textureFilename = "bark-template.png";}
 	var conf = new TPLProperties();
 
 	var textures = [];
@@ -51,7 +51,7 @@ oobloxTexturePanel = function ()
 
 	var refresh = function (targetScene)
 	{
-		mesh.material.map = new THREE.TextureLoader().load( conf.textureFilename );
+		mesh.material.map = new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename );
 		refreshURL(targetScene);
 	}
 
