@@ -67,7 +67,6 @@ oobloxDiamondSquareGround = function ()
 		{
 			for(var j = 0; j < nextHeightMap[i].length; j ++)
 			{
-				console.log(geometries,nextHeightMap[i][j])
 				geometries[geometries.length-1].vertices[geoindex].z = nextHeightMap[i][j];
 				geoindex++;
 			}
@@ -166,6 +165,7 @@ oobloxDiamondSquareGround = function ()
 		scySlider.onChange(function(){refreshURL(targetScene);});
 		var sczSlider = propFolder.add(mesh.scale,'z',0.0001,200).name("Scale Z");
 		sczSlider.onChange(function(){refreshURL(targetScene);});
+		propFolder.add(mesh.material[0],'wireframe').name("Wireframe");
 		datFolder.addFolder(propFolder);
 
 		var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
@@ -194,9 +194,8 @@ oobloxDiamondSquareGround = function ()
 		refresh(targetScene);
 		var event = new Event('vrObjectInstantiated');
 		document.dispatchEvent(event);
-
 		addIteration();
-		console.log(heightMaps);
+		mesh.geometry = geometries[geometries.length-1];
 	}
 }
 
