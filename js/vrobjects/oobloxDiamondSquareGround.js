@@ -73,7 +73,7 @@ oobloxDiamondSquareGround = function ()
 		{
 			for(var j = 1; j < nextHeightMap[i].length; j+=2)
 				nextHeightMap[i][j] = 	(0.25 * (nextHeightMap[i-1][j]+nextHeightMap[i+1][j]+nextHeightMap[i][j-1]+nextHeightMap[i][j+1])) + 
-							((seededRandom()-0.5)*(Math.pow(0.5,iterationsSoFar))));
+							((seededRandom()-0.5)*(Math.pow(0.5,iterationsSoFar)));
 		}
 
 		var geoindex = 0;
