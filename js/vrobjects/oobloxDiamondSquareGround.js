@@ -62,10 +62,13 @@ oobloxDiamondSquareGround = function ()
 		geometries.push(new THREE.PlaneGeometry(1, 1, Math.pow(2,iterationsSoFar+1), Math.pow(2,iterationsSoFar+1)));
 
 		var geoindex = 0;
+
+		console
 		for(var i = 0; i < nextHeightMap.length; i ++)
 		{
 			for(var j = 0; j < nextHeightMap[i].length; j ++)
 			{
+				console.log(geometries[geometries.length-1].vertices[geoindex].position.z,nextHeightMap[i][j])
 				geometries[geometries.length-1].vertices[geoindex].position.z = nextHeightMap[i][j];
 				geoindex++;
 			}
@@ -175,6 +178,8 @@ oobloxDiamondSquareGround = function ()
 
 	this.load = function (targetScene, camera)
 	{
+		heightMaps = [[[0.0,0.0],[0.0,0.0]]];
+		geometries = [new THREE.PlaneGeometry(1, 1, 1, 1)];
 		var argList = getURLargs(mesh.uname);
 		mesh.position.x = parseFloat(argList[1]);
 		mesh.position.y = parseFloat(argList[2]);
@@ -191,7 +196,6 @@ oobloxDiamondSquareGround = function ()
 		var event = new Event('vrObjectInstantiated');
 		document.dispatchEvent(event);
 
-		console.log(heightMaps);
 		addIteration();
 		console.log(heightMaps);
 	}
