@@ -91,6 +91,7 @@ oobloxDiamondSquareGround = function ()
 		scySlider.onChange(function(){refreshURL(targetScene);});
 		var sczSlider = propFolder.add(mesh.scale,'z',0.0001,200).name("Scale Z");
 		sczSlider.onChange(function(){refreshURL(targetScene);});
+		datFolder.addFolder(propFolder);
 
 		var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
 		datFolder.add(remobj,'remove').name(mesh.uname);
