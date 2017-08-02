@@ -324,7 +324,7 @@ function onWindowResize()
 function animate()
 {
 	requestAnimationFrame( animate );
-	THREE.AnimationHandler.update( clock.getDelta() );
+	clock.getDelta();//THREE.AnimationHandler.update( clock.getDelta() );
 	controls.update();
 
 	camOffset = new THREE.Vector3(0,0,-75);
