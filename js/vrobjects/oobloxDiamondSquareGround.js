@@ -68,7 +68,7 @@ oobloxDiamondSquareGround = function ()
 		{
 			for(var j = 0; j < nextHeightMap[i].length; j ++)
 			{
-				console.log(geometries[geometries.length-1].vertices[geoindex].position.z,nextHeightMap[i][j])
+				console.log(geometries,nextHeightMap[i][j])
 				geometries[geometries.length-1].vertices[geoindex].position.z = nextHeightMap[i][j];
 				geoindex++;
 			}
