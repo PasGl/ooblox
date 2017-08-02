@@ -25,6 +25,14 @@ oobloxDiamondSquareGround = function ()
 	var heightMaps = [[[0.0,0.0],[0.0,0.0]]];
 	var geometries = [new THREE.PlaneGeometry(1, 1, 1, 1)];
 
+	var currentSeed = 123;
+	//alert("M "+conf.iterationsLeft+ " "+currentString);
+	function seededRandom() 
+	{
+			var x = Math.sin(currentSeed++) * 10000;
+			return x - Math.floor(x);
+	}
+
 	var addIteration = function ()
 	{
 		var iterationsSoFar = heightMaps.length-1;
@@ -39,12 +47,12 @@ oobloxDiamondSquareGround = function ()
 			for(var j = 0; j < lastheightMap[i].length -1; j ++)
 			{
 				thisRow.push(lastheightMap[i][j]);
-				thisRow.push(0.0);
-				newRow.push(0.0);
+				thisRow.push((0.5*(lastheightMap[i][j]+lastheightMap[i][j+1])) + ((seededRandom()-0.5)*(Math.pow(0.5,iterationsSoFar))));
+				newRow.push((0.5*(lastheightMap[i][j]+lastheightMap[i+1][j])) + ((seededRandom()-0.5)*(Math.pow(0.5,iterationsSoFar))));
 				newRow.push(0.0);
 			}
 			thisRow.push(lastheightMap[i][lastheightMap[i].length -1]);
-			newRow.push(0.0);
+			newRow.push((0.5*(lastheightMap[i][lastheightMap[i].length -1] + lastheightMap[i+1][lastheightMap[i].length -1] )) + ((seededRandom()-0.5)*(Math.pow(0.5,iterationsSoFar))));
 			nextHeightMap.push(thisRow);
 			nextHeightMap.push(newRow);
 		}
@@ -53,13 +61,20 @@ oobloxDiamondSquareGround = function ()
 		for(var j = 0; j < lastheightMap[lastheightMap.length -1].length -1; j ++)
 		{
 			lastRow.push(lastheightMap[lastheightMap.length -1][j]);
-			lastRow.push(0.0);
+			lastRow.push((0.5*(lastheightMap[lastheightMap.length -1][j]+lastheightMap[lastheightMap.length -1][j+1])) + ((seededRandom()-0.5)*(Math.pow(0.5,iterationsSoFar))));
 		}
 		lastRow.push(lastheightMap[lastheightMap.length -1][lastheightMap[lastheightMap.length -1].length -1]);
 		nextHeightMap.push(lastRow);
 
 		heightMaps.push(nextHeightMap);
 		geometries.push(new THREE.PlaneGeometry(1, 1, Math.pow(2,iterationsSoFar+1), Math.pow(2,iterationsSoFar+1)));
+
+		for(var i = 1; i < nextHeightMap.length; i+=2)
+		{
+			for(var j = 1; j < nextHeightMap[i].length; j+=2)
+				nextHeightMap[i][j] = 	(0.25 * (nextHeightMap[i-1][j]+nextHeightMap[i+1][j]+nextHeightMap[i][j-1]+nextHeightMap[i][j+1])) + 
+							((seededRandom()-0.5)*(Math.pow(0.5,iterationsSoFar))));
+		}
 
 		var geoindex = 0;
 
@@ -107,6 +122,10 @@ oobloxDiamondSquareGround = function ()
 				guioffset.x,
 				guioffset.y,
 				guioffset.z,
+				conf.textureRepsX,
+				conf.textureRepsY,
+				conf.randomSeed,
+				conf.iterations,
 				conf.theme]);
 	}
 
@@ -157,7 +176,18 @@ oobloxDiamondSquareGround = function ()
 
 		var propFolder = dat.GUIVR.create('Properties');
 
-		var iterSlider = propFolder.add(conf,'iterations',0,10).step(1);
+		var randomSeedSlider = propFolder.add(conf,'randomSeed',0,99999999).step(1);
+		randomSeedSlider.onChange(function(){
+			heightMaps = [[[0.0,0.0],[0.0,0.0]]];
+			geometries = [new THREE.PlaneGeometry(1, 1, 1, 1)];
+			currentSeed = conf.randomSeed;
+			while (geometries.length < (conf.iterations+1))
+			{addIteration();}
+			mesh.geometry = geometries[conf.iterations];
+			refresh(targetScene);
+		});
+
+		var iterSlider = propFolder.add(conf,'iterations',0,9).step(1);
 		iterSlider.onChange(function(value) {
 			while (geometries.length < (conf.iterations+1))
 			{addIteration();}
@@ -173,6 +203,14 @@ oobloxDiamondSquareGround = function ()
 		scySlider.onChange(function(){refreshURL(targetScene);});
 		var sczSlider = propFolder.add(mesh.scale,'z',0.0001,200).name("Scale Z");
 		sczSlider.onChange(function(){refreshURL(targetScene);});
+
+		var textureRepsXSlider = propFolder.add(conf,'textureRepsX',1.0,200.0).name("Texture Repeats X");
+		textureRepsXSlider.onChange(function(){refresh(targetScene);});
+
+		var textureRepsYSlider = propFolder.add(conf,'textureRepsY',1.0,200.0).name("Texture Repeats Y");
+		textureRepsYSlider.onChange(function(){refresh(targetScene);});
+
+
 		propFolder.add(mesh.material,'wireframe').name("Wireframe");
 		datFolder.addFolder(propFolder);
 
@@ -197,8 +235,16 @@ oobloxDiamondSquareGround = function ()
 		guioffset.x = parseFloat(argList[7]);
 		guioffset.y = parseFloat(argList[8]);
 		guioffset.z = parseFloat(argList[9]);
-		conf.theme = argList[10];
+		conf.textureRepsX = parseFloat(argList[10]);
+		conf.textureRepsY = parseFloat(argList[11]);
+		conf.randomSeed = parseInt(argList[12]);
+		currentSeed = conf.randomSeed;
+		conf.iterations = parseInt(argList[13]);
+		conf.theme = argList[14];
 		mesh.fillDatGUI(targetScene,mesh);
+		while (geometries.length < (conf.iterations+1))
+		{addIteration();}
+		mesh.geometry = geometries[conf.iterations];
 		refresh(targetScene);
 		var event = new Event('vrObjectInstantiated');
 		document.dispatchEvent(event);
