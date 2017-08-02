@@ -2,256 +2,222 @@
  * @author Pascal Gleske / https://github.com/PasGl
  */
 
-/**
- * Textures by Nobiax / http://yughues.deviantart.com
- */
 
-oobloxDiamondSquareGround = function ()
+oobloxMasterMenu = function ()
 {
-	this.mesh = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 1, 1), new THREE.MeshStandardMaterial({}));
-	this.mesh.rotation.x = -Math.PI * 0.5;
-	this.mesh.vrObjectTypeID = "DSG";
-	this.mesh.uname = "";
-	var mesh = this.mesh;
+	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(0, 0, 0), new THREE.MeshPhongMaterial({}));
+	this.indicator = new THREE.Mesh( new THREE.SphereGeometry(1.0, 24, 24), new THREE.MeshPhongMaterial({color:"#FF0000",transparent:true,opacity:0.5}));
+	var indicator = this.indicator;
+	this.mesh.vrObjectTypeID = "OMM";
 
-	this.mesh.receiveShadow = true;
-	this.mesh.castShadow = true;
+	var mesh=this.mesh;
+
+	var remFolder;
+	var remsAdded=0;
+
+	var datFolder = dat.GUIVR.create('ooblox sandbox Menu');
 
 	var groupNode = new THREE.Group();
-	groupNode.add(this.mesh);
+	groupNode.add(datFolder);
 	groupNode.name = "vrObjectGroup";
-	var guioffset = new THREE.Vector3();
 
-	var datFolder = dat.GUIVR.create('Ground (Texures by Nobiax)');
-	groupNode.add( datFolder );
+	var conf = {menusHidden:false};
 
-	var heightMaps = [[[0.0,0.0],[0.0,0.0]]];
-	var geometries = [new THREE.PlaneGeometry(1, 1, 1, 1)];
-
-	var currentSeed = 123;
-	//alert("M "+conf.iterationsLeft+ " "+currentString);
-	function seededRandom() 
-	{
-			var x = Math.sin(currentSeed++) * 10000;
-			return x - Math.floor(x);
-	}
-
-	var addIteration = function ()
-	{
-		var iterationsSoFar = heightMaps.length-1;
-		lastheightMap = heightMaps[iterationsSoFar];
-		var nextHeightMap = [];
-
-
-		for(var i = 0; i < lastheightMap.length -1; i ++)
-		{
-			var thisRow = [];
-			var newRow = [];
-			for(var j = 0; j < lastheightMap[i].length -1; j ++)
-			{
-				thisRow.push(lastheightMap[i][j]);
-				thisRow.push((0.5*(lastheightMap[i][j]+lastheightMap[i][j+1])) + ((seededRandom()-0.5)*(Math.pow(0.5,iterationsSoFar))));
-				newRow.push((0.5*(lastheightMap[i][j]+lastheightMap[i+1][j])) + ((seededRandom()-0.5)*(Math.pow(0.5,iterationsSoFar))));
-				newRow.push(0.0);
-			}
-			thisRow.push(lastheightMap[i][lastheightMap[i].length -1]);
-			newRow.push((0.5*(lastheightMap[i][lastheightMap[i].length -1] + lastheightMap[i+1][lastheightMap[i].length -1] )) + ((seededRandom()-0.5)*(Math.pow(0.5,iterationsSoFar))));
-			nextHeightMap.push(thisRow);
-			nextHeightMap.push(newRow);
-		}
-		
-		var lastRow = [];
-		for(var j = 0; j < lastheightMap[lastheightMap.length -1].length -1; j ++)
-		{
-			lastRow.push(lastheightMap[lastheightMap.length -1][j]);
-			lastRow.push((0.5*(lastheightMap[lastheightMap.length -1][j]+lastheightMap[lastheightMap.length -1][j+1])) + ((seededRandom()-0.5)*(Math.pow(0.5,iterationsSoFar))));
-		}
-		lastRow.push(lastheightMap[lastheightMap.length -1][lastheightMap[lastheightMap.length -1].length -1]);
-		nextHeightMap.push(lastRow);
-
-		heightMaps.push(nextHeightMap);
-		geometries.push(new THREE.PlaneGeometry(1, 1, Math.pow(2,iterationsSoFar+1), Math.pow(2,iterationsSoFar+1)));
-
-		for(var i = 1; i < nextHeightMap.length; i+=2)
-		{
-			for(var j = 1; j < nextHeightMap[i].length; j+=2)
-				nextHeightMap[i][j] = 	(0.25 * (nextHeightMap[i-1][j]+nextHeightMap[i+1][j]+nextHeightMap[i][j-1]+nextHeightMap[i][j+1])) + 
-							((seededRandom()-0.5)*(Math.pow(0.5,iterationsSoFar)));
-		}
-
-		var geoindex = 0;
-
-		for(var i = 0; i < nextHeightMap.length; i ++)
-		{
-			for(var j = 0; j < nextHeightMap[i].length; j ++)
-			{
-				geometries[geometries.length-1].vertices[geoindex].z = nextHeightMap[i][j];
-				geoindex++;
-			}
-		}
-	}
-
-	var TPLProperties = function ()	{
-		this.followGUI = true;
-		this.theme = "dirt";
-		this.randomSeed = 1234567;
-		this.iterations = 0;
-		this.textureRepsX = 2.0;
-		this.textureRepsY = 2.0;
-	};
-	var conf = new TPLProperties();
-
-	var themes = ["dirt","alienmold","arid","glacial","whitestone"];
-
-	var refreshURL = function (targetScene)
+	var urlRefresh = function (targetScene)
 	{
 		var position = new THREE.Vector3();
 		targetScene.updateMatrixWorld();
 		position.setFromMatrixPosition( mesh.matrixWorld );
-		var guiposition = new THREE.Vector3();
-		guiposition.setFromMatrixPosition( datFolder.matrixWorld );
-
-		if (conf.followGUI) mesh.position.copy(guiposition.sub(guioffset));
-		else guioffset.copy(guiposition.sub(position));
-
 		updateURLargs([	mesh.uname,
 				mesh.vrObjectTypeID,
-				mesh.position.x,
-				mesh.position.y,
-				mesh.position.z,
-				mesh.scale.x,
-				mesh.scale.y,
-				mesh.scale.z,
-				guioffset.x,
-				guioffset.y,
-				guioffset.z,
-				conf.textureRepsX,
-				conf.textureRepsY,
-				conf.randomSeed,
-				conf.iterations,
-				conf.theme]);
+				position.x,
+				position.y,
+				position.z,
+				conf.menusHidden]);
+	}
+
+	var showHideMenus = function (targetScene)
+	{
+		targetScene.traverse(function(obj) {
+			if (obj.hasOwnProperty('beingMoved'))
+			{
+				if (obj.parent.name==="vrObjectGroup")
+				{
+					obj.visible = !conf.menusHidden;
+				}
+			}
+		});
 	}
 
 	var refresh = function (targetScene)
 	{
-		var textureFolder = "pattern_265";
-		switch (conf.theme)
+		urlRefresh(targetScene);
+		var allmodulArgs="";
+		var urlCallParametersList= [];
+		if (window.location.href.indexOf("?")!=-1)
 		{
-			case "dirt":
-				textureFolder = "pattern_265";
-				break;
-			case "alienmold":
-				textureFolder = "pattern_266";
-				break;
-			case "arid":
-				textureFolder = "pattern_267";
-				break;
-			case "glacial":
-				textureFolder = "pattern_268";
-				break;
-			case "whitestone":
-				textureFolder = "pattern_269";
-				break;
+			allmodulArgs=window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
+			urlCallParametersList = allmodulArgs.split("&");
+			while (remsAdded<urlCallParametersList.length)
+			{		
+				var uname = urlCallParametersList[remsAdded].substring(0, urlCallParametersList[remsAdded].indexOf("="));
+				var remobj = {myuname:uname, remove: function(){removeInstance(this.myuname);}};
+				remFolder.add(remobj,'remove').name(uname);;
+				remsAdded++;
+			}
+	
 		}
-		mesh.material.map = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/diffuse.tga");
-		mesh.material.map.wrapS = THREE.RepeatWrapping;
-		mesh.material.map.wrapT = THREE.RepeatWrapping;
-		mesh.material.map.repeat.set( conf.textureRepsX , conf.textureRepsY);
-		mesh.material.normalMap = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/normal.tga");
-		mesh.material.normalMap.wrapS = THREE.RepeatWrapping;
-		mesh.material.normalMap.wrapT = THREE.RepeatWrapping;
-		mesh.material.normalMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
-		mesh.material.emissiveMap = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/specular.tga");
-		mesh.material.emissiveMap.wrapS = THREE.RepeatWrapping;
-		mesh.material.emissiveMap.wrapT = THREE.RepeatWrapping;
-		mesh.material.emissiveMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
-		mesh.material.emissive = new THREE.Color( 0x555555 );
-		mesh.material.metalness = 0.1;
-		mesh.material.roughness = 0.5;
-		refreshURL(targetScene);
-	}
-
-	this.mesh.fillDatGUI = function (targetScene,mesh)
+	};
+	
+	this.mesh.fillDatGUI = function (targetScene, camera)
 	{
-		datFolder.position.copy(guioffset).add(mesh.position);
+		datFolder.position.copy(mesh.position);
+		mesh.position.x=0;
+		mesh.position.y=0;
+		mesh.position.z=0;
+		indicator.position.y=0;
+		indicator.position.z=0;
+		indicator.scale.x=0.05;
+		indicator.scale.y=0.05;
+		indicator.scale.z=10;
+		indicator.position.x=-0.25;
 		datFolder.scale.set(20.0,20.0,0.1);
-		var followFlag = datFolder.add(conf,'followGUI');
 
-		var propFolder = dat.GUIVR.create('Properties');
+		remFolder = dat.GUIVR.create('Remove');
+		datFolder.addFolder(remFolder);
+		
+		var rezFolder = dat.GUIVR.create('Add');
 
-		var randomSeedSlider = propFolder.add(conf,'randomSeed',0,99999999).step(1);
-		randomSeedSlider.onChange(function(){
-			heightMaps = [[[0.0,0.0],[0.0,0.0]]];
-			geometries = [new THREE.PlaneGeometry(1, 1, 1, 1)];
-			currentSeed = conf.randomSeed;
-			while (geometries.length < (conf.iterations+1))
-			{addIteration();}
-			mesh.geometry = geometries[conf.iterations];
-			refresh(targetScene);
-		});
+		var tkobj = {add: function() {
+			var position = new THREE.Vector3();
+			targetScene.updateMatrixWorld();
+			position.setFromMatrixPosition( indicator.matrixWorld );
+			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
+			var d = new Date();
+			var uname = "TK" + d.getTime();
+			var newhref = window.location.href + "&" + uname + "=TTK+" + posScaleRotString + 
+				"+6+0.4+240+7+"+Math.floor(Math.random() * 25)+"+"+Math.floor(Math.random() * 25) +"+-10+-5+6";
+			window.history.pushState({}, '', newhref);
+			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("TTK")]();
+			importedThing.mesh.uname = uname;
+			importedThing.load(targetScene, camera);
+			refresh(targetScene);}};
+		rezFolder.add(tkobj,'add').name("Torus Knot");
 
-		var iterSlider = propFolder.add(conf,'iterations',0,9).step(1);
-		iterSlider.onChange(function(value) {
-			while (geometries.length < (conf.iterations+1))
-			{addIteration();}
-			mesh.geometry = geometries[conf.iterations];
-			refresh(targetScene);
-		});
+		var psolobj = {add: function() {
+			var position = new THREE.Vector3();
+			targetScene.updateMatrixWorld();
+			position.setFromMatrixPosition( indicator.matrixWorld );
+			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
+			var d = new Date();
+			var uname = "PSOL" + d.getTime();
+			var newhref = window.location.href + "&" + uname + "=PLS+" + posScaleRotString + "+3+FN(1)+"+Math.floor(Math.random() * 99999999)+
+				"+5+"+(0.4+(0.6*Math.random()))+"+"+(2.0+(3.0*Math.random()))+"+"+(0.1+(0.6*Math.random()))+"+"+(0.2+(0.3*Math.random()))+
+				"+"+(0.2+(0.3*Math.random()))+"+"+(0.6*Math.random())+"+"+(0.6*Math.random())+"+"+(0.0001+(0.4*Math.random()))+"+"+(0.0001+(0.4*Math.random()))+"+5+5+0";
+			window.history.pushState({}, '', newhref);
+			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("PLS")]();
+			importedThing.mesh.uname = uname;
+			importedThing.load(targetScene, camera);
+			refresh(targetScene);}};
+		rezFolder.add(psolobj,'add').name("PSOL-System");
 
-		var sourceChanger = propFolder.add(conf,'theme',themes);
-		sourceChanger.onChange(function(value) {refresh(targetScene);});
-		var scxSlider = propFolder.add(mesh.scale,'x',1.0,10000.0).name("Scale X");
-		scxSlider.onChange(function(){refreshURL(targetScene);});
-		var scySlider = propFolder.add(mesh.scale,'y',1.0,10000.0).name("Scale Y");
-		scySlider.onChange(function(){refreshURL(targetScene);});
-		var sczSlider = propFolder.add(mesh.scale,'z',0.0,10000.0).name("Scale Z");
-		sczSlider.onChange(function(){refreshURL(targetScene);});
+		var cpgobj = {add: function() {
+			var position = new THREE.Vector3();
+			targetScene.updateMatrixWorld();
+			position.setFromMatrixPosition( indicator.matrixWorld );
+			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
+			var d = new Date();
+			var uname = "CPG" + d.getTime();
+			var newhref = window.location.href + "&" + uname + "=CPG+" + posScaleRotString + "+4+" +  Math.floor(Math.random() * 99999999) +"+-10+-5+0";
+			window.history.pushState({}, '', newhref);
+			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("CPG")]();
+			importedThing.mesh.uname = uname;
+			importedThing.load(targetScene, camera);
+			refresh(targetScene);}};
+		rezFolder.add(cpgobj,'add').name("Chord Progression");
 
-		var textureRepsXSlider = propFolder.add(conf,'textureRepsX',1.0,200.0).name("Texture Repeats X");
-		textureRepsXSlider.onChange(function(){refresh(targetScene);});
+		var metobj = {add: function() {
+			var position = new THREE.Vector3();
+			targetScene.updateMatrixWorld();
+			position.setFromMatrixPosition( indicator.matrixWorld );
+			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
+			var d = new Date();
+			var uname = "MET" + d.getTime();
+			var newhref = window.location.href + "&" + uname + "=MET+" + posScaleRotString + "+128+true+0+0+0";
+			window.history.pushState({}, '', newhref);
+			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("MET")]();
+			importedThing.mesh.uname = uname;
+			importedThing.load(targetScene, camera);
+			refresh(targetScene);}};
+		rezFolder.add(metobj,'add').name("Metronome");
 
-		var textureRepsYSlider = propFolder.add(conf,'textureRepsY',1.0,200.0).name("Texture Repeats Y");
-		textureRepsYSlider.onChange(function(){refresh(targetScene);});
+		var texobj = {add: function() {
+			var position = new THREE.Vector3();
+			targetScene.updateMatrixWorld();
+			position.setFromMatrixPosition( indicator.matrixWorld );
+			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
+			var d = new Date();
+			var uname = "TPL" + d.getTime();
+			var newhref = window.location.href + "&" + uname + "=TPL+" + posScaleRotString + "+30.0+15.0+0+0+0+-10+-8+0.1+ooblox-controls.png";
+			window.history.pushState({}, '', newhref);
+			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("TPL")]();
+			importedThing.mesh.uname = uname;
+			importedThing.load(targetScene, camera);
+			refresh(targetScene);}};
+		rezFolder.add(texobj,'add').name("Texture Panel");
 
+		var grnobj = {add: function() {
+			var position = new THREE.Vector3();
+			targetScene.updateMatrixWorld();
+			position.setFromMatrixPosition( indicator.matrixWorld );
+			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
+			var d = new Date();
+			var uname = "DSG" + d.getTime();
+			var newhref = window.location.href + "&" + uname + "=DSG+" + posScaleRotString + "+200.0+200.0+5.0+0+0+-10+5.0+5.0+8745553+5+dirt";
+			window.history.pushState({}, '', newhref);
+			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("DSG")]();
+			importedThing.mesh.uname = uname;
+			importedThing.load(targetScene, camera);
+			refresh(targetScene);}};
+		rezFolder.add(grnobj,'add').name("Ground");
 
-		propFolder.add(mesh.material,'wireframe').name("Wireframe");
-		datFolder.addFolder(propFolder);
-
-		var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
-		datFolder.add(remobj,'remove').name(mesh.uname);
-
+		datFolder.addFolder(rezFolder);
+		datFolder.children[1].add(mesh);
+		datFolder.children[1].add(indicator);
 		targetScene.add( groupNode );
-		window.addEventListener("mouseup", function(){refreshURL(targetScene);})
+		datFolder.close();
+		window.addEventListener("mouseup", function(){urlRefresh(targetScene);});
 	}
 
 	this.load = function (targetScene, camera)
 	{
-		heightMaps = [[[0.0,0.0],[0.0,0.0]]];
-		geometries = [new THREE.PlaneGeometry(1, 1, 1, 1)];
-		var argList = getURLargs(mesh.uname);
-		mesh.position.x = parseFloat(argList[1]);
-		mesh.position.y = parseFloat(argList[2]);
-		mesh.position.z = parseFloat(argList[3]);
-		mesh.scale.x = parseFloat(argList[4]);
-		mesh.scale.y = parseFloat(argList[5]);
-		mesh.scale.z = parseFloat(argList[6]);
-		guioffset.x = parseFloat(argList[7]);
-		guioffset.y = parseFloat(argList[8]);
-		guioffset.z = parseFloat(argList[9]);
-		conf.textureRepsX = parseFloat(argList[10]);
-		conf.textureRepsY = parseFloat(argList[11]);
-		conf.randomSeed = parseInt(argList[12]);
-		currentSeed = conf.randomSeed;
-		conf.iterations = parseInt(argList[13]);
-		conf.theme = argList[14];
-		mesh.fillDatGUI(targetScene,mesh);
-		while (geometries.length < (conf.iterations+1))
-		{addIteration();}
-		mesh.geometry = geometries[conf.iterations];
+		var argList = getURLargs(this.mesh.uname);
+		var position = new THREE.Vector3();
+		position.x = parseFloat(argList[1]);
+		position.y = parseFloat(argList[2]);
+		position.z = parseFloat(argList[3]);
+		conf.menusHidden = Boolean(argList[4]=="true");
+		this.mesh.position.copy(position);
+		this.mesh.fillDatGUI(targetScene, camera);
 		refresh(targetScene);
+
+		document.addEventListener("vrObjectInstantiated", onvrObjectInstantiated, false);
+		function onvrObjectInstantiated(event) {if (conf.menusHidden) showHideMenus(targetScene);};
+
+		document.addEventListener("keydown", onDocumentKeyDown, false);
+		function onDocumentKeyDown(event) {
+			switch(event.which)
+			{
+				case 77:
+					conf.menusHidden=!conf.menusHidden;
+					showHideMenus(targetScene);
+					urlRefresh(targetScene);
+			}
+		};
+
 		var event = new Event('vrObjectInstantiated');
 		document.dispatchEvent(event);
 	}
 }
 
-vrObjectConstructorList.push(oobloxDiamondSquareGround); // global list of all available vrObject type constructors
+vrObjectConstructorList.push(oobloxMasterMenu); // global list of all available vrObject type constructors
