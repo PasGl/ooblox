@@ -202,8 +202,6 @@ oobloxDiamondSquareGround = function ()
 		refresh(targetScene);
 		var event = new Event('vrObjectInstantiated');
 		document.dispatchEvent(event);
-		addIteration();
-		mesh.geometry = geometries[geometries.length-1];
 	}
 }
 
