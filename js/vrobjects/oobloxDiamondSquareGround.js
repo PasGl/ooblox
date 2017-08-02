@@ -204,7 +204,7 @@ oobloxDiamondSquareGround = function ()
 		scxSlider.onChange(function(){refreshURL(targetScene);});
 		var scySlider = propFolder.add(mesh.scale,'y',1.0,10000.0).name("Scale Y");
 		scySlider.onChange(function(){refreshURL(targetScene);});
-		var sczSlider = propFolder.add(mesh.scale,'z',0.0,10000.0).name("Scale Z");
+		var sczSlider = propFolder.add(mesh.scale,'z',0.0001,10000.0).name("Scale Z");
 		sczSlider.onChange(function(){refreshURL(targetScene);});
 
 		var textureRepsXSlider = propFolder.add(conf,'textureRepsX',1.0,200.0).name("Texture Repeats X");
