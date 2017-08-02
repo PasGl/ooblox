@@ -5,6 +5,7 @@
 oobloxDiamondSquareGround = function ()
 {
 	this.mesh = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshStandardMaterial({}));
+	this.mesh.rotation.y = Math.PI * 0.5;
 	this.mesh.vrObjectTypeID = "DSG";
 	this.mesh.uname = "";
 	var mesh = this.mesh;
@@ -82,9 +83,6 @@ oobloxDiamondSquareGround = function ()
 
 		var sourceChanger = propFolder.add(conf,'theme',themes);
 		sourceChanger.onChange(function(value) {refresh(targetScene);});
-
-		propFolder.add(mesh.material,'transparent').name("Texture transparent");
-
 		var scxSlider = propFolder.add(mesh.scale,'x',1.0,1000).name("Scale X");
 		scxSlider.onChange(function(){refreshURL(targetScene);});
 		var scySlider = propFolder.add(mesh.scale,'y',1.0,1000).name("Scale Y");
