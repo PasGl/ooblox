@@ -59,7 +59,7 @@ oobloxDiamondSquareGround = function ()
 		nextHeightMap.push(lastRow);
 
 		heightMaps.push(nextHeightMap);
-		geometries.push(new THREE.PlaneGeometry(1, 1, Math.pow(2,iterationsSoFar+1), Math.pow(2,iterationsSoFar+1));
+		geometries.push(new THREE.PlaneGeometry(1, 1, Math.pow(2,iterationsSoFar+1), Math.pow(2,iterationsSoFar+1)));
 
 		var geoindex = 0;
 		for(var i = 0; i < nextHeightMap.length; i ++)
