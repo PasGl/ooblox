@@ -157,6 +157,14 @@ oobloxDiamondSquareGround = function ()
 
 		var propFolder = dat.GUIVR.create('Properties');
 
+		var iterSlider = propFolder.add(conf,'iterations',0,10).step(1);
+		sourceChanger.onChange(function(value) {
+			while (geometries.length < (conf.iterations+1))
+			{addIteration();}
+			mesh.geometry = geometries[conf.iterations];
+			refresh(targetScene);
+		});
+
 		var sourceChanger = propFolder.add(conf,'theme',themes);
 		sourceChanger.onChange(function(value) {refresh(targetScene);});
 		var scxSlider = propFolder.add(mesh.scale,'x',1.0,1000).name("Scale X");
