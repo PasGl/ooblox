@@ -77,7 +77,8 @@ oobloxDiamondSquareGround = function ()
 		mesh.material.normalMap = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/normal.tga");
 		mesh.material.emissiveMap = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/specular.tga");
 		mesh.material.emissive = new THREE.Color( 0x555555 );
-		mesh.material.metalness = 0.0;
+		mesh.material.metalness = 0.1;
+		mesh.material.roughness = 0.5;
 		refreshURL(targetScene);
 	}
 
