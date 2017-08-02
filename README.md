@@ -31,6 +31,11 @@ A scene about algorithmic geometry, with a Torus Knot and a (not very good, yet)
 A scene with one instance of each Module.
 * http://51.15.67.244/demo
 
+## Contact
+
+* Discord | https://discord.gg/Ux52EYw
+* Patreon | https://www.patreon.com/PasGl
+
 ## Deployment & hosting
 
 Git clone from master to your webserver.
@@ -73,11 +78,6 @@ The other entries are shortcuts for scenes.
                 rewrite ^ http://51.15.67.244/?skybox=SKY+0+20+0+ThickCloudsWater&cammod=OCM+0+2.4492935982947065e-15+40+0+0+0&thisMenu=OMM+18.66255092467717+1.0802947242767904+0+false&TPL1501595236567=TPL+-9.829569922820344+-4.716757406437964+0+30+15+5.898700000000001+0.39690000000000003+0.1095+-10+-10.28196373816352+0.1+ooblox-controls.png;
         }
 ```
-
-## Contact
-
-* Discord | https://discord.gg/Ux52EYw
-* Patreon | https://www.patreon.com/PasGl
 
 ## ooblox makes use of
 
