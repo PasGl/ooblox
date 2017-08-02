@@ -5,7 +5,7 @@
 oobloxDiamondSquareGround = function ()
 {
 	this.mesh = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshStandardMaterial({}));
-	this.mesh.rotation.y = Math.PI * 0.5;
+	this.mesh.rotation.z = Math.PI * 0.5;
 	this.mesh.vrObjectTypeID = "DSG";
 	this.mesh.uname = "";
 	var mesh = this.mesh;
