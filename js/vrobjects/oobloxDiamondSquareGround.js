@@ -14,6 +14,9 @@ oobloxDiamondSquareGround = function ()
 	this.mesh.uname = "";
 	var mesh = this.mesh;
 
+	this.mesh.receiveShadow = true;
+	this.mesh.castShadow = true;
+
 	var groupNode = new THREE.Group();
 	groupNode.add(this.mesh);
 	groupNode.name = "vrObjectGroup";
@@ -90,7 +93,7 @@ oobloxDiamondSquareGround = function ()
 
 	var TPLProperties = function ()	{
 		this.followGUI = true;
-		this.theme = "1";
+		this.theme = "dirt";
 		this.randomSeed = 1234567;
 		this.iterations = 0;
 		this.textureRepsX = 2.0;
@@ -98,7 +101,7 @@ oobloxDiamondSquareGround = function ()
 	};
 	var conf = new TPLProperties();
 
-	var themes = ["1","2","3","4","5"];
+	var themes = ["dirt","alienmold","arid","glacial","whitestone"];
 
 	var refreshURL = function (targetScene)
 	{
@@ -134,19 +137,19 @@ oobloxDiamondSquareGround = function ()
 		var textureFolder = "pattern_265";
 		switch (conf.theme)
 		{
-			case "1":
+			case "dirt":
 				textureFolder = "pattern_265";
 				break;
-			case "2":
+			case "alienmold":
 				textureFolder = "pattern_266";
 				break;
-			case "3":
+			case "arid":
 				textureFolder = "pattern_267";
 				break;
-			case "4":
+			case "glacial":
 				textureFolder = "pattern_268";
 				break;
-			case "5":
+			case "whitestone":
 				textureFolder = "pattern_269";
 				break;
 		}
@@ -197,11 +200,11 @@ oobloxDiamondSquareGround = function ()
 
 		var sourceChanger = propFolder.add(conf,'theme',themes);
 		sourceChanger.onChange(function(value) {refresh(targetScene);});
-		var scxSlider = propFolder.add(mesh.scale,'x',1.0,1000).name("Scale X");
+		var scxSlider = propFolder.add(mesh.scale,'x',1.0,10000.0).name("Scale X");
 		scxSlider.onChange(function(){refreshURL(targetScene);});
-		var scySlider = propFolder.add(mesh.scale,'y',1.0,1000).name("Scale Y");
+		var scySlider = propFolder.add(mesh.scale,'y',1.0,10000.0).name("Scale Y");
 		scySlider.onChange(function(){refreshURL(targetScene);});
-		var sczSlider = propFolder.add(mesh.scale,'z',0.0001,200).name("Scale Z");
+		var sczSlider = propFolder.add(mesh.scale,'z',0.0,10000.0).name("Scale Z");
 		sczSlider.onChange(function(){refreshURL(targetScene);});
 
 		var textureRepsXSlider = propFolder.add(conf,'textureRepsX',1.0,200.0).name("Texture Repeats X");
