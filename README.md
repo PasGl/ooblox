@@ -41,6 +41,8 @@ The first entry is for gathering all available Modules automatically.
 
 The second entry allows Modules to find all available textures.
 
+The third entry allows Modules to find all available 3D models.
+
 The other entries are shortcuts for scenes.
 ```
         location ~ /js/vrobjects {
@@ -48,6 +50,10 @@ The other entries are shortcuts for scenes.
         }
 
         location ~ /images/textures {
+                autoindex on;
+        }
+
+        location ~ /models {
                 autoindex on;
         }
 
