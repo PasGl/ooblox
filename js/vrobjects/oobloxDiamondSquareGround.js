@@ -74,8 +74,17 @@ oobloxDiamondSquareGround = function ()
 				break;
 		}
 		mesh.material.map = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/diffuse.tga");
+		mesh.material.map.wrapS = THREE.RepeatWrapping;
+		mesh.material.map.wrapT = THREE.RepeatWrapping;
+		mesh.material.map.repeat.set( 10.0 , 10.0);
 		mesh.material.normalMap = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/normal.tga");
+		mesh.material.normalMap.wrapS = THREE.RepeatWrapping;
+		mesh.material.normalMap.wrapT = THREE.RepeatWrapping;
+		mesh.material.normalMap.repeat.set( 10.0 , 10.0);
 		mesh.material.emissiveMap = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/specular.tga");
+		mesh.material.emissiveMap.wrapS = THREE.RepeatWrapping;
+		mesh.material.emissiveMap.wrapT = THREE.RepeatWrapping;
+		mesh.material.emissiveMap.repeat.set( 10.0 , 10.0);
 		mesh.material.emissive = new THREE.Color( 0x555555 );
 		mesh.material.metalness = 0.1;
 		mesh.material.roughness = 0.5;
