@@ -70,6 +70,7 @@ oobloxDiamondSquareGround = function ()
 				break;
 		}
 		mesh.material.map = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/diffuse.tga");
+		mesh.material.normalMap = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/normal.tga");
 		refreshURL(targetScene);
 	}
 
