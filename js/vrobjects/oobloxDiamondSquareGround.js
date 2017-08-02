@@ -2,6 +2,10 @@
  * @author Pascal Gleske / https://github.com/PasGl
  */
 
+/**
+ * Textures by Nobiax / http://yughues.deviantart.com
+ */
+
 oobloxDiamondSquareGround = function ()
 {
 	this.mesh = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshStandardMaterial({}));
@@ -15,7 +19,7 @@ oobloxDiamondSquareGround = function ()
 	groupNode.name = "vrObjectGroup";
 	var guioffset = new THREE.Vector3();
 
-	var datFolder = dat.GUIVR.create('Ground');
+	var datFolder = dat.GUIVR.create('Ground (Texures by Nobiax)');
 	groupNode.add( datFolder )
 
 	var TPLProperties = function ()	{this.followGUI = true;this.theme = "1";}
