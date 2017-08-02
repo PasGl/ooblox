@@ -27,8 +27,8 @@ oobloxDiamondSquareGround = function ()
 
 	var addIteration = function ()
 	{
-		var iterationsSoFar = heightMaps.length;
-		lastheightMap = heightMaps[iterationsSoFar-1];
+		var iterationsSoFar = heightMaps.length-1;
+		lastheightMap = heightMaps[iterationsSoFar];
 		var nextHeightMap = [];
 
 
