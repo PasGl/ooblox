@@ -23,7 +23,7 @@ oobloxMeshLoader = function ()
 	var datFolder = dat.GUIVR.create('Mesh');
 	groupNode.add(datFolder)
 
-	var refreshURL = function (targetScene,mesh)
+	var refreshURL = function (targetScene)
 	{
 		var position = new THREE.Vector3();
 		targetScene.updateMatrixWorld();
@@ -51,7 +51,7 @@ oobloxMeshLoader = function ()
 				encodeURIComponent(conf.modelFilename)]);
 	}
 
-	var refresh = function (targetScene,mesh)
+	var refresh = function (targetScene)
 	{
 		mesh.remove(loadedModel);
 		if ([".dae",".DAE"].indexOf(conf.modelFilename.substring(conf.modelFilename.length-4,conf.modelFilename.length+1)) >=0)
@@ -64,7 +64,7 @@ oobloxMeshLoader = function ()
 			});
 		}
 		mesh.add(loadedModel);
-		refreshURL(targetScene,mesh);
+		refreshURL(targetScene);
 	}
 
 	this.load = function (targetScene, camera)
@@ -99,7 +99,7 @@ oobloxMeshLoader = function ()
 				}
 				else conf.models.splice(n,1);
 			}
-			refresh(targetScene,mesh);
+			refresh(targetScene);
 			window.addEventListener("mouseup", function(){refreshURL(targetScene);});
 			var event = new Event('vrObjectInstantiated');
 			document.dispatchEvent(event);
