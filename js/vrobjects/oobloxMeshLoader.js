@@ -14,7 +14,7 @@ oobloxMeshLoader = function ()
 	groupNode.name = "vrObjectGroup";
 	var guioffset = new THREE.Vector3();
 
-	var datFolder = dat.GUIVR.create('Texture Panel');
+	var datFolder = dat.GUIVR.create('Mesh');
 	groupNode.add( datFolder )
 
 	var TPLProperties = function ()	{this.followGUI = true;this.modelFilename = "Object.dae";}
@@ -61,8 +61,7 @@ oobloxMeshLoader = function ()
 		if ([".dae",".DAE"].indexOf(conf.modelFilename.substring(conf.modelFilename.length-4,conf.modelFilename.length+1)) >=0)
 		{
 			var loader = new THREE.ColladaLoader();
-			targetScene.remove(mesh);
-			loader.load('models/'+conf.modelFilename, function ( collada ) {mesh = collada.scene;targetScene.add(mesh);});
+			loader.load('models/'+conf.modelFilename, function ( collada ) {mesh = collada.scene;});
 		}
 
 		mesh.position.copy(position);
