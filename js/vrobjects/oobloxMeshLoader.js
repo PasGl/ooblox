@@ -15,7 +15,7 @@ oobloxMeshLoader = function ()
 	var guioffset = new THREE.Vector3();
 
 	var datFolder = dat.GUIVR.create('Mesh');
-	groupNode.add( datFolder )
+	groupNode.add( datFolder );
 
 	var TPLProperties = function ()	{this.followGUI = true;this.modelFilename = "Object.dae";}
 	var conf = new TPLProperties();
@@ -64,6 +64,7 @@ oobloxMeshLoader = function ()
 			loader.load('models/'+conf.modelFilename, function ( collada ) 
 			{
 				groupNode.remove(mesh);
+				groupNode.remove(datFolder);
 				mesh = collada.scene;
 				mesh.position.copy(position);
 				mesh.scale.copy(scale);
@@ -71,7 +72,9 @@ oobloxMeshLoader = function ()
 				mesh.uname = uname;
 				mesh.vrObjectTypeID = vrObjectTypeID;
 				groupNode.add(mesh);
-				refreshURL(targetScene);
+				datFolder = dat.GUIVR.create('Mesh');
+				groupNode.add( datFolder );
+				fillDatGUI(targetScene);
 			});
 		}	
 	}
@@ -141,7 +144,6 @@ oobloxMeshLoader = function ()
 				}
 				else models.splice(n,1);
 			}
-			fillDatGUI(targetScene);
 			refresh(targetScene);
 			var event = new Event('vrObjectInstantiated');
 			document.dispatchEvent(event);
