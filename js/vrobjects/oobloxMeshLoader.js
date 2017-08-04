@@ -126,7 +126,7 @@ oobloxMeshLoader = function ()
 		guioffset.x = parseFloat(argList[10]);
 		guioffset.y = parseFloat(argList[11]);
 		guioffset.z = parseFloat(argList[12]);
-		conf.textureFilename = decodeURIComponent(argList.slice(13).join(""));
+		conf.modelFilename = decodeURIComponent(argList.slice(13).join(""));
 
 		$.get("./models", function(data) {
 			models = data.split("href=\"");
