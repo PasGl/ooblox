@@ -17,31 +17,7 @@ oobloxMeshLoader = function ()
 	groupNode.name = "vrObjectGroup";
 	var guioffset = new THREE.Vector3();
 
-	var datFolder = dat.GUIVR.create('Mesh');
-	datFolder = dat.GUIVR.create('Mesh');
-	datFolder.position.copy(guioffset).add(mesh.position);
-	datFolder.scale.set(20.0,20.0,0.1);
-	var followFlag = datFolder.add(conf,'followGUI');
-	var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
-	datFolder.add(remobj,'remove').name(mesh.uname);
-	var propFolder = dat.GUIVR.create('Properties');
-	var sourceChanger = propFolder.add(conf,'modelFilename',models);
-	sourceChanger.onChange(function(value) {refresh(targetScene);});
-	var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
-	scxSlider.onChange(function(){refreshURL(targetScene);});
-	var scySlider = propFolder.add(mesh.scale,'y',0.0001,100).name("Scale Y");
-	scySlider.onChange(function(){refreshURL(targetScene);});
-	var sczSlider = propFolder.add(mesh.scale,'z',0.0001,100).name("Scale Z");
-	sczSlider.onChange(function(){refreshURL(targetScene);});
-	var rotxSlider = propFolder.add(mesh.rotation,'x',0.0,Math.PI*2.0).name("Rotation X").step(0.0001);
-	rotxSlider.onChange(function(){refreshURL(targetScene);});
-	var rotySlider = propFolder.add(mesh.rotation,'y',0.0,Math.PI*2.0).name("Rotation Y").step(0.0001);
-	rotySlider.onChange(function(){refreshURL(targetScene);});
-	var rotzSlider = propFolder.add(mesh.rotation,'z',0.0,Math.PI*2.0).name("Rotation Z").step(0.0001);
-	rotzSlider.onChange(function(){refreshURL(targetScene);});
-	datFolder.addFolder(propFolder);
-	groupNode.add( datFolder );
-
+	var datFolder,followFlag,remobj,propFolder,sourceChanger,scxSlider,scySlider,sczSlider,rotxSlider,rotySlider,rotzSlider;
 
 	var models = [];
 
@@ -143,6 +119,30 @@ oobloxMeshLoader = function ()
 		guioffset.y = parseFloat(argList[11]);
 		guioffset.z = parseFloat(argList[12]);
 		conf.modelFilename = decodeURIComponent(argList.slice(13).join(""));
+
+		datFolder = dat.GUIVR.create('Mesh');
+		datFolder.position.copy(guioffset).add(mesh.position);
+		datFolder.scale.set(20.0,20.0,0.1);
+		followFlag = datFolder.add(conf,'followGUI');
+		remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
+		datFolder.add(remobj,'remove').name(mesh.uname);
+		propFolder = dat.GUIVR.create('Properties');
+		sourceChanger = propFolder.add(conf,'modelFilename',models);
+		sourceChanger.onChange(function(value) {refresh(targetScene);});
+		scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
+		scxSlider.onChange(function(){refreshURL(targetScene);});
+		scySlider = propFolder.add(mesh.scale,'y',0.0001,100).name("Scale Y");
+		scySlider.onChange(function(){refreshURL(targetScene);});
+		sczSlider = propFolder.add(mesh.scale,'z',0.0001,100).name("Scale Z");
+		sczSlider.onChange(function(){refreshURL(targetScene);});
+		rotxSlider = propFolder.add(mesh.rotation,'x',0.0,Math.PI*2.0).name("Rotation X").step(0.0001);
+		rotxSlider.onChange(function(){refreshURL(targetScene);});
+		rotySlider = propFolder.add(mesh.rotation,'y',0.0,Math.PI*2.0).name("Rotation Y").step(0.0001);
+		rotySlider.onChange(function(){refreshURL(targetScene);});
+		rotzSlider = propFolder.add(mesh.rotation,'z',0.0,Math.PI*2.0).name("Rotation Z").step(0.0001);
+		rotzSlider.onChange(function(){refreshURL(targetScene);});
+		datFolder.addFolder(propFolder);
+		groupNode.add( datFolder );
 
 		$.get("./models", function(data) {
 			models = data.split("href=\"");
