@@ -21,7 +21,7 @@ oobloxMeshLoader = function ()
 
 	var models = [];
 
-	var refreshURL = function (targetScene)
+	var refreshURL = function (targetScene,mesh)
 	{
 		var position = new THREE.Vector3();
 		targetScene.updateMatrixWorld();
@@ -49,7 +49,7 @@ oobloxMeshLoader = function ()
 				encodeURIComponent(conf.modelFilename)]);
 	}
 
-	var refresh = function (targetScene)
+	var refresh = function (targetScene,mesh)
 	{
 		var uname = mesh.uname;
 		var vrObjectTypeID = mesh.vrObjectTypeID;
@@ -70,12 +70,12 @@ oobloxMeshLoader = function ()
 				mesh.uname = uname;
 				mesh.vrObjectTypeID = vrObjectTypeID;
 				groupNode.add(mesh);
-				fillDatGUI(targetScene);
+				fillDatGUI(targetScene,mesh);
 			});
 		}	
 	}
 
-	var fillDatGUI = function (targetScene)
+	var fillDatGUI = function (targetScene,mesh)
 	{
 		propFolder.remove(sourceChanger);
 		propFolder.remove(scxSlider);
@@ -87,19 +87,19 @@ oobloxMeshLoader = function ()
 		datFolder.remove(propFolder);
 		propFolder = dat.GUIVR.create('Properties');
 		sourceChanger = propFolder.add(conf,'modelFilename',models);
-		sourceChanger.onChange(function(value) {refresh(targetScene);});
+		sourceChanger.onChange(function(value) {refresh(targetScene, mesh);});
 		scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
-		scxSlider.onChange(function(){refreshURL(targetScene);});
+		scxSlider.onChange(function(){refreshURL(targetScene, mesh);});
 		scySlider = propFolder.add(mesh.scale,'y',0.0001,100).name("Scale Y");
-		scySlider.onChange(function(){refreshURL(targetScene);});
+		scySlider.onChange(function(){refreshURL(targetScene, mesh);});
 		sczSlider = propFolder.add(mesh.scale,'z',0.0001,100).name("Scale Z");
-		sczSlider.onChange(function(){refreshURL(targetScene);});
+		sczSlider.onChange(function(){refreshURL(targetScene, mesh);});
 		rotxSlider = propFolder.add(mesh.rotation,'x',0.0,Math.PI*2.0).name("Rotation X").step(0.0001);
-		rotxSlider.onChange(function(){refreshURL(targetScene);});
+		rotxSlider.onChange(function(){refreshURL(targetScene, mesh);});
 		rotySlider = propFolder.add(mesh.rotation,'y',0.0,Math.PI*2.0).name("Rotation Y").step(0.0001);
-		rotySlider.onChange(function(){refreshURL(targetScene);});
+		rotySlider.onChange(function(){refreshURL(targetScene, mesh);});
 		rotzSlider = propFolder.add(mesh.rotation,'z',0.0,Math.PI*2.0).name("Rotation Z").step(0.0001);
-		rotzSlider.onChange(function(){refreshURL(targetScene);});
+		rotzSlider.onChange(function(){refreshURL(targetScene, mesh);});
 		datFolder.addFolder(propFolder);
 	}
 
@@ -128,21 +128,22 @@ oobloxMeshLoader = function ()
 		datFolder.add(remobj,'remove').name(mesh.uname);
 		propFolder = dat.GUIVR.create('Properties');
 		sourceChanger = propFolder.add(conf,'modelFilename',models);
-		sourceChanger.onChange(function(value) {refresh(targetScene);});
+		sourceChanger.onChange(function(value) {refresh(targetScene, mesh);});
 		scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
-		scxSlider.onChange(function(){refreshURL(targetScene);});
+		scxSlider.onChange(function(){refreshURL(targetScene, mesh);});
 		scySlider = propFolder.add(mesh.scale,'y',0.0001,100).name("Scale Y");
-		scySlider.onChange(function(){refreshURL(targetScene);});
+		scySlider.onChange(function(){refreshURL(targetScene, mesh);});
 		sczSlider = propFolder.add(mesh.scale,'z',0.0001,100).name("Scale Z");
-		sczSlider.onChange(function(){refreshURL(targetScene);});
+		sczSlider.onChange(function(){refreshURL(targetScene, mesh);});
 		rotxSlider = propFolder.add(mesh.rotation,'x',0.0,Math.PI*2.0).name("Rotation X").step(0.0001);
-		rotxSlider.onChange(function(){refreshURL(targetScene);});
+		rotxSlider.onChange(function(){refreshURL(targetScene, mesh);});
 		rotySlider = propFolder.add(mesh.rotation,'y',0.0,Math.PI*2.0).name("Rotation Y").step(0.0001);
-		rotySlider.onChange(function(){refreshURL(targetScene);});
+		rotySlider.onChange(function(){refreshURL(targetScene, mesh);});
 		rotzSlider = propFolder.add(mesh.rotation,'z',0.0,Math.PI*2.0).name("Rotation Z").step(0.0001);
-		rotzSlider.onChange(function(){refreshURL(targetScene);});
+		rotzSlider.onChange(function(){refreshURL(targetScene, mesh);});
 		datFolder.addFolder(propFolder);
 		groupNode.add( datFolder );
+		targetScene.add( groupNode );
 
 		$.get("./models", function(data) {
 			models = data.split("href=\"");
@@ -158,7 +159,6 @@ oobloxMeshLoader = function ()
 				}
 				else models.splice(n,1);
 			}
-			targetScene.add( groupNode );
 			refresh(targetScene);
 			window.addEventListener("mouseup", function(){refreshURL(targetScene);});
 			var event = new Event('vrObjectInstantiated');
