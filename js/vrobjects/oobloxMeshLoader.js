@@ -17,7 +17,7 @@ oobloxMeshLoader = function ()
 	var datFolder = dat.GUIVR.create('Texture Panel');
 	groupNode.add( datFolder )
 
-	var TPLProperties = function ()	{this.followGUI = true;this.modelFilename = "thing.dae";}
+	var TPLProperties = function ()	{this.followGUI = true;this.modelFilename = "Object.dae";}
 	var conf = new TPLProperties();
 
 	var models = [];
