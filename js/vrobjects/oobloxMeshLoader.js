@@ -74,12 +74,12 @@ oobloxMeshLoader = function ()
 				groupNode.add(mesh);
 				datFolder = dat.GUIVR.create('Mesh');
 				groupNode.add( datFolder );
-				fillDatGUI(targetScene);
+				fillDatGUI(targetScene,mesh);
 			});
 		}	
 	}
 
-	var fillDatGUI = function (targetScene)
+	var fillDatGUI = function (targetScene,mesh)
 	{
 		datFolder.position.copy(guioffset).add(mesh.position);
 		datFolder.scale.set(20.0,20.0,0.1);
