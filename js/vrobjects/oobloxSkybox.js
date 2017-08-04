@@ -55,7 +55,7 @@ oobloxSkybox = function ()
 				targetScene.fog = new THREE.Fog( 0x222629, 1, 500 );
 				break;
 			    case "FullMoon":
-				targetScene.fog = new THREE.Fog( 0x343c3a, 1, 300 );
+				targetScene.fog = new THREE.Fog( 0x1c2022, 1, 300 );
 				break;
 			    case "SunSet":
 				targetScene.fog = new THREE.Fog( 0x414544, 1, 900 );
