@@ -76,7 +76,7 @@ oobloxMeshLoader = function ()
 		}	
 	}
 
-	var fillDatGUI = function (targetScene,mesh)
+	var fillDatGUI = function (targetScene)
 	{
 		datFolder.position.copy(guioffset).add(mesh.position);
 		datFolder.scale.set(20.0,20.0,0.1);
@@ -141,7 +141,7 @@ oobloxMeshLoader = function ()
 				}
 				else models.splice(n,1);
 			}
-			fillDatGUI(targetScene,mesh);
+			fillDatGUI(targetScene);
 			refresh(targetScene);
 			var event = new Event('vrObjectInstantiated');
 			document.dispatchEvent(event);
