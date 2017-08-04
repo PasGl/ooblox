@@ -9,16 +9,25 @@ oobloxMeshLoader = function ()
 	this.mesh.uname = "";
 	var mesh = this.mesh;
 
+	var TPLProperties = function ()	{this.followGUI = true;this.modelFilename = "Object.dae";}
+	var conf = new TPLProperties();
+
 	var groupNode = new THREE.Group();
 	groupNode.add(this.mesh);
 	groupNode.name = "vrObjectGroup";
 	var guioffset = new THREE.Vector3();
 
 	var datFolder = dat.GUIVR.create('Mesh');
+	datFolder = dat.GUIVR.create('Mesh');
+	datFolder.position.copy(guioffset).add(mesh.position);
+	datFolder.scale.set(20.0,20.0,0.1);
+	var followFlag = datFolder.add(conf,'followGUI');
+	var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
+	datFolder.add(remobj,'remove').name(mesh.uname);
+	var propFolder = dat.GUIVR.create('Properties');
+	datFolder.addFolder(propFolder);
 	groupNode.add( datFolder );
 
-	var TPLProperties = function ()	{this.followGUI = true;this.modelFilename = "Object.dae";}
-	var conf = new TPLProperties();
 
 	var models = [];
 
@@ -71,7 +80,6 @@ oobloxMeshLoader = function ()
 				mesh.uname = uname;
 				mesh.vrObjectTypeID = vrObjectTypeID;
 				groupNode.add(mesh);
-				groupNode.remove( datFolder );
 				fillDatGUI(targetScene);
 			});
 		}	
@@ -79,18 +87,10 @@ oobloxMeshLoader = function ()
 
 	var fillDatGUI = function (targetScene)
 	{
-		datFolder = dat.GUIVR.create('Mesh');
-		datFolder.position.copy(guioffset).add(mesh.position);
-		datFolder.scale.set(20.0,20.0,0.1);
-		var followFlag = datFolder.add(conf,'followGUI');
-
-		var propFolder = dat.GUIVR.create('Properties');
-
+		datFolder.removeFolder(propFolder);
+		propFolder = dat.GUIVR.create('Properties');
 		var sourceChanger = propFolder.add(conf,'modelFilename',models);
 		sourceChanger.onChange(function(value) {refresh(targetScene);});
-
-		//propFolder.add(mesh.material,'transparent').name("Texture transparent");
-
 		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
 		scxSlider.onChange(function(){refreshURL(targetScene);});
 		var scySlider = propFolder.add(mesh.scale,'y',0.0001,100).name("Scale Y");
@@ -104,11 +104,6 @@ oobloxMeshLoader = function ()
 		var rotzSlider = propFolder.add(mesh.rotation,'z',0.0,Math.PI*2.0).name("Rotation Z").step(0.0001);
 		rotzSlider.onChange(function(){refreshURL(targetScene);});
 		datFolder.addFolder(propFolder);
-
-		var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
-		datFolder.add(remobj,'remove').name(mesh.uname);
-
-		groupNode.add( datFolder );
 	}
 
 	this.load = function (targetScene, camera)
