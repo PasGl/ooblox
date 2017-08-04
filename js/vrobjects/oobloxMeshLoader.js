@@ -61,16 +61,17 @@ oobloxMeshLoader = function ()
 		if ([".dae",".DAE"].indexOf(conf.modelFilename.substring(conf.modelFilename.length-4,conf.modelFilename.length+1)) >=0)
 		{
 			var loader = new THREE.ColladaLoader();
-			loader.load('models/'+conf.modelFilename, function ( collada ) {mesh = collada.scene;});
-			mesh.position.copy(position);
-			mesh.scale.copy(scale);
-			mesh.rotation.copy(rotation);
-			mesh.uname = uname;
-			mesh.vrObjectTypeID = vrObjectTypeID;
-			refreshURL(targetScene);
-		}
-
-		
+			loader.load('models/'+conf.modelFilename, function ( collada ) 
+			{
+				mesh = collada.scene;
+				mesh.position.copy(position);
+				mesh.scale.copy(scale);
+				mesh.rotation.copy(rotation);
+				mesh.uname = uname;
+				mesh.vrObjectTypeID = vrObjectTypeID;
+				refreshURL(targetScene);
+			});
+		}	
 	}
 
 	var fillDatGUI = function (targetScene,mesh)
