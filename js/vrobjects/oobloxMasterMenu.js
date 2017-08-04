@@ -181,6 +181,21 @@ oobloxMasterMenu = function ()
 			refresh(targetScene);}};
 		rezFolder.add(grnobj,'add').name("Ground");
 
+		var mesobj = {add: function() {
+			var position = new THREE.Vector3();
+			targetScene.updateMatrixWorld();
+			position.setFromMatrixPosition( indicator.matrixWorld );
+			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
+			var d = new Date();
+			var uname = "OML" + d.getTime();
+			var newhref = window.location.href + "&" + uname + "=OML+" + posScaleRotString + "+1.0+1.0+1.0+0+0+0+-10+-8+0.1+Object.dae";
+			window.history.pushState({}, '', newhref);
+			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("OML")]();
+			importedThing.mesh.uname = uname;
+			importedThing.load(targetScene, camera);
+			refresh(targetScene);}};
+		rezFolder.add(mesobj,'add').name("Mesh");
+
 		datFolder.addFolder(rezFolder);
 		datFolder.children[1].add(mesh);
 		datFolder.children[1].add(indicator);
