@@ -22,7 +22,7 @@ oobloxMeshLoader = function ()
 
 	var models = [];
 
-	var refreshURL = function (targetScene)
+	var refreshURL = function (targetScene,mesh)
 	{
 		var position = new THREE.Vector3();
 		targetScene.updateMatrixWorld();
@@ -50,7 +50,7 @@ oobloxMeshLoader = function ()
 				encodeURIComponent(conf.modelFilename)]);
 	}
 
-	var refresh = function (targetScene)
+	var refresh = function (targetScene,mesh)
 	{
 		var uname = mesh.uname;
 		var vrObjectTypeID = mesh.vrObjectTypeID;
@@ -71,7 +71,7 @@ oobloxMeshLoader = function ()
 				mesh.uname = uname;
 				mesh.vrObjectTypeID = vrObjectTypeID;
 				groupNode.add(mesh);
-				datFolder = dat.GUIVR.create('Mesh');
+				groupNode.remove( datFolder );
 				fillDatGUI(targetScene,mesh);
 			});
 		}	
@@ -79,6 +79,7 @@ oobloxMeshLoader = function ()
 
 	var fillDatGUI = function (targetScene,mesh)
 	{
+		datFolder = dat.GUIVR.create('Mesh');
 		datFolder.position.copy(guioffset).add(mesh.position);
 		datFolder.scale.set(20.0,20.0,0.1);
 		var followFlag = datFolder.add(conf,'followGUI');
@@ -86,26 +87,28 @@ oobloxMeshLoader = function ()
 		var propFolder = dat.GUIVR.create('Properties');
 
 		var sourceChanger = propFolder.add(conf,'modelFilename',models);
-		sourceChanger.onChange(function(value) {refresh(targetScene);});
+		sourceChanger.onChange(function(value) {refresh(targetScene,mesh);});
 
 		//propFolder.add(mesh.material,'transparent').name("Texture transparent");
 
 		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
-		scxSlider.onChange(function(){refreshURL(targetScene);});
+		scxSlider.onChange(function(){refreshURL(targetScene,mesh);});
 		var scySlider = propFolder.add(mesh.scale,'y',0.0001,100).name("Scale Y");
-		scySlider.onChange(function(){refreshURL(targetScene);});
+		scySlider.onChange(function(){refreshURL(targetScene,mesh);});
 		var sczSlider = propFolder.add(mesh.scale,'z',0.0001,100).name("Scale Z");
-		sczSlider.onChange(function(){refreshURL(targetScene);});
+		sczSlider.onChange(function(){refreshURL(targetScene,mesh);});
 		var rotxSlider = propFolder.add(mesh.rotation,'x',0.0,Math.PI*2.0).name("Rotation X").step(0.0001);
-		rotxSlider.onChange(function(){refreshURL(targetScene);});
+		rotxSlider.onChange(function(){refreshURL(targetScene,mesh);});
 		var rotySlider = propFolder.add(mesh.rotation,'y',0.0,Math.PI*2.0).name("Rotation Y").step(0.0001);;
-		rotySlider.onChange(function(){refreshURL(targetScene);});
+		rotySlider.onChange(function(){refreshURL(targetScene,mesh);});
 		var rotzSlider = propFolder.add(mesh.rotation,'z',0.0,Math.PI*2.0).name("Rotation Z").step(0.0001);;
-		rotzSlider.onChange(function(){refreshURL(targetScene);});
+		rotzSlider.onChange(function(){refreshURL(targetScene,mesh);});
 		datFolder.addFolder(propFolder);
 
 		var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
 		datFolder.add(remobj,'remove').name(mesh.uname);
+
+		groupNode.add( datFolder );
 	}
 
 	this.load = function (targetScene, camera)
@@ -139,9 +142,9 @@ oobloxMeshLoader = function ()
 				}
 				else models.splice(n,1);
 			}
-			refresh(targetScene);
 			targetScene.add( groupNode );
-			window.addEventListener("mouseup", function(){refreshURL(targetScene);});
+			refresh(targetScene,mesh);
+			window.addEventListener("mouseup", function(){refreshURL(targetScene,mesh);});
 			var event = new Event('vrObjectInstantiated');
 			document.dispatchEvent(event);
         	});
