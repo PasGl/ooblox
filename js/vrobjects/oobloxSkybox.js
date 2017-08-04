@@ -52,19 +52,19 @@ oobloxSkybox = function ()
 				targetScene.fog = new THREE.Fog( 0x42474c, 1, 800 );
 				break;
 			    case "DarkStormy":
-				targetScene.fog = new THREE.Fog( 0x222629, 1, 800 );
+				targetScene.fog = new THREE.Fog( 0x222629, 1, 500 );
 				break;
 			    case "FullMoon":
-				targetScene.fog = new THREE.Fog( 0x343c3a, 1, 800 );
+				targetScene.fog = new THREE.Fog( 0x343c3a, 1, 300 );
 				break;
 			    case "SunSet":
-				targetScene.fog = new THREE.Fog( 0x414544, 1, 800 );
+				targetScene.fog = new THREE.Fog( 0x414544, 1, 900 );
 				break;
 			    case "ThickCloudsWater":
-				targetScene.fog = new THREE.Fog( 0x5e4b3f, 1, 800 );
+				targetScene.fog = new THREE.Fog( 0x5e4b3f, 1, 900 );
 				break;
 			    case "TropicalSunnyDay":
-				targetScene.fog = new THREE.Fog( 0xf7f9f4, 1, 800 );
+				targetScene.fog = new THREE.Fog( 0xf7f9f4, 200, 1000 );
 				break;
 			}
 
