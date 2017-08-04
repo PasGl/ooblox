@@ -108,9 +108,6 @@ oobloxMeshLoader = function ()
 
 		var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
 		datFolder.add(remobj,'remove').name(mesh.uname);
-
-		targetScene.add( groupNode );
-		window.addEventListener("mouseup", function(){refreshURL(targetScene);})
 	}
 
 	this.load = function (targetScene, camera)
@@ -145,6 +142,8 @@ oobloxMeshLoader = function ()
 				else models.splice(n,1);
 			}
 			refresh(targetScene);
+			targetScene.add( groupNode );
+			window.addEventListener("mouseup", function(){refreshURL(targetScene);});
 			var event = new Event('vrObjectInstantiated');
 			document.dispatchEvent(event);
         	});
