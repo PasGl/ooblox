@@ -90,7 +90,7 @@ oobloxMeshLoader = function ()
 		var sourceChanger = propFolder.add(conf,'modelFilename',models);
 		sourceChanger.onChange(function(value) {refresh(targetScene);});
 
-		propFolder.add(mesh.material,'transparent').name("Texture transparent");
+		//propFolder.add(mesh.material,'transparent').name("Texture transparent");
 
 		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
 		scxSlider.onChange(function(){refreshURL(targetScene);});
@@ -118,7 +118,7 @@ oobloxMeshLoader = function ()
 		mesh.position.z = parseFloat(argList[3]);
 		mesh.scale.x = parseFloat(argList[4]);
 		mesh.scale.y = parseFloat(argList[5]);
-		mesh.scale.y = parseFloat(argList[6]);
+		mesh.scale.z = parseFloat(argList[6]);
 		mesh.rotation.x = parseFloat(argList[7]);
 		mesh.rotation.y = parseFloat(argList[8]);
 		mesh.rotation.z = parseFloat(argList[9]);
