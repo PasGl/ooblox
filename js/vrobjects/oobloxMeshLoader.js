@@ -71,7 +71,7 @@ oobloxMeshLoader = function ()
 			loader.load('models/'+conf.modelFilename, function ( obj ) 
 			{
 				mesh.remove(loadedModel);
-				loadedModel = obj.scene;
+				loadedModel = obj;
 				mesh.add(loadedModel);
 			});
 			refreshURL(targetScene);
@@ -82,7 +82,7 @@ oobloxMeshLoader = function ()
 			loader.load('models/'+conf.modelFilename, function ( stl ) 
 			{
 				mesh.remove(loadedModel);
-				loadedModel = stl.scene;
+				loadedModel = stl;
 				mesh.add(loadedModel);
 			});
 			refreshURL(targetScene);
