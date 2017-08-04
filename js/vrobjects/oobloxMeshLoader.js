@@ -64,7 +64,6 @@ oobloxMeshLoader = function ()
 			loader.load('models/'+conf.modelFilename, function ( collada ) 
 			{
 				groupNode.remove(mesh);
-				groupNode.remove(datFolder);
 				mesh = collada.scene;
 				mesh.position.copy(position);
 				mesh.scale.copy(scale);
@@ -73,7 +72,6 @@ oobloxMeshLoader = function ()
 				mesh.vrObjectTypeID = vrObjectTypeID;
 				groupNode.add(mesh);
 				datFolder = dat.GUIVR.create('Mesh');
-				groupNode.add( datFolder );
 				fillDatGUI(targetScene,mesh);
 			});
 		}	
