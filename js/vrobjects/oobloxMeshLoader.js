@@ -53,18 +53,18 @@ oobloxMeshLoader = function ()
 
 	var refresh = function (targetScene)
 	{
-		mesh.remove(loadedModel);
+		
 		if ([".dae",".DAE"].indexOf(conf.modelFilename.substring(conf.modelFilename.length-4,conf.modelFilename.length+1)) >=0)
 		{
 			var loader = new THREE.ColladaLoader();
 			loader.load('models/'+conf.modelFilename, function ( collada ) 
 			{
+				mesh.remove(loadedModel);
 				loadedModel = collada.scene;
-				
+				mesh.add(loadedModel);
 			});
+			refreshURL(targetScene);
 		}
-		mesh.add(loadedModel);
-		refreshURL(targetScene);
 	}
 
 	this.load = function (targetScene, camera)
