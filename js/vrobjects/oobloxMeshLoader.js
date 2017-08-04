@@ -63,12 +63,14 @@ oobloxMeshLoader = function ()
 			var loader = new THREE.ColladaLoader();
 			loader.load('models/'+conf.modelFilename, function ( collada ) 
 			{
+				groupNode.remove(mesh);
 				mesh = collada.scene;
 				mesh.position.copy(position);
 				mesh.scale.copy(scale);
 				mesh.rotation.copy(rotation);
 				mesh.uname = uname;
 				mesh.vrObjectTypeID = vrObjectTypeID;
+				groupNode.add(mesh);
 				refreshURL(targetScene);
 			});
 		}	
