@@ -101,7 +101,7 @@ oobloxMeshLoader = function ()
 		guioffset.z = parseFloat(argList[12]);
 		conf.modelFilename = decodeURIComponent(argList.slice(13).join(""));
 		targetScene.add( groupNode );
-		fillDatGUI(targetScene,mesh);
+
 		$.get("./models", function(data) {
 			conf.models = data.split("href=\"");
 			var n = 0;
@@ -116,6 +116,7 @@ oobloxMeshLoader = function ()
 				}
 				else conf.models.splice(n,1);
 			}
+			fillDatGUI(targetScene,mesh);
 			refresh(targetScene);
 			window.addEventListener("mouseup", function(){refreshURL(targetScene);});
 			var event = new Event('vrObjectInstantiated');
