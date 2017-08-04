@@ -25,6 +25,20 @@ oobloxMeshLoader = function ()
 	var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
 	datFolder.add(remobj,'remove').name(mesh.uname);
 	var propFolder = dat.GUIVR.create('Properties');
+	var sourceChanger = propFolder.add(conf,'modelFilename',models);
+	sourceChanger.onChange(function(value) {refresh(targetScene);});
+	var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
+	scxSlider.onChange(function(){refreshURL(targetScene);});
+	var scySlider = propFolder.add(mesh.scale,'y',0.0001,100).name("Scale Y");
+	scySlider.onChange(function(){refreshURL(targetScene);});
+	var sczSlider = propFolder.add(mesh.scale,'z',0.0001,100).name("Scale Z");
+	sczSlider.onChange(function(){refreshURL(targetScene);});
+	var rotxSlider = propFolder.add(mesh.rotation,'x',0.0,Math.PI*2.0).name("Rotation X").step(0.0001);
+	rotxSlider.onChange(function(){refreshURL(targetScene);});
+	var rotySlider = propFolder.add(mesh.rotation,'y',0.0,Math.PI*2.0).name("Rotation Y").step(0.0001);
+	rotySlider.onChange(function(){refreshURL(targetScene);});
+	var rotzSlider = propFolder.add(mesh.rotation,'z',0.0,Math.PI*2.0).name("Rotation Z").step(0.0001);
+	rotzSlider.onChange(function(){refreshURL(targetScene);});
 	datFolder.addFolder(propFolder);
 	groupNode.add( datFolder );
 
@@ -87,22 +101,28 @@ oobloxMeshLoader = function ()
 
 	var fillDatGUI = function (targetScene)
 	{
-		console.log(datFolder);
+		propFolder.remove(sourceChanger);
+		propFolder.remove(scxSlider);
+		propFolder.remove(scySlider);
+		propFolder.remove(sczSlider);
+		propFolder.remove(rotxSlider);
+		propFolder.remove(rotySlider);
+		propFolder.remove(rotzSlider);
 		datFolder.remove(propFolder);
 		propFolder = dat.GUIVR.create('Properties');
-		var sourceChanger = propFolder.add(conf,'modelFilename',models);
+		sourceChanger = propFolder.add(conf,'modelFilename',models);
 		sourceChanger.onChange(function(value) {refresh(targetScene);});
-		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
+		scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
 		scxSlider.onChange(function(){refreshURL(targetScene);});
-		var scySlider = propFolder.add(mesh.scale,'y',0.0001,100).name("Scale Y");
+		scySlider = propFolder.add(mesh.scale,'y',0.0001,100).name("Scale Y");
 		scySlider.onChange(function(){refreshURL(targetScene);});
-		var sczSlider = propFolder.add(mesh.scale,'z',0.0001,100).name("Scale Z");
+		sczSlider = propFolder.add(mesh.scale,'z',0.0001,100).name("Scale Z");
 		sczSlider.onChange(function(){refreshURL(targetScene);});
-		var rotxSlider = propFolder.add(mesh.rotation,'x',0.0,Math.PI*2.0).name("Rotation X").step(0.0001);
+		rotxSlider = propFolder.add(mesh.rotation,'x',0.0,Math.PI*2.0).name("Rotation X").step(0.0001);
 		rotxSlider.onChange(function(){refreshURL(targetScene);});
-		var rotySlider = propFolder.add(mesh.rotation,'y',0.0,Math.PI*2.0).name("Rotation Y").step(0.0001);
+		rotySlider = propFolder.add(mesh.rotation,'y',0.0,Math.PI*2.0).name("Rotation Y").step(0.0001);
 		rotySlider.onChange(function(){refreshURL(targetScene);});
-		var rotzSlider = propFolder.add(mesh.rotation,'z',0.0,Math.PI*2.0).name("Rotation Z").step(0.0001);
+		rotzSlider = propFolder.add(mesh.rotation,'z',0.0,Math.PI*2.0).name("Rotation Z").step(0.0001);
 		rotzSlider.onChange(function(){refreshURL(targetScene);});
 		datFolder.addFolder(propFolder);
 	}
