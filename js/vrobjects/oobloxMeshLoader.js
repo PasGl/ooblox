@@ -88,7 +88,7 @@ oobloxMeshLoader = function ()
 	var fillDatGUI = function (targetScene)
 	{
 		console.log(datFolder);
-		datFolder.removeFolder(propFolder);
+		datFolder.remove(propFolder);
 		propFolder = dat.GUIVR.create('Properties');
 		var sourceChanger = propFolder.add(conf,'modelFilename',models);
 		sourceChanger.onChange(function(value) {refresh(targetScene);});
