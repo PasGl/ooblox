@@ -4,7 +4,7 @@
 
 oobloxMeshLoader = function ()
 {
-	this.mesh = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshStandardMaterial({}));
+	this.mesh = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshStandardMaterial({transparent:true,opacity:0.0}));
 	this.mesh.vrObjectTypeID = "OML";
 	this.mesh.uname = "";
 	var mesh = this.mesh;
@@ -67,6 +67,23 @@ oobloxMeshLoader = function ()
 		}
 	}
 
+	var fillDatGUI = function (targetScene,mesh)
+	{
+		datFolder.position.copy(guioffset).add(mesh.position);
+		datFolder.scale.set(20.0,20.0,0.1);
+		var followFlag = datFolder.add(conf,'followGUI');
+		var propFolder = dat.GUIVR.create('Properties');
+
+		var sourceChanger = propFolder.add(conf,'modelFilename',models);
+		sourceChanger.onChange(function(value) {refresh(targetScene);});
+
+
+
+		datFolder.addFolder(propFolder);
+		var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
+		datFolder.add(remobj,'remove').name(mesh.uname);
+	}
+
 	this.load = function (targetScene, camera)
 	{
 		var argList = getURLargs(mesh.uname);
@@ -84,7 +101,7 @@ oobloxMeshLoader = function ()
 		guioffset.z = parseFloat(argList[12]);
 		conf.modelFilename = decodeURIComponent(argList.slice(13).join(""));
 		targetScene.add( groupNode );
-				
+		fillDatGUI(targetScene,mesh);
 		$.get("./models", function(data) {
 			conf.models = data.split("href=\"");
 			var n = 0;
