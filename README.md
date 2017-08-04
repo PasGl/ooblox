@@ -26,7 +26,7 @@ A scene for guitar practise, with a metronome and a chord progression generator.
 A scene about algorithmic geometry, with a Torus Knot and a (not very good, yet) L-System example.
 * http://51.15.67.244/geometry
 
-### Dev-test scene
+### Test scene
 
 A scene with one instance of each Module.
 * http://51.15.67.244/demo
@@ -89,6 +89,7 @@ The other entries are shortcuts for scenes.
 
 * datguivr | https://github.com/dataarts/dat.guiVR
 * SkyboxSet | https://93i.de/p/free-skybox-texture-set/
+* Textures & Models by Yughues | https://www.patreon.com/Yughues
 * FileSaver.js | https://github.com/eligrey/FileSaver.js
 * jszip | https://github.com/Stuk/jszip
 
