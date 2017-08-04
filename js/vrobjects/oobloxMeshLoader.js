@@ -20,6 +20,9 @@ oobloxMeshLoader = function ()
 	groupNode.name = "vrObjectGroup";
 	var guioffset = new THREE.Vector3();
 
+	var datFolder = dat.GUIVR.create('Mesh');
+	groupNode.add(datFolder)
+
 	var refreshURL = function (targetScene,mesh)
 	{
 		var position = new THREE.Vector3();
