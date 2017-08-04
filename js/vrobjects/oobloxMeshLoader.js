@@ -74,7 +74,7 @@ oobloxMeshLoader = function ()
 		var followFlag = datFolder.add(conf,'followGUI');
 		var propFolder = dat.GUIVR.create('Properties');
 
-		var sourceChanger = propFolder.add(conf,'modelFilename',models);
+		var sourceChanger = propFolder.add(conf,'modelFilename',conf.models);
 		sourceChanger.onChange(function(value) {refresh(targetScene);});
 
 
