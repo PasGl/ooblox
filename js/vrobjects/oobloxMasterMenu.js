@@ -166,21 +166,6 @@ oobloxMasterMenu = function ()
 			refresh(targetScene);}};
 		rezFolder.add(texobj,'add').name("Texture Panel");
 
-		var grnobj = {add: function() {
-			var position = new THREE.Vector3();
-			targetScene.updateMatrixWorld();
-			position.setFromMatrixPosition( indicator.matrixWorld );
-			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
-			var d = new Date();
-			var uname = "DSG" + d.getTime();
-			var newhref = window.location.href + "&" + uname + "=DSG+" + posScaleRotString + "+200.0+200.0+5.0+0+0+-10+5.0+5.0+8745553+5+dirt";
-			window.history.pushState({}, '', newhref);
-			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("DSG")]();
-			importedThing.mesh.uname = uname;
-			importedThing.load(targetScene, camera);
-			refresh(targetScene);}};
-		rezFolder.add(grnobj,'add').name("Ground");
-
 		var mesobj = {add: function() {
 			var position = new THREE.Vector3();
 			targetScene.updateMatrixWorld();
