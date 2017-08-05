@@ -66,8 +66,8 @@ oobloxMeshLoader = function ()
 				mesh.remove(loadedModel);
 				loadedModel = collada.scene;
 				mesh.add(loadedModel);
-				loadedModel.receiveShadow = true;
-				loadedModel.castShadow = true;
+				loadedModel.children[0].receiveShadow = true;
+				loadedModel.children[0].castShadow = true;
 			});
 			refreshURL(targetScene);
 		}
@@ -79,8 +79,8 @@ oobloxMeshLoader = function ()
 				mesh.remove(loadedModel);
 				loadedModel = obj;
 				mesh.add(loadedModel);
-				loadedModel.receiveShadow = true;
-				loadedModel.castShadow = true;
+				loadedModel.children[0].receiveShadow = true;
+				loadedModel.children[0].castShadow = true;
 			});
 			refreshURL(targetScene);
 		}
