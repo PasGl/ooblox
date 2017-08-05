@@ -293,14 +293,14 @@ oobloxEnvironment = function ()
 
 		var sourceChanger = propFolder.add(conf,'theme',themes);
 		sourceChanger.onChange(function(value) {refreshGroundTexture(targetScene);refreshHemiLight(targetScene);refreshURL(targetScene);});
-		var scxSlider = propFolder.add(mesh.scale,'x',1.0,10000.0).name("Scale X");
+		var scxSlider = propFolder.add(mesh.scale,'x',1.0,10000.0).name("Width");
 		scxSlider.onChange(function(){refreshURL(targetScene);});
-		var scySlider = propFolder.add(mesh.scale,'y',1.0,10000.0).name("Scale Y");
+		var scySlider = propFolder.add(mesh.scale,'y',1.0,10000.0).name("Length");
 		scySlider.onChange(function(){refreshURL(targetScene);});
-		var sczSlider = propFolder.add(mesh.scale,'z',0.0001,10000.0).name("Scale Z");
+		var sczSlider = propFolder.add(mesh.scale,'z',0.0001,10000.0).name("Height");
 		sczSlider.onChange(function(){refreshURL(targetScene);});
 
-		var posYSlider = propFolder.add(mesh.position,'y',-500.0,500.0).name("Pos Y");
+		var posYSlider = propFolder.add(mesh.position,'y',-500.0,500.0).name("Elevation");
 		posYSlider.onChange(function(){refreshURL(targetScene);});
 
 
