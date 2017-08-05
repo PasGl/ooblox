@@ -20,6 +20,8 @@ var totalModules = 0;
 
 var menusHidden = false;
 
+var camhelper;
+
 // for modules, to get their parameters from the URL query string
 getURLargs = function (uname) {
 	var allmodulArgs = window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
@@ -268,8 +270,8 @@ function createScene()
 	dirLight.shadow.mapSize.height = 4096;
 	dirLight.target = dirTarget;
 
-var helper = new THREE.CameraHelper( dirLight.shadow.camera );
-scene.add( helper );
+	camhelper = new THREE.CameraHelper( dirLight.shadow.camera );
+	scene.add( camhelper );
 
 	scene.add( dirLight );
 }
@@ -335,6 +337,8 @@ function animate()
 	camOffset.applyQuaternion(camera.quaternion);
 	dirLight.position.set(camOffset.x+camera.position.x-400, 1400, camOffset.z+camera.position.z+400 );
 	dirTarget.position.set(camOffset.x+camera.position.x, 0, camOffset.z+camera.position.z );
+
+	camhelper.update();
 
 	if (manager.isVRMode())
 	{
