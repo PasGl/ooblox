@@ -15,6 +15,13 @@ oobloxChordProgressionGenerator = function ()
 	this.mesh.uname = "";
 	var mesh = this.mesh;
 
+	this.mesh.traverse(function(e) {
+		if (e instanceof THREE.Mesh) {
+			e.receiveShadow = true;
+			e.castShadow = true;
+		}
+	});
+
 	var groupNode = new THREE.Group();
 	groupNode.add(this.mesh);
 	groupNode.name = "vrObjectGroup";
