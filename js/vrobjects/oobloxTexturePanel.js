@@ -87,6 +87,8 @@ oobloxTexturePanel = function ()
 		datFolder.add(remobj,'remove').name(mesh.uname);
 
 		targetScene.add( groupNode );
+		mesh.geometry.normalsNeedUpdate = true;
+		mesh.geometry.computeFaceNormals();
 		mesh.receiveShadow = true;
 		mesh.castShadow = true;
 		window.addEventListener("mouseup", function(){refreshURL(targetScene);})
