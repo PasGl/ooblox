@@ -8,9 +8,14 @@ oobloxTexturePanel = function ()
 	this.mesh.vrObjectTypeID = "TPL";
 	this.mesh.uname = "";
 	var mesh = this.mesh;
+	mesh.receiveShadow = true;
+	mesh.castShadow = true;
 
 	var groupNode = new THREE.Group();
 	groupNode.add(this.mesh);
+	groupNode.receiveShadow = true;
+	groupNode.castShadow = true;
+
 	groupNode.name = "vrObjectGroup";
 	var guioffset = new THREE.Vector3();
 
@@ -52,8 +57,6 @@ oobloxTexturePanel = function ()
 	var refresh = function (targetScene)
 	{
 		mesh.material.map = new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename );
-		mesh.receiveShadow = true;
-		mesh.castShadow = true;
 		refreshURL(targetScene);
 	}
 
