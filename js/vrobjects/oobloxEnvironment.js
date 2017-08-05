@@ -139,13 +139,6 @@ oobloxEnvironment = function ()
 
 	var refresh = function (targetScene)
 	{
-
-
-
-
-
-
-
 		if (themenames.indexOf(skyboxSettings.theme) >=0 )
 		{
 			var skyboxname = skyboxSettings.theme;
@@ -195,7 +188,7 @@ oobloxEnvironment = function ()
 	{
 		datFolder.position.copy(guioffset).add(mesh.position);
 		datFolder.scale.set(20.0,20.0,0.1);
-
+/*
 		var themeChanger = datFolder.add(skyboxSettings,'theme',themenames).name("Sky");
 
 		var propFolder = dat.GUIVR.create('Ground');
@@ -236,7 +229,7 @@ oobloxEnvironment = function ()
 
 
 		propFolder.add(mesh.material,'wireframe').name("Wireframe");
-		datFolder.addFolder(propFolder);
+		datFolder.addFolder(propFolder); */
 
 		themeChanger.onChange(function(value) {refresh(targetScene);});
 		window.addEventListener("mouseup", function(){refreshURL(targetScene);});
