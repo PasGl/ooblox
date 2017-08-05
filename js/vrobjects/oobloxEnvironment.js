@@ -300,6 +300,10 @@ oobloxEnvironment = function ()
 		var sczSlider = propFolder.add(mesh.scale,'z',0.0001,10000.0).name("Scale Z");
 		sczSlider.onChange(function(){refreshURL(targetScene);});
 
+		var posYSlider = propFolder.add(mesh.position,'y',-500.0,500.0).name("Pos Y");
+		posYSlider.onChange(function(){refreshURL(targetScene);});
+
+
 		var textureRepsXSlider = propFolder.add(conf,'textureRepsX',1.0,200.0).name("Texture Repeats X");
 		textureRepsXSlider.onChange(function(){refreshGroundTextureReps(targetScene);refreshURL(targetScene);});
 
