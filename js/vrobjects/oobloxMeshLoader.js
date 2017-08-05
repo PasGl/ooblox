@@ -8,7 +8,9 @@ oobloxMeshLoader = function ()
 	this.mesh.vrObjectTypeID = "OML";
 	this.mesh.uname = "";
 	var mesh = this.mesh;
-	
+	mesh.receiveShadow = true;
+	mesh.castShadow = true;	
+
 	var loadedModel = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshStandardMaterial({}));
 	mesh.add(loadedModel);
 
