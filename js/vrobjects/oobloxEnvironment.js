@@ -225,9 +225,9 @@ oobloxEnvironment = function ()
 	{
 		datFolder.position.copy(guioffset).add(mesh.position);
 		datFolder.scale.set(20.0,20.0,0.1);
-/*
-		var themeChanger = datFolder.add(skyboxSettings,'theme',themenames).name("Sky");
-		themeChanger.onChange(function(value) {refresh(targetScene);});
+
+		var skythemeChanger = datFolder.add(skyboxSettings,'theme',themenames).name("Sky");
+		skythemeChanger.onChange(function(value) {refresh(targetScene);});
 
 		var propFolder = dat.GUIVR.create('Ground');
 
@@ -267,7 +267,7 @@ oobloxEnvironment = function ()
 
 
 		propFolder.add(mesh.material,'wireframe').name("Wireframe");
-		datFolder.addFolder(propFolder); */
+		datFolder.addFolder(propFolder);
 
 
 		window.addEventListener("mouseup", function(){refreshURL(targetScene);});
