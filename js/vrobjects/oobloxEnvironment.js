@@ -139,7 +139,23 @@ oobloxEnvironment = function ()
 
 	}
 
-	var refresh = function (targetScene)
+	var refreshGeometry = function (targetScene)
+	{
+		while (geometries.length < (conf.iterations+1))
+		{addIteration();}
+		mesh.geometry = geometries[conf.iterations];
+		refreshURL(targetScene);
+	}
+
+	var refreshGroundTextureReps = function (targetScene)
+	{
+		mesh.material.map.repeat.set( conf.textureRepsX , conf.textureRepsY);
+		mesh.material.normalMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
+		mesh.material.emissiveMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
+		refreshURL(targetScene);
+	}
+
+	var refreshGroundTexture = function (targetScene)
 	{
 		var textureFolder = "pattern_265";
 		var groundColor = 0x9d8851;
@@ -181,7 +197,11 @@ oobloxEnvironment = function ()
 		mesh.material.emissive = new THREE.Color( 0x555555 );
 		mesh.material.metalness = 0.1;
 		mesh.material.roughness = 0.5;
+		refreshURL(targetScene);
+	}
 
+	var refreshSkybox = function (targetScene)
+	{
 		if (themenames.indexOf(skyboxSettings.theme) >=0 )
 		{
 			var skyboxname = skyboxSettings.theme;
@@ -235,7 +255,7 @@ oobloxEnvironment = function ()
 
 		var skyFolder = dat.GUIVR.create('Sky (Textures by Heiko Irrgang)');
 		var skythemeChanger = skyFolder.add(skyboxSettings,'theme',themenames);
-		skythemeChanger.onChange(function(value) {refresh(targetScene);});
+		skythemeChanger.onChange(function(value) {refreshSkybox(targetScene);});
 		datFolder.addFolder(skyFolder);
 
 		var propFolder = dat.GUIVR.create('Ground (Textures by Yughues)');
@@ -244,22 +264,16 @@ oobloxEnvironment = function ()
 			heightMaps = [[[0.0,0.0],[0.0,0.0]]];
 			geometries = [new THREE.PlaneGeometry(1, 1, 1, 1)];
 			currentSeed = conf.randomSeed;
-			while (geometries.length < (conf.iterations+1))
-			{addIteration();}
-			mesh.geometry = geometries[conf.iterations];
-			refresh(targetScene);
+			refreshGeometry(targetScene);
 		});
 
 		var iterSlider = propFolder.add(conf,'iterations',0,9).step(1);
 		iterSlider.onChange(function(value) {
-			while (geometries.length < (conf.iterations+1))
-			{addIteration();}
-			mesh.geometry = geometries[conf.iterations];
-			refresh(targetScene);
+			refreshGeometry(targetScene);
 		});
 
 		var sourceChanger = propFolder.add(conf,'theme',themes);
-		sourceChanger.onChange(function(value) {refresh(targetScene);});
+		sourceChanger.onChange(function(value) {refreshGroundTexture(targetScene);});
 		var scxSlider = propFolder.add(mesh.scale,'x',1.0,10000.0).name("Scale X");
 		scxSlider.onChange(function(){refreshURL(targetScene);});
 		var scySlider = propFolder.add(mesh.scale,'y',1.0,10000.0).name("Scale Y");
@@ -268,10 +282,10 @@ oobloxEnvironment = function ()
 		sczSlider.onChange(function(){refreshURL(targetScene);});
 
 		var textureRepsXSlider = propFolder.add(conf,'textureRepsX',1.0,200.0).name("Texture Repeats X");
-		textureRepsXSlider.onChange(function(){refresh(targetScene);});
+		textureRepsXSlider.onChange(function(){refreshGroundTextureReps(targetScene);});
 
 		var textureRepsYSlider = propFolder.add(conf,'textureRepsY',1.0,200.0).name("Texture Repeats Y");
-		textureRepsYSlider.onChange(function(){refresh(targetScene);});
+		textureRepsYSlider.onChange(function(){refreshGroundTextureReps(targetScene);});
 
 
 		propFolder.add(mesh.material,'wireframe').name("Wireframe");
@@ -310,11 +324,10 @@ oobloxEnvironment = function ()
 		targetScene.add( groupNode );
 		targetScene.add( hemiLight );
 
-		while (geometries.length < (conf.iterations+1))
-		{addIteration();}
-		mesh.geometry = geometries[conf.iterations];
+		refreshGeometry(targetScene);
+		refreshGroundTexture(targetScene);
+		refreshSkybox(targetScene);
 
-		refresh(targetScene);
 		var event = new Event('vrObjectInstantiated');
 		document.dispatchEvent(event);
 	}
