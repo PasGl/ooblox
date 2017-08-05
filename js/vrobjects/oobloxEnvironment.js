@@ -33,6 +33,9 @@ oobloxEnvironment = function ()
 	var geometries = [new THREE.PlaneGeometry(1, 1, 1, 1)];
 	var currentSeed = 123;
 
+	var textureFolder = "pattern_265";
+	var groundColor = 0x9d8851;
+
 	function seededRandom() 
 	{
 			var x = Math.sin(currentSeed++) * 10000;
@@ -157,8 +160,6 @@ oobloxEnvironment = function ()
 
 	var refreshGroundTexture = function (targetScene)
 	{
-		var textureFolder = "pattern_265";
-		var groundColor = 0x9d8851;
 		switch (conf.theme)
 		{
 			case "dirt":
