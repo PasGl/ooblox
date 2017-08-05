@@ -9,6 +9,9 @@ oobloxTexturePanel = function ()
 	this.mesh.uname = "";
 	var mesh = this.mesh;
 
+	mesh.receiveShadow = true;
+	mesh.castShadow = true;
+
 	var groupNode = new THREE.Group();
 	groupNode.add(this.mesh);
 	groupNode.name = "vrObjectGroup";
