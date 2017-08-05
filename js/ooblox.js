@@ -267,6 +267,10 @@ function createScene()
 	dirLight.shadow.mapSize.width = 4096;
 	dirLight.shadow.mapSize.height = 4096;
 	dirLight.target = dirTarget;
+
+var helper = new THREE.CameraHelper( dirLight.shadow.camera );
+scene.add( helper );
+
 	scene.add( dirLight );
 }
 
