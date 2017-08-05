@@ -3,7 +3,7 @@
  */
 
 /**
- * Textures by Nobiax / http://yughues.deviantart.com
+ * Textures by Yughues / http://yughues.deviantart.com
  */
 
 oobloxDiamondSquareGround = function ()
@@ -89,6 +89,9 @@ oobloxDiamondSquareGround = function ()
 				geoindex++;
 			}
 		}
+
+		geometries[geometries.length-1].normalsNeedUpdate = true;
+		geometries[geometries.length-1].computeFaceNormals();
 	}
 
 	var TPLProperties = function ()	{
