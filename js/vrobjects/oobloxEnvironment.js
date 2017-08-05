@@ -139,7 +139,6 @@ oobloxEnvironment = function ()
 				conf.iterations,
 				conf.theme,
 				skyboxSettings.theme]);
-
 	}
 
 	var refreshGeometry = function (targetScene)
@@ -147,7 +146,6 @@ oobloxEnvironment = function ()
 		while (geometries.length < (conf.iterations+1))
 		{addIteration();}
 		mesh.geometry = geometries[conf.iterations];
-		refreshURL(targetScene);
 	}
 
 	var refreshGroundTextureReps = function (targetScene)
@@ -155,7 +153,6 @@ oobloxEnvironment = function ()
 		mesh.material.map.repeat.set( conf.textureRepsX , conf.textureRepsY);
 		mesh.material.normalMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
 		mesh.material.emissiveMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
-		refreshURL(targetScene);
 	}
 
 	var refreshGroundTexture = function (targetScene)
@@ -198,10 +195,9 @@ oobloxEnvironment = function ()
 		mesh.material.emissive = new THREE.Color( 0x555555 );
 		mesh.material.metalness = 0.1;
 		mesh.material.roughness = 0.5;
-		refreshURL(targetScene);
 	}
 
-	var refreshSkybox = function (targetScene)
+	var refreshHemiLight = function (targetScene)
 	{
 		if (themenames.indexOf(skyboxSettings.theme) >=0 )
 		{
@@ -210,33 +206,54 @@ oobloxEnvironment = function ()
 
 			switch (skyboxname) {
 			    case "CloudyLightRays":
-				targetScene.fog = new THREE.Fog( 0x42474c, 1, 800 );
 				hemiLight = new THREE.HemisphereLight( 0xbeb6ab, groundColor, 0.5 );
 				break;
 			    case "DarkStormy":
-				targetScene.fog = new THREE.Fog( 0x222629, 1, 500 );
 				hemiLight = new THREE.HemisphereLight( 0x404141, groundColor, 0.5 );
 				break;
 			    case "FullMoon":
-				targetScene.fog = new THREE.Fog( 0x1c2022, 1, 300 );
 				hemiLight = new THREE.HemisphereLight( 0x08090b, groundColor, 0.3 );
 				break;
 			    case "SunSet":
-				targetScene.fog = new THREE.Fog( 0x414544, 1, 900 );
 				hemiLight = new THREE.HemisphereLight( 0x7d6452, groundColor, 0.6 );
 				break;
 			    case "ThickCloudsWater":
-				targetScene.fog = new THREE.Fog( 0x5e4b3f, 1, 900 );
 				hemiLight = new THREE.HemisphereLight( 0x607d98, groundColor, 0.8 );
 				break;
 			    case "TropicalSunnyDay":
-				targetScene.fog = new THREE.Fog( 0xf7f9f4, 1, 1000 );
 				hemiLight = new THREE.HemisphereLight( 0x77a6cd, groundColor, 0.8 );
 				break;
 			}
-
 			targetScene.add( hemiLight );
+		}
+	}
 
+	var refreshSkybox = function (targetScene)
+	{
+		if (themenames.indexOf(skyboxSettings.theme) >=0 )
+		{
+			var skyboxname = skyboxSettings.theme;
+
+			switch (skyboxname) {
+			    case "CloudyLightRays":
+				targetScene.fog = new THREE.Fog( 0x42474c, 1, 800 );
+				break;
+			    case "DarkStormy":
+				targetScene.fog = new THREE.Fog( 0x222629, 1, 500 );
+				break;
+			    case "FullMoon":
+				targetScene.fog = new THREE.Fog( 0x1c2022, 1, 300 );
+				break;
+			    case "SunSet":
+				targetScene.fog = new THREE.Fog( 0x414544, 1, 900 );
+				break;
+			    case "ThickCloudsWater":
+				targetScene.fog = new THREE.Fog( 0x5e4b3f, 1, 900 );
+				break;
+			    case "TropicalSunnyDay":
+				targetScene.fog = new THREE.Fog( 0xf7f9f4, 1, 1000 );
+				break;
+			}
 			var urls = [  skyboxname + "Front2048.png", skyboxname + "Back2048.png",
 				skyboxname + "Up2048-rot270.png", skyboxname + "Down2048-rot90.png",
 				skyboxname + "Right2048.png", skyboxname + "Left2048.png" ];
@@ -245,7 +262,6 @@ oobloxEnvironment = function ()
 			textureCube.format = THREE.RGBFormat;
 			targetScene.background = textureCube;
 		}
-		refreshURL(targetScene);
 	};
 	
 	this.mesh.fillDatGUI = function (targetScene)
@@ -256,7 +272,7 @@ oobloxEnvironment = function ()
 
 		var skyFolder = dat.GUIVR.create('Sky (Textures by Heiko Irrgang)');
 		var skythemeChanger = skyFolder.add(skyboxSettings,'theme',themenames);
-		skythemeChanger.onChange(function(value) {refreshSkybox(targetScene);});
+		skythemeChanger.onChange(function(value) {refreshSkybox(targetScene);refreshHemiLight(targetScene);refreshURL(targetScene);});
 		datFolder.addFolder(skyFolder);
 
 		var propFolder = dat.GUIVR.create('Ground (Textures by Yughues)');
@@ -266,15 +282,17 @@ oobloxEnvironment = function ()
 			geometries = [new THREE.PlaneGeometry(1, 1, 1, 1)];
 			currentSeed = conf.randomSeed;
 			refreshGeometry(targetScene);
+			refreshURL(targetScene);
 		});
 
 		var iterSlider = propFolder.add(conf,'iterations',0,9).step(1);
 		iterSlider.onChange(function(value) {
 			refreshGeometry(targetScene);
+			refreshURL(targetScene);
 		});
 
 		var sourceChanger = propFolder.add(conf,'theme',themes);
-		sourceChanger.onChange(function(value) {refreshGroundTexture(targetScene);});
+		sourceChanger.onChange(function(value) {refreshGroundTexture(targetScene);refreshHemiLight(targetScene);refreshURL(targetScene);});
 		var scxSlider = propFolder.add(mesh.scale,'x',1.0,10000.0).name("Scale X");
 		scxSlider.onChange(function(){refreshURL(targetScene);});
 		var scySlider = propFolder.add(mesh.scale,'y',1.0,10000.0).name("Scale Y");
@@ -283,10 +301,10 @@ oobloxEnvironment = function ()
 		sczSlider.onChange(function(){refreshURL(targetScene);});
 
 		var textureRepsXSlider = propFolder.add(conf,'textureRepsX',1.0,200.0).name("Texture Repeats X");
-		textureRepsXSlider.onChange(function(){refreshGroundTextureReps(targetScene);});
+		textureRepsXSlider.onChange(function(){refreshGroundTextureReps(targetScene);refreshURL(targetScene);});
 
 		var textureRepsYSlider = propFolder.add(conf,'textureRepsY',1.0,200.0).name("Texture Repeats Y");
-		textureRepsYSlider.onChange(function(){refreshGroundTextureReps(targetScene);});
+		textureRepsYSlider.onChange(function(){refreshGroundTextureReps(targetScene);refreshURL(targetScene);});
 
 
 		propFolder.add(mesh.material,'wireframe').name("Wireframe");
@@ -328,6 +346,8 @@ oobloxEnvironment = function ()
 		refreshGeometry(targetScene);
 		refreshGroundTexture(targetScene);
 		refreshSkybox(targetScene);
+		refreshHemiLight(targetScene);
+		refreshURL(targetScene);
 
 		var event = new Event('vrObjectInstantiated');
 		document.dispatchEvent(event);
