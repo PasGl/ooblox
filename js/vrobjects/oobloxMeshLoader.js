@@ -71,8 +71,8 @@ oobloxMeshLoader = function ()
 						e.receiveShadow = true;
         					e.castShadow = true;
       					}
-				}
-			});
+				});
+			};
 			refreshURL(targetScene);
 		}
 		else if ([".obj",".OBJ"].indexOf(conf.modelFilename.substring(conf.modelFilename.length-4,conf.modelFilename.length+1)) >=0)
@@ -88,8 +88,8 @@ oobloxMeshLoader = function ()
 						e.receiveShadow = true;
         					e.castShadow = true;
       					}
-				}
-			});
+				});
+			};
 			refreshURL(targetScene);
 		}
 		else if ([".stl",".STL"].indexOf(conf.modelFilename.substring(conf.modelFilename.length-4,conf.modelFilename.length+1)) >=0)
@@ -105,8 +105,8 @@ oobloxMeshLoader = function ()
 						e.receiveShadow = true;
         					e.castShadow = true;
       					}
-				}
-			});
+				});
+			};
 			refreshURL(targetScene);
 		}
 	}
