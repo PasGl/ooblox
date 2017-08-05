@@ -260,11 +260,11 @@ function createScene()
 	dirLight.position.set( -400, 1400, 400 );
 	dirLight.castShadow = true;
 	dirLight.shadow.camera.near = 1400;
-	dirLight.shadow.camera.far = 1560;
-	dirLight.shadow.camera.left = -100;
-	dirLight.shadow.camera.right = 100;
-	dirLight.shadow.camera.top = 100;
-	dirLight.shadow.camera.bottom = -100;
+	dirLight.shadow.camera.far = 2000;
+	dirLight.shadow.camera.left = -150;
+	dirLight.shadow.camera.right = 150;
+	dirLight.shadow.camera.top = 150;
+	dirLight.shadow.camera.bottom = -150;
 	dirLight.shadow.bias = 0.00005;
 	dirLight.shadow.mapSize.width = 4096;
 	dirLight.shadow.mapSize.height = 4096;
@@ -335,8 +335,8 @@ function animate()
 
 	camOffset = new THREE.Vector3(0,0,-75);
 	camOffset.applyQuaternion(camera.quaternion);
-	dirLight.position.set(camOffset.x+camera.position.x-400, 1400, camOffset.z+camera.position.z+400 );
-	dirTarget.position.set(camOffset.x+camera.position.x, 0, camOffset.z+camera.position.z );
+	dirLight.position.set(camOffset.x+camera.position.x-400, 1400+camera.position.y, camOffset.z+camera.position.z+400 );
+	dirTarget.position.set(camOffset.x+camera.position.x, 0+camera.position.y, camOffset.z+camera.position.z );
 
 	camhelper.update();
 
