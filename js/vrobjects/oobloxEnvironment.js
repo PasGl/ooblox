@@ -147,23 +147,23 @@ oobloxEnvironment = function ()
 		{
 			case "dirt":
 				textureFolder = "pattern_265";
-				groundColor = 0x9d8851;
+				groundColor = 0x7c7d63;
 				break;
 			case "alienmold":
 				textureFolder = "pattern_266";
-				groundColor = 0x9d8851;
+				groundColor = 0x515945;
 				break;
 			case "arid":
 				textureFolder = "pattern_267";
-				groundColor = 0x9d8851;
+				groundColor = 0x656762;
 				break;
 			case "glacial":
 				textureFolder = "pattern_268";
-				groundColor = 0xf0f0f0;
+				groundColor = 0xd1d2d1;
 				break;
 			case "whitestone":
 				textureFolder = "pattern_269";
-				groundColor = 0xdddddd;
+				groundColor = 0xbbc1bb;
 				break;
 		}
 		mesh.material.map = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/diffuse.tga");
@@ -190,27 +190,27 @@ oobloxEnvironment = function ()
 			switch (skyboxname) {
 			    case "CloudyLightRays":
 				targetScene.fog = new THREE.Fog( 0x42474c, 1, 800 );
-				hemiLight = new THREE.HemisphereLight( 0xbfd1e5, groundColor, 0.6 );
+				hemiLight = new THREE.HemisphereLight( 0xbeb6ab, groundColor, 0.5 );
 				break;
 			    case "DarkStormy":
 				targetScene.fog = new THREE.Fog( 0x222629, 1, 500 );
-				hemiLight = new THREE.HemisphereLight( 0xbfd1e5, groundColor, 0.6 );
+				hemiLight = new THREE.HemisphereLight( 0x404141, groundColor, 0.5 );
 				break;
 			    case "FullMoon":
 				targetScene.fog = new THREE.Fog( 0x1c2022, 1, 300 );
-				hemiLight = new THREE.HemisphereLight( 0xffffff, groundColor, 0.3 );
+				hemiLight = new THREE.HemisphereLight( 0x08090b, groundColor, 0.3 );
 				break;
 			    case "SunSet":
 				targetScene.fog = new THREE.Fog( 0x414544, 1, 900 );
-				hemiLight = new THREE.HemisphereLight( 0xbfd1e5, groundColor, 0.6 );
+				hemiLight = new THREE.HemisphereLight( 0x7d6452, groundColor, 0.6 );
 				break;
 			    case "ThickCloudsWater":
 				targetScene.fog = new THREE.Fog( 0x5e4b3f, 1, 900 );
-				hemiLight = new THREE.HemisphereLight( 0xbfd1e5, groundColor, 0.6 );
+				hemiLight = new THREE.HemisphereLight( 0x607d98, groundColor, 0.8 );
 				break;
 			    case "TropicalSunnyDay":
 				targetScene.fog = new THREE.Fog( 0xf7f9f4, 200, 1000 );
-				hemiLight = new THREE.HemisphereLight( 0xbfd1e5, groundColor, 0.6 );
+				hemiLight = new THREE.HemisphereLight( 0x77a6cd, groundColor, 0.8 );
 				break;
 			}
 
