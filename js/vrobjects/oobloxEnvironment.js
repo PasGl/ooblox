@@ -209,7 +209,7 @@ oobloxEnvironment = function ()
 				hemiLight = new THREE.HemisphereLight( 0x607d98, groundColor, 0.8 );
 				break;
 			    case "TropicalSunnyDay":
-				targetScene.fog = new THREE.Fog( 0xf7f9f4, 200, 2000 );
+				targetScene.fog = new THREE.Fog( 0xf7f9f4, 1, 1000 );
 				hemiLight = new THREE.HemisphereLight( 0x77a6cd, groundColor, 0.8 );
 				break;
 			}
