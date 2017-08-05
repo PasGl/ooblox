@@ -8,8 +8,6 @@ oobloxTexturePanel = function ()
 	this.mesh.vrObjectTypeID = "TPL";
 	this.mesh.uname = "";
 	var mesh = this.mesh;
-	mesh.receiveShadow = true;
-	mesh.castShadow = true;
 
 	var groupNode = new THREE.Group();
 	groupNode.add(this.mesh);
@@ -89,6 +87,8 @@ oobloxTexturePanel = function ()
 		datFolder.add(remobj,'remove').name(mesh.uname);
 
 		targetScene.add( groupNode );
+		mesh.receiveShadow = true;
+		mesh.castShadow = true;
 		window.addEventListener("mouseup", function(){refreshURL(targetScene);})
 	}
 
