@@ -4,7 +4,7 @@
 
 oobloxTexturePanel = function ()
 {
-	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 0), new THREE.MeshBasicMaterial()}));
+	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 0), new THREE.MeshBasicMaterial({}));
 	this.mesh.receiveShadow = true;
 	this.mesh.castShadow = true;
 	this.mesh.vrObjectTypeID = "TPL";
