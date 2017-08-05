@@ -20,7 +20,7 @@ oobloxEnvironment = function ()
 	var guioffset = new THREE.Vector3();
 	var skyboxSettings = this.mesh.skyboxSettings;
 
-	var datFolder = dat.GUIVR.create('SkyboxSet by Heiko Irrgang');
+	var datFolder = dat.GUIVR.create('ooBlox Environment');
 
 	var groupNode = new THREE.Group();
 	groupNode.add(this.mesh);
@@ -142,22 +142,28 @@ oobloxEnvironment = function ()
 	var refresh = function (targetScene)
 	{
 		var textureFolder = "pattern_265";
+		var groundColor = 0x9d8851;
 		switch (conf.theme)
 		{
 			case "dirt":
 				textureFolder = "pattern_265";
+				groundColor = 0x9d8851;
 				break;
 			case "alienmold":
 				textureFolder = "pattern_266";
+				groundColor = 0x9d8851;
 				break;
 			case "arid":
 				textureFolder = "pattern_267";
+				groundColor = 0x9d8851;
 				break;
 			case "glacial":
 				textureFolder = "pattern_268";
+				groundColor = 0xf0f0f0;
 				break;
 			case "whitestone":
 				textureFolder = "pattern_269";
+				groundColor = 0xdddddd;
 				break;
 		}
 		mesh.material.map = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/diffuse.tga");
@@ -184,27 +190,27 @@ oobloxEnvironment = function ()
 			switch (skyboxname) {
 			    case "CloudyLightRays":
 				targetScene.fog = new THREE.Fog( 0x42474c, 1, 800 );
-				hemiLight = new THREE.HemisphereLight( 0xbfd1e5, 0x9d8851, 0.6 );
+				hemiLight = new THREE.HemisphereLight( 0xbfd1e5, groundColor, 0.6 );
 				break;
 			    case "DarkStormy":
 				targetScene.fog = new THREE.Fog( 0x222629, 1, 500 );
-				hemiLight = new THREE.HemisphereLight( 0xbfd1e5, 0x9d8851, 0.6 );
+				hemiLight = new THREE.HemisphereLight( 0xbfd1e5, groundColor, 0.6 );
 				break;
 			    case "FullMoon":
 				targetScene.fog = new THREE.Fog( 0x1c2022, 1, 300 );
-				hemiLight = new THREE.HemisphereLight( 0xbfd1e5, 0x9d8851, 0.6 );
+				hemiLight = new THREE.HemisphereLight( 0xffffff, groundColor, 0.3 );
 				break;
 			    case "SunSet":
 				targetScene.fog = new THREE.Fog( 0x414544, 1, 900 );
-				hemiLight = new THREE.HemisphereLight( 0xbfd1e5, 0x9d8851, 0.6 );
+				hemiLight = new THREE.HemisphereLight( 0xbfd1e5, groundColor, 0.6 );
 				break;
 			    case "ThickCloudsWater":
 				targetScene.fog = new THREE.Fog( 0x5e4b3f, 1, 900 );
-				hemiLight = new THREE.HemisphereLight( 0xbfd1e5, 0x9d8851, 0.6 );
+				hemiLight = new THREE.HemisphereLight( 0xbfd1e5, groundColor, 0.6 );
 				break;
 			    case "TropicalSunnyDay":
 				targetScene.fog = new THREE.Fog( 0xf7f9f4, 200, 1000 );
-				hemiLight = new THREE.HemisphereLight( 0xbfd1e5, 0x9d8851, 0.6 );
+				hemiLight = new THREE.HemisphereLight( 0xbfd1e5, groundColor, 0.6 );
 				break;
 			}
 
@@ -226,11 +232,13 @@ oobloxEnvironment = function ()
 		datFolder.position.copy(guioffset).add(mesh.position);
 		datFolder.scale.set(20.0,20.0,0.1);
 
-		var skythemeChanger = datFolder.add(skyboxSettings,'theme',themenames);
+
+		var skyFolder = dat.GUIVR.create('Sky (Textures by Heiko Irrgang)');
+		var skythemeChanger = skyFolder.add(skyboxSettings,'theme',themenames);
 		skythemeChanger.onChange(function(value) {refresh(targetScene);});
+		datFolder.addFolder(skyFolder);
 
-		var propFolder = dat.GUIVR.create('Ground');
-
+		var propFolder = dat.GUIVR.create('Ground (Textures by Yughues)');
 		var randomSeedSlider = propFolder.add(conf,'randomSeed',0,99999999).step(1);
 		randomSeedSlider.onChange(function(){
 			heightMaps = [[[0.0,0.0],[0.0,0.0]]];
