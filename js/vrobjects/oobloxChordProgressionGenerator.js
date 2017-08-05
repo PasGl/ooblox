@@ -140,7 +140,9 @@ oobloxChordProgressionGenerator = function ()
 					var texture = new THREE.Texture(canvas);
 					texture.needsUpdate = true;
 					var material = new THREE.MeshBasicMaterial({
-						map : texture
+						map : texture,
+						side: THREE.DoubleSide,
+						shading: THREE.FlatShading
 					});
 					mesh.material =  material;
 				}
