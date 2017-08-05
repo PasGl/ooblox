@@ -4,7 +4,9 @@
 
 oobloxTexturePanel = function ()
 {
-	this.mesh = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshStandardMaterial({}));
+	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 0), new THREE.MeshBasicMaterial({}));
+	this.mesh.receiveShadow = true;
+	this.mesh.castShadow = true;
 	this.mesh.vrObjectTypeID = "TPL";
 	this.mesh.uname = "";
 	var mesh = this.mesh;
@@ -84,6 +86,7 @@ oobloxTexturePanel = function ()
 		datFolder.add(remobj,'remove').name(mesh.uname);
 
 		targetScene.add( groupNode );
+
 		window.addEventListener("mouseup", function(){refreshURL(targetScene);})
 	}
 

@@ -20,6 +20,8 @@ var totalModules = 0;
 
 var menusHidden = false;
 
+//var camhelper;
+
 // for modules, to get their parameters from the URL query string
 getURLargs = function (uname) {
 	var allmodulArgs = window.location.href.substring(window.location.href.indexOf("?")+1, window.location.href.length);
@@ -248,9 +250,6 @@ function createScene()
 	scene = new THREE.Scene();
 	scene.name = "Scene";
 	scene.fog = new THREE.Fog( 0xbfd1e5, 1, 1050 );
-	var hemiLight = new THREE.HemisphereLight( 0xbfd1e5, 0x9d8851, 0.6 );
-	hemiLight.position.set( -400, 1400, 400 );
-	scene.add(hemiLight);
 	dirTarget = new THREE.Object3D();
 	dirTarget.name = "dirTarget";
 	scene.add( dirTarget );
@@ -258,15 +257,19 @@ function createScene()
 	dirLight.position.set( -400, 1400, 400 );
 	dirLight.castShadow = true;
 	dirLight.shadow.camera.near = 1400;
-	dirLight.shadow.camera.far = 1560;
-	dirLight.shadow.camera.left = -100;
-	dirLight.shadow.camera.right = 100;
-	dirLight.shadow.camera.top = 100;
-	dirLight.shadow.camera.bottom = -100;
+	dirLight.shadow.camera.far = 2000;
+	dirLight.shadow.camera.left = -150;
+	dirLight.shadow.camera.right = 150;
+	dirLight.shadow.camera.top = 150;
+	dirLight.shadow.camera.bottom = -150;
 	dirLight.shadow.bias = 0.00005;
 	dirLight.shadow.mapSize.width = 4096;
 	dirLight.shadow.mapSize.height = 4096;
 	dirLight.target = dirTarget;
+
+	//camhelper = new THREE.CameraHelper( dirLight.shadow.camera );
+	//scene.add( camhelper );
+
 	scene.add( dirLight );
 }
 
@@ -324,13 +327,15 @@ function onWindowResize()
 function animate()
 {
 	requestAnimationFrame( animate );
-	THREE.AnimationHandler.update( clock.getDelta() );
+	clock.getDelta();//THREE.AnimationHandler.update( clock.getDelta() );
 	controls.update();
 
 	camOffset = new THREE.Vector3(0,0,-75);
 	camOffset.applyQuaternion(camera.quaternion);
-	dirLight.position.set(camOffset.x+camera.position.x-400, 1400, camOffset.z+camera.position.z+400 );
-	dirTarget.position.set(camOffset.x+camera.position.x, 0, camOffset.z+camera.position.z );
+	dirLight.position.set(camOffset.x+camera.position.x-400, 1400+camera.position.y, camOffset.z+camera.position.z+400 );
+	dirTarget.position.set(camOffset.x+camera.position.x, 0+camera.position.y, camOffset.z+camera.position.z );
+
+	//camhelper.update();
 
 	if (manager.isVRMode())
 	{

@@ -10,9 +10,11 @@
 
 oobloxChordProgressionGenerator = function ()
 {
-	this.mesh = new THREE.Mesh( new THREE.PlaneGeometry(40, 5, 10, 10), new THREE.MeshPhongMaterial({}));
+	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(40, 5, 0), new THREE.MeshPhongMaterial({}));
 	this.mesh.vrObjectTypeID = "CPG";
 	this.mesh.uname = "";
+	this.mesh.receiveShadow = true;
+	this.mesh.castShadow = true;
 	var mesh = this.mesh;
 
 	var groupNode = new THREE.Group();
