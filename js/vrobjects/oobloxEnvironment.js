@@ -139,6 +139,41 @@ oobloxEnvironment = function ()
 
 	var refresh = function (targetScene)
 	{
+		var textureFolder = "pattern_265";
+		switch (conf.theme)
+		{
+			case "dirt":
+				textureFolder = "pattern_265";
+				break;
+			case "alienmold":
+				textureFolder = "pattern_266";
+				break;
+			case "arid":
+				textureFolder = "pattern_267";
+				break;
+			case "glacial":
+				textureFolder = "pattern_268";
+				break;
+			case "whitestone":
+				textureFolder = "pattern_269";
+				break;
+		}
+		mesh.material.map = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/diffuse.tga");
+		mesh.material.map.wrapS = THREE.RepeatWrapping;
+		mesh.material.map.wrapT = THREE.RepeatWrapping;
+		mesh.material.map.repeat.set( conf.textureRepsX , conf.textureRepsY);
+		mesh.material.normalMap = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/normal.tga");
+		mesh.material.normalMap.wrapS = THREE.RepeatWrapping;
+		mesh.material.normalMap.wrapT = THREE.RepeatWrapping;
+		mesh.material.normalMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
+		mesh.material.emissiveMap = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/specular.tga");
+		mesh.material.emissiveMap.wrapS = THREE.RepeatWrapping;
+		mesh.material.emissiveMap.wrapT = THREE.RepeatWrapping;
+		mesh.material.emissiveMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
+		mesh.material.emissive = new THREE.Color( 0x555555 );
+		mesh.material.metalness = 0.1;
+		mesh.material.roughness = 0.5;
+
 		if (themenames.indexOf(skyboxSettings.theme) >=0 )
 		{
 			var skyboxname = skyboxSettings.theme;
