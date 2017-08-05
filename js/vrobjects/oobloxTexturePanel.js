@@ -4,16 +4,15 @@
 
 oobloxTexturePanel = function ()
 {
-	this.mesh = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshStandardMaterial({shading: THREE.FlatShading}));
+	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 0), new THREE.MeshStandardMaterial({}));
+	this.mesh.receiveShadow = true;
+	this.mesh.castShadow = true;
 	this.mesh.vrObjectTypeID = "TPL";
 	this.mesh.uname = "";
 	var mesh = this.mesh;
 
 	var groupNode = new THREE.Group();
 	groupNode.add(this.mesh);
-	groupNode.receiveShadow = true;
-	groupNode.castShadow = true;
-
 	groupNode.name = "vrObjectGroup";
 	var guioffset = new THREE.Vector3();
 
@@ -87,10 +86,7 @@ oobloxTexturePanel = function ()
 		datFolder.add(remobj,'remove').name(mesh.uname);
 
 		targetScene.add( groupNode );
-		mesh.geometry.normalsNeedUpdate = true;
-		mesh.geometry.computeFaceNormals();
-		mesh.receiveShadow = true;
-		mesh.castShadow = true;
+
 		window.addEventListener("mouseup", function(){refreshURL(targetScene);})
 	}
 
