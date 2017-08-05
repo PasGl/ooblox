@@ -226,7 +226,7 @@ oobloxEnvironment = function ()
 		datFolder.position.copy(guioffset).add(mesh.position);
 		datFolder.scale.set(20.0,20.0,0.1);
 
-		var skythemeChanger = datFolder.add(skyboxSettings,'theme',themenames).name("Sky");
+		var skythemeChanger = datFolder.add(skyboxSettings,'theme',themenames);
 		skythemeChanger.onChange(function(value) {refresh(targetScene);});
 
 		var propFolder = dat.GUIVR.create('Ground');
