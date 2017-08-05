@@ -9,9 +9,6 @@ oobloxTexturePanel = function ()
 	this.mesh.uname = "";
 	var mesh = this.mesh;
 
-	mesh.receiveShadow = true;
-	mesh.castShadow = true;
-
 	var groupNode = new THREE.Group();
 	groupNode.add(this.mesh);
 	groupNode.name = "vrObjectGroup";
@@ -55,6 +52,8 @@ oobloxTexturePanel = function ()
 	var refresh = function (targetScene)
 	{
 		mesh.material.map = new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename );
+		mesh.receiveShadow = true;
+		mesh.castShadow = true;
 		refreshURL(targetScene);
 	}
 
