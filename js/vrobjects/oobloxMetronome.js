@@ -12,8 +12,12 @@ oobloxMetronome = function ()
 	ball.position.y = -10.0;
 	ball.scale.z = 0.5;
 	this.mesh.add(ball);
-	this.mesh.receiveShadow = true;
-	this.mesh.castShadow = true;
+	this.mesh.traverse(function(e) {
+		if (e instanceof THREE.Mesh) {
+			e.receiveShadow = true;
+			e.castShadow = true;
+		}
+	});
 	this.mesh.vrObjectTypeID = "MET";
 	var mesh=this.mesh;
 	var tockIsLoaded = false;
