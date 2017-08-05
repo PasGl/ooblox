@@ -10,7 +10,7 @@
 
 oobloxChordProgressionGenerator = function ()
 {
-	this.mesh = new THREE.Mesh( new THREE.PlaneGeometry(40, 5, 10, 10), new THREE.MeshPhongMaterial({side: THREE.DoubleSide}));
+	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(40, 5, 0), new THREE.MeshPhongMaterial({}));
 	this.mesh.vrObjectTypeID = "CPG";
 	this.mesh.uname = "";
 	this.mesh.receiveShadow = true;
@@ -140,9 +140,7 @@ oobloxChordProgressionGenerator = function ()
 					var texture = new THREE.Texture(canvas);
 					texture.needsUpdate = true;
 					var material = new THREE.MeshBasicMaterial({
-						map : texture,
-						side: THREE.DoubleSide,
-						shading: THREE.FlatShading
+						map : texture
 					});
 					mesh.material =  material;
 				}
