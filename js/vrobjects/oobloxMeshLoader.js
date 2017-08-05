@@ -8,8 +8,6 @@ oobloxMeshLoader = function ()
 	this.mesh.vrObjectTypeID = "OML";
 	this.mesh.uname = "";
 	var mesh = this.mesh;
-	mesh.receiveShadow = true;
-	mesh.castShadow = true;	
 
 	var loadedModel = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshStandardMaterial({}));
 	mesh.add(loadedModel);
@@ -63,9 +61,9 @@ oobloxMeshLoader = function ()
 			{
 				mesh.remove(loadedModel);
 				loadedModel = collada.scene;
+				mesh.add(loadedModel);
 				loadedModel.receiveShadow = true;
 				loadedModel.castShadow = true;
-				mesh.add(loadedModel);
 			});
 			refreshURL(targetScene);
 		}
@@ -76,9 +74,9 @@ oobloxMeshLoader = function ()
 			{
 				mesh.remove(loadedModel);
 				loadedModel = obj;
+				mesh.add(loadedModel);
 				loadedModel.receiveShadow = true;
 				loadedModel.castShadow = true;
-				mesh.add(loadedModel);
 			});
 			refreshURL(targetScene);
 		}
@@ -89,9 +87,9 @@ oobloxMeshLoader = function ()
 			{
 				mesh.remove(loadedModel);
 				loadedModel = stl;
+				mesh.add(loadedModel);
 				loadedModel.receiveShadow = true;
 				loadedModel.castShadow = true;
-				mesh.add(loadedModel);
 			});
 			refreshURL(targetScene);
 		}
