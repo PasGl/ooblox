@@ -250,9 +250,6 @@ function createScene()
 	scene = new THREE.Scene();
 	scene.name = "Scene";
 	scene.fog = new THREE.Fog( 0xbfd1e5, 1, 1050 );
-	//var hemiLight = new THREE.HemisphereLight( 0xbfd1e5, 0x9d8851, 0.6 );
-	//hemiLight.position.set( -400, 1400, 400 );
-	//scene.add(hemiLight);
 	dirTarget = new THREE.Object3D();
 	dirTarget.name = "dirTarget";
 	scene.add( dirTarget );
