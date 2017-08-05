@@ -2,28 +2,26 @@
  * @author Pascal Gleske / https://github.com/PasGl
  */
 
-oobloxTexturePanel = function ()
+oobloxMeshLoader = function ()
 {
-	this.mesh = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshStandardMaterial({}));
-	this.mesh.vrObjectTypeID = "TPL";
+	this.mesh = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshStandardMaterial({transparent:true,opacity:0.0}));
+	this.mesh.vrObjectTypeID = "OML";
 	this.mesh.uname = "";
 	var mesh = this.mesh;
+	
+	var loadedModel = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshStandardMaterial({}));
+	mesh.add(loadedModel);
 
-	mesh.receiveShadow = true;
-	mesh.castShadow = true;
+	var TPLProperties = function ()	{this.followGUI = true;this.modelFilename = "Object.dae";this.models=["Object.dae"];}
+	var conf = new TPLProperties();
 
 	var groupNode = new THREE.Group();
 	groupNode.add(this.mesh);
 	groupNode.name = "vrObjectGroup";
 	var guioffset = new THREE.Vector3();
 
-	var datFolder = dat.GUIVR.create('Texture Panel');
-	groupNode.add( datFolder )
-
-	var TPLProperties = function ()	{this.followGUI = true;this.textureFilename = "bark-template.png";}
-	var conf = new TPLProperties();
-
-	var textures = [];
+	var datFolder = dat.GUIVR.create('Mesh');
+	groupNode.add(datFolder)
 
 	var refreshURL = function (targetScene)
 	{
@@ -43,51 +41,83 @@ oobloxTexturePanel = function ()
 				mesh.position.z,
 				mesh.scale.x,
 				mesh.scale.y,
+				mesh.scale.z,
 				mesh.rotation.x,
 				mesh.rotation.y,
 				mesh.rotation.z,
 				guioffset.x,
 				guioffset.y,
 				guioffset.z,
-				encodeURIComponent(conf.textureFilename)]);
+				encodeURIComponent(conf.modelFilename)]);
 	}
 
 	var refresh = function (targetScene)
 	{
-		mesh.material.map = new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename );
-		refreshURL(targetScene);
+		
+		if ([".dae",".DAE"].indexOf(conf.modelFilename.substring(conf.modelFilename.length-4,conf.modelFilename.length+1)) >=0)
+		{
+			var loader = new THREE.ColladaLoader();
+			loader.load('models/'+conf.modelFilename, function ( collada ) 
+			{
+				mesh.remove(loadedModel);
+				loadedModel = collada.scene;
+				loadedModel.receiveShadow = true;
+				loadedModel.castShadow = true;
+				mesh.add(loadedModel);
+			});
+			refreshURL(targetScene);
+		}
+		else if ([".obj",".OBJ"].indexOf(conf.modelFilename.substring(conf.modelFilename.length-4,conf.modelFilename.length+1)) >=0)
+		{
+			var loader = new THREE.OBJLoader();
+			loader.load('models/'+conf.modelFilename, function ( obj ) 
+			{
+				mesh.remove(loadedModel);
+				loadedModel = obj;
+				loadedModel.receiveShadow = true;
+				loadedModel.castShadow = true;
+				mesh.add(loadedModel);
+			});
+			refreshURL(targetScene);
+		}
+		else if ([".stl",".STL"].indexOf(conf.modelFilename.substring(conf.modelFilename.length-4,conf.modelFilename.length+1)) >=0)
+		{
+			var loader = new THREE.STLLoader();
+			loader.load('models/'+conf.modelFilename, function ( stl ) 
+			{
+				mesh.remove(loadedModel);
+				loadedModel = stl;
+				loadedModel.receiveShadow = true;
+				loadedModel.castShadow = true;
+				mesh.add(loadedModel);
+			});
+			refreshURL(targetScene);
+		}
 	}
 
-	this.mesh.fillDatGUI = function (targetScene,mesh)
+	var fillDatGUI = function (targetScene,mesh)
 	{
 		datFolder.position.copy(guioffset).add(mesh.position);
 		datFolder.scale.set(20.0,20.0,0.1);
 		var followFlag = datFolder.add(conf,'followGUI');
-
 		var propFolder = dat.GUIVR.create('Properties');
-
-		var sourceChanger = propFolder.add(conf,'textureFilename',textures);
+		var sourceChanger = propFolder.add(conf,'modelFilename',conf.models);
 		sourceChanger.onChange(function(value) {refresh(targetScene);});
-
-		propFolder.add(mesh.material,'transparent').name("Texture transparent");
-
 		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
-		scxSlider.onChange(function(){refreshURL(targetScene);});
+		scxSlider.onChange(function(){refreshURL(targetScene, mesh);});
 		var scySlider = propFolder.add(mesh.scale,'y',0.0001,100).name("Scale Y");
-		scySlider.onChange(function(){refreshURL(targetScene);});
+		scySlider.onChange(function(){refreshURL(targetScene, mesh);});
+		var sczSlider = propFolder.add(mesh.scale,'z',0.0001,100).name("Scale Z");
+		sczSlider.onChange(function(){refreshURL(targetScene, mesh);});
 		var rotxSlider = propFolder.add(mesh.rotation,'x',0.0,Math.PI*2.0).name("Rotation X").step(0.0001);
-		rotxSlider.onChange(function(){refreshURL(targetScene);});
-		var rotySlider = propFolder.add(mesh.rotation,'y',0.0,Math.PI*2.0).name("Rotation Y").step(0.0001);;
-		rotySlider.onChange(function(){refreshURL(targetScene);});
-		var rotzSlider = propFolder.add(mesh.rotation,'z',0.0,Math.PI*2.0).name("Rotation Z").step(0.0001);;
-		rotzSlider.onChange(function(){refreshURL(targetScene);});
+		rotxSlider.onChange(function(){refreshURL(targetScene, mesh);});
+		var rotySlider = propFolder.add(mesh.rotation,'y',0.0,Math.PI*2.0).name("Rotation Y").step(0.0001);
+		rotySlider.onChange(function(){refreshURL(targetScene, mesh);});
+		var rotzSlider = propFolder.add(mesh.rotation,'z',0.0,Math.PI*2.0).name("Rotation Z").step(0.0001);
+		rotzSlider.onChange(function(){refreshURL(targetScene, mesh);});
 		datFolder.addFolder(propFolder);
-
 		var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
 		datFolder.add(remobj,'remove').name(mesh.uname);
-
-		targetScene.add( groupNode );
-		window.addEventListener("mouseup", function(){refreshURL(targetScene);})
 	}
 
 	this.load = function (targetScene, camera)
@@ -98,34 +128,37 @@ oobloxTexturePanel = function ()
 		mesh.position.z = parseFloat(argList[3]);
 		mesh.scale.x = parseFloat(argList[4]);
 		mesh.scale.y = parseFloat(argList[5]);
-		mesh.rotation.x = parseFloat(argList[6]);
-		mesh.rotation.y = parseFloat(argList[7]);
-		mesh.rotation.z = parseFloat(argList[8]);
-		guioffset.x = parseFloat(argList[9]);
-		guioffset.y = parseFloat(argList[10]);
-		guioffset.z = parseFloat(argList[11]);
-		conf.textureFilename = decodeURIComponent(argList.slice(12).join(""));
+		mesh.scale.z = parseFloat(argList[6]);
+		mesh.rotation.x = parseFloat(argList[7]);
+		mesh.rotation.y = parseFloat(argList[8]);
+		mesh.rotation.z = parseFloat(argList[9]);
+		guioffset.x = parseFloat(argList[10]);
+		guioffset.y = parseFloat(argList[11]);
+		guioffset.z = parseFloat(argList[12]);
+		conf.modelFilename = decodeURIComponent(argList.slice(13).join(""));
+		targetScene.add( groupNode );
 
-		$.get("./images/textures", function(data) {
-			textures = data.split("href=\"");
+		$.get("./models", function(data) {
+			conf.models = data.split("href=\"");
 			var n = 0;
-			while (n<textures.length)
+			while (n<conf.models.length)
 			{
-				var thisfilename = textures[n].substring(0,textures[n].indexOf("\""));
+				var thisfilename = conf.models[n].substring(0,conf.models[n].indexOf("\""));
 
-				if ( [".png",".PNG",".jpg",".JPG",".jpeg",".JPEG",".tga",".TGA"].indexOf(thisfilename.substring(thisfilename.length-4,thisfilename.length+1)) >=0)
+				if ( [".dae",".DAE",".obj",".OBJ",".stl",".STL"].indexOf(thisfilename.substring(thisfilename.length-4,thisfilename.length+1)) >=0)
 				{
-					textures[n] = thisfilename;
+					conf.models[n] = thisfilename;
 					n++;
 				}
-				else textures.splice(n,1);
+				else conf.models.splice(n,1);
 			}
-			mesh.fillDatGUI(targetScene,mesh);
+			fillDatGUI(targetScene,mesh);
 			refresh(targetScene);
+			window.addEventListener("mouseup", function(){refreshURL(targetScene);});
 			var event = new Event('vrObjectInstantiated');
 			document.dispatchEvent(event);
         	});
 	}
 }
 
-vrObjectConstructorList.push(oobloxTexturePanel); // global list of all available vrObject type constructors
+vrObjectConstructorList.push(oobloxMeshLoader); // global list of all available vrObject type constructors
