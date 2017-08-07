@@ -254,6 +254,7 @@ function createScene()
 	dirTarget.name = "dirTarget";
 	scene.add( dirTarget );
 	dirLight = new THREE.DirectionalLight( 0xffffff, 1 );
+	dirLight.name = "dirLight";
 	dirLight.position.set( -400, 1400, 400 );
 	dirLight.myPosition = new THREE.Vector3( -400, 1400, 400 );
 	dirLight.castShadow = true;
