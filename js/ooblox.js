@@ -20,7 +20,7 @@ var totalModules = 0;
 
 var menusHidden = false;
 
-//var camhelper;
+var camhelper;
 
 // for modules, to get their parameters from the URL query string
 getURLargs = function (uname) {
@@ -255,6 +255,7 @@ function createScene()
 	scene.add( dirTarget );
 	dirLight = new THREE.DirectionalLight( 0xffffff, 1 );
 	dirLight.position.set( -400, 1400, 400 );
+	dirLight.myPosition = new THREE.Vector3( -400, 1400, 400 );
 	dirLight.castShadow = true;
 	dirLight.shadow.camera.near = 1400;
 	dirLight.shadow.camera.far = 2000;
@@ -267,8 +268,8 @@ function createScene()
 	dirLight.shadow.mapSize.height = 4096;
 	dirLight.target = dirTarget;
 
-	//camhelper = new THREE.CameraHelper( dirLight.shadow.camera );
-	//scene.add( camhelper );
+	camhelper = new THREE.CameraHelper( dirLight.shadow.camera );
+	scene.add( camhelper );
 
 	scene.add( dirLight );
 }
@@ -332,10 +333,10 @@ function animate()
 
 	camOffset = new THREE.Vector3(0,0,-75);
 	camOffset.applyQuaternion(camera.quaternion);
-	dirLight.position.set(camOffset.x+camera.position.x-400, 1400+camera.position.y, camOffset.z+camera.position.z+400 );
-	dirTarget.position.set(camOffset.x+camera.position.x, 0+camera.position.y, camOffset.z+camera.position.z );
+	dirLight.position.set(camOffset.x+camera.position.x + dirLight.myPosition.x, camera.position.y + dirLight.myPosition.y, camOffset.z+camera.position.z + dirLight.myPosition.z );
+	dirTarget.position.set(camOffset.x+camera.position.x, camera.position.y, camOffset.z+camera.position.z );
 
-	//camhelper.update();
+	camhelper.update();
 
 	if (manager.isVRMode())
 	{
