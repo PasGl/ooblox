@@ -278,9 +278,9 @@ oobloxEnvironment = function ()
 		var skythemeChanger = skyFolder.add(skyboxSettings,'theme',themenames);
 		skythemeChanger.onChange(function(value) {refreshSkybox(targetScene);refreshHemiLight(targetScene);refreshURL(targetScene);});
 
-		var dirLightPosXSlider = skyFolder.add(dirLight.myPosition,'x',-1000,1000);
+		var dirLightPosXSlider = skyFolder.add(dirLight.myPosition,'x',-2000,2000);
 		var dirLightPosYSlider = skyFolder.add(dirLight.myPosition,'y',0,2000);
-		var dirLightPosZSlider = skyFolder.add(dirLight.myPosition,'z',-1000,1000);
+		var dirLightPosZSlider = skyFolder.add(dirLight.myPosition,'z',-2000,2000);
 
 		datFolder.addFolder(skyFolder);
 
