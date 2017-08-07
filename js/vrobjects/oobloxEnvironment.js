@@ -272,10 +272,16 @@ oobloxEnvironment = function ()
 		datFolder.position.copy(guioffset).add(mesh.position);
 		datFolder.scale.set(20.0,20.0,0.1);
 
+		var dirLight = targetScene.getObjectByName( "dirLight" );
 
 		var skyFolder = dat.GUIVR.create('Sky (Textures by Heiko Irrgang)');
 		var skythemeChanger = skyFolder.add(skyboxSettings,'theme',themenames);
 		skythemeChanger.onChange(function(value) {refreshSkybox(targetScene);refreshHemiLight(targetScene);refreshURL(targetScene);});
+
+		var dirLightPosXSlider = propFolder.add(dirLight.myPosition,'x',-1000,1000);
+		var dirLightPosYSlider = propFolder.add(dirLight.myPosition,'y',0,2000);
+		var dirLightPosZSlider = propFolder.add(dirLight.myPosition,'z',-1000,1000);
+
 		datFolder.addFolder(skyFolder);
 
 		var propFolder = dat.GUIVR.create('Ground (Textures by Yughues)');
