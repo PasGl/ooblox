@@ -204,6 +204,9 @@ oobloxEnvironment = function ()
 			var skyboxname = skyboxSettings.theme;
 			targetScene.remove( hemiLight );
 
+			var dirLight = targetScene.getObjectByName( "dirLight" );
+			dirLight.myPosition.set( -400, 1400, 400 );
+
 			switch (skyboxname) {
 			    case "CloudyLightRays":
 				hemiLight = new THREE.HemisphereLight( 0xbeb6ab, groundColor, 0.5 );
