@@ -210,21 +210,39 @@ oobloxEnvironment = function ()
 			switch (skyboxname) {
 			    case "CloudyLightRays":
 				hemiLight = new THREE.HemisphereLight( 0xbeb6ab, groundColor, 0.5 );
+				dirLight.myPosition.set( 1040, 1100, -450 );
+				dirLight.intensity = 0.4;
+				dirLight.color.setHex( 0xfff5d0 );
 				break;
 			    case "DarkStormy":
 				hemiLight = new THREE.HemisphereLight( 0x404141, groundColor, 0.5 );
+				dirLight.myPosition.set( -300, 500, -1580 );
+				dirLight.intensity = 0.25;
+				dirLight.color.setHex( 0xdfd7ca );
 				break;
 			    case "FullMoon":
 				hemiLight = new THREE.HemisphereLight( 0x08090b, groundColor, 0.3 );
+				dirLight.myPosition.set( 400, 400, -1400 );
+				dirLight.intensity = 0.8;
+				dirLight.color.setHex( 0xfefefe );
 				break;
 			    case "SunSet":
-				hemiLight = new THREE.HemisphereLight( 0x7d6452, groundColor, 0.6 );
+				hemiLight = new THREEm.HemisphereLight( 0x7d6452, groundColor, 0.6 );
+				dirLight.myPosition.set( 600, 300, -1600 );
+				dirLight.intensity = 0.8;
+				dirLight.color.setHex( 0xffffbd );
 				break;
 			    case "ThickCloudsWater":
 				hemiLight = new THREE.HemisphereLight( 0x607d98, groundColor, 0.8 );
+				dirLight.myPosition.set( 600, 300, -1600 );
+				dirLight.intensity = 0.4;
+				dirLight.color.setHex( 0xacb4ab );
 				break;
 			    case "TropicalSunnyDay":
 				hemiLight = new THREE.HemisphereLight( 0x77a6cd, groundColor, 0.8 );
+				dirLight.myPosition.set( 1400, 400, 400 );
+				dirLight.intensity = 0.95;
+				dirLight.color.setHex( 0xffffff );
 				break;
 			}
 			targetScene.add( hemiLight );
