@@ -8,8 +8,6 @@ oobloxMeshLoader = function ()
 	this.mesh.vrObjectTypeID = "OML";
 	this.mesh.uname = "";
 	var mesh = this.mesh;
-	mesh.receiveShadow = true;
-	mesh.castShadow = true;
 
 	var loadedModel = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshStandardMaterial({}));
 	mesh.add(loadedModel);
@@ -19,8 +17,6 @@ oobloxMeshLoader = function ()
 
 	var groupNode = new THREE.Group();
 	groupNode.add(this.mesh);
-	groupNode.receiveShadow = true;
-	groupNode.castShadow = true;
 	groupNode.name = "vrObjectGroup";
 	var guioffset = new THREE.Vector3();
 

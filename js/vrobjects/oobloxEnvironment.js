@@ -204,24 +204,45 @@ oobloxEnvironment = function ()
 			var skyboxname = skyboxSettings.theme;
 			targetScene.remove( hemiLight );
 
+			var dirLight = targetScene.getObjectByName( "dirLight" );
+			dirLight.myPosition.set( -400, 1400, 400 );
+
 			switch (skyboxname) {
 			    case "CloudyLightRays":
 				hemiLight = new THREE.HemisphereLight( 0xbeb6ab, groundColor, 0.5 );
+				dirLight.myPosition.set( 1040, 1100, -450 );
+				dirLight.intensity = 0.4;
+				dirLight.color.setHex( 0xfff5d0 );
 				break;
 			    case "DarkStormy":
 				hemiLight = new THREE.HemisphereLight( 0x404141, groundColor, 0.5 );
+				dirLight.myPosition.set( -300, 500, 1580 );
+				dirLight.intensity = 0.25;
+				dirLight.color.setHex( 0xdfd7ca );
 				break;
 			    case "FullMoon":
 				hemiLight = new THREE.HemisphereLight( 0x08090b, groundColor, 0.3 );
+				dirLight.myPosition.set( 400, 400, -1400 );
+				dirLight.intensity = 0.8;
+				dirLight.color.setHex( 0xfefefe );
 				break;
 			    case "SunSet":
 				hemiLight = new THREE.HemisphereLight( 0x7d6452, groundColor, 0.6 );
+				dirLight.myPosition.set( 600, 300, -1600 );
+				dirLight.intensity = 0.8;
+				dirLight.color.setHex( 0xffffbd );
 				break;
 			    case "ThickCloudsWater":
 				hemiLight = new THREE.HemisphereLight( 0x607d98, groundColor, 0.8 );
+				dirLight.myPosition.set( 600, 300, -1600 );
+				dirLight.intensity = 0.4;
+				dirLight.color.setHex( 0xacb4ab );
 				break;
 			    case "TropicalSunnyDay":
 				hemiLight = new THREE.HemisphereLight( 0x77a6cd, groundColor, 0.8 );
+				dirLight.myPosition.set( 1400, 400, 400 );
+				dirLight.intensity = 0.95;
+				dirLight.color.setHex( 0xffffff );
 				break;
 			}
 			targetScene.add( hemiLight );
@@ -270,9 +291,16 @@ oobloxEnvironment = function ()
 		datFolder.scale.set(20.0,20.0,0.1);
 
 
+
 		var skyFolder = dat.GUIVR.create('Sky (Textures by Heiko Irrgang)');
 		var skythemeChanger = skyFolder.add(skyboxSettings,'theme',themenames);
 		skythemeChanger.onChange(function(value) {refreshSkybox(targetScene);refreshHemiLight(targetScene);refreshURL(targetScene);});
+
+		//var dirLight = targetScene.getObjectByName( "dirLight" );
+		//var dirLightPosXSlider = skyFolder.add(dirLight.myPosition,'x',-2000,2000);
+		//var dirLightPosYSlider = skyFolder.add(dirLight.myPosition,'y',0,2000);
+		//var dirLightPosZSlider = skyFolder.add(dirLight.myPosition,'z',-2000,2000);
+
 		datFolder.addFolder(skyFolder);
 
 		var propFolder = dat.GUIVR.create('Ground (Textures by Yughues)');
@@ -293,14 +321,14 @@ oobloxEnvironment = function ()
 
 		var sourceChanger = propFolder.add(conf,'theme',themes);
 		sourceChanger.onChange(function(value) {refreshGroundTexture(targetScene);refreshHemiLight(targetScene);refreshURL(targetScene);});
-		var scxSlider = propFolder.add(mesh.scale,'x',1.0,10000.0).name("Scale X");
+		var scxSlider = propFolder.add(mesh.scale,'x',1.0,10000.0).name("Width");
 		scxSlider.onChange(function(){refreshURL(targetScene);});
-		var scySlider = propFolder.add(mesh.scale,'y',1.0,10000.0).name("Scale Y");
+		var scySlider = propFolder.add(mesh.scale,'y',1.0,10000.0).name("Length");
 		scySlider.onChange(function(){refreshURL(targetScene);});
-		var sczSlider = propFolder.add(mesh.scale,'z',0.0001,10000.0).name("Scale Z");
+		var sczSlider = propFolder.add(mesh.scale,'z',0.0001,10000.0).name("Height");
 		sczSlider.onChange(function(){refreshURL(targetScene);});
 
-		var posYSlider = propFolder.add(mesh.position,'y',-500.0,500.0).name("Pos Y");
+		var posYSlider = propFolder.add(mesh.position,'y',-500.0,500.0).name("Elevation");
 		posYSlider.onChange(function(){refreshURL(targetScene);});
 
 
