@@ -235,7 +235,7 @@ oobloxEnvironment = function ()
 			    case "ThickCloudsWater":
 				hemiLight = new THREE.HemisphereLight( 0x607d98, groundColor, 0.8 );
 				dirLight.myPosition.set( 1430, 100, -950 );
-				dirLight.intensity = 0.4;
+				dirLight.intensity = 0.25;
 				dirLight.color.setHex( 0xfef499 );
 				break;
 			    case "TropicalSunnyDay":
