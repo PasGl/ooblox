@@ -240,7 +240,7 @@ oobloxEnvironment = function ()
 				break;
 			    case "TropicalSunnyDay":
 				hemiLight = new THREE.HemisphereLight( 0x77a6cd, groundColor, 0.8 );
-				dirLight.myPosition.set( 1400, 400, 400 );
+				dirLight.myPosition.set( 1390, 520, 550 );
 				dirLight.intensity = 0.95;
 				dirLight.color.setHex( 0xffffff );
 				break;
@@ -272,7 +272,7 @@ oobloxEnvironment = function ()
 				targetScene.fog = new THREE.Fog( 0x5e4b3f, 1, 900 );
 				break;
 			    case "TropicalSunnyDay":
-				targetScene.fog = new THREE.Fog( 0xf7f9f4, 1, 1000 );
+				targetScene.fog = new THREE.Fog( 0xf7f9f4, 400, 1300 );
 				break;
 			}
 			var urls = [  skyboxname + "Front2048.png", skyboxname + "Back2048.png",
