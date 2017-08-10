@@ -68,7 +68,7 @@ oobloxTexturePanel = function ()
 
 		var propFolder = dat.GUIVR.create('Properties');
 
-		var sourceChanger = propFolder.add(conf,'textureFilename',textures).name("Filename");
+		var sourceChanger = propFolder.add(conf,'textureFilename',textures);//.name("Filename");
 		sourceChanger.onChange(function(value) {refresh(targetScene);});
 
 		var transSwitch = propFolder.add(mesh.material,'transparent').name("Transparent");
