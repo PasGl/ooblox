@@ -61,7 +61,7 @@ oobloxTexturePanel = function ()
 		refreshURL(targetScene);
 	}
 
-	this.mesh.fillDatGUI = function (targetScene,mesh)
+	var fillDatGUI = function (targetScene,mesh)
 	{
 		datFolder.position.copy(guioffset).add(mesh.position);
 		datFolder.scale.set(20.0,20.0,0.1);
@@ -78,7 +78,7 @@ oobloxTexturePanel = function ()
 		opacitySlider.onChange(function(){refreshURL(targetScene);});
 		var lightsSwitch = propFolder.add(mesh.material,'lights').name("Apply lights");
 		lightsSwitch.onChange(function(){mesh.material.needsUpdate=true;refreshURL(targetScene);});
-*/
+
 		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
 		scxSlider.onChange(function(){refreshURL(targetScene);});
 		var scySlider = propFolder.add(mesh.scale,'y',0.0001,100).name("Scale Y");
@@ -89,6 +89,8 @@ oobloxTexturePanel = function ()
 		rotySlider.onChange(function(){refreshURL(targetScene);});
 		var rotzSlider = propFolder.add(mesh.rotation,'z',0.0,Math.PI*2.0).name("Rotation Z").step(0.0001);
 		rotzSlider.onChange(function(){refreshURL(targetScene);});
+
+*/
 		datFolder.addFolder(propFolder);
 
 		var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
@@ -113,7 +115,9 @@ oobloxTexturePanel = function ()
 		guioffset.x = parseFloat(argList[9]);
 		guioffset.y = parseFloat(argList[10]);
 		guioffset.z = parseFloat(argList[11]);
-
+		mesh.material.transparent = Boolean(argList[12]=="true");
+		mesh.material.opacity = parseFloat(argList[13]);
+		mesh.material.lights = Boolean(argList[14]=="true");
 		conf.textureFilename = decodeURIComponent(argList.slice(15).join(""));
 		$.get("./images/textures", function(data) {
 			textures = data.split("href=\"");
@@ -129,10 +133,7 @@ oobloxTexturePanel = function ()
 				}
 				else textures.splice(n,1);
 			}
-			mesh.fillDatGUI(targetScene,mesh);
-			mesh.material.transparent = Boolean(argList[12]=="true");
-			mesh.material.opacity = parseFloat(argList[13]);
-			mesh.material.lights = Boolean(argList[14]=="true");
+			fillDatGUI(targetScene,mesh);
 			refresh(targetScene);
 			var event = new Event('vrObjectInstantiated');
 			document.dispatchEvent(event);
