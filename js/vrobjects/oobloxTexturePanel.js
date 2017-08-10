@@ -48,9 +48,9 @@ oobloxTexturePanel = function ()
 				guioffset.x,
 				guioffset.y,
 				guioffset.z,
-				mesh.material.transparent.toString(),
-				mesh.material.opacity,
-				mesh.material.lights.toString(),
+				conf.transparent.toString(),
+				conf.opacity,
+				conf.lights.toString(),
 				encodeURIComponent(conf.textureFilename)]);
 	}
 
@@ -76,11 +76,11 @@ oobloxTexturePanel = function ()
 		//mesh.material.lights = conf.lights;
 		//mesh.material.needsUpdate=true;
 
-		var transSwitch = propFolder.add(mesh.material,'transparent').name("Transparent");
+		var transSwitch = propFolder.add(conf,'transparent').name("Transparent");
 		transSwitch.onChange(function(){refreshURL(targetScene);});
-		var opacitySlider = propFolder.add(mesh.material,'opacity',0.0,1.0).name("Opacity").step(0.0001);
+		var opacitySlider = propFolder.add(conf,'opacity',0.0,1.0).name("Opacity").step(0.0001);
 		opacitySlider.onChange(function(){refreshURL(targetScene);});
-		var lightsSwitch = propFolder.add(mesh.material,'lights').name("Apply lights");
+		var lightsSwitch = propFolder.add(conf,'lights').name("Apply lights");
 		lightsSwitch.onChange(function(){mesh.material.needsUpdate=true;refreshURL(targetScene);});
 
 		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
