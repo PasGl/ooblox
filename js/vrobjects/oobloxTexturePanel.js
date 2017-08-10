@@ -48,6 +48,8 @@ oobloxTexturePanel = function ()
 				guioffset.x,
 				guioffset.y,
 				guioffset.z,
+				mesh.material.transparent,
+				mesh.material.opacity,
 				encodeURIComponent(conf.textureFilename)]);
 	}
 
@@ -69,6 +71,7 @@ oobloxTexturePanel = function ()
 		sourceChanger.onChange(function(value) {refresh(targetScene);});
 
 		propFolder.add(mesh.material,'transparent').name("Texture transparent");
+		propFolder.add(mesh.material,'opacity').name("Texture opacity");
 
 		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
 		scxSlider.onChange(function(){refreshURL(targetScene);});
@@ -104,7 +107,9 @@ oobloxTexturePanel = function ()
 		guioffset.x = parseFloat(argList[9]);
 		guioffset.y = parseFloat(argList[10]);
 		guioffset.z = parseFloat(argList[11]);
-		conf.textureFilename = decodeURIComponent(argList.slice(12).join(""));
+		mesh.material.transparent = Boolean(argList[12]=="true");
+		mesh.material.opacity = parseFloat(argList[13]);
+		conf.textureFilename = decodeURIComponent(argList.slice(14).join(""));
 
 		$.get("./images/textures", function(data) {
 			textures = data.split("href=\"");
