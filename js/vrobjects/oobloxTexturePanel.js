@@ -6,9 +6,9 @@ oobloxTexturePanel = function ()
 {
 	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 0.5), 	[new THREE.MeshStandardMaterial({color:0x000000}),
 									 new THREE.MeshStandardMaterial({color:0x000000}), 
+									 new THREE.MeshStandardMaterial({color:0x000000}),
+									 new THREE.MeshStandardMaterial({color:0x000000}),
 									 new THREE.MeshStandardMaterial({color:0xffffff}),
-									 new THREE.MeshStandardMaterial({color:0x000000}),
-									 new THREE.MeshStandardMaterial({color:0x000000}),
 									 new THREE.MeshStandardMaterial({color:0x000000})]);
 	this.mesh.receiveShadow = true;
 	this.mesh.castShadow = true;
@@ -68,14 +68,14 @@ oobloxTexturePanel = function ()
 	var refreshMaterial = function (targetScene)
 	{
 		if (conf.lights) {
-			mesh.material[2] = new THREE.MeshLambertMaterial({
+			mesh.material[4] = new THREE.MeshLambertMaterial({
 				map: (new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename )),
 				transparent: Boolean(conf.transparent),
 				opacity: conf.opacity
 			});
 		}
 		else {
-			mesh.material[2] = new THREE.MeshBasicMaterial({
+			mesh.material[4] = new THREE.MeshBasicMaterial({
 				map: (new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename )),
 				transparent: Boolean(conf.transparent),
 				opacity: conf.opacity
@@ -85,7 +85,7 @@ oobloxTexturePanel = function ()
 
 	var refresh = function (targetScene)
 	{
-		mesh.material[2].map = new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename );
+		mesh.material[4].map = new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename );
 		refreshURL(targetScene);
 	}
 
@@ -101,9 +101,9 @@ oobloxTexturePanel = function ()
 		sourceChanger.onChange(function() {refresh(targetScene);});
 
 		var transSwitch = propFolder.add(conf,'transparent').name("Transparent");
-		transSwitch.onChange(function(){mesh.material[2].transparent=Boolean(conf.transparent);refreshURL(targetScene);});
+		transSwitch.onChange(function(){mesh.material[4].transparent=Boolean(conf.transparent);refreshURL(targetScene);});
 		var opacitySlider = propFolder.add(conf,'opacity',0.0,1.0).name("Opacity").step(0.0001);
-		opacitySlider.onChange(function(){mesh.material[2].opacity=conf.opacity;refreshURL(targetScene);});
+		opacitySlider.onChange(function(){mesh.material[4].opacity=conf.opacity;refreshURL(targetScene);});
 		var lightsSwitch = propFolder.add(conf,'lights').name("Apply lights");
 		lightsSwitch.onChange(function(){refreshMaterial(targetScene);refreshURL(targetScene);});
 
