@@ -113,9 +113,7 @@ oobloxTexturePanel = function ()
 		guioffset.x = parseFloat(argList[9]);
 		guioffset.y = parseFloat(argList[10]);
 		guioffset.z = parseFloat(argList[11]);
-		mesh.material.transparent = Boolean(argList[12]=="true");
-		mesh.material.opacity = parseFloat(argList[13]);
-		mesh.material.lights = Boolean(argList[14]=="true");
+
 		conf.textureFilename = decodeURIComponent(argList.slice(15).join(""));
 		$.get("./images/textures", function(data) {
 			textures = data.split("href=\"");
@@ -132,6 +130,9 @@ oobloxTexturePanel = function ()
 				else textures.splice(n,1);
 			}
 			mesh.fillDatGUI(targetScene,mesh);
+			mesh.material.transparent = Boolean(argList[12]=="true");
+			mesh.material.opacity = parseFloat(argList[13]);
+			mesh.material.lights = Boolean(argList[14]=="true");
 			refresh(targetScene);
 			var event = new Event('vrObjectInstantiated');
 			document.dispatchEvent(event);
