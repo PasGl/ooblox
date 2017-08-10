@@ -127,7 +127,9 @@ oobloxTexturePanel = function ()
 		conf.opacity = parseFloat(argList[13]);
 		conf.lights = Boolean(argList[14]=="true");
 		conf.textureFilename = decodeURIComponent(argList.slice(15).join(""));
+		mesh.material.transparent = Boolean(conf.transparent);
 		mesh.material.opacity = conf.opacity;
+
 		$.get("./images/textures", function(data) {
 			textures = data.split("href=\"");
 			var n = 0;
