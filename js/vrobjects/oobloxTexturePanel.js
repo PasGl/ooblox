@@ -77,10 +77,10 @@ oobloxTexturePanel = function ()
 		var sourceChanger = propFolder.add(conf,'textureFilename',textures);
 		sourceChanger.onChange(function() {refresh(targetScene);});
 
-		//mesh.material.transparent = conf.transparent
-		//mesh.material.opacity = conf.opacity;
-		//mesh.material.lights = conf.lights;
-		//mesh.material.needsUpdate=true;
+		mesh.material.transparent = conf.transparent
+		mesh.material.opacity = conf.opacity;
+		mesh.material.lights = conf.lights;
+		mesh.material.needsUpdate=true;
 
 		var transSwitch = propFolder.add(conf,'transparent').name("Transparent");
 		transSwitch.onChange(function(){refreshURL(targetScene);});
