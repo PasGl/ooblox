@@ -62,12 +62,22 @@ oobloxTexturePanel = function ()
 
 	var refreshMaterial = function (targetScene)
 	{
-		mesh.material = new THREE.MeshStandardMaterial({
-			map: (new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename )),
-			transparent: Boolean(conf.transparent),
-			opacity: conf.opacity//,
-			//lights: Boolean(conf.lights)
-		});
+		if (conf.lights) {
+			mesh.material = new THREE.MeshStandardMaterial({
+				map: (new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename )),
+				transparent: Boolean(conf.transparent),
+				opacity: conf.opacity//,
+				//lights: Boolean(conf.lights)
+			});
+		}
+		else {
+			mesh.material = new THREE.MeshBasicMaterial({
+				map: (new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename )),
+				transparent: Boolean(conf.transparent),
+				opacity: conf.opacity//,
+				//lights: Boolean(conf.lights)
+			});
+		}
 	}
 
 	var refresh = function (targetScene)
