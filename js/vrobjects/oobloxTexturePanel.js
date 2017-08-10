@@ -48,9 +48,9 @@ oobloxTexturePanel = function ()
 				guioffset.x,
 				guioffset.y,
 				guioffset.z,
-				mesh.material.transparent,
+				mesh.material.transparent.toString(),
 				mesh.material.opacity,
-				mesh.material.lights,
+				mesh.material.lights.toString(),
 				encodeURIComponent(conf.textureFilename)]);
 	}
 
@@ -77,7 +77,7 @@ oobloxTexturePanel = function ()
 		var opacitySlider = propFolder.add(mesh.material,'opacity',0.0,1.0).name("Opacity").step(0.0001);
 		opacitySlider.onChange(function(){refreshURL(targetScene);});
 		var lightsSwitch = propFolder.add(mesh.material,'lights').name("Apply lights");
-		lightsSwitch.onChange(function(){mesh.material.needsUpdate = true;refreshURL(targetScene);});
+		lightsSwitch.onChange(function(){mesh.material.needsUpdate=true;refreshURL(targetScene);});
 
 		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
 		scxSlider.onChange(function(){refreshURL(targetScene);});
