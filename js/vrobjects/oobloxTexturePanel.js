@@ -70,8 +70,8 @@ oobloxTexturePanel = function ()
 		var sourceChanger = propFolder.add(conf,'textureFilename',textures);
 		sourceChanger.onChange(function(value) {refresh(targetScene);});
 
-		propFolder.add(mesh.material,'transparent').name("Texture transparent");
-		propFolder.add(mesh.material,'opacity').name("Texture opacity");
+		propFolder.add(mesh.material,'transparent').name("Texture transparent").step(0.0001);
+		propFolder.add(mesh.material,'opacity',0.0,1.0).name("Texture opacity").step(0.0001);
 
 		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
 		scxSlider.onChange(function(){refreshURL(targetScene);});
@@ -79,9 +79,9 @@ oobloxTexturePanel = function ()
 		scySlider.onChange(function(){refreshURL(targetScene);});
 		var rotxSlider = propFolder.add(mesh.rotation,'x',0.0,Math.PI*2.0).name("Rotation X").step(0.0001);
 		rotxSlider.onChange(function(){refreshURL(targetScene);});
-		var rotySlider = propFolder.add(mesh.rotation,'y',0.0,Math.PI*2.0).name("Rotation Y").step(0.0001);;
+		var rotySlider = propFolder.add(mesh.rotation,'y',0.0,Math.PI*2.0).name("Rotation Y").step(0.0001);
 		rotySlider.onChange(function(){refreshURL(targetScene);});
-		var rotzSlider = propFolder.add(mesh.rotation,'z',0.0,Math.PI*2.0).name("Rotation Z").step(0.0001);;
+		var rotzSlider = propFolder.add(mesh.rotation,'z',0.0,Math.PI*2.0).name("Rotation Z").step(0.0001);
 		rotzSlider.onChange(function(){refreshURL(targetScene);});
 		datFolder.addFolder(propFolder);
 
