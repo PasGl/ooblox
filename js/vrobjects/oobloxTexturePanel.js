@@ -65,8 +65,8 @@ oobloxTexturePanel = function ()
 		mesh.material = new THREE.MeshStandardMaterial({
 			map: (new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename )),
 			transparent: Boolean(conf.transparent),
-			opacity: conf.opacity,
-			lights: Boolean(conf.lights)
+			opacity: conf.opacity//,
+			//lights: Boolean(conf.lights)
 		});
 	}
 
