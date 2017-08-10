@@ -4,7 +4,7 @@
 
 oobloxTexturePanel = function ()
 {
-	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 0), new THREE.MeshStandardMaterial({}));
+	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 0.5), new THREE.MeshStandardMaterial({}));
 	this.mesh.receiveShadow = true;
 	this.mesh.castShadow = true;
 	this.mesh.vrObjectTypeID = "TPL";
@@ -66,16 +66,14 @@ oobloxTexturePanel = function ()
 			mesh.material = new THREE.MeshLambertMaterial({
 				map: (new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename )),
 				transparent: Boolean(conf.transparent),
-				opacity: conf.opacity//,
-				//lights: Boolean(conf.lights)
+				opacity: conf.opacity
 			});
 		}
 		else {
 			mesh.material = new THREE.MeshBasicMaterial({
 				map: (new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename )),
 				transparent: Boolean(conf.transparent),
-				opacity: conf.opacity//,
-				//lights: Boolean(conf.lights)
+				opacity: conf.opacity
 			});
 		}
 	}
@@ -102,7 +100,7 @@ oobloxTexturePanel = function ()
 		var opacitySlider = propFolder.add(conf,'opacity',0.0,1.0).name("Opacity").step(0.0001);
 		opacitySlider.onChange(function(){mesh.material.opacity=conf.opacity;refreshURL(targetScene);});
 		var lightsSwitch = propFolder.add(conf,'lights').name("Apply lights");
-		lightsSwitch.onChange(function(){refreshMaterial(targetScene);refreshURL(targetScene);}); //mesh.material.needsUpdate=true;
+		lightsSwitch.onChange(function(){refreshMaterial(targetScene);refreshURL(targetScene);});
 
 		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
 		scxSlider.onChange(function(){refreshURL(targetScene);});
