@@ -19,7 +19,13 @@ oobloxTexturePanel = function ()
 	var datFolder = dat.GUIVR.create('Texture Panel');
 	groupNode.add( datFolder )
 
-	var TPLProperties = function ()	{this.followGUI = true;this.textureFilename = "bark-template.png";}
+	var TPLProperties = function ()	{
+		this.followGUI = true;
+		this.textureFilename = "bark-template.png";
+		this.transparent = true;
+		this.opacity = 0.61;
+		this.lights = true;
+	}
 	var conf = new TPLProperties();
 
 	var textures = [];
