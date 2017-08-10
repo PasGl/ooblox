@@ -57,7 +57,6 @@ oobloxTexturePanel = function ()
 	var refresh = function (targetScene)
 	{
 		mesh.material.map = new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename );
-		//mesh.material.needsUpdate = true;
 		refreshURL(targetScene);
 	}
 
@@ -68,9 +67,14 @@ oobloxTexturePanel = function ()
 		var followFlag = datFolder.add(conf,'followGUI');
 
 		var propFolder = dat.GUIVR.create('Properties');
-/*
-		var sourceChanger = propFolder.add(conf,'textureFilename',textures);//.name("Filename");
+
+		var sourceChanger = propFolder.add(conf,'textureFilename',textures).name("Filename");
 		sourceChanger.onChange(function() {refresh(targetScene);});
+
+		mesh.material.transparent = conf.transparent
+		mesh.material.opacity = conf.opacity;
+		mesh.material.lights = conf.lights;
+		mesh.material.needsUpdate=true;
 
 		var transSwitch = propFolder.add(mesh.material,'transparent').name("Transparent");
 		transSwitch.onChange(function(){refreshURL(targetScene);});
@@ -90,7 +94,6 @@ oobloxTexturePanel = function ()
 		var rotzSlider = propFolder.add(mesh.rotation,'z',0.0,Math.PI*2.0).name("Rotation Z").step(0.0001);
 		rotzSlider.onChange(function(){refreshURL(targetScene);});
 
-*/
 		datFolder.addFolder(propFolder);
 
 		var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
@@ -115,9 +118,9 @@ oobloxTexturePanel = function ()
 		guioffset.x = parseFloat(argList[9]);
 		guioffset.y = parseFloat(argList[10]);
 		guioffset.z = parseFloat(argList[11]);
-		//mesh.material.transparent = Boolean(argList[12]=="true");
-		//mesh.material.opacity = parseFloat(argList[13]);
-		//mesh.material.lights = Boolean(argList[14]=="true");
+		conf.transparent = Boolean(argList[12]=="true");
+		conf.opacity = parseFloat(argList[13]);
+		conf.lights = Boolean(argList[14]=="true");
 		conf.textureFilename = decodeURIComponent(argList.slice(15).join(""));
 		$.get("./images/textures", function(data) {
 			textures = data.split("href=\"");
