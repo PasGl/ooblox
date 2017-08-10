@@ -58,7 +58,6 @@ oobloxTexturePanel = function ()
 	{
 		mesh.material.map = new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename );
 		refreshURL(targetScene);
-		console.log(mesh.material);
 	}
 
 	this.mesh.fillDatGUI = function (targetScene,mesh)
