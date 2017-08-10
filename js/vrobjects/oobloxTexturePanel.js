@@ -68,10 +68,10 @@ oobloxTexturePanel = function ()
 		var followFlag = datFolder.add(conf,'followGUI');
 
 		var propFolder = dat.GUIVR.create('Properties');
-
+/*
 		var sourceChanger = propFolder.add(conf,'textureFilename',textures);//.name("Filename");
 		sourceChanger.onChange(function() {refresh(targetScene);});
-/*
+
 		var transSwitch = propFolder.add(mesh.material,'transparent').name("Transparent");
 		transSwitch.onChange(function(){refreshURL(targetScene);});
 		var opacitySlider = propFolder.add(mesh.material,'opacity',0.0,1.0).name("Opacity").step(0.0001);
