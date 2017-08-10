@@ -63,7 +63,7 @@ oobloxTexturePanel = function ()
 	var refreshMaterial = function (targetScene)
 	{
 		if (conf.lights) {
-			mesh.material = new THREE.MeshStandardMaterial({
+			mesh.material = new THREE.MeshPhongMaterial({
 				map: (new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename )),
 				transparent: Boolean(conf.transparent),
 				opacity: conf.opacity//,
