@@ -82,11 +82,11 @@ oobloxTexturePanel = function ()
 		sourceChanger.onChange(function() {refresh(targetScene);});
 
 		var transSwitch = propFolder.add(conf,'transparent').name("Transparent");
-		transSwitch.onChange(function(){mesh.material.transparent = (conf.transparent);refreshURL(targetScene);});
+		transSwitch.onChange(function(){mesh.material.transparent = Boolean(conf.transparent);refreshURL(targetScene);});
 		var opacitySlider = propFolder.add(conf,'opacity',0.0,1.0).name("Opacity").step(0.0001);
 		opacitySlider.onChange(function(){mesh.material.opacity = conf.opacity;refreshURL(targetScene);});
 		var lightsSwitch = propFolder.add(conf,'lights').name("Apply lights");
-		lightsSwitch.onChange(function(){mesh.material.lights = (conf.lights);mesh.material.needsUpdate=true;refreshURL(targetScene);});
+		lightsSwitch.onChange(function(){mesh.material.lights = Boolean(conf.lights);refreshURL(targetScene);}); //mesh.material.needsUpdate=true;
 
 		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
 		scxSlider.onChange(function(){refreshURL(targetScene);});
@@ -129,6 +129,7 @@ oobloxTexturePanel = function ()
 		conf.textureFilename = decodeURIComponent(argList.slice(15).join(""));
 		mesh.material.transparent = Boolean(conf.transparent);
 		mesh.material.opacity = conf.opacity;
+		mesh.material.lights = Boolean(conf.lights);
 
 		$.get("./images/textures", function(data) {
 			textures = data.split("href=\"");
