@@ -63,10 +63,10 @@ oobloxTexturePanel = function ()
 	var refresh = function (targetScene)
 	{
 		mesh.material.map = new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename );
-		mesh.material.transparent = (conf.transparent);
-		mesh.material.opacity = conf.opacity;
-		mesh.material.lights = (conf.lights);
-		mesh.material.needsUpdate=true;
+		//mesh.material.transparent = (conf.transparent);
+		//mesh.material.opacity = conf.opacity;
+		//mesh.material.lights = (conf.lights);
+		//mesh.material.needsUpdate=true;
 		refreshURL(targetScene);
 	}
 
