@@ -57,6 +57,7 @@ oobloxTexturePanel = function ()
 	var refresh = function (targetScene)
 	{
 		mesh.material.map = new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename );
+		mesh.material.needsUpdate = true;
 		refreshURL(targetScene);
 	}
 
@@ -69,7 +70,7 @@ oobloxTexturePanel = function ()
 		var propFolder = dat.GUIVR.create('Properties');
 
 		var sourceChanger = propFolder.add(conf,'textureFilename',textures);//.name("Filename");
-		sourceChanger.onChange(function(value) {refresh(targetScene);});
+		sourceChanger.onChange(function() {refresh(targetScene);});
 
 		var transSwitch = propFolder.add(mesh.material,'transparent').name("Transparent");
 		transSwitch.onChange(function(){refreshURL(targetScene);});
@@ -116,7 +117,6 @@ oobloxTexturePanel = function ()
 		mesh.material.opacity = parseFloat(argList[13]);
 		mesh.material.lights = Boolean(argList[14]=="true");
 		conf.textureFilename = decodeURIComponent(argList.slice(15).join(""));
-		mesh.material.needsUpdate = true;
 		$.get("./images/textures", function(data) {
 			textures = data.split("href=\"");
 			var n = 0;
