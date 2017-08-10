@@ -70,7 +70,7 @@ oobloxTexturePanel = function ()
 		var sourceChanger = propFolder.add(conf,'textureFilename',textures);
 		sourceChanger.onChange(function(value) {refresh(targetScene);});
 
-		propFolder.add(mesh.material,'transparent').name("Texture transparent").step(0.0001);
+		propFolder.add(mesh.material,'transparent').name("Texture transparent");
 		propFolder.add(mesh.material,'opacity',0.0,1.0).name("Texture opacity").step(0.0001);
 
 		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
