@@ -22,7 +22,7 @@ oobloxMeshLoader = function ()
 		{
 			if (this.files.length > 0)
 			{
-				var sourceChanger = propFolder.add(conf,'modelFilename',this.files);
+				var sourceChanger = guiFolder.add(conf,'modelFilename',this.files);
 				sourceChanger.onChange(function(value) {conf.modelFilename = this.prefix.substring(8,this.prefix.length)+value;refresh(targetScene);});
 			}
 
