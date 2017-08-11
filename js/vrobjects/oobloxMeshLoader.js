@@ -20,7 +20,7 @@ oobloxMeshLoader = function ()
 		this.prefix="./models";
 		this.folders=[];
 		this.files=[];
-		this.fillGUI = function (guiFolder) 
+		this.fillGUI = function (guiFolder,targetScene) 
 		{
 			if (this.files.length > 0)
 			{
@@ -52,7 +52,7 @@ oobloxMeshLoader = function ()
 	var datFolder = dat.GUIVR.create('Mesh');
 	groupNode.add(datFolder);
 
-	var recBuildSourceTree = function (folderToBeAdded,nodeToBeAddedTo,onComplete)
+	var recBuildSourceTree = function (folderToBeAdded,nodeToBeAddedTo,targetScene)
 	{
 		var foldercounter = 1;
 		$.get(folderToBeAdded, function(data) {
@@ -77,7 +77,7 @@ oobloxMeshLoader = function ()
 						newNode.foldername = thisfilename;
 						newNode.prefix = nodeToBeAddedTo.prefix + "/" + thisfilename;
 						nodeToBeAddedTo.folders.push(newNode);
-						recBuildSourceTree(newNode.prefix,newNode,onComplete);
+						recBuildSourceTree(newNode.prefix,newNode,targetScene);
 						nodeToBeAddedTo.files.splice(n,1);
 					}
 					else
@@ -91,7 +91,7 @@ oobloxMeshLoader = function ()
 				}
 			}
 			foldercounter -= 1;
-			if (foldercounter == 0) {sourceTree.fillGUI(sourceTreeChanger)}
+			if (foldercounter == 0) {sourceTree.fillGUI(sourceTreeChanger,targetScene)}
         	});
 	}
 
@@ -225,7 +225,7 @@ oobloxMeshLoader = function ()
 		conf.modelFilename = decodeURIComponent(argList.slice(13).join(""));
 		targetScene.add( groupNode );
 
-		recBuildSourceTree("./models",sourceTree, function(){});
+		recBuildSourceTree("./models",sourceTree,targetScene);
 
 		fillDatGUI(targetScene,mesh);
 		refresh(targetScene);
