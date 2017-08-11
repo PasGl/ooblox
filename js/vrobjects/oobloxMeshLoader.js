@@ -69,7 +69,7 @@ oobloxMeshLoader = function ()
 	{
 		console.log(sourceTree);
 		var foldercounter = 1;
-		$.get(".models/"+folderToBeAdded, function(data) {
+		$.get("models/"+folderToBeAdded, function(data) {
 			nodeToBeAddedTo.files = data.split("href=\"");
 			var n = 0;
 			while (n<nodeToBeAddedTo.files.length)
