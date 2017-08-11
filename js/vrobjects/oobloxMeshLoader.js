@@ -25,6 +25,7 @@ oobloxMeshLoader = function ()
 			if (this.files.length > 0)
 			{
 				var sourceChanger = guiFolder.add(conf,'modelFilename',this.files);
+				var prefix = this.prefix;
 				sourceChanger.onChange(function(value) {conf.modelFilename = this.prefix.substring(8,this.prefix.length)+value;refresh(targetScene);});
 			}
 
