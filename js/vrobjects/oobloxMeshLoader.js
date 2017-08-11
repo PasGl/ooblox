@@ -17,7 +17,7 @@ oobloxMeshLoader = function ()
 	var SourceTreeNode = function ()
 	{
 		this.foldername="Source File";
-		this.prefix="./models";
+		this.prefix="";
 		this.folders=[];
 		this.files=[];
 		this.fillGUI = function (guiFolder,targetScene,prefix) 
