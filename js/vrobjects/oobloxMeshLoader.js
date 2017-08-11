@@ -53,6 +53,7 @@ oobloxMeshLoader = function ()
 
 	var recBuildSourceTree = function (folderToBeAdded,nodeToBeAddedTo,onComplete)
 	{
+		this.foldercounter = 1;
 		$.get(folderToBeAdded, function(data) {
 			nodeToBeAddedTo.files = data.split("href=\"");
 			var n = 0;
@@ -70,6 +71,7 @@ oobloxMeshLoader = function ()
 					thisfilename = thisfilename.slice(0,-1);
 					if (["..","."].indexOf(thisfilename) == -1) 
 					{
+						this.foldercounter += 1;
 						var newNode = new SourceTreeNode();
 						newNode.foldername = thisfilename;
 						newNode.prefix = nodeToBeAddedTo.prefix + "/" + thisfilename;
@@ -87,7 +89,8 @@ oobloxMeshLoader = function ()
 					nodeToBeAddedTo.files.splice(n,1);
 				}
 			}
-			console.log("might be complete now after: ",nodeToBeAddedTo.foldername);
+			this.foldercounter -= 1;
+			console.log("might be complete now after: ",nodeToBeAddedTo.foldername,this.foldercounter);
         	});
 	}
 
@@ -184,7 +187,6 @@ oobloxMeshLoader = function ()
 		var sourceChanger = propFolder.add(conf,'modelFilename',conf.models);
 		sourceChanger.onChange(function(value) {refresh(targetScene);});
 
-		sourceTree.fillGUI(sourceTreeChanger);
 		propFolder.addFolder(sourceTreeChanger);
 
 		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
