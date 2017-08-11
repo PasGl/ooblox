@@ -15,6 +15,7 @@ oobloxMeshLoader = function ()
 	var SourceTreeNode = function ()
 	{
 		this.foldername="Source File";
+		this.prefix="./models";
 		this.folders=[];
 		this.files=[];
 	}
@@ -62,6 +63,7 @@ oobloxMeshLoader = function ()
 					{
 						var newNode = new SourceTreeNode();
 						newNode.foldername = thisfilename;
+						newNode.prefix = nodeToBeAddedTo.prefix + "/" + thisfilename;
 						nodeToBeAddedTo.folders.push(newNode);
 						recBuildSourceTree(thisfilename,newNode,onComplete);
 						nodeToBeAddedTo.files.splice(n,1);
