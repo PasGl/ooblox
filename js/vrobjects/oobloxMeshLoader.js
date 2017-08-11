@@ -52,9 +52,6 @@ oobloxMeshLoader = function ()
 	var recBuildSourceTree = function (folderToBeAdded,nodeToBeAddedTo,onComplete)
 	{
 		$.get(folderToBeAdded, function(data) {
-
-			console.log("recBuildSourceTree", folderToBeAdded, nodeToBeAddedTo);
-
 			nodeToBeAddedTo.files = data.split("href=\"");
 			var n = 0;
 			while (n<nodeToBeAddedTo.files.length)
@@ -88,8 +85,7 @@ oobloxMeshLoader = function ()
 					nodeToBeAddedTo.files.splice(n,1);
 				}
 			}
-
-			console.log("result", nodeToBeAddedTo);
+			console.log("might be complete now after: ",nodeToBeAddedTo.foldername);
         	});
 	}
 
@@ -185,7 +181,6 @@ oobloxMeshLoader = function ()
 		var propFolder = dat.GUIVR.create('Properties');
 		var sourceChanger = propFolder.add(conf,'modelFilename',conf.models);
 		sourceChanger.onChange(function(value) {refresh(targetScene);});
-
 
 		var sourceTreeChanger  = dat.GUIVR.create('Source');
 		sourceTree.fillGUI(sourceTreeChanger);
