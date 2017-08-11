@@ -22,6 +22,7 @@ oobloxMeshLoader = function ()
 		this.files=[];
 		this.fillGUI = function (guiFolder,targetScene,prefix) 
 		{
+			console.log("fillGUI",prefix,sourceTree);
 			if (this.files.length > 0)
 			{
 				var sourceChanger = guiFolder.add(conf,'modelFilename',this.files);
