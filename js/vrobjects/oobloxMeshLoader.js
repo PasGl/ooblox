@@ -37,7 +37,7 @@ oobloxMeshLoader = function ()
 				for(var i=0;i<this.folders.length;i++)
 				{
 					var thisFolder  = dat.GUIVR.create(this.folders[i].foldername);
-					this.folders[i].fillGUI(thisFolder,targetScene,prefix+"/"+this.folders[i].foldername);
+					this.folders[i].fillGUI(thisFolder,targetScene,prefix+this.folders[i].foldername+"/");
 					guiFolder.addFolder(thisFolder);
 				}
 			}
