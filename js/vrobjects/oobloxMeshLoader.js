@@ -12,7 +12,22 @@ oobloxMeshLoader = function ()
 	var loadedModel = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshStandardMaterial({}));
 	mesh.add(loadedModel);
 
-	var TPLProperties = function ()	{this.followGUI = true;this.modelFilename = "Object.dae";this.models=["Object.dae"];}
+	var SourceTreeNode = function ()
+	{
+		this.foldername="Source File";
+		this.folders=[];
+		this.files=[];
+	}
+
+	var sourceTree = new SourceTreeNode();
+
+	var TPLProperties = function ()
+	{
+		this.followGUI = true;
+		this.modelFilename = "Object.dae";
+		this.models=["Object.dae"];
+	}
+
 	var conf = new TPLProperties();
 
 	var groupNode = new THREE.Group();
@@ -21,7 +36,27 @@ oobloxMeshLoader = function ()
 	var guioffset = new THREE.Vector3();
 
 	var datFolder = dat.GUIVR.create('Mesh');
-	groupNode.add(datFolder)
+	groupNode.add(datFolder);
+
+	var recBuildSourceTree = function (folderToBeAdded,nodeToBeAddedTo,onComplete)
+	{
+		console.log("recBuildSourceTree", folderToBeAdded, nodeToBeAddedTo,onComplete);
+		$.get(folderToBeAdded, function(data) {
+			nodeToBeAddedTo.files = data.split("href=\"");
+			var n = 0;
+			while (n<nodeToBeAddedTo.files.length)
+			{
+				var thisfilename =nodeToBeAddedTo.files[n].substring(0,nodeToBeAddedTo.files[n].indexOf("\""));
+
+				if ( [".dae",".DAE",".obj",".OBJ",".stl",".STL"].indexOf(thisfilename.substring(thisfilename.length-4,thisfilename.length+1)) >=0)
+				{
+					nodeToBeAddedTo.files[n] = thisfilename;
+					n++;
+				}
+				else nodeToBeAddedTo.files.splice(n,1);
+			}
+        	});
+	}
 
 	var refreshURL = function (targetScene)
 	{
@@ -150,26 +185,13 @@ oobloxMeshLoader = function ()
 		conf.modelFilename = decodeURIComponent(argList.slice(13).join(""));
 		targetScene.add( groupNode );
 
-		$.get("./models", function(data) {
-			conf.models = data.split("href=\"");
-			var n = 0;
-			while (n<conf.models.length)
-			{
-				var thisfilename = conf.models[n].substring(0,conf.models[n].indexOf("\""));
+		recBuildSourceTree("./models",sourceTree, function(){});
 
-				if ( [".dae",".DAE",".obj",".OBJ",".stl",".STL"].indexOf(thisfilename.substring(thisfilename.length-4,thisfilename.length+1)) >=0)
-				{
-					conf.models[n] = thisfilename;
-					n++;
-				}
-				else conf.models.splice(n,1);
-			}
-			fillDatGUI(targetScene,mesh);
-			refresh(targetScene);
-			window.addEventListener("mouseup", function(){refreshURL(targetScene);});
-			var event = new Event('vrObjectInstantiated');
-			document.dispatchEvent(event);
-        	});
+		fillDatGUI(targetScene,mesh);
+		refresh(targetScene);
+		window.addEventListener("mouseup", function(){refreshURL(targetScene);});
+		var event = new Event('vrObjectInstantiated');
+		document.dispatchEvent(event);	
 	}
 }
 
