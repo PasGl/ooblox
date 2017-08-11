@@ -88,7 +88,7 @@ oobloxMeshLoader = function ()
 						foldercounter += 1;
 						var newNode = new SourceTreeNode();
 						newNode.foldername = thisfilename;
-						newNode.prefix = nodeToBeAddedTo.prefix + "/" + thisfilename;
+						newNode.prefix = nodeToBeAddedTo.prefix + thisfilename+ "/" ;
 						nodeToBeAddedTo.folders.push(newNode);
 						recBuildSourceTree(newNode.prefix,newNode,targetScene);
 						nodeToBeAddedTo.files.splice(n,1);
