@@ -53,7 +53,7 @@ oobloxMeshLoader = function ()
 
 	var recBuildSourceTree = function (folderToBeAdded,nodeToBeAddedTo,onComplete)
 	{
-		this.foldercounter = 1;
+		var foldercounter = 1;
 		$.get(folderToBeAdded, function(data) {
 			nodeToBeAddedTo.files = data.split("href=\"");
 			var n = 0;
@@ -71,7 +71,7 @@ oobloxMeshLoader = function ()
 					thisfilename = thisfilename.slice(0,-1);
 					if (["..","."].indexOf(thisfilename) == -1) 
 					{
-						this.foldercounter += 1;
+						foldercounter += 1;
 						var newNode = new SourceTreeNode();
 						newNode.foldername = thisfilename;
 						newNode.prefix = nodeToBeAddedTo.prefix + "/" + thisfilename;
@@ -89,8 +89,8 @@ oobloxMeshLoader = function ()
 					nodeToBeAddedTo.files.splice(n,1);
 				}
 			}
-			this.foldercounter -= 1;
-			console.log("might be complete now after: ",nodeToBeAddedTo.foldername,this.foldercounter);
+			foldercounter -= 1;
+			console.log("might be complete now after: ",nodeToBeAddedTo.foldername,foldercounter);
         	});
 	}
 
