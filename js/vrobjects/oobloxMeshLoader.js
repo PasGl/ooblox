@@ -90,7 +90,7 @@ oobloxMeshLoader = function ()
 				}
 			}
 			foldercounter -= 1;
-			console.log("might be complete now after: ",nodeToBeAddedTo.foldername,foldercounter);
+			if (foldercounter == 0) {sourceTree.fillGUI(sourceTreeChanger)}
         	});
 	}
 
