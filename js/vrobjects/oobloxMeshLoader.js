@@ -22,7 +22,7 @@ oobloxMeshLoader = function ()
 		this.files=[];
 		this.fillGUI = function (guiFolder,targetScene,prefix) 
 		{
-			console.log("fillGUI",prefix,sourceTree);
+			//console.log("fillGUI",prefix,sourceTree);
 			if (this.files.length > 0)
 			{
 				var sourceChanger = guiFolder.add(conf,'modelFilename',this.files);
@@ -67,6 +67,7 @@ oobloxMeshLoader = function ()
 
 	var recBuildSourceTree = function (folderToBeAdded,nodeToBeAddedTo,targetScene)
 	{
+		console.log(sourceTree);
 		var foldercounter = 1;
 		$.get(folderToBeAdded, function(data) {
 			nodeToBeAddedTo.files = data.split("href=\"");
