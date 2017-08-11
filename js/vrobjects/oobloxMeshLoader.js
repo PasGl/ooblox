@@ -50,12 +50,13 @@ oobloxMeshLoader = function ()
 			{
 				var thisfilename =nodeToBeAddedTo.files[n].substring(0,nodeToBeAddedTo.files[n].indexOf("\""));
 
-				console.log(thisfilename);
+				
 
 				if ( [".dae",".DAE",".obj",".OBJ",".stl",".STL"].indexOf(thisfilename.substring(thisfilename.length-4,thisfilename.length+1)) >=0)
 				{
 					nodeToBeAddedTo.files[n] = thisfilename;
 					n++;
+					console.log("adding file",thisfilename);
 				}
 				else if (thisfilename.slice(-1) == "/")
 				{
@@ -65,9 +66,17 @@ oobloxMeshLoader = function ()
 						console.log("want to add folder",thisfilename);
 						n++;
 					}
-					else nodeToBeAddedTo.files.splice(n,1);
+					else
+					{
+						console.log("removing",thisfilename);
+						nodeToBeAddedTo.files.splice(n,1);
+					}
 				} 
-				else nodeToBeAddedTo.files.splice(n,1);
+				else
+				{
+					console.log("removing",thisfilename);
+					nodeToBeAddedTo.files.splice(n,1);
+				}
 			}
 
 			console.log("result", nodeToBeAddedTo);
