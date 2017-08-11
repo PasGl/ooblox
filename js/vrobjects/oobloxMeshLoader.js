@@ -15,9 +15,19 @@ oobloxMeshLoader = function ()
 	var SourceTreeNode = function ()
 	{
 		this.foldername="Source File";
-		this.prefix="./models";
+		this.prefix="/";
 		this.folders=[];
 		this.files=[];
+		this.fillGUI = function (guiFolder) 
+		{
+			if (this.files.length > 0)
+			{
+				var sourceChanger = propFolder.add(conf,'modelFilename',this.files);
+				sourceChanger.onChange(function(value) {conf.modelFilename = this.prefix+value;refresh(targetScene);});
+			}
+
+			
+		}
 	}
 
 	var sourceTree = new SourceTreeNode();
@@ -175,6 +185,12 @@ oobloxMeshLoader = function ()
 		var propFolder = dat.GUIVR.create('Properties');
 		var sourceChanger = propFolder.add(conf,'modelFilename',conf.models);
 		sourceChanger.onChange(function(value) {refresh(targetScene);});
+
+
+		var sourceTreeChanger  = dat.GUIVR.create('Source');
+		sourceTree.fillGUI(sourceTreeChanger);
+		propFolder.addFolder(sourceTreeChanger);
+
 		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
 		scxSlider.onChange(function(){refreshURL(targetScene, mesh);});
 		var scySlider = propFolder.add(mesh.scale,'y',0.0001,100).name("Scale Y");
