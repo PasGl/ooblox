@@ -53,6 +53,8 @@ oobloxMeshLoader = function ()
 	var datFolder = dat.GUIVR.create('Mesh');
 	groupNode.add(datFolder);
 
+	var foldercounter = 1;
+
 	var recBuildSourceTree = function (folderToBeAdded,nodeToBeAddedTo,targetScene)
 	{
 		var foldercounter = 1;
@@ -92,7 +94,7 @@ oobloxMeshLoader = function ()
 				}
 			}
 			foldercounter -= 1;
-			if (foldercounter == 0) {sourceTree.fillGUI(sourceTreeChanger,targetScene)}
+			if (foldercounter == 0) {sourceTree.fillGUI(sourceTreeChanger,targetScene);}
         	});
 	}
 
@@ -186,8 +188,6 @@ oobloxMeshLoader = function ()
 		datFolder.scale.set(20.0,20.0,0.1);
 		var followFlag = datFolder.add(conf,'followGUI');
 		var propFolder = dat.GUIVR.create('Properties');
-		var sourceChanger = propFolder.add(conf,'modelFilename',conf.models);
-		sourceChanger.onChange(function(value) {refresh(targetScene);});
 
 		propFolder.addFolder(sourceTreeChanger);
 
