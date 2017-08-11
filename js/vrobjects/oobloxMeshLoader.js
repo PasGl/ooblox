@@ -69,7 +69,7 @@ oobloxMeshLoader = function ()
 	{
 		console.log(sourceTree);
 		var foldercounter = 1;
-		$.get(folderToBeAdded, function(data) {
+		$.get(".models/"+folderToBeAdded, function(data) {
 			nodeToBeAddedTo.files = data.split("href=\"");
 			var n = 0;
 			while (n<nodeToBeAddedTo.files.length)
@@ -238,7 +238,7 @@ oobloxMeshLoader = function ()
 		conf.modelFilename = decodeURIComponent(argList.slice(13).join(""));
 		targetScene.add( groupNode );
 
-		recBuildSourceTree("./models",sourceTree,targetScene);
+		recBuildSourceTree("",sourceTree,targetScene);
 
 		fillDatGUI(targetScene,mesh);
 		refresh(targetScene);
