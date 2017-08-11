@@ -67,7 +67,6 @@ oobloxMeshLoader = function ()
 
 	var recBuildSourceTree = function (folderToBeAdded,nodeToBeAddedTo,targetScene)
 	{
-		console.log(sourceTree);
 		var foldercounter = 1;
 		$.get("models/"+folderToBeAdded, function(data) {
 			nodeToBeAddedTo.files = data.split("href=\"");
@@ -90,7 +89,6 @@ oobloxMeshLoader = function ()
 						var newNode = new SourceTreeNode();
 						newNode.foldername = thisfilename;
 						newNode.prefix = nodeToBeAddedTo.prefix + "/" + thisfilename;
-						console.log("newNode.prefix",newNode.prefix);
 						nodeToBeAddedTo.folders.push(newNode);
 						recBuildSourceTree(newNode.prefix,newNode,targetScene);
 						nodeToBeAddedTo.files.splice(n,1);
@@ -106,7 +104,7 @@ oobloxMeshLoader = function ()
 				}
 			}
 			foldercounter -= 1;
-			if (foldercounter == 0) {sourceTree.fillGUI(sourceTreeChanger,targetScene,"./models/");console.log(sourceTree);}
+			if (foldercounter == 0) {sourceTree.fillGUI(sourceTreeChanger,targetScene,"./models/");}
         	});
 	}
 
