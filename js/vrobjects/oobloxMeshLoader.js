@@ -12,6 +12,8 @@ oobloxMeshLoader = function ()
 	var loadedModel = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshStandardMaterial({}));
 	mesh.add(loadedModel);
 
+	var sourceTreeChanger  = dat.GUIVR.create('Source');
+
 	var SourceTreeNode = function ()
 	{
 		this.foldername="Source File";
@@ -182,7 +184,6 @@ oobloxMeshLoader = function ()
 		var sourceChanger = propFolder.add(conf,'modelFilename',conf.models);
 		sourceChanger.onChange(function(value) {refresh(targetScene);});
 
-		var sourceTreeChanger  = dat.GUIVR.create('Source');
 		sourceTree.fillGUI(sourceTreeChanger);
 		propFolder.addFolder(sourceTreeChanger);
 
