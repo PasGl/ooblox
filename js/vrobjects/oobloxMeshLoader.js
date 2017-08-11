@@ -144,7 +144,7 @@ oobloxMeshLoader = function ()
 		if ([".dae",".DAE"].indexOf(conf.modelFilename.substring(conf.modelFilename.length-4,conf.modelFilename.length+1)) >=0)
 		{
 			var loader = new THREE.ColladaLoader();
-			loader.load('models/'+conf.modelFilename, function ( collada ) 
+			loader.load(conf.modelFilename, function ( collada ) 
 			{
 				mesh.remove(loadedModel);
 				loadedModel = collada.scene;
@@ -161,7 +161,7 @@ oobloxMeshLoader = function ()
 		else if ([".obj",".OBJ"].indexOf(conf.modelFilename.substring(conf.modelFilename.length-4,conf.modelFilename.length+1)) >=0)
 		{
 			var loader = new THREE.OBJLoader();
-			loader.load('models/'+conf.modelFilename, function ( obj ) 
+			loader.load(conf.modelFilename, function ( obj ) 
 			{
 				mesh.remove(loadedModel);
 				loadedModel = obj;
@@ -178,7 +178,7 @@ oobloxMeshLoader = function ()
 		else if ([".stl",".STL"].indexOf(conf.modelFilename.substring(conf.modelFilename.length-4,conf.modelFilename.length+1)) >=0)
 		{
 			var loader = new THREE.STLLoader();
-			loader.load('models/'+conf.modelFilename, function ( stl ) 
+			loader.load(conf.modelFilename, function ( stl ) 
 			{
 				mesh.remove(loadedModel);
 				loadedModel = stl;
