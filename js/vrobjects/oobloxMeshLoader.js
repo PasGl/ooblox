@@ -48,33 +48,31 @@ oobloxMeshLoader = function ()
 			var n = 0;
 			while (n<nodeToBeAddedTo.files.length)
 			{
-				console.log("while",n,"<",nodeToBeAddedTo.files);
-
 				var thisfilename =nodeToBeAddedTo.files[n].substring(0,nodeToBeAddedTo.files[n].indexOf("\""));
 
 				if ( [".dae",".DAE",".obj",".OBJ",".stl",".STL"].indexOf(thisfilename.substring(thisfilename.length-4,thisfilename.length+1)) >=0)
 				{
 					nodeToBeAddedTo.files[n] = thisfilename;
 					n++;
-					console.log("adding file",thisfilename);
 				}
 				else if (thisfilename.slice(-1) == "/")
 				{
 					thisfilename = thisfilename.slice(0,-1);
 					if (["..","."].indexOf(thisfilename) == -1) 
 					{
-						nodeToBeAddedTo.folders.push(thisfilename); // recursion here
+						var newNode = SourceTreeNode();
+						newNode.foldername = thisfilename;
+						nodeToBeAddedTo.folders.push(newNode);
+						recBuildSourceTree(thisfilename,newNode,onComplete);
 						nodeToBeAddedTo.files.splice(n,1);
 					}
 					else
 					{
-						console.log("removing",thisfilename);
 						nodeToBeAddedTo.files.splice(n,1);
 					}
 				} 
 				else
 				{
-					console.log("removing",thisfilename);
 					nodeToBeAddedTo.files.splice(n,1);
 				}
 			}
