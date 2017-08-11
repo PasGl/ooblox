@@ -42,7 +42,7 @@ oobloxMeshLoader = function ()
 	{
 		$.get(folderToBeAdded, function(data) {
 
-			console.log("recBuildSourceTree", folderToBeAdded, nodeToBeAddedTo,onComplete);
+			console.log("recBuildSourceTree", folderToBeAdded, nodeToBeAddedTo);
 
 			nodeToBeAddedTo.files = data.split("href=\"");
 			var n = 0;
@@ -57,8 +57,19 @@ oobloxMeshLoader = function ()
 					nodeToBeAddedTo.files[n] = thisfilename;
 					n++;
 				}
+				else if (thisfilename.slice(-1) == "/")
+				{
+					thisfilename = thisfilename.slice(0,-1);
+					if (["..","."].indexOf(thisfilename) == -1) 
+					{
+						console.log("want to add folder",thisfilename);
+					}
+					else nodeToBeAddedTo.files.splice(n,1);
+				} 
 				else nodeToBeAddedTo.files.splice(n,1);
 			}
+
+			console.log("result", nodeToBeAddedTo);
         	});
 	}
 
