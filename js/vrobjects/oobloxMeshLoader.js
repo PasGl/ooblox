@@ -63,6 +63,7 @@ oobloxMeshLoader = function ()
 					if (["..","."].indexOf(thisfilename) == -1) 
 					{
 						console.log("want to add folder",thisfilename);
+						n++;
 					}
 					else nodeToBeAddedTo.files.splice(n,1);
 				} 
