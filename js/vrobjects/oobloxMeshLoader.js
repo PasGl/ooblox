@@ -60,7 +60,7 @@ oobloxMeshLoader = function ()
 					thisfilename = thisfilename.slice(0,-1);
 					if (["..","."].indexOf(thisfilename) == -1) 
 					{
-						var newNode = SourceTreeNode();
+						var newNode = new SourceTreeNode();
 						newNode.foldername = thisfilename;
 						nodeToBeAddedTo.folders.push(newNode);
 						recBuildSourceTree(thisfilename,newNode,onComplete);
