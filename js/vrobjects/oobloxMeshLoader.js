@@ -17,10 +17,10 @@ oobloxMeshLoader = function ()
 	var SourceTreeNode = function ()
 	{
 		this.foldername="Source File";
-		this.prefix="./models";
+		//this.prefix="./models";
 		this.folders=[];
 		this.files=[];
-		this.fillGUI = function (guiFolder,targetScene) 
+		this.fillGUI = function (guiFolder,targetScene,prefix) 
 		{
 			if (this.files.length > 0)
 			{
@@ -36,7 +36,7 @@ oobloxMeshLoader = function ()
 				for(var i=0;i<this.folders.length;i++)
 				{
 					var thisFolder  = dat.GUIVR.create(this.folders[i].foldername);
-					this.folders[i].fillGUI(thisFolder,targetScene);
+					this.folders[i].fillGUI(thisFolder,targetScene,prefix+"/"+this.folders[i].foldername);
 					guiFolder.addFolder(thisFolder);
 				}
 			}
@@ -103,7 +103,7 @@ oobloxMeshLoader = function ()
 				}
 			}
 			foldercounter -= 1;
-			if (foldercounter == 0) {sourceTree.fillGUI(sourceTreeChanger,targetScene);}
+			if (foldercounter == 0) {sourceTree.fillGUI(sourceTreeChanger,targetScene,"./models");}
         	});
 	}
 
