@@ -48,9 +48,9 @@ oobloxMeshLoader = function ()
 			var n = 0;
 			while (n<nodeToBeAddedTo.files.length)
 			{
-				var thisfilename =nodeToBeAddedTo.files[n].substring(0,nodeToBeAddedTo.files[n].indexOf("\""));
+				console.log("while",n,"<",nodeToBeAddedTo.files);
 
-				
+				var thisfilename =nodeToBeAddedTo.files[n].substring(0,nodeToBeAddedTo.files[n].indexOf("\""));
 
 				if ( [".dae",".DAE",".obj",".OBJ",".stl",".STL"].indexOf(thisfilename.substring(thisfilename.length-4,thisfilename.length+1)) >=0)
 				{
