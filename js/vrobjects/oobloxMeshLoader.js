@@ -28,9 +28,18 @@ oobloxMeshLoader = function ()
 				var prefix = this.prefix;
 				var tScene = targetScene;
 				sourceChanger.onChange(function(value) {conf.modelFilename = prefix.substring(8,prefix.length)+value;refresh(tScene);});
-			}
 
-			
+				
+			}
+			if (this.folders.length > 0)
+			{
+				for(var i=0;i<this.folders.length;i++)
+				{
+					var thisFolder  = dat.GUIVR.create(this.folders[i].foldername);
+					this.folders[i].fillGUI(thisFolder,targetScene);
+					guiFolder.addFolder(thisFolder);
+				}
+			}
 		}
 	}
 
