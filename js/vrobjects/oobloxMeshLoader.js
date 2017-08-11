@@ -40,13 +40,17 @@ oobloxMeshLoader = function ()
 
 	var recBuildSourceTree = function (folderToBeAdded,nodeToBeAddedTo,onComplete)
 	{
-		console.log("recBuildSourceTree", folderToBeAdded, nodeToBeAddedTo,onComplete);
 		$.get(folderToBeAdded, function(data) {
+
+			console.log("recBuildSourceTree", folderToBeAdded, nodeToBeAddedTo,onComplete);
+
 			nodeToBeAddedTo.files = data.split("href=\"");
 			var n = 0;
 			while (n<nodeToBeAddedTo.files.length)
 			{
 				var thisfilename =nodeToBeAddedTo.files[n].substring(0,nodeToBeAddedTo.files[n].indexOf("\""));
+
+				console.log(thisfilename);
 
 				if ( [".dae",".DAE",".obj",".OBJ",".stl",".STL"].indexOf(thisfilename.substring(thisfilename.length-4,thisfilename.length+1)) >=0)
 				{
