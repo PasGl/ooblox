@@ -105,6 +105,11 @@ oobloxMeshLoader = function ()
 			if (foldercounter == 0) {
 				//sourceTree.fillGUI(sourceTreeChanger,targetScene,"./models/");
 				sourceTree.fillGUI(datFolder,targetScene,"./models/");
+				fillDatGUI(targetScene,mesh);
+				refresh(targetScene);
+				window.addEventListener("mouseup", function(){refreshURL(targetScene);});
+				var event = new Event('vrObjectInstantiated');
+				document.dispatchEvent(event);	
 			}
         	});
 	}
@@ -214,7 +219,7 @@ oobloxMeshLoader = function ()
 		datFolder.scale.set(20.0,20.0,0.1);
 		var followFlag = datFolder.add(conf,'followGUI');
 
-		datFolder.addFolder(sourceTreeChanger);
+		//datFolder.addFolder(sourceTreeChanger);
 
 		var propFolder = dat.GUIVR.create('Properties');
 		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,20.0).name("Scale X").step(0.0001);
@@ -251,14 +256,7 @@ oobloxMeshLoader = function ()
 		guioffset.z = parseFloat(argList[12]);
 		conf.modelFilename = decodeURIComponent(argList.slice(13).join(""));
 		targetScene.add( groupNode );
-
 		recBuildSourceTree("",sourceTree,targetScene);
-
-		fillDatGUI(targetScene,mesh);
-		refresh(targetScene);
-		window.addEventListener("mouseup", function(){refreshURL(targetScene);});
-		var event = new Event('vrObjectInstantiated');
-		document.dispatchEvent(event);	
 	}
 }
 
