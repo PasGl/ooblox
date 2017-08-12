@@ -102,7 +102,10 @@ oobloxMeshLoader = function ()
 				}
 			}
 			foldercounter -= 1;
-			if (foldercounter == 0) {sourceTree.fillGUI(sourceTreeChanger,targetScene,"./models/");}
+			if (foldercounter == 0) {
+				//sourceTree.fillGUI(sourceTreeChanger,targetScene,"./models/");
+				sourceTree.fillGUI(datFolder,targetScene,"./models/");
+			}
         	});
 	}
 
