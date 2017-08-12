@@ -26,7 +26,7 @@ oobloxMeshLoader = function ()
 			{
 				var sourceChanger = guiFolder.add(conf,'modelFilename',this.files);
 				var tScene = targetScene;
-				sourceChanger.onChange(function(value) {conf.modelFilename = prefix+value;refresh(tScene);});
+				sourceChanger.onChange(function(value) {conf.modelFilename = value;refresh(tScene);});
 			}
 			if (this.folders.length > 0)
 			{
@@ -75,7 +75,7 @@ oobloxMeshLoader = function ()
 
 				if ( [".dae",".DAE",".obj",".OBJ",".stl",".STL"].indexOf(thisfilename.substring(thisfilename.length-4,thisfilename.length+1)) >=0)
 				{
-					nodeToBeAddedTo.files[n] = thisfilename;
+					nodeToBeAddedTo.files[n] = nodeToBeAddedTo.prefix+thisfilename;
 					n++;
 				}
 				else if (thisfilename.slice(-1) == "/")
