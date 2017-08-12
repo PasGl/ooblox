@@ -12,7 +12,7 @@ oobloxMeshLoader = function ()
 	var loadedModel = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 1, 1), new THREE.MeshStandardMaterial({}));
 	mesh.add(loadedModel);
 
-	var sourceTreeChanger  = dat.GUIVR.create('models/');
+	var sourceTreeChanger  = dat.GUIVR.create('Source: models/');
 
 	var SourceTreeNode = function ()
 	{
