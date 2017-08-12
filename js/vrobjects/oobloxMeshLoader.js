@@ -49,6 +49,8 @@ oobloxMeshLoader = function ()
 		this.followGUI = true;
 		this.modelFilename = "Object.dae";
 		this.models = ["Object.dae"];
+		this.scale = new THREE.Vector3(1.0,1.0,1.0);
+		this.scalar = 1.0;
 	}
 
 	var conf = new TPLProperties();
@@ -130,9 +132,10 @@ oobloxMeshLoader = function ()
 				mesh.position.x,
 				mesh.position.y,
 				mesh.position.z,
-				mesh.scale.x,
-				mesh.scale.y,
-				mesh.scale.z,
+				conf.scale.x,
+				conf.scale.y,
+				conf.scale.z,
+				conf.scaler,
 				mesh.rotation.x,
 				mesh.rotation.y,
 				mesh.rotation.z,
@@ -222,12 +225,13 @@ oobloxMeshLoader = function ()
 		//datFolder.addFolder(sourceTreeChanger);
 
 		var propFolder = dat.GUIVR.create('Properties');
-		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,20.0).name("Scale X").step(0.0001);
-		scxSlider.onChange(function(){refreshURL(targetScene, mesh);});
-		var scySlider = propFolder.add(mesh.scale,'y',0.0001,20.0).name("Scale Y").step(0.0001);
-		scySlider.onChange(function(){refreshURL(targetScene, mesh);});
-		var sczSlider = propFolder.add(mesh.scale,'z',0.0001,20.0).name("Scale Z").step(0.0001);
-		sczSlider.onChange(function(){refreshURL(targetScene, mesh);});
+		var scalarSlider = propFolder.add(conf,'scalar',0.01,10.0).name("Scaler").step(0.0001);
+		scalarSlider.onChange(function(){
+			mesh.scale.x = conf.scale.x * conf.scalar;
+			mesh.scale.y = conf.scale.y * conf.scalar;
+			mesh.scale.z = conf.scale.z * conf.scalar;
+			refreshURL(targetScene, mesh);
+		});
 		var rotxSlider = propFolder.add(mesh.rotation,'x',0.0,Math.PI*2.0).name("Rotation X").step(0.0001);
 		rotxSlider.onChange(function(){refreshURL(targetScene, mesh);});
 		var rotySlider = propFolder.add(mesh.rotation,'y',0.0,Math.PI*2.0).name("Rotation Y").step(0.0001);
@@ -245,16 +249,20 @@ oobloxMeshLoader = function ()
 		mesh.position.x = parseFloat(argList[1]);
 		mesh.position.y = parseFloat(argList[2]);
 		mesh.position.z = parseFloat(argList[3]);
-		mesh.scale.x = parseFloat(argList[4]);
-		mesh.scale.y = parseFloat(argList[5]);
-		mesh.scale.z = parseFloat(argList[6]);
-		mesh.rotation.x = parseFloat(argList[7]);
-		mesh.rotation.y = parseFloat(argList[8]);
-		mesh.rotation.z = parseFloat(argList[9]);
-		guioffset.x = parseFloat(argList[10]);
-		guioffset.y = parseFloat(argList[11]);
-		guioffset.z = parseFloat(argList[12]);
-		conf.modelFilename = decodeURIComponent(argList.slice(13).join(""));
+		conf.scale.x = parseFloat(argList[4]);
+		conf.scale.y = parseFloat(argList[5]);
+		conf.scale.z = parseFloat(argList[6]);
+		conf.scaler = parseFloat(argList[7]);
+		mesh.rotation.x = parseFloat(argList[8]);
+		mesh.rotation.y = parseFloat(argList[9]);
+		mesh.rotation.z = parseFloat(argList[10]);
+		guioffset.x = parseFloat(argList[11]);
+		guioffset.y = parseFloat(argList[12]);
+		guioffset.z = parseFloat(argList[13]);
+		conf.modelFilename = decodeURIComponent(argList.slice(14).join(""));
+		mesh.scale.x = conf.scale.x * conf.scaler;
+		mesh.scale.y =  conf.scale.y * conf.scaler;
+		mesh.scale.z =  conf.scale.z * conf.scaler;
 		targetScene.add( groupNode );
 		recBuildSourceTree("",sourceTree,targetScene);
 	}
