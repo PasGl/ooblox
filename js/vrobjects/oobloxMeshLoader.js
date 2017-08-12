@@ -173,6 +173,7 @@ oobloxMeshLoader = function ()
 					var yi = conf.modelFilename.indexOf("Yughues")+8;
 					var objName = conf.modelFilename.substring(yi,conf.modelFilename.length-4);
 					var path = conf.modelFilename.substring(0,yi);
+					loadedModel.material = new THREE.MeshStandardMaterial({});
 					loadedModel.material.map = new THREE.TGALoader().load( path + "Textures/"+ objName + "_diffuse.tga");
 					loadedModel.material.normalMap = new THREE.TGALoader().load( path + "Textures/"+ objName + "_normal.tga");
 					loadedModel.material.aoMap = new THREE.TGALoader().load( path + "Textures/"+ objName + "_occlusion.tga");
