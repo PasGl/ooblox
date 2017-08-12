@@ -109,7 +109,7 @@ oobloxEnvironment = function ()
 	};
 	var conf = new TPLProperties();
 
-	var themes = ["dirt","alienmold","arid","glacial","whitestone"];
+	var themes = ["dirt","alienmold","arid","glacial","whitestone","mossy","drygrass","grass","sand","clay"];
 	var themenames = ["CloudyLightRays","DarkStormy","FullMoon","SunSet","ThickCloudsWater","TropicalSunnyDay"];
 
 	var refreshURL = function (targetScene)
@@ -179,22 +179,42 @@ oobloxEnvironment = function ()
 				textureFolder = "pattern_269";
 				groundColor = 0xbbc1bb;
 				break;
+			case "mossy":
+				textureFolder = "pattern_42";
+				groundColor = 0xd2ce7d;
+				break;
+			case "drygrass":
+				textureFolder = "pattern_43";
+				groundColor = 0xe1c583;
+				break;
+			case "grass":
+				textureFolder = "pattern_44";
+				groundColor = 0xa59978;
+				break;
+			case "sand":
+				textureFolder = "pattern_45";
+				groundColor = 0xc8b89e;
+				break;
+			case "clay":
+				textureFolder = "pattern_46";
+				groundColor = 0x714f39;
+				break;
 		}
-		mesh.material.map = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/diffuse.tga");
+		mesh.material.map = new THREE.TGALoader().load( "images/Yughues_patterns/" + textureFolder + "/diffuse.tga");
 		mesh.material.map.wrapS = THREE.RepeatWrapping;
 		mesh.material.map.wrapT = THREE.RepeatWrapping;
 		mesh.material.map.repeat.set( conf.textureRepsX , conf.textureRepsY);
-		mesh.material.normalMap = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/normal.tga");
+		mesh.material.normalMap = new THREE.TGALoader().load( "images/Yughues_patterns/" + textureFolder + "/normal.tga");
 		mesh.material.normalMap.wrapS = THREE.RepeatWrapping;
 		mesh.material.normalMap.wrapT = THREE.RepeatWrapping;
 		mesh.material.normalMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
-		mesh.material.emissiveMap = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/specular.tga");
+		mesh.material.emissiveMap = new THREE.TGALoader().load( "images/Yughues_patterns/" + textureFolder + "/specular.tga");
 		mesh.material.emissiveMap.wrapS = THREE.RepeatWrapping;
 		mesh.material.emissiveMap.wrapT = THREE.RepeatWrapping;
 		mesh.material.emissiveMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
 		mesh.material.emissive = new THREE.Color( 0x555555 );
-		mesh.material.metalness = 0.1;
-		mesh.material.roughness = 0.5;
+		mesh.material.metalness = 0.5;
+		mesh.material.roughness = 0.9;
 	}
 
 	var refreshHemiLight = function (targetScene)
