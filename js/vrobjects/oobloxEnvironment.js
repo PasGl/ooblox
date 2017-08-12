@@ -341,21 +341,21 @@ oobloxEnvironment = function ()
 
 		var sourceChanger = propFolder.add(conf,'theme',themes);
 		sourceChanger.onChange(function(value) {refreshGroundTexture(targetScene);refreshHemiLight(targetScene);refreshURL(targetScene);});
-		var scxSlider = propFolder.add(mesh.scale,'x',1.0,4000.0).name("Width");
+		var scxSlider = propFolder.add(mesh.scale,'x',1.0,4000.0).name("Width").step(1);
 		scxSlider.onChange(function(){refreshURL(targetScene);});
-		var scySlider = propFolder.add(mesh.scale,'y',1.0,4000.0).name("Length");
+		var scySlider = propFolder.add(mesh.scale,'y',1.0,4000.0).name("Length").step(1);
 		scySlider.onChange(function(){refreshURL(targetScene);});
-		var sczSlider = propFolder.add(mesh.scale,'z',0.0001,2000.0).name("Height");
+		var sczSlider = propFolder.add(mesh.scale,'z',0.0001,2000.0).name("Height").step(0.01);
 		sczSlider.onChange(function(){refreshURL(targetScene);});
 
-		var posYSlider = propFolder.add(mesh.position,'y',-500.0,500.0).name("Elevation");
+		var posYSlider = propFolder.add(mesh.position,'y',-500.0,500.0).name("Elevation").step(0.01);
 		posYSlider.onChange(function(){refreshURL(targetScene);});
 
 
-		var textureRepsXSlider = propFolder.add(conf,'textureRepsX',1.0,200.0).name("Texture Repeats X");
+		var textureRepsXSlider = propFolder.add(conf,'textureRepsX',1.0,100.0).name("Texture Repeats X");
 		textureRepsXSlider.onChange(function(){refreshGroundTextureReps(targetScene);refreshURL(targetScene);});
 
-		var textureRepsYSlider = propFolder.add(conf,'textureRepsY',1.0,200.0).name("Texture Repeats Y");
+		var textureRepsYSlider = propFolder.add(conf,'textureRepsY',1.0,100.0).name("Texture Repeats Y");
 		textureRepsYSlider.onChange(function(){refreshGroundTextureReps(targetScene);refreshURL(targetScene);});
 
 
