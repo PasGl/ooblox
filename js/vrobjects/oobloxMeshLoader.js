@@ -170,6 +170,10 @@ oobloxMeshLoader = function ()
 				if (conf.modelFilename.indexOf("Yughues") > -1) 
 				{
 					console.log(conf.modelFilename);
+					var yi = conf.modelFilename.indexOf("Yughues")+8;
+					var objName = conf.modelFilename.substring(yi,conf.modelFilename.length-4);
+					var path = conf.modelFilename.substring(0,yi+1);
+					console.log(objName,"in",path);
 					//loadedModel.material.map = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/diffuse.tga");
 				}
 			});
