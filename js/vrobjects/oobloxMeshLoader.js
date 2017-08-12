@@ -75,7 +75,7 @@ oobloxMeshLoader = function ()
 
 				if ( [".dae",".DAE",".obj",".OBJ",".stl",".STL"].indexOf(thisfilename.substring(thisfilename.length-4,thisfilename.length+1)) >=0)
 				{
-					nodeToBeAddedTo.files[n] = nodeToBeAddedTo.prefix+thisfilename;
+					nodeToBeAddedTo.files[n] = "models/"+nodeToBeAddedTo.prefix+thisfilename;
 					n++;
 				}
 				else if (thisfilename.slice(-1) == "/")
