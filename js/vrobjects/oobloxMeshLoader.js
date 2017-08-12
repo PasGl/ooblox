@@ -188,7 +188,7 @@ oobloxMeshLoader = function ()
 					loadedModel.children[0].material.aoMap = new THREE.TGALoader().load( path + "Textures/"+ objName + "_occlusion.tga");
 					loadedModel.children[0].material.emissiveMap = new THREE.TGALoader().load( path + "Textures/"+ objName + "_specular.tga");
 					loadedModel.children[0].material.emissive = new THREE.Color( 0x555555 );
-					mesh.material.metalness = 0.5;
+					mesh.material.metalness = 0.2;
 					mesh.material.roughness = 0.9;
 				}
 			});
