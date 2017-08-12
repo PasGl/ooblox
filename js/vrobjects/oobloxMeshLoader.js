@@ -32,9 +32,11 @@ oobloxMeshLoader = function ()
 			{
 				for(var i=0;i<this.folders.length;i++)
 				{
-					var thisFolder  = dat.GUIVR.create('models/' + this.folders[i].prefix);
-					this.folders[i].fillGUI(thisFolder,targetScene,prefix+this.folders[i].foldername+"/");
-					guiFolder.addFolder(thisFolder);
+					//var thisFolder  = dat.GUIVR.create('models/' + this.folders[i].prefix);
+					//this.folders[i].fillGUI(thisFolder,targetScene,prefix+this.folders[i].foldername+"/");
+					//guiFolder.addFolder(thisFolder);
+
+					this.folders[i].fillGUI(guiFolder,targetScene,prefix+this.folders[i].foldername+"/");
 				}
 			}
 		}
