@@ -135,7 +135,7 @@ oobloxMeshLoader = function ()
 				conf.scale.x,
 				conf.scale.y,
 				conf.scale.z,
-				conf.scaler,
+				conf.scalar,
 				mesh.rotation.x,
 				mesh.rotation.y,
 				mesh.rotation.z,
@@ -225,7 +225,7 @@ oobloxMeshLoader = function ()
 		//datFolder.addFolder(sourceTreeChanger);
 
 		var propFolder = dat.GUIVR.create('Properties');
-		var scalarSlider = propFolder.add(conf,'scalar',0.01,10.0).name("Scaler").step(0.0001);
+		var scalarSlider = propFolder.add(conf,'scalar',0.01,5.0).name("Scalar").step(0.01);
 		scalarSlider.onChange(function(){
 			mesh.scale.x = conf.scale.x * conf.scalar;
 			mesh.scale.y = conf.scale.y * conf.scalar;
@@ -252,7 +252,7 @@ oobloxMeshLoader = function ()
 		conf.scale.x = parseFloat(argList[4]);
 		conf.scale.y = parseFloat(argList[5]);
 		conf.scale.z = parseFloat(argList[6]);
-		conf.scaler = parseFloat(argList[7]);
+		conf.scalar = parseFloat(argList[7]);
 		mesh.rotation.x = parseFloat(argList[8]);
 		mesh.rotation.y = parseFloat(argList[9]);
 		mesh.rotation.z = parseFloat(argList[10]);
@@ -260,9 +260,9 @@ oobloxMeshLoader = function ()
 		guioffset.y = parseFloat(argList[12]);
 		guioffset.z = parseFloat(argList[13]);
 		conf.modelFilename = decodeURIComponent(argList.slice(14).join(""));
-		mesh.scale.x = conf.scale.x * conf.scaler;
-		mesh.scale.y =  conf.scale.y * conf.scaler;
-		mesh.scale.z =  conf.scale.z * conf.scaler;
+		mesh.scale.x = conf.scale.x * conf.scalar;
+		mesh.scale.y =  conf.scale.y * conf.scalar;
+		mesh.scale.z =  conf.scale.z * conf.scalar;
 		targetScene.add( groupNode );
 		recBuildSourceTree("",sourceTree,targetScene);
 	}
