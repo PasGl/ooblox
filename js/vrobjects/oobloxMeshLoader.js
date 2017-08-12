@@ -166,6 +166,12 @@ oobloxMeshLoader = function ()
         					e.castShadow = true;
       					}
 				});
+
+				if (conf.modelFilename.indexOf("Yughues") > -1) 
+				{
+					console.log(conf.modelFilename);
+					//loadedModel.material.map = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/diffuse.tga");
+				}
 			});
 			refreshURL(targetScene);
 		}
