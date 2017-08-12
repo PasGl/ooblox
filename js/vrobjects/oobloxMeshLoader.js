@@ -212,11 +212,11 @@ oobloxMeshLoader = function ()
 		datFolder.addFolder(sourceTreeChanger);
 
 		var propFolder = dat.GUIVR.create('Properties');
-		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
+		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,20.0).name("Scale X").step(0.0001);
 		scxSlider.onChange(function(){refreshURL(targetScene, mesh);});
-		var scySlider = propFolder.add(mesh.scale,'y',0.0001,100).name("Scale Y");
+		var scySlider = propFolder.add(mesh.scale,'y',0.0001,20.0).name("Scale Y").step(0.0001);
 		scySlider.onChange(function(){refreshURL(targetScene, mesh);});
-		var sczSlider = propFolder.add(mesh.scale,'z',0.0001,100).name("Scale Z");
+		var sczSlider = propFolder.add(mesh.scale,'z',0.0001,20.0).name("Scale Z").step(0.0001);
 		sczSlider.onChange(function(){refreshURL(targetScene, mesh);});
 		var rotxSlider = propFolder.add(mesh.rotation,'x',0.0,Math.PI*2.0).name("Rotation X").step(0.0001);
 		rotxSlider.onChange(function(){refreshURL(targetScene, mesh);});
