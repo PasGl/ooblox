@@ -173,7 +173,7 @@ oobloxMasterMenu = function ()
 			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
 			var d = new Date();
 			var uname = "OML" + d.getTime();
-			var newhref = window.location.href + "&" + uname + "=OML+" + posScaleRotString + "+1.0+1.0+1.0+0+0+0+-10+-8+0.1+.%2Fmodels%2FYughues%2FRock2_Cluster_LOD7.obj";
+			var newhref = window.location.href + "&" + uname + "=OML+" + posScaleRotString + "+1.0+1.0+1.0+1.0+0+0+0+-10+-8+0.1+models%2FYughues%2FRock2_Cluster_LOD7.obj";
 			window.history.pushState({}, '', newhref);
 			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("OML")]();
 			importedThing.mesh.uname = uname;
