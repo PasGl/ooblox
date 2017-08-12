@@ -4,12 +4,12 @@
 
 oobloxMeshLoader = function ()
 {
-	this.mesh = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshStandardMaterial({transparent:true,opacity:0.0}));
+	this.mesh = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 1, 1), new THREE.MeshStandardMaterial({transparent:true,opacity:0.0}));
 	this.mesh.vrObjectTypeID = "OML";
 	this.mesh.uname = "";
 	var mesh = this.mesh;
 
-	var loadedModel = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 10, 10), new THREE.MeshStandardMaterial({}));
+	var loadedModel = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 1, 1), new THREE.MeshStandardMaterial({}));
 	mesh.add(loadedModel);
 
 	var sourceTreeChanger  = dat.GUIVR.create('Source');
@@ -22,15 +22,11 @@ oobloxMeshLoader = function ()
 		this.files=[];
 		this.fillGUI = function (guiFolder,targetScene,prefix) 
 		{
-			//console.log("fillGUI",prefix,sourceTree);
 			if (this.files.length > 0)
 			{
 				var sourceChanger = guiFolder.add(conf,'modelFilename',this.files);
-				//var prefix = this.prefix;
 				var tScene = targetScene;
 				sourceChanger.onChange(function(value) {conf.modelFilename = prefix+value;refresh(tScene);});
-
-				
 			}
 			if (this.folders.length > 0)
 			{
@@ -50,7 +46,7 @@ oobloxMeshLoader = function ()
 	{
 		this.followGUI = true;
 		this.modelFilename = "Object.dae";
-		this.models=["Object.dae"];
+		this.models = ["Object.dae"];
 	}
 
 	var conf = new TPLProperties();
@@ -197,10 +193,10 @@ oobloxMeshLoader = function ()
 		datFolder.position.copy(guioffset).add(mesh.position);
 		datFolder.scale.set(20.0,20.0,0.1);
 		var followFlag = datFolder.add(conf,'followGUI');
+
+		datFolder.addFolder(sourceTreeChanger);
+
 		var propFolder = dat.GUIVR.create('Properties');
-
-		propFolder.addFolder(sourceTreeChanger);
-
 		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
 		scxSlider.onChange(function(){refreshURL(targetScene, mesh);});
 		var scySlider = propFolder.add(mesh.scale,'y',0.0001,100).name("Scale Y");
