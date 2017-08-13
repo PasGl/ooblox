@@ -28,7 +28,7 @@ A scene about algorithmic geometry, with a Torus Knot and a (not very good, yet)
 
 ### Test scene
 
-A scene with one instance of each Module.
+A scene with (at least) one instance of each Module.
 * http://51.15.67.244/demo
 
 ## Contact
@@ -63,7 +63,7 @@ The other entries are shortcuts for scenes.
         }
 
         location ~ /demo {
-                rewrite ^ http://51.15.67.244/?aTorusKnot=TTK+-30.52241056830794+-24.060654672392648+-19.148882587418605+9+0.7+246+7+6+10+-10+-5+6&chords=CPG+-20.413473137516963+15.520613613013657+-0.8822046718585383+4+390219+-29.275937545907542+10.236375141624494+0.05410277709049893&metronome=MET+-19.376949262765798+12.911771552356136+0.6836799437677445+128+false+-26.24683861118693+-6.671107515866989+0.4303844745127776&tree=PLS+32.451315494533375+-20.110257252210452+-0.12786119898048298+3+FN(1)+645101582+5+0.6000000000000001+4.5+0.7+0.36+0.3+0.45+0.4+0.0001+0.0001+5+5+0&cammod=OCM+1.6051670373027225+4.2657046391278834+39.79632653680005+1.0816275156575472+3.7453727056881654+-0.1968623964210779&thisMenu=OMM+17.85859540156063+17.07248287315567+-0.27264278541460385+true&TPL1501595683496=TPL+2.776542255211245+1.1955171270653295+0.06590600067666941+30+15+5.9594000000000005+0+0+-6.8305519702257005+-10.47184376458835+0.09066960974727181+true+0.61+false+ooblox-controls.png&ENV1501867801551=ENV+0+-55+0+1600+1600+315+36+-1.5+-30+35+35+41382439+7+dirt+CloudyLightRays;
+                rewrite ^ http://51.15.67.244/?cammod=OCM+0+0+30+0+0+-75&thisMenu=OMM+16+-2.5+-26+true&infoPanel=TPL+-20.0+-17.0+-30+30+15+6+0.50+0.16+-17+14.0+0+true+0.61+false+ooblox-controls.png&environment=ENV+0+-18+0+1600+1600+92+13+41.5+-20+13+13+29385260+5+mossy+TropicalSunnyDay&aTorusKnot=TTK+-46+-6+-55+6+0.4+240+7+9+7+-31+16.5+-3.0&aTree=PLS+1+-25.5+-77+4+FN(1)+37491667+7+1.87+6.2+0.57+0.39+0.28+0.18+0.17+0.1+0.17+16.5+22.5+-0.25&chords1=CPG+70+17+-84+4+21477896+-10+-5+0&metronom1=MET+50.5+14.5+-84+128+true+-11+-15+-1.5&mesh1=OML+30.56+-25.55+-10.46+0.1+0.1+0.1+1+0.13+0.7+6.2+10.8+6.7+3.1+models%2FYughues%2Fpallet_v2.obj&mesh2=OML+30.67+-24.1+-10.44+0.1+0.1+0.1+1+0.13+0.7+6.2+7.7+11.8+-6.8+models%2FYughues%2Ffuel_can.obj;
         }
 
         location ~ /guitar {
@@ -75,7 +75,7 @@ The other entries are shortcuts for scenes.
         }
 
         location ~ /sandbox {
-                rewrite ^ http://51.15.67.244/?cammod=OCM+30+-50+9+32+-50+-2&thisMenu=OMM+66+-57+-26+false&TPL1501595236567=TPL+12.5+-58+-30+30+15+6+0.5+0.1+-10+-10+0+true+0.61+false+ooblox-controls.png&ENV1501867801551=ENV+0+-55+0+1600+1600+315+36+-1.5+-30+35+35+41382439+7+dirt+CloudyLightRays;
+                rewrite ^ http://51.15.67.244/?cammod=OCM+0+0+60+0+0+-30&thisMenu=OMM+16+-2.5+-26+false&infoPanel=TPL+-20.0+-17.0+-30+30+15+6+0.50+0.16+-17+14.0+0+true+0.61+false+ooblox-controls.png&environment=ENV+0+-18+0+1600+1600+92+13+41.5+-20+13+13+29385260+5+sand+TropicalSunnyDay;
         }
 ```
 
