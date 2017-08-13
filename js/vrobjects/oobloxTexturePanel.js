@@ -4,7 +4,12 @@
 
 oobloxTexturePanel = function ()
 {
-	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 0), new THREE.MeshBasicMaterial({}));
+	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 0.5), 	[new THREE.MeshStandardMaterial({color:0x000000}),
+									 new THREE.MeshStandardMaterial({color:0x000000}), 
+									 new THREE.MeshStandardMaterial({color:0x000000}),
+									 new THREE.MeshStandardMaterial({color:0x000000}),
+									 new THREE.MeshStandardMaterial({color:0xffffff}),
+									 new THREE.MeshStandardMaterial({color:0x000000})]);
 	this.mesh.receiveShadow = true;
 	this.mesh.castShadow = true;
 	this.mesh.vrObjectTypeID = "TPL";
@@ -19,7 +24,13 @@ oobloxTexturePanel = function ()
 	var datFolder = dat.GUIVR.create('Texture Panel');
 	groupNode.add( datFolder )
 
-	var TPLProperties = function ()	{this.followGUI = true;this.textureFilename = "bark-template.png";}
+	var TPLProperties = function ()	{
+		this.followGUI = true;
+		this.textureFilename = "bark-template.png";
+		this.transparent = true;
+		this.opacity = 0.61;
+		this.lights = true;
+	}
 	var conf = new TPLProperties();
 
 	var textures = [];
@@ -48,16 +59,37 @@ oobloxTexturePanel = function ()
 				guioffset.x,
 				guioffset.y,
 				guioffset.z,
+				conf.transparent.toString(),
+				conf.opacity,
+				conf.lights.toString(),
 				encodeURIComponent(conf.textureFilename)]);
+	}
+
+	var refreshMaterial = function (targetScene)
+	{
+		if (conf.lights) {
+			mesh.material[4] = new THREE.MeshLambertMaterial({
+				map: (new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename )),
+				transparent: Boolean(conf.transparent),
+				opacity: conf.opacity
+			});
+		}
+		else {
+			mesh.material[4] = new THREE.MeshBasicMaterial({
+				map: (new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename )),
+				transparent: Boolean(conf.transparent),
+				opacity: conf.opacity
+			});
+		}
 	}
 
 	var refresh = function (targetScene)
 	{
-		mesh.material.map = new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename );
+		mesh.material[4].map = new THREE.TextureLoader().load( "images/textures/" + conf.textureFilename );
 		refreshURL(targetScene);
 	}
 
-	this.mesh.fillDatGUI = function (targetScene,mesh)
+	var fillDatGUI = function (targetScene,mesh)
 	{
 		datFolder.position.copy(guioffset).add(mesh.position);
 		datFolder.scale.set(20.0,20.0,0.1);
@@ -66,9 +98,14 @@ oobloxTexturePanel = function ()
 		var propFolder = dat.GUIVR.create('Properties');
 
 		var sourceChanger = propFolder.add(conf,'textureFilename',textures);
-		sourceChanger.onChange(function(value) {refresh(targetScene);});
+		sourceChanger.onChange(function() {refresh(targetScene);});
 
-		propFolder.add(mesh.material,'transparent').name("Texture transparent");
+		var transSwitch = propFolder.add(conf,'transparent').name("Transparent");
+		transSwitch.onChange(function(){mesh.material[4].transparent=Boolean(conf.transparent);refreshURL(targetScene);});
+		var opacitySlider = propFolder.add(conf,'opacity',0.0,1.0).name("Opacity").step(0.0001);
+		opacitySlider.onChange(function(){mesh.material[4].opacity=conf.opacity;refreshURL(targetScene);});
+		var lightsSwitch = propFolder.add(conf,'lights').name("Apply lights");
+		lightsSwitch.onChange(function(){refreshMaterial(targetScene);refreshURL(targetScene);});
 
 		var scxSlider = propFolder.add(mesh.scale,'x',0.0001,100).name("Scale X");
 		scxSlider.onChange(function(){refreshURL(targetScene);});
@@ -76,10 +113,11 @@ oobloxTexturePanel = function ()
 		scySlider.onChange(function(){refreshURL(targetScene);});
 		var rotxSlider = propFolder.add(mesh.rotation,'x',0.0,Math.PI*2.0).name("Rotation X").step(0.0001);
 		rotxSlider.onChange(function(){refreshURL(targetScene);});
-		var rotySlider = propFolder.add(mesh.rotation,'y',0.0,Math.PI*2.0).name("Rotation Y").step(0.0001);;
+		var rotySlider = propFolder.add(mesh.rotation,'y',0.0,Math.PI*2.0).name("Rotation Y").step(0.0001);
 		rotySlider.onChange(function(){refreshURL(targetScene);});
-		var rotzSlider = propFolder.add(mesh.rotation,'z',0.0,Math.PI*2.0).name("Rotation Z").step(0.0001);;
+		var rotzSlider = propFolder.add(mesh.rotation,'z',0.0,Math.PI*2.0).name("Rotation Z").step(0.0001);
 		rotzSlider.onChange(function(){refreshURL(targetScene);});
+
 		datFolder.addFolder(propFolder);
 
 		var remobj = {myuname: mesh.uname,remove: function(){removeInstance(this.myuname);}};
@@ -104,7 +142,10 @@ oobloxTexturePanel = function ()
 		guioffset.x = parseFloat(argList[9]);
 		guioffset.y = parseFloat(argList[10]);
 		guioffset.z = parseFloat(argList[11]);
-		conf.textureFilename = decodeURIComponent(argList.slice(12).join(""));
+		conf.transparent = Boolean(argList[12]=="true");
+		conf.opacity = parseFloat(argList[13]);
+		conf.lights = Boolean(argList[14]=="true");
+		conf.textureFilename = decodeURIComponent(argList.slice(15).join(""));
 
 		$.get("./images/textures", function(data) {
 			textures = data.split("href=\"");
@@ -120,7 +161,8 @@ oobloxTexturePanel = function ()
 				}
 				else textures.splice(n,1);
 			}
-			mesh.fillDatGUI(targetScene,mesh);
+			fillDatGUI(targetScene,mesh);
+			refreshMaterial(targetScene);
 			refresh(targetScene);
 			var event = new Event('vrObjectInstantiated');
 			document.dispatchEvent(event);

@@ -158,7 +158,7 @@ oobloxMasterMenu = function ()
 			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
 			var d = new Date();
 			var uname = "TPL" + d.getTime();
-			var newhref = window.location.href + "&" + uname + "=TPL+" + posScaleRotString + "+30.0+15.0+0+0+0+-10+-8+0.1+ooblox-controls.png";
+			var newhref = window.location.href + "&" + uname + "=TPL+" + posScaleRotString + "+30.0+15.0+0+0+0+-10+-8+0.1+true+0.61+false+ooblox-controls.png";
 			window.history.pushState({}, '', newhref);
 			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("TPL")]();
 			importedThing.mesh.uname = uname;
@@ -173,7 +173,7 @@ oobloxMasterMenu = function ()
 			var posScaleRotString = "" + position.x  + "+" + position.y + "+" + position.z;
 			var d = new Date();
 			var uname = "OML" + d.getTime();
-			var newhref = window.location.href + "&" + uname + "=OML+" + posScaleRotString + "+1.0+1.0+1.0+0+0+0+-10+-8+0.1+Object.dae";
+			var newhref = window.location.href + "&" + uname + "=OML+" + posScaleRotString + "+0.1+0.1+0.1+1.0+0+0+0+-10+-8+0.1+models%2FYughues%2Ffuel_can.obj";
 			window.history.pushState({}, '', newhref);
 			var importedThing = new vrObjectConstructorList[importTypesAvailable.indexOf("OML")]();
 			importedThing.mesh.uname = uname;

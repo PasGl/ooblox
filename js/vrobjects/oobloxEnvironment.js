@@ -109,7 +109,7 @@ oobloxEnvironment = function ()
 	};
 	var conf = new TPLProperties();
 
-	var themes = ["dirt","alienmold","arid","glacial","whitestone"];
+	var themes = ["dirt","alienmold","arid","glacial","whitestone","mossy","drygrass","grass","sand","clay"];
 	var themenames = ["CloudyLightRays","DarkStormy","FullMoon","SunSet","ThickCloudsWater","TropicalSunnyDay"];
 
 	var refreshURL = function (targetScene)
@@ -179,22 +179,42 @@ oobloxEnvironment = function ()
 				textureFolder = "pattern_269";
 				groundColor = 0xbbc1bb;
 				break;
+			case "mossy":
+				textureFolder = "pattern_42";
+				groundColor = 0xd2ce7d;
+				break;
+			case "drygrass":
+				textureFolder = "pattern_43";
+				groundColor = 0xe1c583;
+				break;
+			case "grass":
+				textureFolder = "pattern_44";
+				groundColor = 0xa59978;
+				break;
+			case "sand":
+				textureFolder = "pattern_45";
+				groundColor = 0xc8b89e;
+				break;
+			case "clay":
+				textureFolder = "pattern_46";
+				groundColor = 0x714f39;
+				break;
 		}
-		mesh.material.map = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/diffuse.tga");
+		mesh.material.map = new THREE.TGALoader().load( "images/Yughues_patterns/" + textureFolder + "/diffuse.tga");
 		mesh.material.map.wrapS = THREE.RepeatWrapping;
 		mesh.material.map.wrapT = THREE.RepeatWrapping;
 		mesh.material.map.repeat.set( conf.textureRepsX , conf.textureRepsY);
-		mesh.material.normalMap = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/normal.tga");
+		mesh.material.normalMap = new THREE.TGALoader().load( "images/Yughues_patterns/" + textureFolder + "/normal.tga");
 		mesh.material.normalMap.wrapS = THREE.RepeatWrapping;
 		mesh.material.normalMap.wrapT = THREE.RepeatWrapping;
 		mesh.material.normalMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
-		mesh.material.emissiveMap = new THREE.TGALoader().load( "images/3D_pattern_53/" + textureFolder + "/specular.tga");
+		mesh.material.emissiveMap = new THREE.TGALoader().load( "images/Yughues_patterns/" + textureFolder + "/specular.tga");
 		mesh.material.emissiveMap.wrapS = THREE.RepeatWrapping;
 		mesh.material.emissiveMap.wrapT = THREE.RepeatWrapping;
 		mesh.material.emissiveMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
 		mesh.material.emissive = new THREE.Color( 0x555555 );
-		mesh.material.metalness = 0.1;
-		mesh.material.roughness = 0.5;
+		mesh.material.metalness = 0.5;
+		mesh.material.roughness = 0.9;
 	}
 
 	var refreshHemiLight = function (targetScene)
@@ -216,31 +236,31 @@ oobloxEnvironment = function ()
 				break;
 			    case "DarkStormy":
 				hemiLight = new THREE.HemisphereLight( 0x404141, groundColor, 0.5 );
-				dirLight.myPosition.set( -300, 500, 1580 );
+				dirLight.myPosition.set( 0, 500, 1570 );
 				dirLight.intensity = 0.25;
 				dirLight.color.setHex( 0xdfd7ca );
 				break;
 			    case "FullMoon":
 				hemiLight = new THREE.HemisphereLight( 0x08090b, groundColor, 0.3 );
-				dirLight.myPosition.set( 400, 400, -1400 );
+				dirLight.myPosition.set( 510, 480, -1380 );
 				dirLight.intensity = 0.8;
 				dirLight.color.setHex( 0xfefefe );
 				break;
 			    case "SunSet":
 				hemiLight = new THREE.HemisphereLight( 0x7d6452, groundColor, 0.6 );
-				dirLight.myPosition.set( 600, 300, -1600 );
+				dirLight.myPosition.set( 690, 100, -1460 );
 				dirLight.intensity = 0.8;
 				dirLight.color.setHex( 0xffffbd );
 				break;
 			    case "ThickCloudsWater":
-				hemiLight = new THREE.HemisphereLight( 0x607d98, groundColor, 0.8 );
-				dirLight.myPosition.set( 600, 300, -1600 );
-				dirLight.intensity = 0.4;
-				dirLight.color.setHex( 0xacb4ab );
+				hemiLight = new THREE.HemisphereLight( 0x607d98, groundColor, 0.95 );
+				dirLight.myPosition.set( 1430, 100, -950 );
+				dirLight.intensity = 0.35;
+				dirLight.color.setHex( 0xfef499 );
 				break;
 			    case "TropicalSunnyDay":
-				hemiLight = new THREE.HemisphereLight( 0x77a6cd, groundColor, 0.8 );
-				dirLight.myPosition.set( 1400, 400, 400 );
+				hemiLight = new THREE.HemisphereLight( 0x77a6cd, groundColor, 0.95 );
+				dirLight.myPosition.set( 1390, 520, 550 );
 				dirLight.intensity = 0.95;
 				dirLight.color.setHex( 0xffffff );
 				break;
@@ -272,7 +292,7 @@ oobloxEnvironment = function ()
 				targetScene.fog = new THREE.Fog( 0x5e4b3f, 1, 900 );
 				break;
 			    case "TropicalSunnyDay":
-				targetScene.fog = new THREE.Fog( 0xf7f9f4, 1, 1000 );
+				targetScene.fog = new THREE.Fog( 0xf7f9f4, 400, 1300 );
 				break;
 			}
 			var urls = [  skyboxname + "Front2048.png", skyboxname + "Back2048.png",
@@ -296,10 +316,10 @@ oobloxEnvironment = function ()
 		var skythemeChanger = skyFolder.add(skyboxSettings,'theme',themenames);
 		skythemeChanger.onChange(function(value) {refreshSkybox(targetScene);refreshHemiLight(targetScene);refreshURL(targetScene);});
 
-		//var dirLight = targetScene.getObjectByName( "dirLight" );
-		//var dirLightPosXSlider = skyFolder.add(dirLight.myPosition,'x',-2000,2000);
-		//var dirLightPosYSlider = skyFolder.add(dirLight.myPosition,'y',0,2000);
-		//var dirLightPosZSlider = skyFolder.add(dirLight.myPosition,'z',-2000,2000);
+//		var dirLight = targetScene.getObjectByName( "dirLight" );
+//		var dirLightPosXSlider = skyFolder.add(dirLight.myPosition,'x',-2000,2000).listen();
+//		var dirLightPosYSlider = skyFolder.add(dirLight.myPosition,'y',0,2000).listen();
+//		var dirLightPosZSlider = skyFolder.add(dirLight.myPosition,'z',-2000,2000).listen();
 
 		datFolder.addFolder(skyFolder);
 
@@ -321,21 +341,21 @@ oobloxEnvironment = function ()
 
 		var sourceChanger = propFolder.add(conf,'theme',themes);
 		sourceChanger.onChange(function(value) {refreshGroundTexture(targetScene);refreshHemiLight(targetScene);refreshURL(targetScene);});
-		var scxSlider = propFolder.add(mesh.scale,'x',1.0,10000.0).name("Width");
+		var scxSlider = propFolder.add(mesh.scale,'x',1.0,4000.0).name("Width").step(1);
 		scxSlider.onChange(function(){refreshURL(targetScene);});
-		var scySlider = propFolder.add(mesh.scale,'y',1.0,10000.0).name("Length");
+		var scySlider = propFolder.add(mesh.scale,'y',1.0,4000.0).name("Length").step(1);
 		scySlider.onChange(function(){refreshURL(targetScene);});
-		var sczSlider = propFolder.add(mesh.scale,'z',0.0001,10000.0).name("Height");
+		var sczSlider = propFolder.add(mesh.scale,'z',0.0001,2000.0).name("Height").step(0.01);
 		sczSlider.onChange(function(){refreshURL(targetScene);});
 
-		var posYSlider = propFolder.add(mesh.position,'y',-500.0,500.0).name("Elevation");
+		var posYSlider = propFolder.add(mesh.position,'y',-500.0,500.0).name("Elevation").step(0.01);
 		posYSlider.onChange(function(){refreshURL(targetScene);});
 
 
-		var textureRepsXSlider = propFolder.add(conf,'textureRepsX',1.0,200.0).name("Texture Repeats X");
+		var textureRepsXSlider = propFolder.add(conf,'textureRepsX',1.0,100.0).name("Texture Repeats X");
 		textureRepsXSlider.onChange(function(){refreshGroundTextureReps(targetScene);refreshURL(targetScene);});
 
-		var textureRepsYSlider = propFolder.add(conf,'textureRepsY',1.0,200.0).name("Texture Repeats Y");
+		var textureRepsYSlider = propFolder.add(conf,'textureRepsY',1.0,100.0).name("Texture Repeats Y");
 		textureRepsYSlider.onChange(function(){refreshGroundTextureReps(targetScene);refreshURL(targetScene);});
 
 
