@@ -575,9 +575,9 @@ function PSOLSystem ()
 		finalGeometry.computeBoundingBox();
 		this.finalVertexCount = finalGeometry.vertices.length;
 		mesh.geometry = finalGeometry;
-		mesh.material[0].map.repeat.set( -(conf.iterations + 4) , -2);
-		mesh.material[0].normalMap.repeat.set( -(conf.iterations + 4) , -2);
-		mesh.material[0].emissiveMap.repeat.set( -(conf.iterations + 4) , -2);
+		mesh.material[0].map.repeat.set( -(conf.iterations + 5) , -2);
+		mesh.material[0].normalMap.repeat.set( -(conf.iterations + 5) , -2);
+		mesh.material[0].emissiveMap.repeat.set( -(conf.iterations + 5) , -2);
 	}
 	var finalize = this.finalize;
 
