@@ -641,12 +641,12 @@ function PSOLSystem ()
 
 		var matFolder = dat.GUIVR.create('Materials');
 		var barkSourceChanger = matFolder.add(conf,'barkTexture',conf.barkTextures);
-		barkSourceChanger.onChange(function(){refreshBarkTexture(targetScene,thismesh);refreshURL(targetScene);});
+		barkSourceChanger.onChange(function(){refreshBarkTexture(targetScene,thismesh);updateMyURLArgs(targetScene);});
 		matFolder.add(thismesh.material[0],'visible').name("Bark visible");
 		matFolder.add(thismesh.material[0],'wireframe').name("Bark wireframe");
 		matFolder.add(thismesh.material[0],'wireframeLinewidth',1,20).name("Bark wire width").step(1);
 		var foliageSourceChanger = matFolder.add(conf,'foliageTexture',conf.foliageTextures);
-		foliageSourceChanger.onChange(function(){refreshFoliageTexture(targetScene,thismesh);refreshURL(targetScene);});
+		foliageSourceChanger.onChange(function(){refreshFoliageTexture(targetScene,thismesh);updateMyURLArgs(targetScene);});
 		matFolder.add(thismesh.material[1],'visible').name("Foliage visible");
 		matFolder.add(thismesh.material[1],'transparent').name("Foliage transparent");
 		matFolder.add(thismesh.material[1],'alphaTest',0.0,1.0).name("Foliage alpha threshold");
