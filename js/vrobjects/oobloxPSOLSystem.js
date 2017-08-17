@@ -106,9 +106,8 @@ function PSOLSystem ()
 					normalMap: abarktexture,
 					emissiveMap: abarktexture,
 					emissive: "#555555",
-					metalness: 0.0,
-					roughness: 0.9,
-					
+					metalness: 0.01,
+					roughness: 0.9
 				}),
 				new THREE.MeshStandardMaterial(
 				{
@@ -120,7 +119,7 @@ function PSOLSystem ()
 					emissiveMap: afoliagetexture,
 					emissive: "#555555",
 					alphaTest: 0.2,
-					metalness: 0.1,
+					metalness: 0.05,
 					roughness: 0.32
 				})];
 
