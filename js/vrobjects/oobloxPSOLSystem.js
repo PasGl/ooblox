@@ -94,15 +94,15 @@ function PSOLSystem ()
 	var datFolder = dat.GUIVR.create("PS0L-System");
 	groupNode.add( datFolder );
 
-	var barktexture = new THREE.TextureLoader().load( "images/textures/bark-template.png" );
-	var foliagetexture = new THREE.TextureLoader().load( "images/textures/foliage-template.png" );
-	barktexture.wrapS = THREE.RepeatWrapping;
-	barktexture.wrapT = THREE.RepeatWrapping;
+	var abarktexture = new THREE.TextureLoader().load( "images/textures/bark-template.png" );
+	var afoliagetexture = new THREE.TextureLoader().load( "images/textures/foliage-template.png" );
+	abarktexture.wrapS = THREE.RepeatWrapping;
+	abarktexture.wrapT = THREE.RepeatWrapping;
 	this.mesh.material  = [new THREE.MeshStandardMaterial(
 				{
 					color: "#FFFFFF",
 					shading: THREE.SmoothShading,
-					map: barktexture,
+					map: abarktexture,
 					metalness: 0.0,
 					roughness: 0.9,
 					
@@ -112,7 +112,7 @@ function PSOLSystem ()
 					color: "#FFFFFF",
 					shading: THREE.SmoothShading,
 					side: THREE.DoubleSide,
-					map: foliagetexture,
+					map: afoliagetexture,
 					alphaTest: 0.2,
 					metalness: 0.1,
 					roughness: 0.32
