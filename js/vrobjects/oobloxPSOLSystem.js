@@ -103,6 +103,9 @@ function PSOLSystem ()
 					color: "#FFFFFF",
 					shading: THREE.SmoothShading,
 					map: abarktexture,
+					normalMap: abarktexture,
+					emissiveMap: abarktexture,
+					emissive: "#555555",
 					metalness: 0.0,
 					roughness: 0.9,
 					
@@ -113,6 +116,9 @@ function PSOLSystem ()
 					shading: THREE.SmoothShading,
 					side: THREE.DoubleSide,
 					map: afoliagetexture,
+					normalMap: afoliagetexture,
+					emissiveMap: afoliagetexture,
+					emissive: "#555555",
 					alphaTest: 0.2,
 					metalness: 0.1,
 					roughness: 0.32
