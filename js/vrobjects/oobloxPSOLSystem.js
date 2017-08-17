@@ -129,7 +129,11 @@ function PSOLSystem ()
 		this.diameter = 0.5;
 		this.circleSegments = 5;
 		this.initTurtle = new PTurtle3D ();
-		this.followGUI = true;	
+		this.followGUI = true;
+		this.barkTexture = "pattern_230";
+		this.foliageTexture = "21";
+		this.barkTextures = ["pattern_230","pattern_231","pattern_232","pattern_233","pattern_234"]; 
+		this.foliageTextures = ["21","22","23","24","25","31","32","33","34","35","36","37","38","39","40"];
 	};
 
 	var conf = new PSOLGUIProperties();
@@ -571,7 +575,9 @@ function PSOLSystem ()
 		finalGeometry.computeBoundingBox();
 		this.finalVertexCount = finalGeometry.vertices.length;
 		mesh.geometry = finalGeometry;
-		barktexture.repeat.set( -(conf.iterations + 1) , -2);
+		mesh.material[0].map.repeat.set( -(conf.iterations + 1) , -2);
+		mesh.material[0].normalMap.repeat.set( -(conf.iterations + 1) , -2);
+		mesh.material[0].emissiveMap.repeat.set( -(conf.iterations + 1) , -2);
 	}
 	var finalize = this.finalize;
 
@@ -634,9 +640,13 @@ function PSOLSystem ()
 		datFolder.addFolder(propFolder);
 
 		var matFolder = dat.GUIVR.create('Materials');
+		var barkSourceChanger = matFolder.add(conf,'barkTexture',barkTextures);
+		barkSourceChanger.onChange(function(){refreshBarkTexture(targetScene,thismesh);refreshURL(targetScene);});
 		matFolder.add(thismesh.material[0],'visible').name("Bark visible");
 		matFolder.add(thismesh.material[0],'wireframe').name("Bark wireframe");
 		matFolder.add(thismesh.material[0],'wireframeLinewidth',1,20).name("Bark wire width").step(1);
+		var foliageSourceChanger = matFolder.add(conf,'foliageTexture',foliageTextures);
+		foliageSourceChanger.onChange(function(){refreshFoliageTexture(targetScene,thismesh);refreshURL(targetScene);});
 		matFolder.add(thismesh.material[1],'visible').name("Foliage visible");
 		matFolder.add(thismesh.material[1],'transparent').name("Foliage transparent");
 		matFolder.add(thismesh.material[1],'alphaTest',0.0,1.0).name("Foliage alpha threshold");
@@ -687,7 +697,9 @@ function PSOLSystem ()
 				conf.initTurtle.gravityDelta,
 				guioffset.x,
 				guioffset.y,
-				guioffset.z]);
+				guioffset.z,
+				conf.barkTexture,
+				conf.foliageTexture]);
 	}
 	var updateMyURLArgs = this.updateMyURLArgs;
 
@@ -698,6 +710,28 @@ function PSOLSystem ()
 		updateMyURLArgs(targetScene,thismesh);
 	}
 	var refresh = this.refresh;
+
+	this.refreshBarkTexture = function (targetScene,thismesh)
+	{
+		thismesh.material[0].map = new THREE.TGALoader().load(  "images/Yughues_bark/" + conf.barkTexture + "/diffuse.tga" );
+		thismesh.material[0].map.wrapS = THREE.RepeatWrapping;
+		thismesh.material[0].map.wrapT = THREE.RepeatWrapping;
+		thismesh.material[0].normalMap = new THREE.TGALoader().load( "images/Yughues_bark/" + conf.barkTexture + "/normal.tga");
+		thismesh.material[0].normalMap.wrapS = THREE.RepeatWrapping;
+		thismesh.material[0].normalMap.wrapT = THREE.RepeatWrapping;
+		thismesh.material[0].emissiveMap = new THREE.TGALoader().load( "images/Yughues_bark/" + conf.barkTexture + "/specular.tga");
+		thismesh.material[0].emissiveMap.wrapS = THREE.RepeatWrapping;
+		thismesh.material[0].emissiveMap.wrapT = THREE.RepeatWrapping;
+	}
+	var refreshBarkTexture = this.refreshBarkTexture;
+
+	this.refreshFoliageTexture = function (targetScene,thismesh)
+	{
+		thismesh.material[1].map = new THREE.TGALoader().load(  "images/Yughues_branches/" + conf.foliageTexture + "/diffuse.tga" );
+		thismesh.material[1].normalMap = new THREE.TGALoader().load( "images/Yughues_branches/" + conf.foliageTexture + "/normal.tga");
+		thismesh.material[1].emissiveMap = new THREE.TGALoader().load( "images/Yughues_branches/" + conf.foliageTexture + "/specular.tga");
+	}
+	var refreshFoliageTexture = this.refreshFoliageTexture;
 
 	this.load = function (targetScene, camera)
 	{
@@ -722,10 +756,14 @@ function PSOLSystem ()
 		guioffset.x = parseFloat(argList[17]);
 		guioffset.y = parseFloat(argList[18]);
 		guioffset.z = parseFloat(argList[19]);
+		conf.barkTexture = argList[20];
+		conf.foliageTexture = argList[21];
 		conf.initTurtle.scale = new THREE.Vector3(conf.diameter,conf.diameter,conf.diameter);
 		this.mesh.position.copy(position);
 		this.initPresetRandom();
 		this.fillGUI(targetScene,this.mesh);
+		refreshBarkTexture(targetScene,this.mesh);
+		refreshFoliageTexture(targetScene,this.mesh);
 		refresh(targetScene,this.mesh);
 		var event = new Event('vrObjectInstantiated');
 		document.dispatchEvent(event);
