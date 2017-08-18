@@ -580,9 +580,9 @@ function PSOLSystem ()
 		finalGeometry.computeBoundingBox();
 		this.finalVertexCount = finalGeometry.vertices.length;
 		mesh.geometry = finalGeometry;
-		mesh.material[0].map.repeat.set( -(2*conf.iterations + 5) , -1);
-		mesh.material[0].normalMap.repeat.set( -(2*conf.iterations + 5) , -1);
-		mesh.material[0].emissiveMap.repeat.set( -(2*conf.iterations + 5) , -1);
+		mesh.material[0].map.repeat.set( -(2*conf.iterations + 4) , -1);
+		mesh.material[0].normalMap.repeat.set( -(2*conf.iterations + 4) , -1);
+		mesh.material[0].emissiveMap.repeat.set( -(2*conf.iterations + 4) , -1);
 	}
 	var finalize = this.finalize;
 
@@ -626,13 +626,13 @@ function PSOLSystem ()
 			conf.initTurtle.scale.z=value;
 			refresh(targetScene,thismesh);
 		});
-		var stepSlider = propFolder.add(conf.initTurtle,'step',0.1,10.0);
+		var stepSlider = propFolder.add(conf.initTurtle,'step',0.1,20.0);
 		stepSlider.onChange(function(){refresh(targetScene,thismesh);});
 		var angleSlider = propFolder.add(conf.initTurtle,'angle',0.001,1.5);
 		angleSlider.onChange(function(){refresh(targetScene,thismesh);});
-		var diameterDeltaSlider = propFolder.add(conf.initTurtle,'diameterDelta',0.0001,0.5);
+		var diameterDeltaSlider = propFolder.add(conf.initTurtle,'diameterDelta',0.0001,0.8);
 		diameterDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
-		var stepDeltaSlider = propFolder.add(conf.initTurtle,'stepDelta',0.0001,0.5);
+		var stepDeltaSlider = propFolder.add(conf.initTurtle,'stepDelta',0.0001,0.8);
 		stepDeltaSlider.onChange(function(){refresh(targetScene,thismesh);});
 		var tropismAngleSlider = propFolder.add(conf.initTurtle,'tropismAngle',0.001,1.5);
 		tropismAngleSlider.onChange(function(){refresh(targetScene,thismesh);});
