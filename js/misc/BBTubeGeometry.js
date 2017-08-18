@@ -101,12 +101,12 @@ THREE.BBTubeGeometry = function( path, radii, segments, radialSegments, closed, 
 	{
 		u = i / (this.segments);
 		var radiV = radii.getPointAt( u );
-		var radius = radiV.x;
+		var radius = radiV.x * Math.PI * 2.0;
 		//if (i<(this.segments-1))
 		//{
 			u = (i+1) / (this.segments);
 		var	radiV2 = radii.getPointAt( u );
-		var	nextradius = radiV2.x;
+		var	nextradius = radiV2.x * Math.PI * 2.0;
 		//}
 
 		if (nextradius>radius) 	nextradius=radius;
