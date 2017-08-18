@@ -389,7 +389,7 @@ function PSOLSystem ()
 							(tubePoints.length-1)*3,
 							conf.circleSegments,
 							false,
-							(tubePoints.length-1) / (Math.PI*2*tubeRadii[0]));
+							tubePoints.length-1);
 						finalGeometry.merge( tubeGeometry,tubeGeometry.matrix,0 );
 					}
 					tubePoints = [];
@@ -441,7 +441,7 @@ function PSOLSystem ()
 							(tubePoints.length-1)*3,
 							conf.circleSegments,
 							false,
-							(tubePoints.length-1) / (Math.PI*2*tubeRadii[0]));
+							tubePoints.length-1);
 						finalGeometry.merge( tubeGeometry,tubeGeometry.matrix,0 );
 					}
 					currentTurtle = turtleStack.pop();
@@ -564,7 +564,7 @@ function PSOLSystem ()
 				(tubePoints.length-1)*3,
 				conf.circleSegments,
 				false,
-				(tubePoints.length-1) / (Math.PI*2*tubeRadii[0]) );
+				(tubePoints.length-1) );
 			finalGeometry.merge( tubeGeometry,tubeGeometry.matrix,0 );
 		}
 	}
