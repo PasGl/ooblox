@@ -102,6 +102,13 @@ THREE.BBTubeGeometry = function( path, radii, segments, radialSegments, closed, 
 		u = i / this.segments;
 		var radiV = radii.getPointAt( u );
 		var radius = radiV.x;
+		var nextradius = radius;
+		if (i<(this.segments-1))
+		{
+			u = (i+1) / this.segments;
+			radiV = radii.getPointAt( u );
+			nextradius = radiV.x;
+		}
 
 		for ( j = 0; j < this.radialSegments; j++ )
 		{
@@ -114,8 +121,8 @@ THREE.BBTubeGeometry = function( path, radii, segments, radialSegments, closed, 
 			d = this.grid[ i ][ jp ];
 
 			uva = new THREE.Vector2( this.verticalTextureScalar * ( i 	/ this.segments ) / radius	, j / this.radialSegments );
-			uvb = new THREE.Vector2( this.verticalTextureScalar * ((i + 1) 	/ this.segments ) / radius	, j / this.radialSegments );
-			uvc = new THREE.Vector2( this.verticalTextureScalar * ((i + 1) 	/ this.segments ) / radius	, ( j + 1 ) / this.radialSegments );
+			uvb = new THREE.Vector2( this.verticalTextureScalar * ((i + 1) 	/ this.segments ) / nextradius	, j / this.radialSegments );
+			uvc = new THREE.Vector2( this.verticalTextureScalar * ((i + 1) 	/ this.segments ) / nextradius	, ( j + 1 ) / this.radialSegments );
 			uvd = new THREE.Vector2( this.verticalTextureScalar * ( i 	/ this.segments ) / radius	, ( j + 1 ) / this.radialSegments );
 
 			this.faces.push( new THREE.Face3( a, b, d ) );
