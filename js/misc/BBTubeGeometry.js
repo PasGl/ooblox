@@ -11,9 +11,10 @@
 * http://www.cs.indiana.edu/pub/techreports/TR425.pdf
 *
 * changed by Pascal Gleske / https://github.com/PasGl to go through an array of radii
+* and scale vertical UVs by verticalTextureScalar
 */
 
-THREE.BBTubeGeometry = function( path, radii, segments, radialSegments, closed ) {
+THREE.BBTubeGeometry = function( path, radii, segments, radialSegments, closed, verticalTextureScalar ) {
 
 	THREE.Geometry.call( this );
 
@@ -22,6 +23,7 @@ THREE.BBTubeGeometry = function( path, radii, segments, radialSegments, closed )
 	this.segments = segments || 64;
 	this.radialSegments = radialSegments || 8;
 	this.closed = closed || false;
+	this.verticalTextureScalar = verticalTextureScalar || 1;
 
 	this.grid = [];
 
@@ -107,10 +109,10 @@ THREE.BBTubeGeometry = function( path, radii, segments, radialSegments, closed )
 			c = this.grid[ ip ][ jp ];
 			d = this.grid[ i ][ jp ];
 
-			uva = new THREE.Vector2( i / this.segments, j / this.radialSegments );
-			uvb = new THREE.Vector2( ( i + 1 ) / this.segments, j / this.radialSegments );
-			uvc = new THREE.Vector2( ( i + 1 ) / this.segments, ( j + 1 ) / this.radialSegments );
-			uvd = new THREE.Vector2( i / this.segments, ( j + 1 ) / this.radialSegments );
+			uva = new THREE.Vector2( this.verticalTextureScalar * i / this.segments, j / this.radialSegments );
+			uvb = new THREE.Vector2( this.verticalTextureScalar * ( i + 1 ) / this.segments, j / this.radialSegments );
+			uvc = new THREE.Vector2( this.verticalTextureScalar * ( i + 1 ) / this.segments, ( j + 1 ) / this.radialSegments );
+			uvd = new THREE.Vector2( this.verticalTextureScalar * i / this.segments, ( j + 1 ) / this.radialSegments );
 
 			this.faces.push( new THREE.Face3( a, b, d ) );
 			this.faceVertexUvs[ 0 ].push( [ uva, uvb, uvd ] );
