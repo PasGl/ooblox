@@ -139,7 +139,6 @@ function PSOLSystem ()
 		this.foliageTexture = "21";
 		this.barkTextures = ["pattern_230","pattern_231","pattern_232","pattern_233","pattern_234"]; 
 		this.foliageTextures = ["21","22","23","24","25","31","32","33","34","35","36","37","38","39","40"];
-		this.texRepPerIter = 2;
 		this.texRepAdd = 4;
 	};
 
@@ -647,9 +646,7 @@ function PSOLSystem ()
 		var barkSourceChanger = matFolder.add(conf,'barkTexture',conf.barkTextures);
 		barkSourceChanger.onChange(function(){refreshBarkTexture(targetScene,thismesh);refreshBarkReps(targetScene,thismesh);updateMyURLArgs(targetScene,thismesh);});
 
-		var texRepPerIterSlider = propFolder.add(conf,'texRepPerIter',0,6).name("Bark Repeats/Iteration").step(1);
-		texRepPerIterSlider.onChange(function(){refreshBarkReps(targetScene,thismesh);updateMyURLArgs(targetScene,thismesh);});
-		var texRepAddSlider = propFolder.add(conf,'texRepAdd',0,10).name("Bark Repeats added").step(1);
+		var texRepAddSlider = propFolder.add(conf,'texRepAdd',0.0001,10).name("Bark Repeats added").step(0.01);
 		texRepAddSlider.onChange(function(){refreshBarkReps(targetScene,thismesh);updateMyURLArgs(targetScene,thismesh);});
 
 		matFolder.add(thismesh.material[0],'visible').name("Bark visible");
@@ -738,9 +735,9 @@ function PSOLSystem ()
 
 	this.refreshBarkReps = function (targetScene,thismesh)
 	{
-		thismesh.material[0].map.repeat.set( -(conf.texRepPerIter*conf.iterations + conf.texRepAdd) , -1);
-		thismesh.material[0].normalMap.repeat.set( -(conf.texRepPerIter*conf.iterations + conf.texRepAdd) , -1);
-		thismesh.material[0].emissiveMap.repeat.set( -(conf.texRepPerIter*conf.iterations + conf.texRepAdd) , -1);
+		thismesh.material[0].map.repeat.set( -(conf.iterations + conf.texRepAdd) , -1);
+		thismesh.material[0].normalMap.repeat.set( -(conf.iterations + conf.texRepAdd) , -1);
+		thismesh.material[0].emissiveMap.repeat.set( -(conf.iterations + conf.texRepAdd) , -1);
 	}
 	var refreshBarkReps = this.refreshBarkReps;
 
