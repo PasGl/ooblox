@@ -783,7 +783,7 @@ function PSOLSystem ()
 		this.initPresetRandom();
 		this.fillGUI(targetScene,this.mesh);
 		refreshBarkTexture(targetScene,this.mesh);
-		refreshBarkReps(targetScene,thismesh);
+		refreshBarkReps(targetScene,this.mesh);
 		refreshFoliageTexture(targetScene,this.mesh);
 		refresh(targetScene,this.mesh);
 		var event = new Event('vrObjectInstantiated');
