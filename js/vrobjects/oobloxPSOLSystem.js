@@ -618,7 +618,7 @@ function PSOLSystem ()
 		datFolder.addFolder(setFolder);
 
 		var propFolder = dat.GUIVR.create('Properties');
-		var diameterSlider = propFolder.add(conf,'diameter',0.1,3.0);
+		var diameterSlider = propFolder.add(conf,'diameter',0.1,6.0);
 		diameterSlider.onChange(function(value) 
 		{
 			conf.initTurtle.scale.x=value;
@@ -727,6 +727,9 @@ function PSOLSystem ()
 		thismesh.material[0].emissiveMap = new THREE.TGALoader().load( "images/Yughues_bark/" + conf.barkTexture + "/specular.tga");
 		thismesh.material[0].emissiveMap.wrapS = THREE.RepeatWrapping;
 		thismesh.material[0].emissiveMap.wrapT = THREE.RepeatWrapping;
+		thismesh.material[0].map.repeat.set( -(2*conf.iterations + 4) , -1);
+		thismesh.material[0].normalMap.repeat.set( -(2*conf.iterations + 4) , -1);
+		thismesh.material[0].emissiveMap.repeat.set( -(2*conf.iterations + 4) , -1);
 	}
 	var refreshBarkTexture = this.refreshBarkTexture;
 
