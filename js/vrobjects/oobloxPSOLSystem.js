@@ -735,9 +735,9 @@ function PSOLSystem ()
 
 	this.refreshBarkReps = function (targetScene,thismesh)
 	{
-		thismesh.material[0].map.repeat.set( -(conf.iterations + conf.texRepAdd) , -1);
-		thismesh.material[0].normalMap.repeat.set( -(conf.iterations + conf.texRepAdd) , -1);
-		thismesh.material[0].emissiveMap.repeat.set( -(conf.iterations + conf.texRepAdd) , -1);
+		thismesh.material[0].map.repeat.set( -(conf.iterations * conf.texRepAdd) , -1);
+		thismesh.material[0].normalMap.repeat.set( -(conf.iterations * conf.texRepAdd) , -1);
+		thismesh.material[0].emissiveMap.repeat.set( -(conf.iterations * conf.texRepAdd) , -1);
 	}
 	var refreshBarkReps = this.refreshBarkReps;
 
