@@ -139,6 +139,8 @@ function PSOLSystem ()
 		this.foliageTexture = "21";
 		this.barkTextures = ["pattern_230","pattern_231","pattern_232","pattern_233","pattern_234"]; 
 		this.foliageTextures = ["21","22","23","24","25","31","32","33","34","35","36","37","38","39","40"];
+		this.texRepPerIter = 2;
+		this.texRepAdd = 4;
 	};
 
 	var conf = new PSOLGUIProperties();
@@ -394,7 +396,7 @@ function PSOLSystem ()
 							(tubePoints.length-1)*3,
 							conf.circleSegments,
 							false,
-							false);
+							tubePoints.length-1);
 						finalGeometry.merge( tubeGeometry,tubeGeometry.matrix,0 );
 					}
 					tubePoints = [];
@@ -446,7 +448,7 @@ function PSOLSystem ()
 							(tubePoints.length-1)*3,
 							conf.circleSegments,
 							false,
-							false);
+							tubePoints.length-1);
 						finalGeometry.merge( tubeGeometry,tubeGeometry.matrix,0 );
 					}
 					currentTurtle = turtleStack.pop();
@@ -569,7 +571,7 @@ function PSOLSystem ()
 				(tubePoints.length-1)*3,
 				conf.circleSegments,
 				false,
-				false);
+				tubePoints.length-1);
 			finalGeometry.merge( tubeGeometry,tubeGeometry.matrix,0 );
 		}
 	}
@@ -580,9 +582,6 @@ function PSOLSystem ()
 		finalGeometry.computeBoundingBox();
 		this.finalVertexCount = finalGeometry.vertices.length;
 		mesh.geometry = finalGeometry;
-		mesh.material[0].map.repeat.set( -(2*conf.iterations + 4) , -1);
-		mesh.material[0].normalMap.repeat.set( -(2*conf.iterations + 4) , -1);
-		mesh.material[0].emissiveMap.repeat.set( -(2*conf.iterations + 4) , -1);
 	}
 	var finalize = this.finalize;
 
@@ -646,7 +645,13 @@ function PSOLSystem ()
 
 		var matFolder = dat.GUIVR.create('Materials');
 		var barkSourceChanger = matFolder.add(conf,'barkTexture',conf.barkTextures);
-		barkSourceChanger.onChange(function(){refreshBarkTexture(targetScene,thismesh);updateMyURLArgs(targetScene,thismesh);});
+		barkSourceChanger.onChange(function(){refreshBarkTexture(targetScene,thismesh);refreshBarkReps(targetScene,thismesh);updateMyURLArgs(targetScene,thismesh);});
+
+		var texRepPerIterSlider = propFolder.add(conf,'texRepPerIter',0,6).name("Bark Repeats/Iteration").step(1);
+		texRepPerIterSlider.onChange(function(){refreshBarkReps(targetScene,thismesh);updateMyURLArgs(targetScene,thismesh);});
+		var texRepAddSlider = propFolder.add(conf,'texRepAdd',0,10).name("Bark Repeats added").step(1);
+		texRepAddSlider.onChange(function(){refreshBarkReps(targetScene,thismesh);updateMyURLArgs(targetScene,thismesh);});
+
 		matFolder.add(thismesh.material[0],'visible').name("Bark visible");
 		matFolder.add(thismesh.material[0],'wireframe').name("Bark wireframe");
 		matFolder.add(thismesh.material[0],'wireframeLinewidth',1,20).name("Bark wire width").step(1);
@@ -712,6 +717,7 @@ function PSOLSystem ()
 	{
 		interpret(iterate());
 		finalize(thismesh);
+		refreshBarkReps(targetScene,thismesh);
 		updateMyURLArgs(targetScene,thismesh);
 	}
 	var refresh = this.refresh;
@@ -727,11 +733,17 @@ function PSOLSystem ()
 		thismesh.material[0].emissiveMap = new THREE.TGALoader().load( "images/Yughues_bark/" + conf.barkTexture + "/specular.tga");
 		thismesh.material[0].emissiveMap.wrapS = THREE.RepeatWrapping;
 		thismesh.material[0].emissiveMap.wrapT = THREE.RepeatWrapping;
-		thismesh.material[0].map.repeat.set( -(2*conf.iterations + 4) , -1);
-		thismesh.material[0].normalMap.repeat.set( -(2*conf.iterations + 4) , -1);
-		thismesh.material[0].emissiveMap.repeat.set( -(2*conf.iterations + 4) , -1);
 	}
 	var refreshBarkTexture = this.refreshBarkTexture;
+
+	this.refreshBarkReps = function (targetScene,thismesh)
+	{
+		thismesh.material[0].map.repeat.set( -(conf.texRepPerIter*conf.iterations + conf.texRepAdd) , -1);
+		thismesh.material[0].normalMap.repeat.set( -(conf.texRepPerIter*conf.iterations + conf.texRepAdd) , -1);
+		thismesh.material[0].emissiveMap.repeat.set( -(conf.texRepPerIter*conf.iterations + conf.texRepAdd) , -1);
+	}
+	var refreshBarkReps = this.refreshBarkReps;
+
 
 	this.refreshFoliageTexture = function (targetScene,thismesh)
 	{
@@ -771,6 +783,7 @@ function PSOLSystem ()
 		this.initPresetRandom();
 		this.fillGUI(targetScene,this.mesh);
 		refreshBarkTexture(targetScene,this.mesh);
+		refreshBarkReps(targetScene,thismesh);
 		refreshFoliageTexture(targetScene,this.mesh);
 		refresh(targetScene,this.mesh);
 		var event = new Event('vrObjectInstantiated');
