@@ -128,10 +128,10 @@ THREE.BBTubeGeometry = function( path, radii, segments, radialSegments, closed, 
 			c = this.grid[ ip ][ jp ];
 			d = this.grid[ i ][ jp ];
 
-			uva = new THREE.Vector2( (this.verticalTextureScalar/radius)	 * ( i 	/ (this.segments+1) ) 	, j / this.radialSegments );
-			uvb = new THREE.Vector2( (this.verticalTextureScalar/nextradius) * ((i + 1) / (this.segments+1) ) 	, j / this.radialSegments );
-			uvc = new THREE.Vector2( (this.verticalTextureScalar/nextradius) * ((i + 1) / (this.segments+1) ) 	, ( j + 1 ) / this.radialSegments );
-			uvd = new THREE.Vector2( (this.verticalTextureScalar/radius)	 * ( i 	/ (this.segments+1) )	, ( j + 1 ) / this.radialSegments );
+			uva = new THREE.Vector2( (this.verticalTextureScalar/radius)	 * ( i 	/ (this.segments-1) ) 	, j / this.radialSegments );
+			uvb = new THREE.Vector2( (this.verticalTextureScalar/nextradius) * ((i + 1) / (this.segments-1) ) 	, j / this.radialSegments );
+			uvc = new THREE.Vector2( (this.verticalTextureScalar/nextradius) * ((i + 1) / (this.segments-1) ) 	, ( j + 1 ) / this.radialSegments );
+			uvd = new THREE.Vector2( (this.verticalTextureScalar/radius)	 * ( i 	/ (this.segments-1) )	, ( j + 1 ) / this.radialSegments );
 
 			this.faces.push( new THREE.Face3( a, b, d ) );
 			this.faceVertexUvs[ 0 ].push( [ uva, uvb, uvd ] );
