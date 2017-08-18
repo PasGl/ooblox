@@ -99,25 +99,6 @@ THREE.BBTubeGeometry = function( path, radii, segments, radialSegments, closed, 
 
 	for ( i = 0; i < this.segments; i++ )
 	{
-		u = i / (this.segments);
-		var radiV = radii.getPointAt( u );
-		var radius = radiV.x * Math.PI * 2.0;
-		//if (i<(this.segments-1))
-		//{
-			u = (i+1) / (this.segments);
-		var	radiV2 = radii.getPointAt( u );
-		var	nextradius = radiV2.x * Math.PI * 2.0;
-		//}
-
-		//if (nextradius>radius) 	nextradius=radius;
-
-		//console.log(		"r<nr",
-		//			i,
-		//			this.segments,
-		//			((this.verticalTextureScalar/nextradius) * ((i + 1) / this.segments )) - ((this.verticalTextureScalar/radius)	 * ( i 	/ this.segments )),
-		//			(this.verticalTextureScalar/radius)	 * ( i 	/ this.segments ),
-		//			(this.verticalTextureScalar/nextradius) * ((i + 1) / this.segments ) );
-
 		for ( j = 0; j < this.radialSegments; j++ )
 		{
 			ip = ( this.closed ) ? (i + 1) % this.segments : i + 1;
@@ -128,20 +109,18 @@ THREE.BBTubeGeometry = function( path, radii, segments, radialSegments, closed, 
 			c = this.grid[ ip ][ jp ];
 			d = this.grid[ i ][ jp ];
 
-			uva = new THREE.Vector2( (this.verticalTextureScalar)	 * ( i 	/ (this.segments) ) 		, j / this.radialSegments );
-			uvb = new THREE.Vector2( (this.verticalTextureScalar) * ((i + 1) / (this.segments) ) 	, j / this.radialSegments );
-			uvc = new THREE.Vector2( (this.verticalTextureScalar) * ((i + 1) / (this.segments) ) 	, ( j + 1 ) / this.radialSegments );
-			uvd = new THREE.Vector2( (this.verticalTextureScalar)	 * ( i 	/ (this.segments) )		, ( j + 1 ) / this.radialSegments );
+			uva = new THREE.Vector2( (this.verticalTextureScalar) * ( i 	/ (this.segments) ) , j / this.radialSegments );
+			uvb = new THREE.Vector2( (this.verticalTextureScalar) * ((i + 1)/ (this.segments) ) , j / this.radialSegments );
+			uvc = new THREE.Vector2( (this.verticalTextureScalar) * ((i + 1)/ (this.segments) ) , ( j + 1 ) / this.radialSegments );
+			uvd = new THREE.Vector2( (this.verticalTextureScalar) * ( i 	/ (this.segments) ) , ( j + 1 ) / this.radialSegments );
 
 			this.faces.push( new THREE.Face3( a, b, d ) );
 			this.faceVertexUvs[ 0 ].push( [ uva, uvb, uvd ] );
-
 			this.faces.push( new THREE.Face3( b, c, d ) );
 			this.faceVertexUvs[ 0 ].push( [ uvb.clone(), uvc, uvd.clone() ] );
 		}
 	}
 
-	//this.computeCentroids();
 	this.computeFaceNormals();
 	this.computeVertexNormals();
 
