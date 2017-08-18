@@ -155,7 +155,7 @@ function PSOLSystem ()
 			(new THREE.Vector3( 1.0, 1.0, 1.0 )));
 		closingGeometry.applyMatrix(closingGeometryMatrix);
 
-		var secondquaternion = new THREE.Quaternion();
+	/*	var secondquaternion = new THREE.Quaternion();
 		secondquaternion.setFromAxisAngle( new THREE.Vector3( 0, 1, 0 ), Math.PI / 2 );
 
 		var secondPlane = new THREE.PlaneGeometry(tsx*2.0,tsx*2.0,1,1);
@@ -167,7 +167,7 @@ function PSOLSystem ()
 		secondPlane.applyMatrix(secondPlaneMatrix);
 
 		closingGeometry.merge( secondPlane,secondPlane.matrix,0 );
-
+*/
 		return closingGeometry;
 	}
 	var flower = this.flower;
