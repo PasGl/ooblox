@@ -133,7 +133,7 @@ function PSOLSystem ()
 		this.foliageTexture = "21";
 		this.barkTextures = ["pattern_230","pattern_231","pattern_232","pattern_233","pattern_234"]; 
 		this.foliageTextures = ["21","22","23","24","25","31","32","33","34","35","36","37","38","39","40"];
-		this.texRepAdd = 4;
+		this.texRepAdd = 0.5;
 	};
 
 	var conf = new PSOLGUIProperties();
@@ -564,7 +564,7 @@ function PSOLSystem ()
 				(tubePoints.length-1)*3,
 				conf.circleSegments,
 				false,
-				(tubePoints.length-1) );
+				tubePoints.length-1);
 			finalGeometry.merge( tubeGeometry,tubeGeometry.matrix,0 );
 		}
 	}
