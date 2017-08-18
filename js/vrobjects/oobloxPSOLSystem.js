@@ -98,29 +98,23 @@ function PSOLSystem ()
 	var afoliagetexture = new THREE.TextureLoader().load( "images/textures/foliage-template.png" );
 	abarktexture.wrapS = THREE.RepeatWrapping;
 	abarktexture.wrapT = THREE.RepeatWrapping;
-	this.mesh.material  = [new THREE.MeshStandardMaterial(
+	this.mesh.material  = [new THREE.MeshPhongMaterial(
 				{
 					color: "#FFFFFF",
 					shading: THREE.SmoothShading,
 					map: abarktexture,
 					normalMap: abarktexture,
-					emissiveMap: abarktexture,
-					emissive: "#555555",
-					metalness: 0.01,
-					roughness: 0.9
+					specularMap: abarktexture
 				}),
-				new THREE.MeshStandardMaterial(
+				new THREE.MeshPhongMaterial(
 				{
 					color: "#FFFFFF",
 					shading: THREE.SmoothShading,
 					side: THREE.DoubleSide,
 					map: afoliagetexture,
 					normalMap: afoliagetexture,
-					emissiveMap: afoliagetexture,
-					emissive: "#555555",
-					alphaTest: 0.2,
-					metalness: 0.05,
-					roughness: 0.32
+					specularMap: afoliagetexture,
+					alphaTest: 0.2
 				})];
 
 	var PSOLGUIProperties = function ()
@@ -727,17 +721,17 @@ function PSOLSystem ()
 		thismesh.material[0].normalMap = new THREE.TGALoader().load( "images/Yughues_bark/" + conf.barkTexture + "/normal.tga");
 		thismesh.material[0].normalMap.wrapS = THREE.RepeatWrapping;
 		thismesh.material[0].normalMap.wrapT = THREE.RepeatWrapping;
-		thismesh.material[0].emissiveMap = new THREE.TGALoader().load( "images/Yughues_bark/" + conf.barkTexture + "/specular.tga");
-		thismesh.material[0].emissiveMap.wrapS = THREE.RepeatWrapping;
-		thismesh.material[0].emissiveMap.wrapT = THREE.RepeatWrapping;
+		thismesh.material[0].specularMap = new THREE.TGALoader().load( "images/Yughues_bark/" + conf.barkTexture + "/specular.tga");
+		thismesh.material[0].specularMap.wrapS = THREE.RepeatWrapping;
+		thismesh.material[0].specularMap.wrapT = THREE.RepeatWrapping;
 	}
 	var refreshBarkTexture = this.refreshBarkTexture;
 
 	this.refreshBarkReps = function (targetScene,thismesh)
 	{
-		thismesh.material[0].map.repeat.set( -(conf.iterations * conf.texRepAdd) , -1);
-		thismesh.material[0].normalMap.repeat.set( -(conf.iterations * conf.texRepAdd) , -1);
-		thismesh.material[0].emissiveMap.repeat.set( -(conf.iterations * conf.texRepAdd) , -1);
+		thismesh.material[0].map.repeat.set( -conf.texRepAdd , -1);
+		thismesh.material[0].normalMap.repeat.set( -conf.texRepAdd , -1);
+		thismesh.material[0].specularMap.repeat.set( -conf.texRepAdd , -1);
 	}
 	var refreshBarkReps = this.refreshBarkReps;
 
@@ -746,7 +740,7 @@ function PSOLSystem ()
 	{
 		thismesh.material[1].map = new THREE.TGALoader().load(  "images/Yughues_branches/" + conf.foliageTexture + "/diffuse.tga" );
 		thismesh.material[1].normalMap = new THREE.TGALoader().load( "images/Yughues_branches/" + conf.foliageTexture + "/normal.tga");
-		thismesh.material[1].emissiveMap = new THREE.TGALoader().load( "images/Yughues_branches/" + conf.foliageTexture + "/specular.tga");
+		thismesh.material[1].specularMap = new THREE.TGALoader().load( "images/Yughues_branches/" + conf.foliageTexture + "/specular.tga");
 	}
 	var refreshFoliageTexture = this.refreshFoliageTexture;
 
