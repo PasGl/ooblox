@@ -109,7 +109,8 @@ THREE.BBTubeGeometry = function( path, radii, segments, radialSegments, closed, 
 		var	nextradius = radiV.x;
 		//}
 
-		console.log("r: ",radius,nextradius);
+		
+		if (radius<nextradius) console.log("r<nr",i,this.segments);
 
 		for ( j = 0; j < this.radialSegments; j++ )
 		{
