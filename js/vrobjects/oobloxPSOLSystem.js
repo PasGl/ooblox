@@ -638,7 +638,12 @@ function PSOLSystem ()
 
 		var matFolder = dat.GUIVR.create('Materials');
 		var barkSourceChanger = matFolder.add(conf,'barkTexture',conf.barkTextures);
-		barkSourceChanger.onChange(function(){refreshBarkTexture(targetScene,thismesh);refreshBarkReps(targetScene,thismesh);updateMyURLArgs(targetScene,thismesh);});
+		barkSourceChanger.onChange(function(){
+			refreshBarkTexture(targetScene,thismesh);
+			refreshBarkReps(targetScene,thismesh);
+			refreshCustomDepthMaterial(targetScene,thismesh);
+			updateMyURLArgs(targetScene,thismesh);
+		});
 
 		var texRepAddSlider = propFolder.add(conf,'texRepAdd',0.0001,10).name("Bark Repeats added").step(0.01);
 		texRepAddSlider.onChange(function(){refreshBarkReps(targetScene,thismesh);updateMyURLArgs(targetScene,thismesh);});
@@ -647,7 +652,11 @@ function PSOLSystem ()
 		matFolder.add(thismesh.material[0],'wireframe').name("Bark wireframe");
 		matFolder.add(thismesh.material[0],'wireframeLinewidth',1,20).name("Bark wire width").step(1);
 		var foliageSourceChanger = matFolder.add(conf,'foliageTexture',conf.foliageTextures);
-		foliageSourceChanger.onChange(function(){refreshFoliageTexture(targetScene,thismesh);updateMyURLArgs(targetScene,thismesh);});
+		foliageSourceChanger.onChange(function(){
+			refreshFoliageTexture(targetScene,thismesh);
+			refreshCustomDepthMaterial(targetScene,thismesh);
+			updateMyURLArgs(targetScene,thismesh);
+		});
 		matFolder.add(thismesh.material[1],'visible').name("Foliage visible");
 		matFolder.add(thismesh.material[1],'transparent').name("Foliage transparent");
 		matFolder.add(thismesh.material[1],'alphaTest',0.0,1.0).name("Foliage alpha threshold");
@@ -715,20 +724,7 @@ function PSOLSystem ()
 
 	this.refreshBarkTexture = function (targetScene,thismesh)
 	{
-		thismesh.material[0].map = new THREE.TGALoader().load(  "images/Yughues_bark/" + conf.barkTexture + "/diffuse.tga" , function(texture) {
-			var uniforms = { 
-				texture0:  { value: texture },
-				texture1:  { value: thismesh.material[1].map }
-			};
-			var vertexShader = document.getElementById( 'vertexShaderDepth' ).textContent;
-			var fragmentShader = document.getElementById( 'fragmentShaderDepth' ).textContent;
-			thismesh.customDepthMaterial = 	new THREE.ShaderMaterial( {
-						uniforms: uniforms,
-						vertexShader: vertexShader,
-						fragmentShader: fragmentShader,
-						side: THREE.DoubleSide
-			} );
-		});
+		thismesh.material[0].map = new THREE.TGALoader().load(  "images/Yughues_bark/" + conf.barkTexture + "/diffuse.tga");
 		thismesh.material[0].map.wrapS = THREE.RepeatWrapping;
 		thismesh.material[0].map.wrapT = THREE.RepeatWrapping;
 		thismesh.material[0].normalMap = new THREE.TGALoader().load( "images/Yughues_bark/" + conf.barkTexture + "/normal.tga");
@@ -751,24 +747,32 @@ function PSOLSystem ()
 
 	this.refreshFoliageTexture = function (targetScene,thismesh)
 	{
-		thismesh.material[1].map = new THREE.TGALoader().load(  "images/Yughues_branches/" + conf.foliageTexture + "/diffuse.tga" , function(texture) {
-			var uniforms = { 
-				texture0:  { value: thismesh.material[0].map },
-				texture1:  { value: texture }
-			};
-			var vertexShader = document.getElementById( 'vertexShaderDepth' ).textContent;
-			var fragmentShader = document.getElementById( 'fragmentShaderDepth' ).textContent;
-			thismesh.customDepthMaterial = 	new THREE.ShaderMaterial( {
-						uniforms: uniforms,
-						vertexShader: vertexShader,
-						fragmentShader: fragmentShader,
-						side: THREE.DoubleSide
-			} );
-		});
+		thismesh.material[1].map = new THREE.TGALoader().load(  "images/Yughues_branches/" + conf.foliageTexture + "/diffuse.tga");
 		thismesh.material[1].normalMap = new THREE.TGALoader().load( "images/Yughues_branches/" + conf.foliageTexture + "/normal.tga");
 		thismesh.material[1].specularMap = new THREE.TGALoader().load( "images/Yughues_branches/" + conf.foliageTexture + "/specular.tga");
 	}
 	var refreshFoliageTexture = this.refreshFoliageTexture;
+
+	this.refreshCustomDepthMaterial = function (targetScene,thismesh)
+	{
+			var bark 	= new THREE.TGALoader().load(  "images/Yughues_bark/" + conf.barkTexture + "/diffuse.tga",function (barktexture) {
+				var foliage 	= new THREE.TGALoader().load(  "images/Yughues_branches/" + conf.foliageTexture + "/diffuse.tga", function(foliagetexture) {
+					var uniforms = { 
+						texture0:  { value: barktexture },
+						texture1:  { value: foliagetexture }
+					};
+					var vertexShader = document.getElementById( 'vertexShaderDepth' ).textContent;
+					var fragmentShader = document.getElementById( 'fragmentShaderDepth' ).textContent;
+					thismesh.customDepthMaterial = 	new THREE.ShaderMaterial( {
+								uniforms: uniforms,
+								vertexShader: vertexShader,
+								fragmentShader: fragmentShader,
+								side: THREE.DoubleSide
+					} );	
+				});
+			});
+	}
+	var refreshCustomDepthMaterial = this.refreshCustomDepthMaterial;
 
 	this.load = function (targetScene, camera)
 	{
@@ -802,6 +806,7 @@ function PSOLSystem ()
 		refreshBarkTexture(targetScene,this.mesh);
 		refreshBarkReps(targetScene,this.mesh);
 		refreshFoliageTexture(targetScene,this.mesh);
+		refreshCustomDepthMaterial(targetScene,this.mesh);
 		refresh(targetScene,this.mesh);
 		var event = new Event('vrObjectInstantiated');
 		document.dispatchEvent(event);
