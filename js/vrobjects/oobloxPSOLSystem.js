@@ -715,7 +715,20 @@ function PSOLSystem ()
 
 	this.refreshBarkTexture = function (targetScene,thismesh)
 	{
-		thismesh.material[0].map = new THREE.TGALoader().load(  "images/Yughues_bark/" + conf.barkTexture + "/diffuse.tga" );
+		thismesh.material[0].map = new THREE.TGALoader().load(  "images/Yughues_bark/" + conf.barkTexture + "/diffuse.tga" , function() {
+			var uniforms = { 
+				texture0:  { value: thismesh.material[0].map },
+				texture1:  { value: thismesh.material[1].map }
+			};
+			var vertexShader = document.getElementById( 'vertexShaderDepth' ).textContent;
+			var fragmentShader = document.getElementById( 'fragmentShaderDepth' ).textContent;
+			thismesh.customDepthMaterial = 	new THREE.ShaderMaterial( {
+						uniforms: uniforms,
+						vertexShader: vertexShader,
+						fragmentShader: fragmentShader,
+						side: THREE.DoubleSide
+			} );
+		});
 		thismesh.material[0].map.wrapS = THREE.RepeatWrapping;
 		thismesh.material[0].map.wrapT = THREE.RepeatWrapping;
 		thismesh.material[0].normalMap = new THREE.TGALoader().load( "images/Yughues_bark/" + conf.barkTexture + "/normal.tga");
@@ -724,19 +737,6 @@ function PSOLSystem ()
 		thismesh.material[0].specularMap = new THREE.TGALoader().load( "images/Yughues_bark/" + conf.barkTexture + "/specular.tga");
 		thismesh.material[0].specularMap.wrapS = THREE.RepeatWrapping;
 		thismesh.material[0].specularMap.wrapT = THREE.RepeatWrapping;
-
-		var uniforms = { 
-			texture0:  { value: thismesh.material[0].map },
-			texture1:  { value: thismesh.material[1].map }
-		};
-		var vertexShader = document.getElementById( 'vertexShaderDepth' ).textContent;
-		var fragmentShader = document.getElementById( 'fragmentShaderDepth' ).textContent;
-		thismesh.customDepthMaterial = 	new THREE.ShaderMaterial( {
-					uniforms: uniforms,
-					vertexShader: vertexShader,
-					fragmentShader: fragmentShader,
-					side: THREE.DoubleSide
-		} );
 	}
 	var refreshBarkTexture = this.refreshBarkTexture;
 
@@ -751,22 +751,22 @@ function PSOLSystem ()
 
 	this.refreshFoliageTexture = function (targetScene,thismesh)
 	{
-		thismesh.material[1].map = new THREE.TGALoader().load(  "images/Yughues_branches/" + conf.foliageTexture + "/diffuse.tga" );
+		thismesh.material[1].map = new THREE.TGALoader().load(  "images/Yughues_branches/" + conf.foliageTexture + "/diffuse.tga" , function() {
+			var uniforms = { 
+				texture0:  { value: thismesh.material[0].map },
+				texture1:  { value: thismesh.material[1].map }
+			};
+			var vertexShader = document.getElementById( 'vertexShaderDepth' ).textContent;
+			var fragmentShader = document.getElementById( 'fragmentShaderDepth' ).textContent;
+			thismesh.customDepthMaterial = 	new THREE.ShaderMaterial( {
+						uniforms: uniforms,
+						vertexShader: vertexShader,
+						fragmentShader: fragmentShader,
+						side: THREE.DoubleSide
+			} );
+		});
 		thismesh.material[1].normalMap = new THREE.TGALoader().load( "images/Yughues_branches/" + conf.foliageTexture + "/normal.tga");
 		thismesh.material[1].specularMap = new THREE.TGALoader().load( "images/Yughues_branches/" + conf.foliageTexture + "/specular.tga");
-
-		var uniforms = { 
-			texture0:  { value: thismesh.material[0].map },
-			texture1:  { value: thismesh.material[1].map }
-		};
-		var vertexShader = document.getElementById( 'vertexShaderDepth' ).textContent;
-		var fragmentShader = document.getElementById( 'fragmentShaderDepth' ).textContent;
-		thismesh.customDepthMaterial = 	new THREE.ShaderMaterial( {
-					uniforms: uniforms,
-					vertexShader: vertexShader,
-					fragmentShader: fragmentShader,
-					side: THREE.DoubleSide
-		} );
 	}
 	var refreshFoliageTexture = this.refreshFoliageTexture;
 
