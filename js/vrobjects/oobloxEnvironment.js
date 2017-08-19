@@ -215,7 +215,7 @@ oobloxEnvironment = function ()
 		mesh.material.specularMap.wrapT = THREE.RepeatWrapping;
 		mesh.material.specularMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
 		mesh.material.specularMap.anisotropy = 16;
-		mesh.material.specular = new THREE.Color( 0x555555 );
+		mesh.material.specular = new THREE.Color( groundColor );
 	}
 
 	var refreshHemiLight = function (targetScene)
