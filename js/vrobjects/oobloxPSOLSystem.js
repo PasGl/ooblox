@@ -727,12 +727,15 @@ function PSOLSystem ()
 		thismesh.material[0].map = new THREE.TGALoader().load(  "images/Yughues_bark/" + conf.barkTexture + "/diffuse.tga");
 		thismesh.material[0].map.wrapS = THREE.RepeatWrapping;
 		thismesh.material[0].map.wrapT = THREE.RepeatWrapping;
+		thismesh.material[0].map.anisotropy = 16;
 		thismesh.material[0].normalMap = new THREE.TGALoader().load( "images/Yughues_bark/" + conf.barkTexture + "/normal.tga");
 		thismesh.material[0].normalMap.wrapS = THREE.RepeatWrapping;
 		thismesh.material[0].normalMap.wrapT = THREE.RepeatWrapping;
+		thismesh.material[0].normalMap.anisotropy = 16;
 		thismesh.material[0].specularMap = new THREE.TGALoader().load( "images/Yughues_bark/" + conf.barkTexture + "/specular.tga");
 		thismesh.material[0].specularMap.wrapS = THREE.RepeatWrapping;
 		thismesh.material[0].specularMap.wrapT = THREE.RepeatWrapping;
+		thismesh.material[0].specularMap.anisotropy = 16;
 	}
 	var refreshBarkTexture = this.refreshBarkTexture;
 
