@@ -744,15 +744,24 @@ function PSOLSystem ()
 		thismesh.material[1].specularMap = new THREE.TGALoader().load( "images/Yughues_branches/" + conf.foliageTexture + "/specular.tga");
 
 		var uniforms = { texture:  { value: diffusemap } };
+		var barkuniforms = { texture:  { value: thismesh.material[0].map } };
 		var vertexShader = document.getElementById( 'vertexShaderDepth' ).textContent;
 		var fragmentShader = document.getElementById( 'fragmentShaderDepth' ).textContent;
 
-		thismesh.customDepthMaterial = new THREE.ShaderMaterial( {
+		thismesh.customDepthMaterial = [
+			new THREE.ShaderMaterial( {
+					uniforms: barkuniforms,
+					vertexShader: vertexShader,
+					fragmentShader: fragmentShader,
+					side: THREE.DoubleSide
+			} ),
+			new THREE.ShaderMaterial( {
 					uniforms: uniforms,
 					vertexShader: vertexShader,
 					fragmentShader: fragmentShader,
 					side: THREE.DoubleSide
-		} );
+			} )
+		];
 	}
 	var refreshFoliageTexture = this.refreshFoliageTexture;
 
