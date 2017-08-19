@@ -738,9 +738,21 @@ function PSOLSystem ()
 
 	this.refreshFoliageTexture = function (targetScene,thismesh)
 	{
-		thismesh.material[1].map = new THREE.TGALoader().load(  "images/Yughues_branches/" + conf.foliageTexture + "/diffuse.tga" );
+		var diffusemap = new THREE.TGALoader().load(  "images/Yughues_branches/" + conf.foliageTexture + "/diffuse.tga" );
+		thismesh.material[1].map = diffusemap;
 		thismesh.material[1].normalMap = new THREE.TGALoader().load( "images/Yughues_branches/" + conf.foliageTexture + "/normal.tga");
 		thismesh.material[1].specularMap = new THREE.TGALoader().load( "images/Yughues_branches/" + conf.foliageTexture + "/specular.tga");
+
+		var uniforms = { texture:  { value: diffusemap } };
+		var vertexShader = document.getElementById( 'vertexShaderDepth' ).textContent;
+		var fragmentShader = document.getElementById( 'fragmentShaderDepth' ).textContent;
+
+		thismesh.customDepthMaterial = new THREE.ShaderMaterial( {
+					uniforms: uniforms,
+					vertexShader: vertexShader,
+					fragmentShader: fragmentShader,
+					side: THREE.DoubleSide
+		} );
 	}
 	var refreshFoliageTexture = this.refreshFoliageTexture;
 
