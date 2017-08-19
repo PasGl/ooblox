@@ -11,7 +11,7 @@
 * http://www.cs.indiana.edu/pub/techreports/TR425.pdf
 *
 * changed by Pascal Gleske / https://github.com/PasGl to go through an array of radii
-* and scale vertical UVs by verticalTextureScalar/radius
+* and scale vertical UVs by verticalTextureScalar
 */
 
 THREE.BBTubeGeometry = function( path, radii, segments, radialSegments, closed, verticalTextureScalar ) {
