@@ -802,9 +802,9 @@ function PSOLSystem ()
 								vertexShader: vertexShader,
 								fragmentShader: fragmentShader,
 								side: THREE.DoubleSide
-					} );	*/
+					} );	
 				});
-			});
+			});*/
 	}
 	var refreshCustomDepthMaterial = this.refreshCustomDepthMaterial;
 
