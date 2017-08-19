@@ -755,9 +755,26 @@ function PSOLSystem ()
 
 	this.refreshCustomDepthMaterial = function (targetScene,thismesh)
 	{
+
 			var bark 	= new THREE.TGALoader().load(  "images/Yughues_bark/" + conf.barkTexture + "/diffuse.tga",function (barktexture) {
 				var foliage 	= new THREE.TGALoader().load(  "images/Yughues_branches/" + conf.foliageTexture + "/diffuse.tga", function(foliagetexture) {
-					var uniforms = { 
+
+
+					var customDepthMaterial = [
+						new THREE.MeshDepthMaterial( {
+					    		depthPacking: THREE.RGBADepthPacking,
+				    			map: barktexture, // or, alphaMap: myAlphaMap
+				    			alphaTest: 0.5} ),
+						new THREE.MeshDepthMaterial( {
+					    		depthPacking: THREE.RGBADepthPacking,
+				    			map: foliagetexture, // or, alphaMap: myAlphaMap
+				    			alphaTest: 0.5} )
+					];
+					thismesh.customDepthMaterial = customDepthMaterial;
+
+
+
+					/*var uniforms = { 
 						texture0:  { value: barktexture },
 						texture1:  { value: foliagetexture }
 					};
@@ -768,7 +785,7 @@ function PSOLSystem ()
 								vertexShader: vertexShader,
 								fragmentShader: fragmentShader,
 								side: THREE.DoubleSide
-					} );	
+					} );	*/
 				});
 			});
 	}
