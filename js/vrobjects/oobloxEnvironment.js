@@ -204,14 +204,17 @@ oobloxEnvironment = function ()
 		mesh.material.map.wrapS = THREE.RepeatWrapping;
 		mesh.material.map.wrapT = THREE.RepeatWrapping;
 		mesh.material.map.repeat.set( conf.textureRepsX , conf.textureRepsY);
+		mesh.material.map.anisotropy = 16;
 		mesh.material.normalMap = new THREE.TGALoader().load( "images/Yughues_patterns/" + textureFolder + "/normal.tga");
 		mesh.material.normalMap.wrapS = THREE.RepeatWrapping;
 		mesh.material.normalMap.wrapT = THREE.RepeatWrapping;
 		mesh.material.normalMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
+		mesh.material.normalMap.anisotropy = 16;
 		mesh.material.specularMap = new THREE.TGALoader().load( "images/Yughues_patterns/" + textureFolder + "/specular.tga");
 		mesh.material.specularMap.wrapS = THREE.RepeatWrapping;
 		mesh.material.specularMap.wrapT = THREE.RepeatWrapping;
 		mesh.material.specularMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
+		mesh.material.specularMap.anisotropy = 16;
 		mesh.material.specular = new THREE.Color( 0x555555 );
 	}
 
