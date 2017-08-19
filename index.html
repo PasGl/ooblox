@@ -49,7 +49,6 @@
 		<script src="js/exporters/STLExporter.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script type="x-shader/x-fragment" id="fragmentShaderDepth">
-			// fragment-shader for customDepthMaterial (for proper shadows from transparent textures)
 			#include <packing>
 			uniform sampler2D texture;
 			varying vec2 vUV;
@@ -60,7 +59,6 @@
 			}
 		</script>
 		<script type="x-shader/x-vertex" id="vertexShaderDepth">
-			// vertex-shader for customDepthMaterial (for proper shadows from transparent textures)
 			varying vec2 vUV;
 			void main() {
 				vUV = 0.75 * uv;
