@@ -759,10 +759,24 @@ function PSOLSystem ()
 	this.refreshCustomDepthMaterial = function (targetScene,thismesh)
 	{
 
+
+					var customDepthMaterial = [
+						new THREE.MeshDepthMaterial( {
+					    		depthPacking: THREE.RGBADepthPacking,
+				    			map: thismesh.material[0].map, // or, alphaMap: myAlphaMap
+				    			alphaTest: 0.5} ),
+						new THREE.MeshDepthMaterial( {
+					    		depthPacking: THREE.RGBADepthPacking,
+				    			map: thismesh.material[1].map, // or, alphaMap: myAlphaMap
+				    			alphaTest: 0.5} )
+					];
+					thismesh.customDepthMaterial = customDepthMaterial;
+
+/*
 			var bark 	= new THREE.TGALoader().load(  "images/Yughues_bark/" + conf.barkTexture + "/diffuse.tga",function (barktexture) {
 				var foliage 	= new THREE.TGALoader().load(  "images/Yughues_branches/" + conf.foliageTexture + "/diffuse.tga", function(foliagetexture) {
 
-/*
+
 					var customDepthMaterial = [
 						new THREE.MeshDepthMaterial( {
 					    		depthPacking: THREE.RGBADepthPacking,
