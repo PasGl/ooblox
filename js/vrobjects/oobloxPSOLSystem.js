@@ -760,16 +760,11 @@ function PSOLSystem ()
 	{
 
 
-					var customDepthMaterial = [
-						new THREE.MeshDepthMaterial( {
-					    		depthPacking: THREE.RGBADepthPacking,
-				    			map: thismesh.material[0].map, // or, alphaMap: myAlphaMap
-				    			alphaTest: 0.5} ),
-						new THREE.MeshDepthMaterial( {
+					var customDepthMaterial = new THREE.MeshDepthMaterial( {
 					    		depthPacking: THREE.RGBADepthPacking,
 				    			map: thismesh.material[1].map, // or, alphaMap: myAlphaMap
-				    			alphaTest: 0.5} )
-					];
+				    			alphaTest: 0.5} );
+					
 					thismesh.customDepthMaterial = customDepthMaterial;
 
 /*
