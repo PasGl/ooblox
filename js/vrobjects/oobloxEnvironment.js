@@ -10,7 +10,7 @@
 
 oobloxEnvironment = function ()
 {
-	this.mesh = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 1, 1), new THREE.MeshStandardMaterial({}));
+	this.mesh = new THREE.Mesh( new THREE.PlaneGeometry(1, 1, 1, 1), new THREE.MeshPhongMaterial({}));
 	this.mesh.rotation.x = -Math.PI * 0.5;
 	this.mesh.receiveShadow = true;
 	this.mesh.castShadow = true;
@@ -152,7 +152,7 @@ oobloxEnvironment = function ()
 	{
 		mesh.material.map.repeat.set( conf.textureRepsX , conf.textureRepsY);
 		mesh.material.normalMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
-		mesh.material.emissiveMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
+		mesh.material.specularMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
 	}
 
 	var refreshGroundTexture = function (targetScene)
@@ -208,13 +208,11 @@ oobloxEnvironment = function ()
 		mesh.material.normalMap.wrapS = THREE.RepeatWrapping;
 		mesh.material.normalMap.wrapT = THREE.RepeatWrapping;
 		mesh.material.normalMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
-		mesh.material.emissiveMap = new THREE.TGALoader().load( "images/Yughues_patterns/" + textureFolder + "/specular.tga");
-		mesh.material.emissiveMap.wrapS = THREE.RepeatWrapping;
-		mesh.material.emissiveMap.wrapT = THREE.RepeatWrapping;
-		mesh.material.emissiveMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
-		mesh.material.emissive = new THREE.Color( 0x555555 );
-		mesh.material.metalness = 0.5;
-		mesh.material.roughness = 0.9;
+		mesh.material.specularMap = new THREE.TGALoader().load( "images/Yughues_patterns/" + textureFolder + "/specular.tga");
+		mesh.material.specularMap.wrapS = THREE.RepeatWrapping;
+		mesh.material.specularMap.wrapT = THREE.RepeatWrapping;
+		mesh.material.specularMap.repeat.set( conf.textureRepsX , conf.textureRepsY);
+		mesh.material.specular = new THREE.Color( 0x555555 );
 	}
 
 	var refreshHemiLight = function (targetScene)
