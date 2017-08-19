@@ -715,9 +715,9 @@ function PSOLSystem ()
 
 	this.refreshBarkTexture = function (targetScene,thismesh)
 	{
-		thismesh.material[0].map = new THREE.TGALoader().load(  "images/Yughues_bark/" + conf.barkTexture + "/diffuse.tga" , function() {
+		thismesh.material[0].map = new THREE.TGALoader().load(  "images/Yughues_bark/" + conf.barkTexture + "/diffuse.tga" , function(texture) {
 			var uniforms = { 
-				texture0:  { value: thismesh.material[0].map },
+				texture0:  { value: texture },
 				texture1:  { value: thismesh.material[1].map }
 			};
 			var vertexShader = document.getElementById( 'vertexShaderDepth' ).textContent;
@@ -751,10 +751,10 @@ function PSOLSystem ()
 
 	this.refreshFoliageTexture = function (targetScene,thismesh)
 	{
-		thismesh.material[1].map = new THREE.TGALoader().load(  "images/Yughues_branches/" + conf.foliageTexture + "/diffuse.tga" , function() {
+		thismesh.material[1].map = new THREE.TGALoader().load(  "images/Yughues_branches/" + conf.foliageTexture + "/diffuse.tga" , function(texture) {
 			var uniforms = { 
 				texture0:  { value: thismesh.material[0].map },
-				texture1:  { value: thismesh.material[1].map }
+				texture1:  { value: texture }
 			};
 			var vertexShader = document.getElementById( 'vertexShaderDepth' ).textContent;
 			var fragmentShader = document.getElementById( 'fragmentShaderDepth' ).textContent;
