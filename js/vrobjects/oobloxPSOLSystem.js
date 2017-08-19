@@ -759,7 +759,7 @@ function PSOLSystem ()
 			var bark 	= new THREE.TGALoader().load(  "images/Yughues_bark/" + conf.barkTexture + "/diffuse.tga",function (barktexture) {
 				var foliage 	= new THREE.TGALoader().load(  "images/Yughues_branches/" + conf.foliageTexture + "/diffuse.tga", function(foliagetexture) {
 
-
+/*
 					var customDepthMaterial = [
 						new THREE.MeshDepthMaterial( {
 					    		depthPacking: THREE.RGBADepthPacking,
@@ -774,7 +774,7 @@ function PSOLSystem ()
 
 
 
-					/*var uniforms = { 
+					var uniforms = { 
 						texture0:  { value: barktexture },
 						texture1:  { value: foliagetexture }
 					};
