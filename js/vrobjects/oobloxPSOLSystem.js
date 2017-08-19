@@ -724,6 +724,19 @@ function PSOLSystem ()
 		thismesh.material[0].specularMap = new THREE.TGALoader().load( "images/Yughues_bark/" + conf.barkTexture + "/specular.tga");
 		thismesh.material[0].specularMap.wrapS = THREE.RepeatWrapping;
 		thismesh.material[0].specularMap.wrapT = THREE.RepeatWrapping;
+
+		var uniforms = { 
+			texture0:  { value: thismesh.material[0].map },
+			texture1:  { value: thismesh.material[1].map }
+		};
+		var vertexShader = document.getElementById( 'vertexShaderDepth' ).textContent;
+		var fragmentShader = document.getElementById( 'fragmentShaderDepth' ).textContent;
+		thismesh.customDepthMaterial = 	new THREE.ShaderMaterial( {
+					uniforms: uniforms,
+					vertexShader: vertexShader,
+					fragmentShader: fragmentShader,
+					side: THREE.DoubleSide
+		} );
 	}
 	var refreshBarkTexture = this.refreshBarkTexture;
 
@@ -738,30 +751,22 @@ function PSOLSystem ()
 
 	this.refreshFoliageTexture = function (targetScene,thismesh)
 	{
-		var diffusemap = new THREE.TGALoader().load(  "images/Yughues_branches/" + conf.foliageTexture + "/diffuse.tga" );
-		thismesh.material[1].map = diffusemap;
+		thismesh.material[1].map = new THREE.TGALoader().load(  "images/Yughues_branches/" + conf.foliageTexture + "/diffuse.tga" );
 		thismesh.material[1].normalMap = new THREE.TGALoader().load( "images/Yughues_branches/" + conf.foliageTexture + "/normal.tga");
 		thismesh.material[1].specularMap = new THREE.TGALoader().load( "images/Yughues_branches/" + conf.foliageTexture + "/specular.tga");
 
-		var uniforms = { texture:  { value: diffusemap } };
-		var barkuniforms = { texture:  { value: thismesh.material[0].map } };
+		var uniforms = { 
+			texture0:  { value: thismesh.material[0].map },
+			texture1:  { value: thismesh.material[1].map }
+		};
 		var vertexShader = document.getElementById( 'vertexShaderDepth' ).textContent;
 		var fragmentShader = document.getElementById( 'fragmentShaderDepth' ).textContent;
-
-		thismesh.customDepthMaterial = [
-			new THREE.ShaderMaterial( {
-					uniforms: barkuniforms,
-					vertexShader: vertexShader,
-					fragmentShader: fragmentShader,
-					side: THREE.DoubleSide
-			} ),
-			new THREE.ShaderMaterial( {
+		thismesh.customDepthMaterial = 	new THREE.ShaderMaterial( {
 					uniforms: uniforms,
 					vertexShader: vertexShader,
 					fragmentShader: fragmentShader,
 					side: THREE.DoubleSide
-			} )
-		];
+		} );
 	}
 	var refreshFoliageTexture = this.refreshFoliageTexture;
 
