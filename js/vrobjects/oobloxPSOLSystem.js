@@ -101,16 +101,16 @@ function PSOLSystem ()
 	this.mesh.material  = [new THREE.MeshPhongMaterial(
 				{
 					color: "#FFFFFF",
-					shading: THREE.SmoothShading,
 					map: abarktexture,
+					flatShading : false,
 					normalMap: abarktexture,
 					specularMap: abarktexture
 				}),
 				new THREE.MeshPhongMaterial(
 				{
 					color: "#FFFFFF",
-					shading: THREE.SmoothShading,
 					side: THREE.DoubleSide,
+					flatShading : false,
 					map: afoliagetexture,
 					normalMap: afoliagetexture,
 					specularMap: afoliagetexture,
