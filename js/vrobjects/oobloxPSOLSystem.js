@@ -156,6 +156,9 @@ function PSOLSystem ()
 	{
 		var tsx = turtle.scale.x * 30.0;
 		var closingGeometry = new THREE.BoxGeometry(tsx*2.0,tsx*2.0,0.0,1,1,1);
+
+console.log(closingGeometry.faceVertexUvs);
+
 		var closingGeometryMatrix = new THREE.Matrix4 ();
 		closingGeometryMatrix.compose(
 			turtle.position.clone().add( (new THREE.Vector3( 0, tsx, 0 )).applyQuaternion(turtle.orientation)),
