@@ -145,7 +145,7 @@ function PSOLSystem ()
 		this.followGUI = true;
 		this.barkTexture = "pattern_230";
 		this.foliageTexture = "21";
-		this.barkTextures = ["pattern_230","pattern_231","pattern_232","pattern_233","pattern_234"]; 
+		this.barkTextures = ["pattern_114","pattern_115","pattern_116","pattern_117","pattern_118","pattern_149","pattern_150","pattern_151","pattern_152","pattern_153","pattern_230","pattern_231","pattern_232","pattern_233","pattern_234"]; 
 		this.foliageTextures = ["21","22","23","24","25","31","32","33","34","35","36","37","38","39","40"];
 		this.texRepAdd = 0.5;
 	};
