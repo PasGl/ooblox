@@ -113,7 +113,8 @@ function PSOLSystem ()
 					map: abarktexture,
 					flatShading : false,
 					normalMap: abarktexture,
-					specularMap: abarktexture
+					specularMap: abarktexture,
+					specular: "#555555"
 				});
 	foliagemesh.material  = new THREE.MeshPhongMaterial(
 				{
@@ -122,7 +123,8 @@ function PSOLSystem ()
 					map: afoliagetexture,
 					normalMap: afoliagetexture,
 					specularMap: afoliagetexture,
-					alphaTest: 0.2
+					alphaTest: 0.2,
+					specular: "#FFFFFF"
 				});
 
 	var PSOLGUIProperties = function ()
