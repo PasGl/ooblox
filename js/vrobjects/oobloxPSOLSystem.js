@@ -770,7 +770,7 @@ function PSOLSystem ()
 					var customDepthMaterial = new THREE.MeshDepthMaterial( {
 					    		depthPacking: THREE.RGBADepthPacking,
 				    			map: thismesh.children[0].material.map, // or, alphaMap: myAlphaMap
-							side: THREE.BackSide,
+							side: THREE.FrontSide,
 							transparent: false,
 				    			alphaTest: 0.2} );
 					
