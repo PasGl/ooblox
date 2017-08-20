@@ -118,7 +118,6 @@ function PSOLSystem ()
 	foliagemesh.material  = new THREE.MeshPhongMaterial(
 				{
 					color: "#FFFFFF",
-					side: THREE.DoubleSide,
 					flatShading : false,
 					map: afoliagetexture,
 					normalMap: afoliagetexture,
@@ -774,7 +773,6 @@ function PSOLSystem ()
 
 					var customDepthMaterial = new THREE.MeshDepthMaterial( {
 					    		depthPacking: THREE.RGBADepthPacking,
-							side: THREE.DoubleSide,
 				    			map: thismesh.children[0].material.map, // or, alphaMap: myAlphaMap
 							transparent: false,
 				    			alphaTest: 0.2} );
