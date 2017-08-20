@@ -158,8 +158,8 @@ function PSOLSystem ()
 		var closingGeometry = new THREE.BoxGeometry(tsx*2.0,tsx*2.0,0.0,1,1,1);
 
 //console.log(closingGeometry);
-		closingGeometry.faceVertexUvs[0][2] = [new THREE.UV(1, 1),new THREE.UV(1, 0),new THREE.UV(0, 1)];
-		closingGeometry.faceVertexUvs[0][3] = [new THREE.UV(1, 0),new THREE.UV(0, 0),new THREE.UV(0, 1)];
+		closingGeometry.faceVertexUvs[0][2] = [new THREE.Vector2(1, 1),new THREE.Vector2(1, 0),new THREE.Vector2(0, 1)];
+		closingGeometry.faceVertexUvs[0][3] = [new THREE.Vector2(1, 0),new THREE.Vector2(0, 0),new THREE.Vector2(0, 1)];
 		//closingGeometry.uvsNeedUpdate = true;
 
 		var closingGeometryMatrix = new THREE.Matrix4 ();
