@@ -75,7 +75,7 @@ The other entries are shortcuts for scenes.
         }
 
         location ~ /sandbox {
-                rewrite ^ http://51.15.67.244/?cammod=OCM+0+0+60+0+0+-30&thisMenu=OMM+16+-2.5+-26+false&infoPanel=TPL+-20.0+-17.0+-30+30+15+6+0.50+0.16+-17+14.0+0+true+0.61+false+ooblox-controls.png&environment=ENV+0+-18+0+1600+1600+92+13+41.5+-20+13+13+29385260+5+sand+TropicalSunnyDay;
+                rewrite ^ http://51.15.67.244/?cammod=OCM+0+0+5+0+0+-30&thisMenu=OMM+16+-2.5+-26+false&infoPanel=TPL+-20.0+-17.0+-30+30+15+6+0.50+0.16+-17+14.0+0+true+0.61+false+ooblox-controls.png&environment=ENV+0+-18+0+1600+1600+92+13+41.5+-20+13+13+29385260+5+sand+TropicalSunnyDay;
         }
 ```
 
