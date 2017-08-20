@@ -154,7 +154,7 @@ function PSOLSystem ()
 
  	this.flower = function (turtle)
 	{
-		var tsx = turtle.scale.x * 30.0;
+		var tsx = turtle.scale.x * 20.0;
 		var closingGeometry = new THREE.BoxGeometry(tsx*2.0,tsx*2.0,0.0,1,1,1);
 
 		closingGeometry.faceVertexUvs[0][2] = [new THREE.Vector2(1, 1),new THREE.Vector2(1, 0),new THREE.Vector2(0, 1)];
