@@ -80,9 +80,18 @@ function PSOLSystem ()
 	this.finalVertexCount = 0;
 	this.finalGeometry;
 	var finalGeometry = this.finalGeometry;
+	this.finalFoliageGeometry;
+	var finalFoliageGeometry = this.finalFoliageGeometry;
+
 	this.mesh = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 1), new THREE.MeshPhongMaterial({}));
 	this.mesh.receiveShadow = true;
 	this.mesh.castShadow = true;
+
+	var foliagemesh = new THREE.Mesh( new THREE.BoxGeometry(1, 1, 1), new THREE.MeshPhongMaterial({}));
+	foliagemesh.receiveShadow = true;
+	foliagemesh.castShadow = true;
+
+	this.mesh.add(foliagemesh);
 
 	this.mesh.vrObjectTypeID = "PLS";
 
@@ -98,15 +107,15 @@ function PSOLSystem ()
 	var afoliagetexture = new THREE.TextureLoader().load( "images/textures/foliage-template.png" );
 	abarktexture.wrapS = THREE.RepeatWrapping;
 	abarktexture.wrapT = THREE.RepeatWrapping;
-	this.mesh.material  = [new THREE.MeshPhongMaterial(
+	this.mesh.material  = new THREE.MeshPhongMaterial(
 				{
 					color: "#FFFFFF",
 					map: abarktexture,
 					flatShading : false,
 					normalMap: abarktexture,
 					specularMap: abarktexture
-				}),
-				new THREE.MeshPhongMaterial(
+				});
+	foliagemesh.material  = new THREE.MeshPhongMaterial(
 				{
 					color: "#FFFFFF",
 					side: THREE.DoubleSide,
@@ -115,7 +124,7 @@ function PSOLSystem ()
 					normalMap: afoliagetexture,
 					specularMap: afoliagetexture,
 					alphaTest: 0.2
-				})];
+				});
 
 	var PSOLGUIProperties = function ()
 	{
@@ -331,6 +340,7 @@ function PSOLSystem ()
 		var tubeStack = [];
 		var matrix = new THREE.Matrix4();
 		finalGeometry = new THREE.Geometry();
+		finalFoliageGeometry = new THREE.Geometry();
 		var tubePoints = [currentTurtle.position.clone()];
 		var tubeRadii = [currentTurtle.scale.clone()];
 		for (var i=0;i<currentString.length;i++)
@@ -395,7 +405,7 @@ function PSOLSystem ()
 					tubePoints = [];
 					tubeRadii = [];
 					var closingGeometry = flower(currentTurtle);
-					finalGeometry.merge( closingGeometry,closingGeometry.matrix,1 );
+					finalFoliageGeometry.merge( closingGeometry,closingGeometry.matrix,1 );
 					break;
 				case "+":
 					var angle = parseFloatDefault(params,currentTurtle.angle);
@@ -573,8 +583,10 @@ function PSOLSystem ()
 	this.finalize = function (mesh)
 	{
 		finalGeometry.computeBoundingBox();
-		this.finalVertexCount = finalGeometry.vertices.length;
+		finalFoliageGeometry.computeBoundingBox();
+		this.finalVertexCount = finalGeometry.vertices.length + finalFoliageGeometry.vertices.length;
 		mesh.geometry = finalGeometry;
+		mesh.children[0].geometry = finalFoliageGeometry;
 	}
 	var finalize = this.finalize;
 
@@ -648,18 +660,18 @@ function PSOLSystem ()
 		var texRepAddSlider = propFolder.add(conf,'texRepAdd',0.0001,10).name("Bark Repeats added").step(0.01);
 		texRepAddSlider.onChange(function(){refreshBarkReps(targetScene,thismesh);updateMyURLArgs(targetScene,thismesh);});
 
-		matFolder.add(thismesh.material[0],'visible').name("Bark visible");
-		matFolder.add(thismesh.material[0],'wireframe').name("Bark wireframe");
-		matFolder.add(thismesh.material[0],'wireframeLinewidth',1,20).name("Bark wire width").step(1);
+		matFolder.add(thismesh.material,'visible').name("Bark visible");
+		matFolder.add(thismesh.material,'wireframe').name("Bark wireframe");
+		matFolder.add(thismesh.material,'wireframeLinewidth',1,20).name("Bark wire width").step(1);
 		var foliageSourceChanger = matFolder.add(conf,'foliageTexture',conf.foliageTextures);
 		foliageSourceChanger.onChange(function(){
 			refreshFoliageTexture(targetScene,thismesh);
 			refreshCustomDepthMaterial(targetScene,thismesh);
 			updateMyURLArgs(targetScene,thismesh);
 		});
-		matFolder.add(thismesh.material[1],'visible').name("Foliage visible");
-		matFolder.add(thismesh.material[1],'transparent').name("Foliage transparent");
-		matFolder.add(thismesh.material[1],'alphaTest',0.0,1.0).name("Foliage alpha threshold");
+		matFolder.add(thismesh.children[0].material,'visible').name("Foliage visible");
+		matFolder.add(thismesh.children[0].material,'transparent').name("Foliage transparent");
+		matFolder.add(thismesh.children[0].material,'alphaTest',0.0,1.0).name("Foliage alpha threshold");
 		datFolder.addFolder(matFolder);
 
 		var remobj = {remove: function(){removeInstance(thismesh.uname);}};
@@ -724,35 +736,35 @@ function PSOLSystem ()
 
 	this.refreshBarkTexture = function (targetScene,thismesh)
 	{
-		thismesh.material[0].map = new THREE.TGALoader().load(  "images/Yughues_bark/" + conf.barkTexture + "/diffuse.tga");
-		thismesh.material[0].map.wrapS = THREE.RepeatWrapping;
-		thismesh.material[0].map.wrapT = THREE.RepeatWrapping;
-		thismesh.material[0].map.anisotropy = 16;
-		thismesh.material[0].normalMap = new THREE.TGALoader().load( "images/Yughues_bark/" + conf.barkTexture + "/normal.tga");
-		thismesh.material[0].normalMap.wrapS = THREE.RepeatWrapping;
-		thismesh.material[0].normalMap.wrapT = THREE.RepeatWrapping;
-		thismesh.material[0].normalMap.anisotropy = 16;
-		thismesh.material[0].specularMap = new THREE.TGALoader().load( "images/Yughues_bark/" + conf.barkTexture + "/specular.tga");
-		thismesh.material[0].specularMap.wrapS = THREE.RepeatWrapping;
-		thismesh.material[0].specularMap.wrapT = THREE.RepeatWrapping;
-		thismesh.material[0].specularMap.anisotropy = 16;
+		thismesh.material.map = new THREE.TGALoader().load(  "images/Yughues_bark/" + conf.barkTexture + "/diffuse.tga");
+		thismesh.material.map.wrapS = THREE.RepeatWrapping;
+		thismesh.material.map.wrapT = THREE.RepeatWrapping;
+		thismesh.material.map.anisotropy = 16;
+		thismesh.material.normalMap = new THREE.TGALoader().load( "images/Yughues_bark/" + conf.barkTexture + "/normal.tga");
+		thismesh.material.normalMap.wrapS = THREE.RepeatWrapping;
+		thismesh.material.normalMap.wrapT = THREE.RepeatWrapping;
+		thismesh.material.normalMap.anisotropy = 16;
+		thismesh.material.specularMap = new THREE.TGALoader().load( "images/Yughues_bark/" + conf.barkTexture + "/specular.tga");
+		thismesh.material.specularMap.wrapS = THREE.RepeatWrapping;
+		thismesh.material.specularMap.wrapT = THREE.RepeatWrapping;
+		thismesh.material.specularMap.anisotropy = 16;
 	}
 	var refreshBarkTexture = this.refreshBarkTexture;
 
 	this.refreshBarkReps = function (targetScene,thismesh)
 	{
-		thismesh.material[0].map.repeat.set( -conf.texRepAdd , -1);
-		thismesh.material[0].normalMap.repeat.set( -conf.texRepAdd , -1);
-		thismesh.material[0].specularMap.repeat.set( -conf.texRepAdd , -1);
+		thismesh.material.map.repeat.set( -conf.texRepAdd , -1);
+		thismesh.material.normalMap.repeat.set( -conf.texRepAdd , -1);
+		thismesh.material.specularMap.repeat.set( -conf.texRepAdd , -1);
 	}
 	var refreshBarkReps = this.refreshBarkReps;
 
 
 	this.refreshFoliageTexture = function (targetScene,thismesh)
 	{
-		thismesh.material[1].map = new THREE.TGALoader().load(  "images/Yughues_branches/" + conf.foliageTexture + "/diffuse.tga");
-		thismesh.material[1].normalMap = new THREE.TGALoader().load( "images/Yughues_branches/" + conf.foliageTexture + "/normal.tga");
-		thismesh.material[1].specularMap = new THREE.TGALoader().load( "images/Yughues_branches/" + conf.foliageTexture + "/specular.tga");
+		thismesh.children[0].material.map = new THREE.TGALoader().load(  "images/Yughues_branches/" + conf.foliageTexture + "/diffuse.tga");
+		thismesh.children[0].material.normalMap = new THREE.TGALoader().load( "images/Yughues_branches/" + conf.foliageTexture + "/normal.tga");
+		thismesh.children[0].material.specularMap = new THREE.TGALoader().load( "images/Yughues_branches/" + conf.foliageTexture + "/specular.tga");
 	}
 	var refreshFoliageTexture = this.refreshFoliageTexture;
 
@@ -762,10 +774,10 @@ function PSOLSystem ()
 
 					var customDepthMaterial = new THREE.MeshDepthMaterial( {
 					    		depthPacking: THREE.RGBADepthPacking,
-				    			map: thismesh.material[1].map, // or, alphaMap: myAlphaMap
+				    			map: thismesh.children[0].material.map, // or, alphaMap: myAlphaMap
 				    			alphaTest: 0.5} );
 					
-					thismesh.customDepthMaterial = customDepthMaterial;
+					thismesh.children[0].customDepthMaterial = customDepthMaterial;
 
 /*
 			var bark 	= new THREE.TGALoader().load(  "images/Yughues_bark/" + conf.barkTexture + "/diffuse.tga",function (barktexture) {
