@@ -5,7 +5,7 @@
 /**
  * Skybox Textures by Heiko Irrgang / https://93i.de/p/free-skybox-texture-set/
  *
- * Ground Textures by Yughues / http://yughues.deviantart.com
+ * Ground Textures by Yughues / https://www.patreon.com/Yughues
  */
 
 oobloxEnvironment = function ()
