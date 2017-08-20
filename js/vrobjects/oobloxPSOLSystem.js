@@ -777,7 +777,7 @@ function PSOLSystem ()
 							side: THREE.DoubleSide,
 				    			map: thismesh.children[0].material.map, // or, alphaMap: myAlphaMap
 							transparent: true,
-				    			alphaTest: 0.5} );
+				    			alphaTest: 0.2} );
 					
 					thismesh.children[0].customDepthMaterial = customDepthMaterial;
 
