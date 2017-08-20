@@ -776,6 +776,7 @@ function PSOLSystem ()
 					    		depthPacking: THREE.RGBADepthPacking,
 							side: THREE.DoubleSide,
 				    			map: thismesh.children[0].material.map, // or, alphaMap: myAlphaMap
+							transparent: true,
 				    			alphaTest: 0.5} );
 					
 					thismesh.children[0].customDepthMaterial = customDepthMaterial;
