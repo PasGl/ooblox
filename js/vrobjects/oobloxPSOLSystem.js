@@ -162,7 +162,7 @@ function PSOLSystem ()
 		closingGeometry.faceVertexUvs[0][2] = [new THREE.Vector2(1, 1),new THREE.Vector2(1, 0),new THREE.Vector2(0, 1)];
 		closingGeometry.faceVertexUvs[0][3] = [new THREE.Vector2(1, 0),new THREE.Vector2(0, 0),new THREE.Vector2(0, 1)];
 		closingGeometry.uvsNeedUpdate = true;
-
+		closingGeometry.normalsNeedUpdate = true;
 		var closingGeometryMatrix = new THREE.Matrix4 ();
 		closingGeometryMatrix.compose(
 			turtle.position.clone().add( (new THREE.Vector3( 0, tsx, 0 )).applyQuaternion(turtle.orientation)),
