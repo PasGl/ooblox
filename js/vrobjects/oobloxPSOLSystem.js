@@ -2,6 +2,10 @@
  * @author Pascal Gleske / https://github.com/PasGl
  */
 
+/**
+ * Textures by Yughues / https://www.patreon.com/Yughues
+ */
+
 function arrayClone(ori)
 {
 	var newA = [];
@@ -100,7 +104,7 @@ function PSOLSystem ()
 	groupNode.name = "vrObjectGroup";
 	var guioffset = new THREE.Vector3();
 
-	var datFolder = dat.GUIVR.create("PS0L-System");
+	var datFolder = dat.GUIVR.create("PS0L-System (Textures by Yughues)");
 	groupNode.add( datFolder );
 
 	var abarktexture = new THREE.TextureLoader().load( "images/textures/bark-template.png" );
@@ -650,7 +654,7 @@ function PSOLSystem ()
 			updateMyURLArgs(targetScene,thismesh);
 		});
 
-		var texRepAddSlider = propFolder.add(conf,'texRepAdd',0.0001,10).name("Bark Repeats added").step(0.01);
+		var texRepAddSlider = matFolder.add(conf,'texRepAdd',0.0001,10).name("Bark Repeat Factor").step(0.01);
 		texRepAddSlider.onChange(function(){refreshBarkReps(targetScene,thismesh);updateMyURLArgs(targetScene,thismesh);});
 
 		matFolder.add(thismesh.material,'visible').name("Bark visible");
@@ -766,6 +770,7 @@ function PSOLSystem ()
 					var customDepthMaterial = new THREE.MeshDepthMaterial( {
 					    		depthPacking: THREE.RGBADepthPacking,
 				    			map: thismesh.children[0].material.map, // or, alphaMap: myAlphaMap
+							side: THREE.BackSide,
 							transparent: false,
 				    			alphaTest: 0.2} );
 					
