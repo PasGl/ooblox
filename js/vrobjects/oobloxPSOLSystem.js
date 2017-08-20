@@ -156,7 +156,7 @@ function PSOLSystem ()
  	this.flower = function (turtle)
 	{
 		var tsx = turtle.scale.x * 30.0;
-		var closingGeometry = new THREE.PlaneGeometry(tsx*2.0,0.0,tsx*2.0,1,1,1);
+		var closingGeometry = new THREE.BoxGeometry(tsx*2.0,0.0,tsx*2.0,1,1,1);
 		var closingGeometryMatrix = new THREE.Matrix4 ();
 		closingGeometryMatrix.compose(
 			turtle.position.clone().add( (new THREE.Vector3( 0, tsx, 0 )).applyQuaternion(turtle.orientation)),
