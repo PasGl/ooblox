@@ -157,10 +157,8 @@ function PSOLSystem ()
 		var tsx = turtle.scale.x * 30.0;
 		var closingGeometry = new THREE.BoxGeometry(tsx*2.0,tsx*2.0,0.0,1,1,1);
 
-//console.log(closingGeometry);
 		closingGeometry.faceVertexUvs[0][2] = [new THREE.Vector2(1, 1),new THREE.Vector2(1, 0),new THREE.Vector2(0, 1)];
 		closingGeometry.faceVertexUvs[0][3] = [new THREE.Vector2(1, 0),new THREE.Vector2(0, 0),new THREE.Vector2(0, 1)];
-		//closingGeometry.uvsNeedUpdate = true;
 
 		var closingGeometryMatrix = new THREE.Matrix4 ();
 		closingGeometryMatrix.compose(
@@ -169,19 +167,6 @@ function PSOLSystem ()
 			(new THREE.Vector3( 1.0, 1.0, 1.0 )));
 		closingGeometry.applyMatrix(closingGeometryMatrix);
 
-	/*	var secondquaternion = new THREE.Quaternion();
-		secondquaternion.setFromAxisAngle( new THREE.Vector3( 0, 1, 0 ), Math.PI / 2 );
-
-		var secondPlane = new THREE.PlaneGeometry(tsx*2.0,tsx*2.0,1,1);
-		var secondPlaneMatrix = new THREE.Matrix4 ();
-		secondPlaneMatrix.compose(
-			turtle.position.clone().add( (new THREE.Vector3( 0, tsx, 0 )).applyQuaternion(turtle.orientation)),
-			turtle.orientation.clone().multiply(secondquaternion),
-			(new THREE.Vector3( 1.0, 1.0, 1.0 )));
-		secondPlane.applyMatrix(secondPlaneMatrix);
-
-		closingGeometry.merge( secondPlane,secondPlane.matrix,0 );
-*/
 		return closingGeometry;
 	}
 	var flower = this.flower;
@@ -775,8 +760,6 @@ function PSOLSystem ()
 
 	this.refreshCustomDepthMaterial = function (targetScene,thismesh)
 	{
-
-
 					var customDepthMaterial = new THREE.MeshDepthMaterial( {
 					    		depthPacking: THREE.RGBADepthPacking,
 				    			map: thismesh.children[0].material.map, // or, alphaMap: myAlphaMap
@@ -784,40 +767,6 @@ function PSOLSystem ()
 				    			alphaTest: 0.2} );
 					
 					thismesh.children[0].customDepthMaterial = customDepthMaterial;
-
-/*
-			var bark 	= new THREE.TGALoader().load(  "images/Yughues_bark/" + conf.barkTexture + "/diffuse.tga",function (barktexture) {
-				var foliage 	= new THREE.TGALoader().load(  "images/Yughues_branches/" + conf.foliageTexture + "/diffuse.tga", function(foliagetexture) {
-
-
-					var customDepthMaterial = [
-						new THREE.MeshDepthMaterial( {
-					    		depthPacking: THREE.RGBADepthPacking,
-				    			map: bark, // or, alphaMap: myAlphaMap
-				    			alphaTest: 0.5} ),
-						new THREE.MeshDepthMaterial( {
-					    		depthPacking: THREE.RGBADepthPacking,
-				    			map: foliagetexture, // or, alphaMap: myAlphaMap
-				    			alphaTest: 0.5} )
-					];
-					thismesh.customDepthMaterial = customDepthMaterial;
-
-
-
-					var uniforms = { 
-						texture0:  { value: barktexture },
-						texture1:  { value: foliagetexture }
-					};
-					var vertexShader = document.getElementById( 'vertexShaderDepth' ).textContent;
-					var fragmentShader = document.getElementById( 'fragmentShaderDepth' ).textContent;
-					thismesh.customDepthMaterial = 	new THREE.ShaderMaterial( {
-								uniforms: uniforms,
-								vertexShader: vertexShader,
-								fragmentShader: fragmentShader,
-								side: THREE.DoubleSide
-					} );	
-				});
-			});*/
 	}
 	var refreshCustomDepthMaterial = this.refreshCustomDepthMaterial;
 
