@@ -39,7 +39,7 @@ Each module implements an "Object Type" that ooblox can instatiate to assemble t
 
 *  CPG | Chord progression generator | [oobloxChordProgressionGenerator.js](./js/vrobjects/oobloxChordProgressionGenerator.js)
 *  ENV | Skybox, Diamond-Square ground, Lights & Fog | [oobloxEnvironment.js](./js/vrobjects/oobloxEnvironment.js)
-*  OMM | Menu to add and remove ojects | [oobloxMasterMenu.js](./js/vrobjects/oobloxMasterMenu.js)
+*  OMM | Menu to add and remove objects | [oobloxMasterMenu.js](./js/vrobjects/oobloxMasterMenu.js)
 *  OML | Mesh loader for Collada, OBJ and STL | [oobloxMeshLoader.js](./js/vrobjects/oobloxMeshLoader.js)
 *  MET | Metronom | [oobloxMetronome.js](./js/vrobjects/oobloxMetronome.js)
 *  OCM | Camera perspective | [oobloxOrbitCamMod.js](./js/vrobjects/oobloxOrbitCamMod.js)
