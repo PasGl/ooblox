@@ -37,7 +37,7 @@ A scene with (at least) one instance of each Module.
 
 Each module implements an "Object Type" that ooblox can instatiate to assemble the scene.
 
-*  CPG | Chord progression generator | ./js/vrobjects/oobloxChordProgressionGenerator.js
+*  CPG | Chord progression generator | [oobloxChordProgressionGenerator.js](./js/vrobjects/oobloxChordProgressionGenerator.js)
 *  ENV | Skybox, Diamond-Square ground, Lights & Fog | ./js/vrobjects/oobloxEnvironment.js
 *  OMM | Menu to add and remove ojects | ./js/vrobjects/oobloxMasterMenu.js
 *  OML | Mesh loader for Collada, OBJ and STL | ./js/vrobjects/oobloxMeshLoader.js
