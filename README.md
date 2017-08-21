@@ -37,15 +37,15 @@ A scene with (at least) one instance of each Module.
 
 Each module implements an "Object Type" that ooblox can instatiate to assemble the scene.
 
-### oobloxChordProgressionGenerator.js | CPG
-### oobloxEnvironment.js | ENV
-### oobloxMasterMenu.js | OMM
-### oobloxMeshLoader.js | OML
-### oobloxMetronome.js | MET
-### oobloxOrbitCamMod.js | OCM
-### oobloxPSOLSystem.js | PLS
-### oobloxTexturePanel.js | TPL
-### oobloxTorusKnot.js | TTK 
+*  CPG | Chord progression generator | ./js/vrobjects/oobloxChordProgressionGenerator.js
+*  ENV | Skybox, Diamond-Square ground, Lights & Fog | ./js/vrobjects/oobloxEnvironment.js
+*  OMM | Menu to add and remove ojects | ./js/vrobjects/oobloxMasterMenu.js
+*  OML | Mesh loader for Collada, OBJ and STL | ./js/vrobjects/oobloxMeshLoader.js
+*  MET | Metronom | ./js/vrobjects/oobloxMetronome.js
+*  OCM | Camera perspective | ./js/vrobjects/oobloxOrbitCamMod.js
+*  PLS | Tree-generator based on L-System | ./js/vrobjects/oobloxPSOLSystem.js
+*  TPL | Texture Panel | ./js/vrobjects/oobloxTexturePanel.js
+*  TTK | three.js torus-knot as ooblox module | ./js/vrobjects/oobloxTorusKnot.js
 
 ## Contact
 
