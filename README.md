@@ -3,7 +3,7 @@ ooblox
 
 ooblox is a browser-based 3D sandbox framework, with optional VR support, in its infancy.
 
-![ooblox - 'm' to toggle GUI](/images/showHideGUI.gif)
+![ooblox - screenshots](/images/showHideGUI.gif)
 
 ## Why ?
 
