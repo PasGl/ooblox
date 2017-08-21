@@ -3,6 +3,8 @@ ooblox
 
 ooblox is a browser-based 3D sandbox framework, with optional VR support, in its infancy.
 
+![ooblox - screenshots](/images/screenshots.gif)
+
 ## Why ?
 
 I want to have a framework like this.
@@ -30,6 +32,20 @@ A scene about algorithmic geometry, with a Torus Knot and a (not very good, yet)
 
 A scene with (at least) one instance of each Module.
 * http://51.15.67.244/demo
+
+## Modules (so far)
+
+Each module implements an "Object Type" that ooblox can instatiate to assemble the scene.
+
+*  CPG | Chord progression generator | [oobloxChordProgressionGenerator.js](./js/vrobjects/oobloxChordProgressionGenerator.js)
+*  ENV | Skybox, Diamond-Square ground, Lights & Fog | [oobloxEnvironment.js](./js/vrobjects/oobloxEnvironment.js)
+*  OMM | Menu to add and remove ojects | [oobloxMasterMenu.js](./js/vrobjects/oobloxMasterMenu.js)
+*  OML | Mesh loader for Collada, OBJ and STL | [oobloxMeshLoader.js](./js/vrobjects/oobloxMeshLoader.js)
+*  MET | Metronom | [oobloxMetronome.js](./js/vrobjects/oobloxMetronome.js)
+*  OCM | Camera perspective | [oobloxOrbitCamMod.js](./js/vrobjects/oobloxOrbitCamMod.js)
+*  PLS | Tree-generator based on L-System | [oobloxPSOLSystem.js](./js/vrobjects/oobloxPSOLSystem.js)
+*  TPL | Texture Panel | [oobloxTexturePanel.js](./js/vrobjects/oobloxTexturePanel.js)
+*  TTK | three.js torus-knot as ooblox module | [oobloxTorusKnot.js](./js/vrobjects/oobloxTorusKnot.js)
 
 ## Contact
 
