@@ -38,14 +38,14 @@ A scene with (at least) one instance of each Module.
 Each module implements an "Object Type" that ooblox can instatiate to assemble the scene.
 
 *  CPG | Chord progression generator | [oobloxChordProgressionGenerator.js](./js/vrobjects/oobloxChordProgressionGenerator.js)
-*  ENV | Skybox, Diamond-Square ground, Lights & Fog | ./js/vrobjects/oobloxEnvironment.js
-*  OMM | Menu to add and remove ojects | ./js/vrobjects/oobloxMasterMenu.js
-*  OML | Mesh loader for Collada, OBJ and STL | ./js/vrobjects/oobloxMeshLoader.js
-*  MET | Metronom | ./js/vrobjects/oobloxMetronome.js
-*  OCM | Camera perspective | ./js/vrobjects/oobloxOrbitCamMod.js
-*  PLS | Tree-generator based on L-System | ./js/vrobjects/oobloxPSOLSystem.js
-*  TPL | Texture Panel | ./js/vrobjects/oobloxTexturePanel.js
-*  TTK | three.js torus-knot as ooblox module | ./js/vrobjects/oobloxTorusKnot.js
+*  ENV | Skybox, Diamond-Square ground, Lights & Fog | [oobloxEnvironment.js](./js/vrobjects/oobloxEnvironment.js)
+*  OMM | Menu to add and remove ojects | [oobloxMasterMenu.js](./js/vrobjects/oobloxMasterMenu.js)
+*  OML | Mesh loader for Collada, OBJ and STL | [oobloxMeshLoader.js](./js/vrobjects/oobloxMeshLoader.js)
+*  MET | Metronom | [oobloxMetronome.js](./js/vrobjects/oobloxMetronome.js)
+*  OCM | Camera perspective | [oobloxOrbitCamMod.js](./js/vrobjects/oobloxOrbitCamMod.js)
+*  PLS | Tree-generator based on L-System | [oobloxPSOLSystem.js](./js/vrobjects/oobloxPSOLSystem.js)
+*  TPL | Texture Panel | [oobloxTexturePanel.js](./js/vrobjects/oobloxTexturePanel.js)
+*  TTK | three.js torus-knot as ooblox module | [oobloxTorusKnot.js](./js/vrobjects/oobloxTorusKnot.js)
 
 ## Contact
 
