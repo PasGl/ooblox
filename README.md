@@ -33,6 +33,20 @@ A scene about algorithmic geometry, with a Torus Knot and a (not very good, yet)
 A scene with (at least) one instance of each Module.
 * http://51.15.67.244/demo
 
+## Modules (so far)
+
+Each module implements an "Object Type" that ooblox can instatiate to assemble the scene.
+
+### oobloxChordProgressionGenerator.js | CPG
+### oobloxEnvironment.js | ENV
+### oobloxMasterMenu.js | OMM
+### oobloxMeshLoader.js | OML
+### oobloxMetronome.js | MET
+### oobloxOrbitCamMod.js | OCM
+### oobloxPSOLSystem.js | PLS
+### oobloxTexturePanel.js | TPL
+### oobloxTorusKnot.js | TTK 
+
 ## Contact
 
 * Discord | https://discord.gg/Ux52EYw
