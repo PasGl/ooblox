@@ -3,6 +3,8 @@ ooblox
 
 ooblox is a browser-based 3D sandbox framework, with optional VR support, in its infancy.
 
+![ooblox - screenshots](/images/screenshots.gif)
+
 ## Why ?
 
 I want to have a framework like this.
