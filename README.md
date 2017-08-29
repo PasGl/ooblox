@@ -49,7 +49,7 @@ Each module implements an "Object Type" that ooblox can instatiate via URL query
 
 ### URL query string
 ```
-index.html?uniqueNameForInstance1=TYPE+param1+param2+....+paramLast&uniqueNameForInstance2=TYPE+param1+...
+index.html?nameOfInstance1=TYPE+param1+param2+....+paramLast&nameOfInstance2=TYPE+param1+...
 ```
 *  `&` separates Instances.
 *  Instances need unique names.
