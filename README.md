@@ -104,7 +104,7 @@ The other entries are shortcuts for scenes.
 ## ooblox modules make use of
 
 * datguivr | https://github.com/dataarts/dat.guiVR
-* SkyboxSet | https://93i.de/p/free-skybox-texture-set/
+* SkyboxSet by Heiko Irrgang | https://93i.de/p/free-skybox-texture-set/
 * Textures & Models by Yughues | https://www.patreon.com/Yughues
 * FileSaver.js | https://github.com/eligrey/FileSaver.js
 * jszip | https://github.com/Stuk/jszip
