@@ -14,22 +14,18 @@ It allows me to quickly develop and deploy 3D toys, experiments, visualizations,
 ## Demo
 
 ### Sandbox scene
-
 A scene set up to serve as sandbox.
 * http://51.15.67.244/sandbox
 
 ### Guitar scene
-
 A scene for guitar practise, with a metronome and a chord progression generator.
 * http://51.15.67.244/guitar
 
 ### Geometry scene
-
 A scene about algorithmic geometry, with a Torus Knot and a (not very good, yet) L-System example.
 * http://51.15.67.244/geometry
 
 ### Test scene
-
 A scene with (at least) one instance of each Module.
 * http://51.15.67.244/demo
 
@@ -66,6 +62,7 @@ index.html?`nameOfInstance1=TYPE+param1+param2+....+paramLast&nameOfInstance2=TY
 ## Deployment & hosting
 
 Git clone from master to your webserver.
+
 Nginx config snippet, that I use (adjust accordingly):
 *  The first entry is for gathering all available Modules automatically.
 *  The second entry allows Modules to find all available textures.
