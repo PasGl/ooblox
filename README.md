@@ -48,10 +48,10 @@ Each module implements an "Object Type" that ooblox can instatiate via URL query
 *  TPL | Texture Panel | [oobloxTexturePanel.js](./js/vrobjects/oobloxTexturePanel.js)
 *  TTK | three.js torus-knot as ooblox module | [oobloxTorusKnot.js](./js/vrobjects/oobloxTorusKnot.js)
 
-### URL query string
-```
-index.html?nameOfInstance1=TYPE+param1+param2+....+paramLast&nameOfInstance2=TYPE+param1+...
-```
+### query string
+
+index.html?`nameOfInstance1=TYPE+param1+param2+....+paramLast&nameOfInstance2=TYPE+param1+...`
+
 *  `&` separates Instances.
 *  Instances need unique names.
 *  `TYPE` is one of the available 3-letter Module codes.
