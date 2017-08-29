@@ -49,13 +49,13 @@ Each module implements an "Object Type" that ooblox can instatiate via URL query
 
 ### URL query string
 ```
-index.html?uniqueNameForFirstInstance=TYPE+param1+param2+param3+....+paramLast&uniqueNameForSecondInstance=TYPE+param1+param2+...
+index.html?uniqueNameForInstance1=TYPE+param1+param2+....+paramLast&uniqueNameForInstance2=TYPE+param1+...
 ```
 *  `&` separates Instances.
 *  Instances need unique names.
-*  TYPE is one of the available 3-letter Module codes.
+*  `TYPE` is one of the available 3-letter Module codes.
 *  `+` separates parameters for an instance.
-*  Each Module has its own set of parameters and its own logic on how they are to be used (see `this.load` in Module-files).
+*  Modules implement their own logic on how parameters are to be used (see `this.load` in Module-files).
 
 ## Contact
 
