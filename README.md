@@ -39,7 +39,7 @@ Each module implements an "Object Type" that ooblox can instatiate to assemble t
 
 *  CPG | Chord progression generator | [oobloxChordProgressionGenerator.js](./js/vrobjects/oobloxChordProgressionGenerator.js)
 *  ENV | Skybox, Diamond-Square ground, Lights & Fog | [oobloxEnvironment.js](./js/vrobjects/oobloxEnvironment.js)
-*  OMM | Menu to add and remove ojects | [oobloxMasterMenu.js](./js/vrobjects/oobloxMasterMenu.js)
+*  OMM | Menu to add and remove objects | [oobloxMasterMenu.js](./js/vrobjects/oobloxMasterMenu.js)
 *  OML | Mesh loader for Collada, OBJ and STL | [oobloxMeshLoader.js](./js/vrobjects/oobloxMeshLoader.js)
 *  MET | Metronom | [oobloxMetronome.js](./js/vrobjects/oobloxMetronome.js)
 *  OCM | Camera perspective | [oobloxOrbitCamMod.js](./js/vrobjects/oobloxOrbitCamMod.js)
@@ -104,7 +104,7 @@ The other entries are shortcuts for scenes.
 ## ooblox modules make use of
 
 * datguivr | https://github.com/dataarts/dat.guiVR
-* SkyboxSet | https://93i.de/p/free-skybox-texture-set/
+* SkyboxSet by Heiko Irrgang | https://93i.de/p/free-skybox-texture-set/
 * Textures & Models by Yughues | https://www.patreon.com/Yughues
 * FileSaver.js | https://github.com/eligrey/FileSaver.js
 * jszip | https://github.com/Stuk/jszip
