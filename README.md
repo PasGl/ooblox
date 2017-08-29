@@ -66,16 +66,11 @@ index.html?nameOfInstance1=TYPE+param1+param2+....+paramLast&nameOfInstance2=TYP
 ## Deployment & hosting
 
 Git clone from master to your webserver.
-
-Nginx config snippet, that I use (adjust accordingly).
-
-The first entry is for gathering all available Modules automatically.
-
-The second entry allows Modules to find all available textures.
-
-The third entry allows Modules to find all available 3D models.
-
-The other entries are shortcuts for scenes.
+Nginx config snippet, that I use (adjust accordingly):
+*  The first entry is for gathering all available Modules automatically.
+*  The second entry allows Modules to find all available textures.
+*  The third entry allows Modules to find all available 3D models.
+*  The other entries are shortcuts for scenes.
 ```
         location ~ /js/vrobjects {
                 autoindex on;
