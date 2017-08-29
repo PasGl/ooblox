@@ -35,7 +35,7 @@ A scene with (at least) one instance of each Module.
 
 ## Modules (so far)
 
-Each module implements an "Object Type" that ooblox can instatiate to assemble the scene.
+Each module implements an "Object Type" that ooblox can instatiate via URL query string, to assemble the scene.
 
 *  CPG | Chord progression generator | [oobloxChordProgressionGenerator.js](./js/vrobjects/oobloxChordProgressionGenerator.js)
 *  ENV | Skybox, Diamond-Square ground, Lights & Fog | [oobloxEnvironment.js](./js/vrobjects/oobloxEnvironment.js)
@@ -46,6 +46,16 @@ Each module implements an "Object Type" that ooblox can instatiate to assemble t
 *  PLS | Tree-generator based on L-System | [oobloxPSOLSystem.js](./js/vrobjects/oobloxPSOLSystem.js)
 *  TPL | Texture Panel | [oobloxTexturePanel.js](./js/vrobjects/oobloxTexturePanel.js)
 *  TTK | three.js torus-knot as ooblox module | [oobloxTorusKnot.js](./js/vrobjects/oobloxTorusKnot.js)
+
+### URL query string
+```
+index.html?uniqueNameForFirstInstance=TYPE+param1+param2+param3+....+paramLast&uniqueNameForSecondInstance=TYPE+param1+param2+...
+```
+*  `&` separates Instances.
+*  Instances need unique names.
+*  TYPE is one of the available 3-letter Module codes.
+*  `+` separates parameters for an instance.
+*  Each Module has its own set of parameters and its own logic on how they are to be used (see `this.load` in Module-files).
 
 ## Contact
 
