@@ -14,29 +14,26 @@ It allows me to quickly develop and deploy 3D toys, experiments, visualizations,
 ## Demo
 
 ### Sandbox scene
-
 A scene set up to serve as sandbox.
 * http://51.15.67.244/sandbox
 
 ### Guitar scene
-
 A scene for guitar practise, with a metronome and a chord progression generator.
 * http://51.15.67.244/guitar
 
 ### Geometry scene
-
 A scene about algorithmic geometry, with a Torus Knot and a (not very good, yet) L-System example.
 * http://51.15.67.244/geometry
 
 ### Test scene
-
 A scene with (at least) one instance of each Module.
 * http://51.15.67.244/demo
 
 ## Modules (so far)
 
-Each module implements an "Object Type" that ooblox can instatiate to assemble the scene.
+Each module implements an "Object Type" that ooblox can instatiate via URL query string, to assemble the scene.
 
+*  `Type`| Description | Module-file
 *  CPG | Chord progression generator | [oobloxChordProgressionGenerator.js](./js/vrobjects/oobloxChordProgressionGenerator.js)
 *  ENV | Skybox, Diamond-Square ground, Lights & Fog | [oobloxEnvironment.js](./js/vrobjects/oobloxEnvironment.js)
 *  OMM | Menu to add and remove objects | [oobloxMasterMenu.js](./js/vrobjects/oobloxMasterMenu.js)
@@ -47,6 +44,16 @@ Each module implements an "Object Type" that ooblox can instatiate to assemble t
 *  TPL | Texture Panel | [oobloxTexturePanel.js](./js/vrobjects/oobloxTexturePanel.js)
 *  TTK | three.js torus-knot as ooblox module | [oobloxTorusKnot.js](./js/vrobjects/oobloxTorusKnot.js)
 
+### query string
+
+index.html?`nameOfInstance1=TYPE+param1+param2+....+paramLast&nameOfInstance2=TYPE+param1+...`
+
+*  `&` separates Instances.
+*  Instances need unique names.
+*  `TYPE` is one of the available 3-letter Module codes.
+*  `+` separates parameters for an instance.
+*  Modules implement their own logic on how parameters are to be used (see `this.load` in Module-files).
+
 ## Contact
 
 * Discord | https://discord.gg/Ux52EYw
@@ -56,15 +63,11 @@ Each module implements an "Object Type" that ooblox can instatiate to assemble t
 
 Git clone from master to your webserver.
 
-Nginx config snippet, that I use (adjust accordingly).
-
-The first entry is for gathering all available Modules automatically.
-
-The second entry allows Modules to find all available textures.
-
-The third entry allows Modules to find all available 3D models.
-
-The other entries are shortcuts for scenes.
+Nginx config snippet, that I use (adjust accordingly):
+*  The first entry is for gathering all available Modules automatically.
+*  The second entry allows Modules to find all available textures.
+*  The third entry allows Modules to find all available 3D models.
+*  The other entries are shortcuts for scenes.
 ```
         location ~ /js/vrobjects {
                 autoindex on;
