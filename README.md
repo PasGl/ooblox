@@ -13,6 +13,13 @@ It allows me to quickly develop and deploy 3D toys, experiments, visualizations,
 
 ## Demo
 
+| Scene 		|
+| --------------------- |
+| [Basic Sandbox](http://51.15.67.244/sandbox) |
+| [Guitar training](http://51.15.67.244/guitar) |
+| [Algorithmic Geometry](http://51.15.67.244/geometry) |
+| [All Modules](http://51.15.67.244/demo) |
+
 ### Sandbox scene
 A scene set up to serve as sandbox.
 * http://51.15.67.244/sandbox
@@ -33,16 +40,17 @@ A scene with (at least) one instance of each Module.
 
 Each module implements an "Object Type" that ooblox can instatiate via URL query string, to assemble the scene.
 
-*  `TYPE`| Description | Module-file
-*  CPG | Chord progression generator | [oobloxChordProgressionGenerator.js](./js/vrobjects/oobloxChordProgressionGenerator.js)
-*  ENV | Skybox, Diamond-Square ground, Lights & Fog | [oobloxEnvironment.js](./js/vrobjects/oobloxEnvironment.js)
-*  OMM | Menu to add and remove objects | [oobloxMasterMenu.js](./js/vrobjects/oobloxMasterMenu.js)
-*  OML | Mesh loader for Collada, OBJ and STL | [oobloxMeshLoader.js](./js/vrobjects/oobloxMeshLoader.js)
-*  MET | Metronom | [oobloxMetronome.js](./js/vrobjects/oobloxMetronome.js)
-*  OCM | Camera perspective | [oobloxOrbitCamMod.js](./js/vrobjects/oobloxOrbitCamMod.js)
-*  PLS | Tree-generator based on L-System | [oobloxPSOLSystem.js](./js/vrobjects/oobloxPSOLSystem.js)
-*  TPL | Texture Panel | [oobloxTexturePanel.js](./js/vrobjects/oobloxTexturePanel.js)
-*  TTK | three.js torus-knot as ooblox module | [oobloxTorusKnot.js](./js/vrobjects/oobloxTorusKnot.js)
+| `TYPE`| Description					| Module-file 				|
+| ----- | --------------------------------------------- | ------------------------------------- |
+| CPG	| Chord progression generator			| [oobloxChordProgressionGenerator.js](./js/vrobjects/oobloxChordProgressionGenerator.js) |
+| ENV	| Skybox, Diamond-Square ground, Lights & Fog	| [oobloxEnvironment.js](./js/vrobjects/oobloxEnvironment.js) |
+| OMM	| Menu to add and remove objects		| [oobloxMasterMenu.js](./js/vrobjects/oobloxMasterMenu.js) |
+| OML	| Mesh loader for Collada, OBJ and STL		| [oobloxMeshLoader.js](./js/vrobjects/oobloxMeshLoader.js) |
+| MET	| Metronom					| [oobloxMetronome.js](./js/vrobjects/oobloxMetronome.js) |
+| OCM	| Camera perspective				| [oobloxOrbitCamMod.js](./js/vrobjects/oobloxOrbitCamMod.js) |
+| PLS	| Tree-generator based on L-System		| [oobloxPSOLSystem.js](./js/vrobjects/oobloxPSOLSystem.js) |
+| TPL	| Texture Panel					| [oobloxTexturePanel.js](./js/vrobjects/oobloxTexturePanel.js) |
+| TTK	| three.js torus-knot as ooblox module		| [oobloxTorusKnot.js](./js/vrobjects/oobloxTorusKnot.js) |
 
 ### query string
 
