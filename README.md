@@ -13,7 +13,7 @@ It allows me to quickly develop and deploy 3D toys, experiments, visualizations,
 
 ## Demo
 
-| Scene 		|
+|:Scene 		|
 | --------------------- |
 | [Basic Sandbox](http://51.15.67.244/sandbox) |
 | [Guitar training](http://51.15.67.244/guitar) |
@@ -24,7 +24,7 @@ It allows me to quickly develop and deploy 3D toys, experiments, visualizations,
 
 Each module implements an "Object Type" that ooblox can instatiate via URL query string, to assemble the scene.
 
-| `TYPE`| Description					| Module-file 				|
+|:`TYPE`|:Description					|:Module-file 				|
 | ----- | --------------------------------------------- | ------------------------------------- |
 | CPG	| Chord progression generator			| [oobloxChordProgressionGenerator.js](./js/vrobjects/oobloxChordProgressionGenerator.js) |
 | ENV	| Skybox, Diamond-Square ground, Lights & Fog	| [oobloxEnvironment.js](./js/vrobjects/oobloxEnvironment.js) |
